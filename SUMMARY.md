@@ -12,4 +12,14 @@
 
 ## 💻 Developer Docs <a href="#devs" id="devs"></a>
 
-* [Page 2](devs/page-2.md)
+* [Nexus Core](nexus-next/index.md)
+    * [Packages: Workflow](nexus-next/packages/Workflow.md)
+    * [Packages: Primitives](nexus-next/packages/Primitives.md)
+    * [Sui Move Conventions](nexus-next/conventions/Sui-Move.md)
+    * [Crate: Leader](nexus-next/crates/Leader.md)
+    * [Tool](nexus-next/Tool.md)
+    * [Nexus Interface](nexus-next/Nexus-Interface.md)
+* [Nexus SDK](nexus-sdk/index.md)
+    * [CLI](nexus-sdk/CLI.md)
+* [Glossary](nexus-next/Glossary.md)
+
