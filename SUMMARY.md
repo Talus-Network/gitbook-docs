@@ -23,3 +23,8 @@
     * [CLI](nexus-sdk/CLI.md)
 * [Glossary](nexus-next/Glossary.md)
 
+
+## Looking for a home
+
+* [nexus-sdk/new-file.md](nexus-sdk/new-file.md)
+* [tools/test-tool/README.md](tools/test-tool/README.md)
