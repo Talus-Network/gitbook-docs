@@ -5,6 +5,8 @@ on:
     branches:
       - test-workflow
     types: [opened, synchronize, reopened]
+permissions:
+  contents: write
 
 jobs:
   update-summary:
