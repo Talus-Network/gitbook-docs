@@ -27,10 +27,18 @@ jobs:
         run: |
           BASE_BRANCH=${{ github.event.pull_request.base.ref }}
           git fetch origin $BASE_BRANCH
-          ADDED_FILES=$(git diff --diff-filter=A --name-only origin/$BASE_BRANCH... | grep '\.md$' || true | tr '\n' ' ')
-        
+          ADDED_FILES=$(git diff --diff-filter=A --name-only origin/$BASE_BRANCH... | grep '\.md$' || true)
+    
           echo "Added files: $ADDED_FILES"
-          echo "files=$ADDED_FILES" >> $GITHUB_ENV
+    
+          if [ -n "$ADDED_FILES" ]; then
+            echo "files<<EOF" >> $GITHUB_ENV
+            echo "$ADDED_FILES" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+          else
+            echo "files=" >> $GITHUB_ENV
+          fi
+        
 
       - name: Update SUMMARY.md
         run: |
