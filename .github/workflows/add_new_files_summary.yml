@@ -3,7 +3,7 @@ name: Update SUMMARY.md on PR
 on:
   pull_request:
     branches:
-      - test-workflow
+      - main
     types: [opened, synchronize, reopened]
 permissions:
   contents: write
