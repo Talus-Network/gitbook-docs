@@ -3,7 +3,7 @@ name: Update SUMMARY.md on PR
 on:
   pull_request:
     branches:
-      - main
+      - test-workflow
     types: [opened]
 
 jobs:
