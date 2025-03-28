@@ -1,0 +1,120 @@
+name: Update SUMMARY.md on PR
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened]
+
+jobs:
+  update-summary:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Get list of added files
+        id: added_files
+        run: |
+          ADDED_FILES=$(git diff --diff-filter=A --name-only origin/main... | grep '\.md$' || true)
+          echo "Added files: $ADDED_FILES"
+          echo "files=$ADDED_FILES" >> $GITHUB_ENV
+
+      - name: Update SUMMARY.md
+        run: |
+          SUMMARY_FILE="SUMMARY.md"
+          SECTION_TITLE="## Looking for a home"
+
+          if [ ! -f "$SUMMARY_FILE" ]; then
+            echo "SUMMARY.md not found!"
+            exit 1
+          fi
+
+          if [ -z "$files" ]; then
+            echo "No new markdown files detected."
+            exit 0
+          fi
+
+          # Track new entries
+          NEW_ENTRIES=""
+
+          # Find uncategorized files
+          UNLISTED_FILES=""
+          for file in $files; do
+            if ! grep -q "($file)" "$SUMMARY_FILE"; then
+              UNLISTED_FILES+="$file"$'\n'
+            fi
+          done
+
+          # If there are uncategorized files, add them
+          if [ -n "$UNLISTED_FILES" ]; then
+            # Add section if it does not already exist
+            if ! grep -Fxq "$SECTION_TITLE" "$SUMMARY_FILE"; then
+              echo -e "\n$SECTION_TITLE\n" >> "$SUMMARY_FILE"
+            fi
+
+            # Add new files under "Looking for a home"
+            for file in $UNLISTED_FILES; do
+              ENTRY="* [$file]($file)"
+              echo "$ENTRY" >> "$SUMMARY_FILE"
+              NEW_ENTRIES+="$ENTRY"$'\n'
+            done
+          fi
+
+          echo "Updated SUMMARY.md:"
+          cat "$SUMMARY_FILE"
+
+          # Save new entries as environment variable for later
+          echo "new_entries<<EOF" >> $GITHUB_ENV
+          echo "$NEW_ENTRIES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.DEVOPS_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.DEVOPS_GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          git_config_global: true
+            
+      - name: Commit and push changes (Signed)
+        run: |
+          git checkout ${{ github.event.pull_request.head.ref }}
+
+          if git diff --exit-code SUMMARY.md; then
+            echo "No changes to commit."
+          else
+            git add SUMMARY.md
+            GIT_COMMITTER_DATE="$(date)" git commit -S -m "Update SUMMARY.md with new files under 'Looking for a home'" || exit 0
+            git push origin ${{ github.event.pull_request.head.ref }}
+          fi
+
+      - name: Add TODO comment on PR
+        if: env.new_entries != ''
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue_number = context.payload.pull_request.number;
+            const body = `⚠️ **TODO:** These new files need to be categorized properly in \`SUMMARY.md\`!  
+            
+            ## 📌 Newly Added Files:
+            ${process.env.new_entries}
+
+            👉 Please review and move them to the appropriate section.`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: body
+            });
