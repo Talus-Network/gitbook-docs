@@ -21,5 +21,11 @@
     * [Nexus Interface](nexus-next/Nexus-Interface.md)
 * [Nexus SDK](nexus-sdk/index.md)
     * [CLI](nexus-sdk/CLI.md)
+    * [Tool Development](nexus-sdk/tool-development.md)
+    * [Toolkit Rust](nexus-sdk/toolkit-rust.md)
 * [Glossary](nexus-next/Glossary.md)
 
+## 🛠️ Tools
+
+* [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
+* [Math](tools/math/README.md)
