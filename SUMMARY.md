@@ -21,10 +21,10 @@
     * [Nexus Interface](nexus-next/Nexus-Interface.md)
 * [Nexus SDK](nexus-sdk/index.md)
     * [CLI](nexus-sdk/CLI.md)
+    * [New File](nexus-sdk/new-file.md)
 * [Glossary](nexus-next/Glossary.md)
 
 
-## Looking for a home
+## Tools
 
-* [nexus-sdk/new-file.md](nexus-sdk/new-file.md)
-* [tools/test-tool/README.md](tools/test-tool/README.md)
+* [Test Tool](tools/test-tool/README.md)
