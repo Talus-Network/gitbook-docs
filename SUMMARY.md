@@ -29,3 +29,10 @@
 
 * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
 * [Math](tools/math/README.md)
+
+## Looking for a home
+
+* [nexus-next/SAP/Default-SAP.md](nexus-next/SAP/Default-SAP.md)
+* [nexus-next/SAP/Index.md](nexus-next/SAP/Index.md)
+* [nexus-next/crates/Sui-Tx.md](nexus-next/crates/Sui-Tx.md)
+* [nexus-next/packages/Nexus-Interface.md](nexus-next/packages/Nexus-Interface.md)
