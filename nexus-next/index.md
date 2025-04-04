@@ -11,16 +11,6 @@ For the purposes of this documentation we make distinction between different use
 - **Agent developer.** Outside contributor that creates DAGs and subsequently deploys the Agent smart contract.
 - **Agent user.** End-user that interacts with the ecosystem through clients built by us or outside contributors.
 
-## SUI Transactions
-
-The Leader will be assigned a wallet via the `SUI_SECRET_MNEMONIC` environment variable. This wallet will hold N `leader_cap`s. These are owned objects that are used to verify that the TX submission was done from the Leader. On Sui, to avoid equivocation, only one parallel TX can be sent per-`leader_cap`. The wallet is assigned N `Coin<Sui>` objects as gas (on mainnet) or Coin objects are poured from a faucet (on localnet and testnet).
-
-> Important thing to note is that, upon a failed transaction, Sui will lock all objects associated with the transaction until the next epoch, which is 24 hours. That means that we need to "damage" a `leader_cap` if a transaction fails and not use it for the next 24 hours.
-
-Initially, there will only be one transaction type from Leader back to Workflow. This transaction notifies the Workflow of the Tool invocation result. More details are available in the [[Crate: Leader]] documentation.
-
-Once on-chain Tools are defined, the Leader will also have to send transactions to invoke these Tools. This is however as of now an unexplored topic.
-
 ## [Glossary][glossary]
 
 Ubiqutously used terms. Often these terms reference specific parts of the project so it is crucial that they be clearly defined.
@@ -28,11 +18,12 @@ Ubiqutously used terms. Often these terms reference specific parts of the projec
 ## Onchain Nexus
 
 The on-chain part of Nexus.
-Holds the workflow DAG state and requests Tool execution from the Leader. The codebase resides in [this repository](repo-nexus-sui).
+Holds the workflow DAG state and requests Tool execution from the Leader. The codebase resides in [this repository][repo-nexus-sui].
 
 Docs:
 - [Workflow package][packages-workflow]
 - [Primitives package][packages-primitives]
+- [Nexus interface package][packages-interface]
 
 Epics:
 
@@ -46,7 +37,7 @@ Skim through them before diving into the Move codebase.
 
 ## Offchain Nexus
 
-The main off-chain service. Consumes events produced by the on-chain Workflow, invokes Tools and notifies Workflow about the outcome of Tool invocations. The codebase resides in [this repository](repo-nexus-rust).
+The main off-chain service. Consumes events produced by the on-chain Workflow, invokes Tools and notifies Workflow about the outcome of Tool invocations. The codebase resides in [this repository][repo-nexus-rust].
 
 Docs: 
 
@@ -58,9 +49,9 @@ Epics:
 
 ## [Tools][tool]
 
-Tools are Vertices in the Nexus workflow DAG. They are services with [Nexus-defined interface][nexus-interface] schema that perform specific tasks. These Tools are what Agent Developers orchestrate in a workflow DAG to create an Agent.
+Tools are Vertices in the Nexus workflow DAG. They are services with [Nexus-defined interface][tool] schema that perform specific tasks. These Tools are what Agent Developers orchestrate in a workflow DAG to create an Agent.
 
-There are currently no Tools yet implemented. It is, however, likely that Tools will have their own repository.
+There are a few standard Nexus tools, they can be found it the [Nexus SDK repository's tools][repo-tools] folder.
 
 Some examples of what a Tool is:
 
@@ -78,22 +69,37 @@ Epics:
 - https://github.com/Talus-Network/nexus-next/issues/30
 - https://github.com/Talus-Network/nexus-next/issues/31
 
+## [Agent Development][agent-development]
+
+The components referenced above (onchain Nexus, offchain Nexus and tools) provide the infrastructure and building blocks for [agent developers](#actors) to build Talus agents.
+
+Docs:
+
+- [Agent development][agent-development]
+- [Default SAP template][default-sap]
+
 ## Nexus SDK
 
-Nexus offers tool and agent developers (refer to [Actors](#actors)) an easy-to-use SDK consisting of a CLI and Toolkit to streamline their development. The codebase resides in [this repository][repo-nexus-sdk].
+Nexus offers tool and [agent developers](#actors) an easy-to-use SDK consisting of a CLI and Toolkit to streamline their development. The codebase resides in [this repository][repo-nexus-sdk].
 
-<!-- TODO: add link to docs when they are live -->
+Docs:
+
+- [Nexus SDK documentation](../nexus-sdk/index.md)
 
 <!-- List of References -->
 
 [repo-nexus-sui]: https://github.com/Talus-Network/nexus-next/tree/main/sui
 [repo-nexus-rust]: https://github.com/Talus-Network/nexus-next/tree/main/be
 [repo-nexus-sdk]: https://github.com/Talus-Network/nexus-sdk
+[repo-tools]: https://github.com/Talus-Network/nexus-sdk/tree/main/tools
 
 [glossary]: ./Glossary.md
 [packages-primitives]: ./packages/Primitives.md
 [packages-workflow]: ./packages/Workflow.md
+[packages-interface]: ./packages/Nexus-Interface.md
 [conventions-sui-move]: ./conventions/Sui-Move.md
 [crates-leader]: ./crates/Leader.md
-[nexus-interface]: ./Nexus-Interface.md
 [tool]: ./Tool.md
+[agent-development]: ./SAP/Index.md
+[default-sap]: ./SAP/Default-SAP.md
+
