@@ -1,8 +1,12 @@
 # Table of contents
 
-* [Introduction to Talus](README.md)
-* [AI Agent: What's in a Name?](intro/ai-agent-whats-in-a-name.md)
-* [Why Sui Move?](intro/why-sui-move.md)
+* [Talus Documentation](README.md)
+
+## 🔮 Talus Overview
+
+* [Introduction to Talus](talus-overview/readme.md)
+* [AI Agent: What's in a Name?](talus-overview/ai-agent-whats-in-a-name.md)
+* [Why Sui Move?](talus-overview/why-sui-move.md)
 
 ## 🎒 Product Docs <a href="#products" id="products"></a>
 
@@ -13,19 +17,19 @@
 ## 💻 Developer Docs <a href="#devs" id="devs"></a>
 
 * [Nexus Core](nexus-next/index.md)
-    * [Packages: Workflow](nexus-next/packages/Workflow.md)
-    * [Packages: Primitives](nexus-next/packages/Primitives.md)
-    * [Packages: Nexus Interface](nexus-next/packages/Nexus-Interface.md)
-    * [Sui Move Conventions](nexus-next/conventions/Sui-Move.md)
-    * [Crate: Leader](nexus-next/crates/Leader.md)
-        * [Leader Sui Transactions](nexus-next/crates/Sui-Tx.md)
-    * [Agent Development](nexus-next/SAP/Index.md)
-    * [Default SAP](nexus-next/SAP/Default-SAP.md)
-    * [Tool](nexus-next/Tool.md)
+  * [Packages: Workflow](nexus-next/packages/Workflow.md)
+  * [Packages: Primitives](nexus-next/packages/Primitives.md)
+  * [Packages: Nexus Interface](nexus-next/packages/Nexus-Interface.md)
+  * [Sui Move Conventions](nexus-next/conventions/Sui-Move.md)
+  * [Crate: Leader](nexus-next/crates/Leader.md)
+    * [Leader Sui Transactions](nexus-next/crates/Sui-Tx.md)
+  * [Agent Development](nexus-next/SAP/Index.md)
+  * [Default SAP](nexus-next/SAP/Default-SAP.md)
+  * [Tool](nexus-next/Tool.md)
 * [Nexus SDK](nexus-sdk/index.md)
-    * [CLI](nexus-sdk/CLI.md)
-    * [Tool Development](nexus-sdk/tool-development.md)
-    * [Toolkit Rust](nexus-sdk/toolkit-rust.md)
+  * [CLI](nexus-sdk/CLI.md)
+  * [Tool Development](nexus-sdk/tool-development.md)
+  * [Toolkit Rust](nexus-sdk/toolkit-rust.md)
 * [Glossary](nexus-next/Glossary.md)
 
 ## 🛠️ Tools
