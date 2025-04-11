@@ -36,3 +36,7 @@
 
 * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
 * [Math](tools/math/README.md)
+
+## Looking for a home
+
+* [nexus-next/Gas-Service.md](nexus-next/Gas-Service.md)
