@@ -41,3 +41,17 @@
 ## Looking for a home
 
 * [nexus-next/Gas-Service.md](nexus-next/Gas-Service.md)
+* [nexus-next/packages/reference/nexus_interface/v1.md](nexus-next/packages/reference/nexus_interface/v1.md)
+* [nexus-next/packages/reference/nexus_interface/version.md](nexus-next/packages/reference/nexus_interface/version.md)
+* [nexus-next/packages/reference/nexus_primitives/data.md](nexus-next/packages/reference/nexus_primitives/data.md)
+* [nexus-next/packages/reference/nexus_primitives/event.md](nexus-next/packages/reference/nexus_primitives/event.md)
+* [nexus-next/packages/reference/nexus_primitives/owner_cap.md](nexus-next/packages/reference/nexus_primitives/owner_cap.md)
+* [nexus-next/packages/reference/nexus_primitives/proof_of_uid.md](nexus-next/packages/reference/nexus_primitives/proof_of_uid.md)
+* [nexus-next/packages/reference/nexus_primitives/proven_value.md](nexus-next/packages/reference/nexus_primitives/proven_value.md)
+* [nexus-next/packages/reference/nexus_workflow/dag.md](nexus-next/packages/reference/nexus_workflow/dag.md)
+* [nexus-next/packages/reference/nexus_workflow/default_gas_extension.md](nexus-next/packages/reference/nexus_workflow/default_gas_extension.md)
+* [nexus-next/packages/reference/nexus_workflow/default_sap.md](nexus-next/packages/reference/nexus_workflow/default_sap.md)
+* [nexus-next/packages/reference/nexus_workflow/gas.md](nexus-next/packages/reference/nexus_workflow/gas.md)
+* [nexus-next/packages/reference/nexus_workflow/leader_cap.md](nexus-next/packages/reference/nexus_workflow/leader_cap.md)
+* [nexus-next/packages/reference/nexus_workflow/main.md](nexus-next/packages/reference/nexus_workflow/main.md)
+* [nexus-next/packages/reference/nexus_workflow/tool_registry.md](nexus-next/packages/reference/nexus_workflow/tool_registry.md)
