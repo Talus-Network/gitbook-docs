@@ -35,7 +35,7 @@ To comply with the Nexus V1 Interface the SAP must:
    - Can verify that required confirmations have been collected.
    - Invoked by the Nexus Leader.
 
-![Diagram showing Nexus V1 Interface flow](images/nexus-interface-v1.png)
+![Diagram showing Nexus V1 Interface flow](../images/nexus-interface-v1.png)
 
 ### Events
 

@@ -25,14 +25,16 @@ In a nutshell, the workflow engine executes walks over a directed acyclic graph 
 
 - A default value is a value that is static with respect to walk execution. Think configurations.
 
-- Entry group is a set of entry vertices that are executed concurrently when DAG is invoked.
+- An entry input port is an input port that requires input from the client prior to execution.
 
-- Default entry group is an entry group used when no entry group is specified.
+- Entry group is a named set of `(Vertex, InputPort)` pairs (or `Vertex` in case of a vertex without any input ports)that define an entry point for DAG execution. All specified input ports for all vertices within the group must receive data to start execution. Vertices listed without any ports are executed immediately if they have no other input dependencies.
+
+- Default entry group is the entry group used when no specific group name is provided during execution initiation. All entry input ports are assumed to be part of the default entry group.
 
 ## Rules
 
 1. If a cycle is detected, the walk halts as failed.
-2. DAG can have multiple entry points and multiple end states.
+2. DAG can have multiple named entry points (`EntryGroup`s) and multiple end states.
 3. Relationships between `Vertex`s are encoded into `Edge`s.
 4. An `InputPort` can either have an incoming `OutputPort` or a default value, but not both.
 5. No `InputPort` can at runtime receive a value two different `OutputPort`s.
@@ -42,9 +44,9 @@ In a nutshell, the workflow engine executes walks over a directed acyclic graph 
 8. If a walk reaches an end state then it halts as successful.
 9. Vertex is not scheduled for execution until all edges leading to it are evaluated.
 10. If a walk reaches a vertex that cannot be immediately scheduled for execution then the walk halts as consumed.
-11. Entry vertices can have default values which cannot be overridden by user input data.
+11. Input ports designated as part of an `EntryGroup` cannot have default values. Default values are only permitted for input ports that are *not* part of any entry group.
 
-> These rules are statically validated by the Nexus [[CLI]] if using JSON definitions of DAGs.
+> These rules are statically validated by the [Nexus CLI][nexus-sdk-cli] if using JSON definitions of DAGs.
 
 ![Shows legend](../images/dag-rules/dag.legend.png)
 
@@ -119,13 +121,41 @@ If DAG ends up in a situation from which it cannot continue, it just halts.
 
 More design and documentation regarding the static analysis to follow.
 
+### Entry input ports
+
+Entry input ports are input ports that must receive data from the client before execution can begin. These ports are explicitly defined as part of an entry group and cannot have default values.
+
+Key characteristics of entry input ports:
+
+- They must be provided with data when starting DAG execution
+- They cannot have default values assigned to them
+- They are defined as part of an entry group configuration
+- Multiple entry input ports can be defined for a single vertex
+- Entry input ports help define valid starting states for DAG execution
+
+For example, if a vertex `A` has input ports `x` and `y`, and port `x` is designated as an entry input port in the default entry group, then:
+
+- Port `x` must receive data from the client before execution can start
+- Port `x` cannot have a default value
+- Port `y` can optionally have a default value or receive data via an edge
+- The DAG execution will not begin until port `x` receives its required input data
+
+This mechanism allows DAGs to enforce specific initialization requirements while maintaining flexibility in how other inputs are handled during execution.
+
+
 ### Entry groups
 
-A DAG can have multiple entry groups.
-When beginning execution of a DAG the user must specify which entry group to use.
-An entry group has one or more entry vertices.
-All entry vertices in an entry group are executed concurrently.
-Therefore, the user must provide data for all entry vertices in an entry group.
+A DAG can define multiple named `EntryGroup`s, each specifying a distinct starting configuration.
+
+When initiating a DAG execution, the user must select an `EntryGroup` by name (or use the default one if defined).
+
+An `EntryGroup` consists of a map where keys are `Vertex` names and values are sets of `InputPort` names associated with that vertex (`VecMap<Vertex, VecSet<InputPort>>`).
+
+To start the execution via a specific entry group, the user must provide input data for *every* `(Vertex, InputPort)` pair listed in that group.
+
+Vertices included in an entry group map but with an *empty* set of input ports will be scheduled for execution immediately at the start, provided they don't have other input dependencies (like edges or default values on other ports).
+
+A default entry group (named `_default_group`) can be defined for convenience.
 
 ## Events
 
@@ -153,73 +183,8 @@ Events in our Nexus packages can contain these data types:
   - represents what should be the inputs to a vertex
   - `{ ports_to_data: Map<InputPort, NexusData> }`
 
-Then there are these events emitted and their conditions:
-
-- `DAGCreatedEvent`
-  - `dag: SuiObjectID`
-  - emitted when a new DAG is created
-  - our current typical usage is a shared object DAG
-  - object not found should be just logged with `warn` and skipped because the
-    DAG can also be a stored object technically, albeit our implementations will
-    always share it
-- `DAGEntryVertexAddedEvent`
-  - `dag: SuiObjectID`
-  - `vertex: Vertex`
-  - `kind: VertexKind`
-  - `input_ports: Vec<InputPort>`
-  - emitted when a new entry vertex is added to a DAG
-  - vertices cannot be removed so this is final
-  - the `input_ports` are the input ports of the vertex _not including default values_
-- `DAGVertexAddedEvent`
-  - `dag: SuiObjectID`
-  - `vertex: Vertex`
-  - `kind: VertexKind`
-  - emitted when a new vertex is added to a DAG
-  - vertices cannot be removed so this is final
-  - the input ports are determined by the edges and default values
-- `DAGEdgeAddedEvent`
-  - `dag: SuiObjectID`
-  - `from_vertex: Vertex`
-  - `edge: Edge`
-  - emitted when a new edge is added to a DAG
-  - edges cannot be removed so this is final
-  - both from and to vertices must exist
-  - if an edge leads to an input port it won't have a default value
-- `DAGDefaultValueAddedEvent`
-  - `dag: SuiObjectID`
-  - `vertex: Vertex`
-  - `port: InputPort`
-  - `value: NexusData`
-  - emitted when a default value is added to a vertex
-  - if a default values is defined for an input port it won't have an edge
-- `RequestWalkExecutionEvent`
-  - `dag: SuiObjectID`
-  - `execution: SuiObjectID`
-    - shared object that contains the state related to one execution of the DAG
-  - `walk_index: u64`
-    - will be necessary when submitting the results
-  - `next_vertex: Vertex`
-    - this is the vertex that must be executed
-    - to translate it to a tool use `VertexKind` on the vertex
-  - `evaluations: SuiObjectID`
-    - dynamic object field that can be queried to fetch data
-  - emitted when a walk execution is requested
-  - only one request per walk index will be emitted per tx
-  - multiple concurrent walks can request execution in one tx
-- `EndStateReachedEvent`
-  - `dag: SuiObjectID`
-  - `execution: SuiObjectID`
-  - `walk_index: u64`
-  - `vertex: Vertex`
-  - `evaluations: SuiObjectID`
-  - emitted when a walk reaches an end state, ie. a vertex that has no further
-    outgoing edges
-- `ExecutionFinishedEvent`
-  - `dag: SuiObjectID`
-  - `execution: SuiObjectID`
-  - `has_any_walk_failed: bool`
-  - `has_any_walk_succeed: bool`
-  - emitted when no more work needs to be done for this execution
+<!-- TODO: https://github.com/Talus-Network/nexus-next/pull/247 -->
+For a list of all event types, refer to [the reference docs for the Workflow package][reference-workflow].
 
 ## Leader cap
 
@@ -251,3 +216,5 @@ The amount of `SUI` locked and the interval after which they can be reclaimed is
 [repo-primitives-package-data]: https://github.com/Talus-Network/nexus-next/tree/main/sui/primitives
 [tool-definitions]: ../Tool.md#tool-definitions
 [crates-leader]: ./crates/Leader.md
+[reference-workflow]: ./reference/nexus_workflow/dag.md 
+[nexus-sdk-cli]: ../../nexus-sdk/CLI.md
