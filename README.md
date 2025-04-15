@@ -1,8 +1,8 @@
 ---
-description: Powering the Autonomous AI Economy
+description: 'Talus: Powering the Autonomous AI Economy'
 ---
 
-# Talus
+# 🏠 Home
 
 Welcome to the Talus Documentation Site! Here, you'll find comprehensive resources designed to guide developers and product users in building AI agents with Talus. Whether you're here to dive into the technical aspects or understand product functionality, our documentation has you covered.
 

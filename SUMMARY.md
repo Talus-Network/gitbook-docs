@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Talus](README.md)
+* [🏠 Home](README.md)
 
 ## 🔮 Talus Overview
 
