@@ -6,15 +6,24 @@
 
 * [Introduction to Talus](talus-overview/readme.md)
 * [AI Agent: What's in a Name?](talus-overview/ai-agent-whats-in-a-name.md)
+
+## 🚀 Getting Started
+
+* [Dev Quickstart](nexus-sdk/guides/math-branching-quickstart.md)
+* [Dev Guides](nexus-sdk/guides/index.md)
+  * [Build the Quickstart](nexus-sdk/guides/math-branching-dag-builder.md)
+  * [Add Flexibility with Entry Groups](nexus-sdk/guides/math_branching-dag-entry.md)
+  * [Build the Missing Tool](nexus-sdk/guides/llm-openai-chat-prep-tool.md)
+  * [Add an LLM to your DAG](nexus-sdk/guides/math_branching_with_chat.md)
+
+## 🎒 Product Docs
+
 * [Why Sui Move?](talus-overview/why-sui-move.md)
-
-## 🎒 Product Docs <a href="#products" id="products"></a>
-
 * [Introducing Nexus](products/introducing-nexus.md)
 * [Towards an Agentic Economy](products/towards-an-agentic-economy.md)
 * [Nexus Use Cases](products/nexus-use-cases.md)
 
-## 💻 Developer Docs <a href="#devs" id="devs"></a>
+## 💻 Developer Docs
 
 * [Nexus Core](nexus-next/index.md)
   * [Packages: Workflow](nexus-next/packages/Workflow.md)
@@ -46,7 +55,8 @@
   * [CLI](nexus-sdk/CLI.md)
   * [Tool Development](nexus-sdk/tool-development.md)
   * [Toolkit Rust](nexus-sdk/toolkit-rust.md)
-* [Glossary](nexus-next/Glossary.md)
+  * [How to Build a DAG](nexus-sdk/guides/dag-construction.md)
+* [Technical Glossary](nexus-next/Glossary.md)
 
 ## 🛠️ Tools
 
