@@ -11,7 +11,6 @@
 
 * [Dev Quickstart](nexus-sdk/guides/math-branching-quickstart.md)
 * [Dev Guides](nexus-sdk/guides/index.md)
-  * [How to Build your DAG](nexus-sdk/guides/dag-construction.md)
   * [Build the Quickstart](nexus-sdk/guides/math-branching-dag-builder.md)
   * [Add Flexibility with Entry Groups](nexus-sdk/guides/math_branching-dag-entry.md)
   * [Build the Missing Tool](nexus-sdk/guides/llm-openai-chat-prep-tool.md)
@@ -56,6 +55,7 @@
   * [CLI](nexus-sdk/CLI.md)
   * [Tool Development](nexus-sdk/tool-development.md)
   * [Toolkit Rust](nexus-sdk/toolkit-rust.md)
+  * [How to Build a DAG](nexus-sdk/guides/dag-construction.md)
 * [Technical Glossary](nexus-next/Glossary.md)
 
 ## 🛠️ Tools
