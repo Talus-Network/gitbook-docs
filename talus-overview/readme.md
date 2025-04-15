@@ -2,7 +2,7 @@
 description: Why Talus?
 ---
 
-# Introduction to Talus
+# 🐸 Introduction to Talus
 
 Since ChatGPT's launch in late 2022, the AI sector has experienced a Cambrian explosion of attention and innovation. This breakthrough showcased the potential for dramatically enhanced user-facing AI systems, unleashing builders' creativity worldwide. Yet the promised disruption of our economy and daily lives by AI systems hasn't fully materialized. While large language models (LLMs) are powerful, they remain relatively limited when used in isolation. As a response, we enter the era of AI agents and Talus is leading the way to shape the agentic future.
 
@@ -41,7 +41,7 @@ Looking at the shortcomings of the Web2 AI Agent sector, we can identify the val
 4. Secure
 5. Composable
 6. Fair
-7. Tied to a native value layer (i.e., defined onchain).&#x20;
+7. Tied to a native value layer (i.e., defined onchain).
 {% endhint %}
 
 These values will be familiar to the attentive reader. They are precisely the values that Web3 and blockchain champion—and the same values that AI technology must now embrace.

@@ -2,7 +2,7 @@
 description: Removing the veil of ignorance about AI agents
 ---
 
-# AI Agent: What's in a Name?
+# 🤖 AI Agent: What's in a Name?
 
 Talus aims to build the premier platform to build and deploy AI agents in an open, transparent, censorship resistant, composable and secure manner. But… what do we actually mean when we say that? In fact, what do we mean when we talk about AI agents? With the hype surrounding them increasing, so too has the confusion and even misinformation. So before continuing, let’s clearly outline how we at Talus think about AI agents.
 

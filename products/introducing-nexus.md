@@ -2,7 +2,7 @@
 description: Nexus at the heart of the Talus Technical Ecosystem
 ---
 
-# Introducing Nexus
+# 👋 Introducing Nexus
 
 The **Talus platform, powered by Nexus**, allows for an open ecosystem consisting of many actors, our community, building towards a future with Talus AI agents that revolutionize digital experiences to serve everyone.
 
@@ -17,8 +17,6 @@ At first sight, this layered approach introduces more coordination complexity. T
 {% endhint %}
 
 <figure><img src="../.gitbook/assets/nexus-arch.png" alt=""><figcaption></figcaption></figure>
-
-
 
 In essence, Nexus as a framework enables us to bridge the gap between the different layers that make up a Talus agent workflow, between the onchain and offchain world. It does the heavy lifting in the background and provides the developer with and easy to interact with SDK.
 
@@ -94,4 +92,3 @@ For the purposes of this documentation we make the distinction between different
 
 * **Service Provider (for Tools)**: These are 3rd party entities that run services that are desirable for Tool developers to integrate as additional offchain features for AI agents.
 * **Onchain applications (for Tools)**: These are onchain applications or contracts on the Sui blockchain that can be used for Tool developers to integrate as additional onchain features for AI agents.
-

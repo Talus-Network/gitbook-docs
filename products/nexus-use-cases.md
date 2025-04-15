@@ -2,7 +2,7 @@
 description: So what can you build?
 ---
 
-# Nexus Use Cases
+# 🎨 Nexus Use Cases
 
 To make matters a bit more concrete, let’s walk through a hypothetical use case that showcases the potential of Nexus to build Talus AI agents.
 
@@ -37,8 +37,8 @@ Let’s walk through the steps from the previous section that outline what devel
 2. We need to integrate the AI song recommendation service as a Tool. This means we’ll need to create a Tool definition to comply with the Tool interface expected by Nexus. This will allow the Nexus offchain components to invoke the Tool when the onchain workflow requests it. Additionally you’ll register the Tool to the Nexus onchain Tool registry. All of the above is facilitated by the Nexus SDK.
 3. We are also using 1 onchain Tool, the online music marketplace dApp. This service is not yet registered in the Nexus Tool registry.
 4. We need to write a proxy contract onchain that will hold the Tool definition. Again this is to comply with the Tool interface set by Nexus, but this time for onchain Tools. The Tool then needs to be registered in the Nexus Tool registry. Once more, Nexus SDK can automate part of your development work.
-5. This step can happen in parallel with previous steps and involves designing the agent Workflow, i.e. formalizing the desired functionality in terms of Tools and the control flow between them. For each Tool you’ll need to specify what inputs it is taking, what outputs are possible and what to do next based on those outputs. \
-   In our case, we’ll need to trigger the workflow by some event from the game (for example, some new contextual metadata is added) which will then take some inputs (user ID etc.) and the onchain workflow should emit an event to request the AI Song recommendation tool to return a list of songs to purchase. This will be the major output of the Tool. The list of songs to purchase will then serve as input for the next Tool, which is the onchain Tool that can purchase the songs using the funds it has at its disposal. The output here could be some metadata referencing an NFT transfer of the songs to the user’s wallet. This then completes the workflow.&#x20;
+5. This step can happen in parallel with previous steps and involves designing the agent Workflow, i.e. formalizing the desired functionality in terms of Tools and the control flow between them. For each Tool you’ll need to specify what inputs it is taking, what outputs are possible and what to do next based on those outputs.\
+   In our case, we’ll need to trigger the workflow by some event from the game (for example, some new contextual metadata is added) which will then take some inputs (user ID etc.) and the onchain workflow should emit an event to request the AI Song recommendation tool to return a list of songs to purchase. This will be the major output of the Tool. The list of songs to purchase will then serve as input for the next Tool, which is the onchain Tool that can purchase the songs using the funds it has at its disposal. The output here could be some metadata referencing an NFT transfer of the songs to the user’s wallet. This then completes the workflow.
 6. When the workflow is designed as part of the TAP, we can publish the package and instantiate the agent.
 
 {% hint style="info" %}
@@ -145,6 +145,3 @@ To further get the creative juices flowing, here is a non-exhaustive list of pot
 * Automated Instagram Posts
 
 </details>
-
-
-

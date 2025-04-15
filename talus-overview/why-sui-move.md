@@ -2,7 +2,7 @@
 description: Vision, tech, community
 ---
 
-# Why Sui Move?
+# 💧 Why Sui Move?
 
 In the section above, we outlined the motivation for building Talus (and Nexus) and introduced our system-level definitions of Talus AI agents as a specific subset of the AI agent space, along with a classification of agentic frameworks to build agents. Before diving into the (first) actual implementation of the Nexus framework and Talus agents, let’s first take a moment to consider why we picked Sui Move as the smart contract language to build Talus agents and why we’ll initially deploy Nexus on the Sui chain.
 

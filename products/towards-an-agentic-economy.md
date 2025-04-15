@@ -2,7 +2,7 @@
 description: Where are we now and where are we going?
 ---
 
-# Towards an Agentic Economy
+# 💸 Towards an Agentic Economy
 
 In the [previous section](products/introducing-nexus.md) we provided an overview of the Talus technical ecosystem, the technical components and the ecosystem actors. **Talus’ vision is that this ecosystem will evolve into a burgeoning double-sided marketplace of AI service providers (Tools) on the one hand and Talus agent builders on the other.** An application developer wanting to build with Talus agents does not have to build and run the AI tools themselves and vice versa, an AI tool provider is not tasked with building the applications leveraging their models.
 
