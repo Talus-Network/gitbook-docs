@@ -62,3 +62,7 @@
 
 * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
 * [Math](tools/math/README.md)
+
+## Looking for a home
+
+* [tools/test-tool/README.md](tools/test-tool/README.md)
