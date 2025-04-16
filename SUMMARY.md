@@ -63,3 +63,8 @@
 
 * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
 * [Math](tools/math/README.md)
+
+## Looking for a home
+
+* [nexus-next/TAP/Default-TAP.md](nexus-next/TAP/Default-TAP.md)
+* [nexus-next/TAP/Index.md](nexus-next/TAP/Index.md)
