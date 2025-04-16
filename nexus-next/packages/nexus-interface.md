@@ -19,7 +19,7 @@ Some examples of what the business logic in a TAP could do:
 Nexus first iteration is focused on the workflow component.\
 To comply with the Nexus V1 Interface the TAP must:
 
-1. Register itself with the [Nexus leader](../../../nexus-next/crates/Leader.md) by emitting `nexus_interface::v1::AnnounceInterfacePackageEvent` that
+1. Register itself with the [Nexus leader](../crates/leader.md) by emitting `nexus_interface::v1::AnnounceInterfacePackageEvent` that
    * has a generic parameter `W` which is a type located in the package and module that implements the interface.
    * contains property `shared_objects: vector<ID>` is a list of `SuiObjectID`s that the leader will inject as args into each following public function call.\
      The list is ordered, that is the shared objects will be injected in the order they are listed.
@@ -35,7 +35,7 @@ To comply with the Nexus V1 Interface the TAP must:
    * Can verify that required confirmations have been collected.
    * Invoked by the Nexus Leader.
 
-![Diagram showing Nexus V1 Interface flow](../../../nexus-next/images/nexus-interface-v1.png)
+![Diagram showing Nexus V1 Interface flow](../images/nexus-interface-v1.png)
 
 ### Events
 

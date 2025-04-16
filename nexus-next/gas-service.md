@@ -51,7 +51,7 @@ Tracks gas settlement state for a specific DAG execution. This struct maintains 
 
 #### GasBudgets
 
-Manages gas budgets for different scopes in the system. The inner Bag stores balances of SUI coins, with the key being a Scope. These budgets are used as a fallback payment method when no gas tickets are available. See [Default Gas Budget](Gas-Service.md#1-default-gas-budget).
+Manages gas budgets for different scopes in the system. The inner Bag stores balances of SUI coins, with the key being a Scope. These budgets are used as a fallback payment method when no gas tickets are available. See [Default Gas Budget](gas-service.md#1-default-gas-budget).
 
 #### ToolGas
 
@@ -124,7 +124,7 @@ public struct LeaderClaimedGasEvent has copy, drop {
 There are several ways to check if gas has been paid for a tool invocation:
 
 1. **Using GasService State**
-   * Anyone can check if gas has been settled for a specific vertex in an execution using [`is_execution_vertex_settled`](Gas-Service.md#view-operations).
+   * Anyone can check if gas has been settled for a specific vertex in an execution using [`is_execution_vertex_settled`](gas-service.md#view-operations).
    * This is useful both for onchain and offchain actors.
    * This is the most direct way to verify gas payment status.
    * Returns a boolean indicating whether the vertex can be invoked.
@@ -145,7 +145,7 @@ There are several ways to check if gas has been paid for a tool invocation:
 2. Only tickets in "Upon Discretion of Tool" mode can be revoked.
 3. Tool owners can claim gas at any time.
 4. Gas budgets can be refunded if the execution is finished.
-5. Workflows that want to pay gas on behalf of the user must assert that they execute in a network with a trusted leader. See [current limitation below](Gas-Service.md#current-limitation)
+5. Workflows that want to pay gas on behalf of the user must assert that they execute in a network with a trusted leader. See [current limitation below](gas-service.md#current-limitation)
 
 ### Current limitation
 
