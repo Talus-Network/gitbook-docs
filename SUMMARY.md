@@ -62,3 +62,7 @@
 
 * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
 * [Math](tools/math/README.md)
+
+## Looking for a home
+
+* [nexus-sdk/guides/setup.md](nexus-sdk/guides/setup.md)
