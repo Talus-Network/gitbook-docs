@@ -1,4 +1,4 @@
-# Default Talus Agent Package (TAP)
+# Default TAP
 
 ## Overview
 
@@ -6,31 +6,31 @@ The Default TAP is a useful helper component for Nexus agent developers. It serv
 
 ## Interface Compliance
 
-The Default TAP implements the [Nexus Interface V1][nexus-interface-v1]  specification, which defines the required functionality for any Talus Agent Package to integrate with the Nexus workflow engine. Key interface requirements include:
+The Default TAP implements the [Nexus Interface V1](../onchain-nexus/nexus-interface.md#v1) specification, which defines the required functionality for any Talus Agent Package to integrate with the Nexus workflow engine. Key interface requirements include:
 
 1. **Version Management**
-   - Must declare and maintain interface version compatibility.
-   - Must support version checking for backward compatibility.
-
+   * Must declare and maintain interface version compatibility.
+   * Must support version checking for backward compatibility.
 2. **Workflow Management**
-   - Must handle worksheet management and state tracking.
-   - Must support tool evaluation confirmation.
-
+   * Must handle worksheet management and state tracking.
+   * Must support tool evaluation confirmation.
 3. **Authorization**
-   - Must implement witness-based authorization.
-   - Must support package upgrade mechanisms.
+   * Must implement witness-based authorization.
+   * Must support package upgrade mechanisms.
 
-For detailed interface requirements, see the [Nexus Interface Documentation][nexus-interface] .
+For detailed interface requirements, see the [Nexus Interface Documentation](../onchain-nexus/nexus-interface.md) .
 
-<!-- Gitbook syntax -->
-{% hint style="info" %} In the code snippets below, we reference some Sui Move patterns (e.g. hot potato), please refer to the [primitives pakcage doc][packages-primitives] for more information on the approach taken here. {% endhint %}
+{% hint style="info" %}
+In the code snippets below, we reference some Sui Move patterns (e.g. hot potato), please refer to the \[primitives pakcage doc]\[packages-primitives] for more information on the approach taken here.
+{% endhint %}
 
 ### DefaultTAP Structure
 
 The agent will be represented by the `DefaultTAP` struct, which is a shared object that contains:
-- `id`: A unique identifier for the TAP instance.
-- `witness`: A Bag containing authorization tokens for package identification and upgrade management.
-- `iv`: The interface version (currently v1) that clients can use to determine compatibility.
+
+* `id`: A unique identifier for the TAP instance.
+* `witness`: A Bag containing authorization tokens for package identification and upgrade management.
+* `iv`: The interface version (currently v1) that clients can use to determine compatibility.
 
 ```rust
 use nexus_interface::version::InterfaceVersion;
@@ -56,6 +56,7 @@ public struct DefaultTAP has key {
 ### Constructor and Leader Registration
 
 The DefaultTAP is created using the `new()` constructor function, which:
+
 1. Creates a new DefaultTAP instance with a unique ID.
 2. Initializes a witness token for package identification.
 3. Sets the Nexus interface version to v1.
@@ -140,16 +141,14 @@ fun get_witness(self: &DefaultSAP): &DefaultSAPV1Witness {
 The Default TAP works in conjunction with the Nexus workflow engine, which provides:
 
 1. **DAG Implementation**
-   - Directed Acyclic Graph data structure for modeling complex workflows.
-   - Support for vertices, edges, and input/output ports.
-   - Entry group management for workflow initiation.
-
+   * Directed Acyclic Graph data structure for modeling complex workflows.
+   * Support for vertices, edges, and input/output ports.
+   * Entry group management for workflow initiation.
 2. **Tool Registry**
-   - Registration and management of available tools.
-
+   * Registration and management of available tools.
 3. **Tool Invocation**
-   - Support for tool execution invocation, onchain or offchain.
-   - Leader capability management.
+   * Support for tool execution invocation, onchain or offchain.
+   * Leader capability management.
 
 Where the above steps effectively ensure interface compliance, the (default) TAP also needs to enable DAG execution.
 
@@ -211,15 +210,15 @@ public fun begin_dag_execution(
 
 ## Security Considerations
 
-- The TAP uses witness tokens for authorization as required by the [Nexus Interface][nexus-interface].
-- Interface version checking ensures compatibility.
-- Worksheet proofs ensure state integrity.
-- Tool execution is properly isolated.
-<!-- TODO: refer to Security analysis after integrating Stephen's whitepaper section on it -->
+* The TAP uses witness tokens for authorization as required by the [Nexus Interface](../onchain-nexus/nexus-interface.md).
+* Interface version checking ensures compatibility.
+* Worksheet proofs ensure state integrity.
+* Tool execution is properly isolated.
 
 ## Full Module Code
 
 Toggle to see the full module code for the default TAP:
+
 <details>
 
 <summary>Toggle code</summary>
@@ -349,9 +348,3 @@ fun get_witness(self: &DefaultSAP): &DefaultSAPV1Witness {
 ```
 
 </details>
-
-<!-- List of references -->
-
-[nexus-interface]: ../packages/Nexus-Interface.md
-[nexus-interface-v1]: ../packages/Nexus-Interface.md#v1
-[packages-primitives]: ../packages/Primitives.md

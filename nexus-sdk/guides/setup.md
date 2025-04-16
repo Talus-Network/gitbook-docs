@@ -1,4 +1,4 @@
-# Nexus SDK Developer Setup Guide
+# 🔌 Setup Guide
 
 This guide will help you quickly set up your development environment and start using Nexus SDK, including initializing your wallet, funding it through a faucet, and accessing the `devnet` Sui explorer.
 
@@ -10,9 +10,9 @@ Follow these steps to install the Nexus CLI and set up your environment:
 
 Make sure you have installed:
 
-- [Rust](https://rustup.rs/) (latest stable)
-- [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
-- [Sui](https://docs.sui.io/guides/developer/getting-started)
+* [Rust](https://rustup.rs/) (latest stable)
+* [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+* [Sui](https://docs.sui.io/guides/developer/getting-started)
 
 ### Install the Nexus CLI
 
@@ -59,12 +59,12 @@ nexus --version
 ## Configure the Talus devnet
 
 {% hint style="warning" %}
-The Talus `devnet` is currently private and accessible only through approved
-credentials. To request access, please submit your details using the form
+The Talus `devnet` is currently private and accessible only through approved\
+credentials. To request access, please submit your details using the form\
 provided in the navigation bar.
 {% endhint %}
 
-Once you receive your credentials, configure your Nexus CLI to connect to the
+Once you receive your credentials, configure your Nexus CLI to connect to the\
 Talus `devnet` by running:
 
 ```bash
@@ -87,14 +87,14 @@ source .envrc
 ```
 
 {% hint style="success" %}
-To automatically load these variables every time you navigate to the project
-directory, consider using [direnv](https://direnv.net/). After installing it,
+To automatically load these variables every time you navigate to the project\
+directory, consider using [direnv](https://direnv.net/). After installing it,\
 run `direnv allow` within your project directory.
 {% endhint %}
 
 ### Configure the Sui client
 
-After installing the Sui binaries, configure and activate your Talus `devnet`
+After installing the Sui binaries, configure and activate your Talus `devnet`\
 environment:
 
 ```bash
@@ -112,7 +112,7 @@ sui client new-address ed25519 tally
 ```
 
 {% hint style="danger" %}
-This command will output your wallet details, including your address and
+This command will output your wallet details, including your address and\
 recovery phrase. Ensure you store this information securely.
 {% endhint %}
 
@@ -133,7 +133,7 @@ sui client balance tally
 
 Open the [Talus Sui Explorer](https://explorer.devnet.taluslabs.dev/) and request an access code.
 
----
+***
 
-After completing these steps, you are ready to build and execute workflows using
+After completing these steps, you are ready to build and execute workflows using\
 the Nexus SDK. To build your first workflow, check the [Dev Quickstart guide](math-branching-quickstart.md).

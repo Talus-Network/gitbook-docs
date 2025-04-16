@@ -58,6 +58,7 @@ enum Output {
 ```
 
 where:
+
 ```rust
 /// Represents the type of a message in a chat completion request or response.
 #[derive(Debug, Default, PartialEq, Eq, Deserialize, Serialize, JsonSchema, EnumString)]
@@ -185,11 +186,11 @@ Every Nexus tool must include a README.md file that documents the tool's functio
 
 <summary>Example README.md</summary>
 
-## `xyz.taluslabs.llm-openai-chat-prep@1`
+### `xyz.taluslabs.llm-openai-chat-prep@1`
 
 Standard Nexus Tool that converts a number into a message format compatible with the OpenAI chat completion tool. This is particularly useful when you want to use the results of mathematical operations as input for chat completion.
 
-### Input
+#### Input
 
 **`number`: \[`prim@i64`]**
 
@@ -199,7 +200,7 @@ _opt_ **`role`: \[`Role`]** _default_: `Role::User`
 
 The role for the message. Must be one of: `Role::User`, `Role::System`, or `Role::Assistant`. Defaults to `Role::User` if not specified.
 
-### Output Variants & Ports
+#### Output Variants & Ports
 
 **`ok`**
 
@@ -216,13 +217,13 @@ The conversion failed due to an invalid input.
   * For invalid roles: "Invalid Role: {role}"
   * For number conversion failures: "Failed to validate number conversion: {error}"
 
-### Error Handling
+#### Error Handling
 
 This tool handles the following error case:
 
 **Invalid Role**: If the provided role is not one of the valid `Role` variants, the tool returns an `err` variant with a descriptive error message.
 
-### Example Usage
+#### Example Usage
 
 This tool is typically used in a DAG to convert the output of a mathematical operation into a format that can be used as input for the chat completion tool. For example:
 
@@ -317,6 +318,7 @@ This tool is typically used in a DAG to convert the output of a mathematical ope
 ```
 
 Note that you'll have to add the chat completion api key still. It is recommended to use entry input ports for this.
+
 </details>
 
 ## Build, Run, Register your Tool

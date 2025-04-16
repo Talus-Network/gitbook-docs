@@ -17,21 +17,21 @@ Ubiqutously used terms. Often these terms reference specific parts of the projec
 
 ## Onchain Nexus
 
-The on-chain part of Nexus. Holds the workflow DAG state and requests Tool execution from the Leader. 
+The on-chain part of Nexus. Holds the workflow DAG state and requests Tool execution from the Leader.
 
 Docs:
 
-* [Workflow package](packages/Workflow.md)
-* [Primitives package](packages/Primitives.md)
-* [Nexus interface package](packages/Nexus-Interface.md)
+* [Workflow package](../developer-docs/index/onchain-nexus/workflow.md)
+* [Primitives package](../developer-docs/index/onchain-nexus/primitives.md)
+* [Nexus interface package](../developer-docs/index/onchain-nexus/nexus-interface.md)
 
 {% hint style="info" %}
-The Nexus core onchain packages are currently not open sourced. To find all of the function signatures and data structs, please refer to [the reference API documentation](./packages/reference/)
+The Nexus core onchain packages are currently not open sourced. To find all of the function signatures and data structs, please refer to [the reference API documentation](packages/reference/)
 {% endhint %}
 
-### [Sui Move Conventions](conventions/Sui-Move.md)
+### [Sui Move Conventions](../developer-docs/index/onchain-nexus/sui-move.md)
 
-We established a [set of conventions for writing Move code](conventions/Sui-Move.md), some of them unfamiliar outside of the Nexus team. Skim through them before diving into the Move codebase.
+We established a [set of conventions for writing Move code](../developer-docs/index/onchain-nexus/sui-move.md), some of them unfamiliar outside of the Nexus team. Skim through them before diving into the Move codebase.
 
 ## Offchain Nexus
 
@@ -63,8 +63,8 @@ The components referenced above (onchain Nexus, offchain Nexus and tools) provid
 
 Docs:
 
-* [Agent development](TAP/Index.md)
-* [Default TAP template](TAP/Default-TAP.md)
+* [Agent development](../developer-docs/index/index/)
+* [Default TAP template](../developer-docs/index/index/default-tap.md)
 
 ## Nexus SDK
 
