@@ -16,6 +16,7 @@
   * [Add Flexibility with Entry Groups](nexus-sdk/guides/math_branching-dag-entry.md)
   * [Build the Missing Tool](nexus-sdk/guides/llm-openai-chat-prep-tool.md)
   * [Add an LLM to your DAG](nexus-sdk/guides/math_branching_with_chat.md)
+  * [Protect your Tool](nexus-sdk/guides/tool-firewall.md)
 
 ## 🌟 Product Docs
 
@@ -63,7 +64,3 @@
 
 * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
 * [Math](tools/math/README.md)
-
-## Looking for a home
-
-* [nexus-sdk/guides/tool-firewall.md](nexus-sdk/guides/tool-firewall.md)
