@@ -58,7 +58,6 @@ enum Output {
 ```
 
 where:
-
 ```rust
 /// Represents the type of a message in a chat completion request or response.
 #[derive(Debug, Default, PartialEq, Eq, Deserialize, Serialize, JsonSchema, EnumString)]
@@ -318,7 +317,6 @@ This tool is typically used in a DAG to convert the output of a mathematical ope
 ```
 
 Note that you'll have to add the chat completion api key still. It is recommended to use entry input ports for this.
-
 </details>
 
 ## Build, Run, Register your Tool
