@@ -4,50 +4,171 @@ description: So what can you build?
 
 # 🎨 Nexus Use Cases
 
-To make matters a bit more concrete, let’s walk through a hypothetical use case that showcases the potential of Nexus to build Talus AI agents.
+Let's explore specific use cases that demonstrate how Nexus enables the creation of Talus AI agents across our key product verticals.
 
-### Example Use Case: In-game Soundtrack Agent
+### Product Vertical 1: Memes/Personality Agents
 
-#### The business idea
+#### Example Use Case: X Engagement Agent
 
-Imagine a scenario where a game developer is building a game that has some functionality that interacts with the blockchain. At the very least there is an **in-game currency that is a token deployed onchain**.
+An agent developer wants to create a personality-driven agent that engages with crypto Twitter, building a following through humor and timely market insights.
 
-Additionally, there is an **onchain music marketplace** that offers songs by paying a (small) fee, either to own the rights to play the song or the capability to play it only once.
+#### The Business Idea
 
-We would like to develop a Talus AI Agent, an onchain workflow designed to autonomously purchase and curate background soundtracks for gaming. Instead of requiring players to manually select songs, the AI Agent intelligently recommends and acquires tracks based on user preferences and contextual factors, such as time of day, season, and in-game events (e.g., boss battles or exploration sequences).
+The Nexus-powered agent monitors popular crypto accounts, automatically generates witty responses, and builds engagement through a unique persona. It can analyze market sentiment, incorporate trending topics, and time posts for maximum visibility. The agent's personality evolves based on engagement metrics, creating a virtuous cycle of growth.
 
-The AI dynamically analyzes gameplay and environmental cues to select the most immersive soundtracks. Over time, the agent optimizes its recommendations through reinforcement learning, continuously improving its ability to match music with gameplay moments for a more engaging and personalized experience.
+This agent monetizes by promoting NFT collections or tokens through native integrations, charging for sponsored content, or operating on a subscription model where followers get early access to its insights.
 
-Now, we would like to create a Talus AI agent (defined as a workflow onchain) that enables the purchase of songs to be used as background soundtracks while playing the game. The AI element comes into play when the agent is using the preferences of the user and some other contextual data (time of the day, time of the year, game context e.g. boss battle) to recommend which songs to purchase and play, the user does not actively need to pick them. The agent's performance is optimized through reinforcement learning.
+```mermaid
+flowchart TD
+    A[Agent Creator] -->|Creates & Maintains| B[X Engagement Agent]
+    B -->|Generates Content| C[X Platform]
+    C -->|Builds Following| D[Followers/Community]
+    D -->|Engagement & Views| C
+    D -->|Pays for Premium Content| A
+    E[Sponsors] -->|Sponsored Content Fees| A
+    A -->|Workflow Execution Fees| F[Nexus/Talus]
+    G[Tool Providers] -->|Tools| B
+    F -->|Revenue Share| G
+```
 
-#### Dependencies
+#### Development Journey with Nexus
 
-* There exists an onchain marketplace for music tracks to purchase songs from.
-  * Ideally with low fees through transaction batching or something of the sort.
-* The onchain marketplace offering can be queried with price and metadata information available.
-* There exists an AI service that allows to output song recommendations based on contextual data with reinforcement learning capabilities.
-* The contextual metadata from the game’s backend is available.
-* Wallet integration for Sui (should be present given the in-game currency already exists)
+1. **Tool Selection**: The developer uses both existing and custom tools:
+   * Twitter API Tools for monitoring and posting
+   * OpenAI LLM Tool for content generation
+   * Analytics Tool for tracking engagement metrics
+2. **Workflow Design**: The developer creates a DAG workflow that:
+   * Monitors target accounts on a schedule
+   * Generates contextually relevant responses
+   * Posts content based on engagement data
+   * Tracks performance for continuous improvement
+3. **Economic Integration**: The agent incurs workflow execution fees when posting or analyzing content, but these are offset by monetization through:
+   * Sponsored content fees
+   * Token-gated premium features
+   * Revenue sharing from conversions
 
-#### Developer Journey
+This use case leverages Nexus's onchain workflow verification to ensure transparency for sponsors, while the hybrid execution model keeps operational costs manageable.
 
-Let’s walk through the steps from the previous section that outline what development work needs to be done to implement this Talus agent:
+### Product Vertical 2: Gamification/AvA (Agent vs Agent)
 
-1. We are using 1 offchain Tool. The AI song recommendation service. This service is not yet registered in the Nexus Tool registry.
-2. We need to integrate the AI song recommendation service as a Tool. This means we’ll need to create a Tool definition to comply with the Tool interface expected by Nexus. This will allow the Nexus offchain components to invoke the Tool when the onchain workflow requests it. Additionally you’ll register the Tool to the Nexus onchain Tool registry. All of the above is facilitated by the Nexus SDK.
-3. We are also using 1 onchain Tool, the online music marketplace dApp. This service is not yet registered in the Nexus Tool registry.
-4. We need to write a proxy contract onchain that will hold the Tool definition. Again this is to comply with the Tool interface set by Nexus, but this time for onchain Tools. The Tool then needs to be registered in the Nexus Tool registry. Once more, Nexus SDK can automate part of your development work.
-5. This step can happen in parallel with previous steps and involves designing the agent Workflow, i.e. formalizing the desired functionality in terms of Tools and the control flow between them. For each Tool you’ll need to specify what inputs it is taking, what outputs are possible and what to do next based on those outputs.\
-   In our case, we’ll need to trigger the workflow by some event from the game (for example, some new contextual metadata is added) which will then take some inputs (user ID etc.) and the onchain workflow should emit an event to request the AI Song recommendation tool to return a list of songs to purchase. This will be the major output of the Tool. The list of songs to purchase will then serve as input for the next Tool, which is the onchain Tool that can purchase the songs using the funds it has at its disposal. The output here could be some metadata referencing an NFT transfer of the songs to the user’s wallet. This then completes the workflow.
-6. When the workflow is designed as part of the TAP, we can publish the package and instantiate the agent.
+#### Example Use Case: Battle Royale Game Master
 
-{% hint style="info" %}
-**Fat Agent or multi-agent workflows?**
+A developer creates a Game Master agent that hosts competitive text-based battles between player-owned Talus agents in public X threads, with real monetary stakes and verifiable outcomes.
 
-One design question to consider is whether to put all of your application logic into a single “fat” agent, or whether to split up functionality into smaller agents (that could be used by others, potentially with some royalty fee going to the original builder) that interact, i.e. multi-agent workflows. This is still an open design space at the moment.
-{% endhint %}
+#### The Business Idea
 
-### Examples: Tools
+The Game Master agent manages a tournament-style competition where Talus agents compete in personality-based challenges. Players can place bets on outcomes, and each round's results are recorded onchain for transparency. The Game Master dynamically adjusts difficulty, creates compelling narratives, and ensures fair competition through verifiable randomization.
+
+```mermaid
+flowchart TD
+    A[Game Creator] -->|Builds & Maintains| B[Game Master Agent]
+    B -->|Hires| D[Talus Agents]
+    D -->|Compete in| E[Tournaments/Battles]
+    B -->|Manages| E
+    C[Speculators] -->|Place Bets on| E
+    E -->|Generates| F[Betting Volume]
+    F -->|Transaction Fee %| A
+    F -->|Winnings| C
+    A -->|Workflow Execution Fees| G[Nexus/Talus]
+    H[Tool Providers] -->|Tools| B
+    G -->|Revenue Share| H
+    I[Community] -->|Own| D
+    D -->|Income Share| I
+```
+
+#### Development Journey with Nexus
+
+1. **Tool Integration**:
+   * LLM Tool for scenario generation and battle narration
+   * Onchain randomization Tool for fair outcomes
+   * Betting marketplace Tool for handling wagers
+   * Social media integration for promotion
+2. **Workflow Design**:
+   * Tournament bracket management
+   * Challenge creation and evaluation
+   * Result verification and recording
+   * Prize distribution
+3. **Economic Model**:
+   * The Game Master collects a percentage of betting volume
+   * Players pay entry fees to participate
+   * Nexus collects workflow execution fees
+   * Tool providers earn through each tournament execution
+
+This use case demonstrates Nexus's ability to support complex multi-agent interactions with economic incentives, while providing the critical onchain verification that makes AvA betting viable and trustworthy.
+
+### Product Vertical 3: DeFi
+
+#### Example Use Case: Yield Optimization Agent
+
+A DeFi protocol developer creates an agent that autonomously manages liquidity across protocols to maximize returns while managing risk parameters.
+
+#### The Business Idea
+
+The Yield Optimizer agent continuously monitors DeFi protocols across multiple chains, identifies optimal yield strategies, and automatically rebalances user funds to maximize returns. It uses onchain verification to provide transparent execution records, manage risk parameters, and adapt to changing market conditions without requiring constant user intervention.
+
+```mermaid
+flowchart TD
+    A[Protocol Developer] -->|Creates & Manages| B[Yield Optimizer Agent]
+    C[Investors] -->|Deposit Funds| B
+    B -->|Allocates Capital to| D[DeFi Protocols]
+    D -->|Generate| E[Yield/Returns]
+    E -->|Performance Fee %| A
+    E -->|Remaining Returns| C
+    A -->|Workflow Execution Fees| F[Nexus/Talus]
+    G[Tool Providers] -->|Protocol Integration Tools| B
+    F -->|Revenue Share| G
+    B -->|Transparent Execution Records| C
+```
+
+#### Development Journey with Nexus
+
+1. **Tool Selection**:
+   * Onchain protocol interaction Tools for major DeFi platforms
+   * Market data aggregation Tool for real-time analytics
+   * Risk assessment Tool for strategy evaluation
+   * Gas optimization Tool for cost-effective transactions
+2. **Workflow Design**:
+   * Regular yield opportunity scanning
+   * Risk-adjusted strategy formulation
+   * Transaction batching and execution
+   * Performance reporting and strategy adjustment
+3. **Economic Integration**:
+   * Performance-based fee structure (% of yields generated)
+   * Workflow execution costs covered by yield generated
+   * Treasury management for gas reserves
+
+This use case highlights Nexus's value proposition for financial applications where transparency, auditability, and trustless execution are paramount. The onchain control plane provides security assurances that purely off-chain solutions cannot match.
+
+### Development Process with Nexus
+
+For all these use cases, developers follow a consistent process enabled by Nexus:
+
+1. **Design the agent workflow** using the DAG architecture, defining inputs, outputs, and control flow
+2. **Register or develop required tools** in the Tool Registry
+3. **Implement the workflow logic** using Nexus SDK and CLI
+4. **Define economic parameters** for fee collection and distribution
+5. **Deploy and monitor** the agent with observability features
+
+The Nexus framework provides developers with:
+
+* Standardized interfaces for tool integration
+* Composable building blocks for complex agent behaviors
+* Transparent execution with onchain verification
+* Built-in economic mechanisms for sustainable revenue
+* Hybrid execution model for optimal performance and cost
+
+### Alignment with Talus Business Strategy
+
+These use cases support Talus's vision of powering the AI Economy through:
+
+1. **IDOL.fun Integration**: The Personality Agents and AvA Gaming agents provide direct use cases for IDOL.fun, demonstrating how Nexus enables monetizable agent experiences.
+2. **Revenue Generation**: Each vertical showcases how the workflow execution fee model creates sustainable revenue for Talus, tool providers, and agent developers.
+3. **Verifiable Execution**: All examples highlight the unique value proposition of onchain workflow verification, addressing the trust issues that purely centralized agent solutions cannot solve.
+4. **Economic Sustainability**: The examples demonstrate clear paths to revenue for agent creators, validating Talus's thesis that decentralized agentic workflows unlock new business models in the AI economy.
+
+By focusing on these three verticals, Talus can validate the Nexus framework's ability to support a diverse range of monetizable agent use cases, driving adoption and revenue growth as the platform matures.
+
+### Further Examples: Tools
 
 To further get the creative juices flowing, here is a non-exhaustive list of potential AI services that could serve as offchain Tools:
 

@@ -62,5 +62,6 @@
 
 ## 🛠️ Tools
 
+* [⚓ Nexus Standard Tools](tools/nexus-standard-tools.md)
 * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
 * [Math](tools/math/README.md)

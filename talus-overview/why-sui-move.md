@@ -25,4 +25,13 @@ The strategic decision to utilize Move as the smart contract language is underpi
 
 #### The Ecosystem
 
-Sui has known an impressive start ever since their launch with an ever increasing number of impressive and competent teams building on it. The launch of Walrus will only further Sui adoption. We believe there are many synergies for Sui ecosystem teams to partner with Talus for AI enhanced applications.
+Sui has known an impressive start ever since their launch with an ever increasing number of talented and competent teams building on it. The launch of Walrus (and soon Seal) has only furthered Sui adoption. We believe there are many synergies for Sui ecosystem teams to partner with Talus for AI enhanced applications. Additionally, Sui leads all major L1s in all the growth metrics that matter (TVL, onchain volume, liquidity inflows). We have been particularly impressed by inflows from stablecoins, Ethereum native assets, and BTC liquidity.
+
+#### Talus’ Role Within Sui
+
+We at Talus have determined that Sui will be the #1 general purpose L1 of the future. We are proud to call Mysten Labs/Sui Foundation close partners in our journey to deliver decentralized AI Agents to the world. No L1 technology nor ecosystem better suits our needs.
+
+Talus intends to deliver on two goals for the broader Sui ecosystem:
+
+1. **Make Sui the AI chain**: Sui is the best L1 to develop AI applications, and Talus will lead the way in showcasing this.
+2. **Boost Onchain Activity**: Talus Agents and the activity they bring will improve multiple areas of the Sui onchain ecosystem like onchain transaction volume, TVL from agent tokens, increased interaction with complementary Sui DeFi applications, and more.
