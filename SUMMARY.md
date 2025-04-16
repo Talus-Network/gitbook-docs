@@ -33,8 +33,8 @@
   * [Sui Move Conventions](nexus-next/conventions/Sui-Move.md)
   * [Crate: Leader](nexus-next/crates/Leader.md)
     * [Leader Sui Transactions](nexus-next/crates/Sui-Tx.md)
-  * [Agent Development](nexus-next/SAP/Index.md)
-  * [Default SAP](nexus-next/SAP/Default-SAP.md)
+  * [Agent Development](nexus-next/TAP/Index.md)
+  * [Default TAP](nexus-next/TAP/Default-TAP.md)
   * [Tool](nexus-next/Tool.md)
   * [Gas Service](nexus-next/Gas-Service.md)
   * [Nexus Core API docs](developer-docs/index/nexus-core-api-docs/README.md)
@@ -63,8 +63,3 @@
 
 * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
 * [Math](tools/math/README.md)
-
-## Looking for a home
-
-* [nexus-next/TAP/Default-TAP.md](nexus-next/TAP/Default-TAP.md)
-* [nexus-next/TAP/Index.md](nexus-next/TAP/Index.md)
