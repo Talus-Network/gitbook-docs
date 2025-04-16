@@ -1,13 +1,13 @@
 # Nexus Interface
 
-Nexus components are designed to be composed into "Smart Agent Packages" (SAPs) that are published on Sui.
-SAPs are typically template Sui packages that are customized for a specific product.
+Nexus components are designed to be composed into "Talus Agent Packages" (TAPs) that are published on Sui.
+TAPs are typically template Sui packages that are customized for a specific product.
 They would include business logic relevant to the product and configurations for the Nexus components.
 
 The configurations typically take the form of `SuiObjectID`s which represent shared objects.
 These shared objects, such as [`DAG`][packages-workflow], are unforced to be invoked in situations described by the business logic.
 
-Some examples of what the business logic in a SAP could do:
+Some examples of what the business logic in a TAP could do:
 
 - check token supply to feature-gate a workflow
 - require a payment component
@@ -17,7 +17,7 @@ Some examples of what the business logic in a SAP could do:
 ## `V1`
 
 Nexus first iteration is focused on the workflow component.
-To comply with the Nexus V1 Interface the SAP must:
+To comply with the Nexus V1 Interface the TAP must:
 
 1. Register itself with the [Nexus leader][crates-leader] by emitting `nexus_interface::v1::AnnounceInterfacePackageEvent` that
    - has a generic parameter `W` which is a type located in the package and module that implements the interface.

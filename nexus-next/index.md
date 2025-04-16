@@ -76,8 +76,8 @@ The components referenced above (onchain Nexus, offchain Nexus and tools) provid
 
 Docs:
 
-* [Agent development](SAP/Index.md)
-* [Default SAP template](SAP/Default-SAP.md)
+* [Agent development](TAP/Index.md)
+* [Default TAP template](TAP/Default-TAP.md)
 
 ## Nexus SDK
 
@@ -85,4 +85,4 @@ Nexus offers tool and [agent developers](index.md#actors) an easy-to-use SDK con
 
 Docs:
 
-* [Nexus SDK documentation](broken-reference)
+* [Nexus SDK documentation](../nexus-sdk/index.md)
