@@ -1,7 +1,5 @@
 # Leader
 
-> concerns [`be/leader` crate][repo-leader-crate]
-
 ## Sequence diagram
 
 High-level sequence diagram describing the duties of the Leader.
@@ -94,13 +92,15 @@ There are multiple processes running in parallel in the leader node. These are a
 
 ## High integrity channel
 
-Some parts of the Leader service use a [custom channel implementation][channel-impl] that handles indexing of messages sent over this channel, as well as retries and sweeps of stale messages.
+Some parts of the Leader service use a custom channel implementation that handles indexing of messages sent over this channel, as well as retries and sweeps of stale messages.
 
 Notably, the event listener<>event executor and the event executor<>merchant processes communicate via this channel.
 
 The following state diagrams should highlight the functionality of the channel.
 
-> Note that this channel "assumes" it has a stable Redis connection. There are edge cases, where dropping events is very unlikely, but possible. One such edge case is if sending a message over this channel fails due to Redis being unavailable but the Sui event listener successfully saves the next page cursor to Redis. This can in the future be improved by handling Redis errors within the channel differently (by for example, halting).
+{% hint style="info" %}
+Note that this channel "assumes" it has a stable Redis connection. There are edge cases, where dropping events is very unlikely, but possible. One such edge case is if sending a message over this channel fails due to Redis being unavailable but the Sui event listener successfully saves the next page cursor to Redis. This can in the future be improved by handling Redis errors within the channel differently (by for example, halting).
+{% endhint %}
 
 ### High integrity channel receiver and sender
 
@@ -167,7 +167,3 @@ stateDiagram-v2
     }
 ```
 
-<!-- List of References -->
-
-[repo-leader-crate]: https://github.com/Talus-Network/nexus-next/tree/main/be/leader
-[channel-impl]: https://github.com/Talus-Network/nexus-next/tree/main/be/leader/src/channel.rs

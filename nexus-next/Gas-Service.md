@@ -74,7 +74,7 @@ Tools can set a default cost per invocation. When no gas tickets are available, 
 
 ### 2. Gas Extensions
 
-Gas extensions provide alternative payment strategies. The default extension ([`default_gas_extension`](https://github.com/Talus-Network/nexus-next/tree/main/sui/workflow/sources/default_gas_extentsion.move)) implements an expiry-based system where users can:
+Gas extensions provide alternative payment strategies. The default extension implements an expiry-based system where users can:
 
 * Buy access for a specific duration (e.g., 10 minutes).
 * Pay a fixed rate per minute.

@@ -1,7 +1,5 @@
 # Primitives Package
 
-> concerns [`sui/primitives` package][repo-primitives-package]
-
 Exports types that allow two Sui packages, A and B, to communicate with each other in an authenticated way without using explicit Move dependencies. Instead, A and B have a shared dependency on this package, `nexus_primitives`.
 
 ## Why is this useful?

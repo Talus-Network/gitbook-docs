@@ -54,7 +54,7 @@ This topic has not yet been discussed in depth and needs addressing.
 
 ## Tool registration
 
-Tools should be register in the Tool Registry using our [CLI][repo-nexus-sdk-cli].
+Tools should be register in the Tool Registry using our [CLI](../nexus-sdk/CLI.md#nexus-tool)
 
 ### Off-chain tools
 
@@ -72,7 +72,3 @@ Our initial focus are off-chain tools.
 ## Tool authorization
 
 Once there are community Tools, we will need a way to authorize communication between the Leader and a Tool. This has been discussed superficially and it needs to be researched in depth in the future.
-
-<!-- List of References -->
-
-[repo-nexus-sdk-cli]: https://github.com/Talus-Network/nexus-sdk/tree/main/cli
