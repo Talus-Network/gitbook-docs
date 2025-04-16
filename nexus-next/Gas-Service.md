@@ -34,7 +34,7 @@ Gas tickets represent prepaid access to tool invocations. They can be configured
 Gas tickets and budgets can be associated with different scopes:
 
 1. **Execution Scope**: Specific to a single DAG execution.
-2. **Worksheet Type Scope**: Applies to all executions of a specific worksheet type, i.e. the SAP.
+2. **Worksheet Type Scope**: Applies to all executions of a specific worksheet type, i.e. the TAP.
 3. **Invoker Address Scope**: Applies to all executions initiated by a specific address.
 
 {% hint style="warning" %}
