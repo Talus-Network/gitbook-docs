@@ -9,6 +9,7 @@
 
 ## 🚀 Getting Started
 
+* [🔌 Setup Guide](nexus-sdk/guides/setup.md)
 * [💨 Dev Quickstart](nexus-sdk/guides/math-branching-quickstart.md)
 * [📓 Dev Guides](getting-started/dev-guides/README.md)
   * [Build the Quickstart](nexus-sdk/guides/math-branching-dag-builder.md)
@@ -62,7 +63,3 @@
 
 * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
 * [Math](tools/math/README.md)
-
-## Looking for a home
-
-* [nexus-sdk/guides/setup.md](nexus-sdk/guides/setup.md)
