@@ -3,7 +3,6 @@
 This guide walks through the process of constructing a Directed Acyclic Graph (DAG) that demonstrates conditional logic using standard Nexus math tools. We will build the `math_branching.json` DAG step-by-step, applying the concepts outlined in the main [Nexus DAG Construction Guide](dag-construction.md).
 
 The goal is to build a DAG that:
-
 1. Takes a single number `a` as input.
 2. Adds `-3` to `a`.
 3. Compares the result to `0`.
@@ -269,7 +268,6 @@ In our case:
 Combining these sections gives us the complete `math_branching.json`:
 
 <details>
-
 <summary>Complete DAG Definition</summary>
 
 ```json
@@ -404,7 +402,6 @@ Combining these sections gives us the complete `math_branching.json`:
   // No "entry_groups" section needed, default mechanism applies.
 }
 ```
-
 </details>
 
 ## Validation and Execution with the CLI
