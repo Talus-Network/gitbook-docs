@@ -99,7 +99,6 @@ Take note of the DAG ID returned by this command - you'll need it in the next st
 To execute the published DAG, use its ID and provide input for the entry vertex:
 
 **Input JSON Structure:**
-
 ```json
 // Example Input: provide value 10 to port 'a' of 'add_input_and_default'
 '{"add_input_and_default": {"a": 10}}'
