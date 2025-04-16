@@ -36,10 +36,10 @@ In a nutshell, the workflow engine executes walks over a directed acyclic graph 
 11. Input ports designated as part of an `EntryGroup` cannot have default values. Default values are only permitted for input ports that are _not_ part of any entry group.
 
 {% hint style="info" %}
-These rules are statically validated by the [Nexus CLI](../../../nexus-sdk/CLI.md) if using JSON definitions of DAGs.
+These rules are statically validated by the [Nexus CLI](../../nexus-sdk/cli.md) if using JSON definitions of DAGs.
 {% endhint %}
 
-![Shows legend](../../../nexus-next/images/dag-rules/dag.legend.png)
+![Shows legend](../images/dag-rules/dag.legend.png)
 
 A tool is represented by a vertex in the DAG.\
 A tool has at least one input represented by input ports.\
@@ -50,21 +50,21 @@ A variant has at least one output represented by output ports.
 
 ***
 
-![Shows two concurrent branches](../../../nexus-next/images/dag-rules/dag.1.png)
+![Shows two concurrent branches](../images/dag-rules/dag.1.png)
 
 This DAG has three vertices.\
 Once vertex `A` is done, the walk will fork into two concurrent walks, ie. vertex `B` and `C` will be executed concurrently.
 
 ***
 
-![Shows mutual exclusivity of variants](../../../nexus-next/images/dag-rules/dag.2.png)
+![Shows mutual exclusivity of variants](../images/dag-rules/dag.2.png)
 
 Because output variants are mutually exclusive, only one of those two branches will be taken.\
 That means there's no race condition in this DAG.
 
 ***
 
-![Shows a simple race condition](../../../nexus-next/images/dag-rules/dag.3.png)
+![Shows a simple race condition](../images/dag-rules/dag.3.png)
 
 This DAG is _UNACCEPTABLE_.\
 It violates the rule `5.`.\
@@ -72,21 +72,21 @@ Because these two output ports are connected to the same input port on vertex `B
 
 ***
 
-![Shows branching from two output ports](../../../nexus-next/images/dag-rules/dag.4.png)
+![Shows branching from two output ports](../images/dag-rules/dag.4.png)
 
 This DAG demonstrates how one vertex can again branch into two concurrent walks.\
 This time, both walks were started from a different output port of the same output variant.
 
 ***
 
-![Shows branching](../../../nexus-next/images/dag-rules/dag.5.png)
+![Shows branching](../images/dag-rules/dag.5.png)
 
 This DAG demonstrates that having two edges leading to the same input port is acceptable if they come from different output variants of the same vertex.\
 Only one path through the DAG can be taken at runtime and therefore there's no race condition to vertex `D`.
 
 ***
 
-![Shows a more complicated race condition](../../../nexus-next/images/dag-rules/dag.6.png)
+![Shows a more complicated race condition](../images/dag-rules/dag.6.png)
 
 This DAG is _UNACCEPTABLE_.\
 It violates the rule `5.`.\
@@ -94,13 +94,13 @@ Both walks will be spawned and therefore there's a race condition to vertex `D`.
 
 ***
 
-![Shows default value](../../../nexus-next/images/dag-rules/dag.7.png)
+![Shows default value](../images/dag-rules/dag.7.png)
 
 Default values are great for static configuration.
 
 ***
 
-![Shows misused default value](../../../nexus-next/images/dag-rules/dag.8.png)
+![Shows misused default value](../images/dag-rules/dag.8.png)
 
 This DAG is _UNACCEPTABLE_.\
 You cannot have a default value and an edge leading to the same input port.
@@ -173,11 +173,11 @@ Events in our Nexus packages can contain these data types:
   * represents what should be the inputs to a vertex
   * `{ ports_to_data: Map<InputPort, NexusData> }`
 
-For a list of all event types, refer to [the reference docs for the Workflow package](../../../nexus-next/packages/reference/nexus_workflow/dag.md).
+For a list of all event types, refer to [the reference docs for the Workflow package](./reference/nexus_workflow/dag.md).
 
 ## Leader cap
 
-The leader cap(_ability_) is an owned object given to the [leader](../../../nexus-next/packages/crates/Leader.md) wallet.\
+The leader cap(_ability_) is an owned object given to the [leader](../crates/leader.md) wallet.\
 With this object the leader authorizes itself to submit tool outputs to the workflow.
 
 The leader cap can be cloned and given to other wallets, or multiple times to the same wallet.\
@@ -185,7 +185,7 @@ This is desirable if parallel txs are submitted to the workflow to prevent equiv
 
 ## Tool registry
 
-The tool registry is an on-chain shared object that holds [tool definitions](../../../nexus-next/Tool.md#tool-definitions).
+The tool registry is an on-chain shared object that holds [tool definitions](../tool.md#tool-definitions).
 
 To register a tool the creator must deposit a time-locked collateral to prevent spamming the registry.\
 The amount of `SUI` locked and the interval after which they can be reclaimed is configured in the `nexus-next` repo.

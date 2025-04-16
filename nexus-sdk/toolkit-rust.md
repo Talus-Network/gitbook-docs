@@ -8,7 +8,7 @@ This documentation will go over the main features of the library and how to use 
 
 ## Installation
 
-Using the [CLI](CLI.md) run the `$ nexus tool new --help` command to see the available options. This command creates a fresh Rust project with the necessary dependencies to get started.
+Using the [CLI](cli.md) run the `$ nexus tool new --help` command to see the available options. This command creates a fresh Rust project with the necessary dependencies to get started.
 
 Alternatively, you can add the following to your `Cargo.toml` file:
 
@@ -83,7 +83,7 @@ This associated type defines the output that the Tool produces. This type must d
 
 The Tool's output schema is then derived from this type via the `schemars::schema_for!` macro.
 
-To comply with [Nexus Workflow output variants](../developer-docs/index/onchain-nexus/workflow.md), the output schema **must include a top-level `oneOf`**. This is also enforced by the Tool's runtime and achievable in Rust simply by using an `enum`.
+To comply with [Nexus Workflow output variants](../nexus-next/packages/workflow.md), the output schema **must include a top-level `oneOf`**. This is also enforced by the Tool's runtime and achievable in Rust simply by using an `enum`.
 
 ```rs
 use nexus_toolkit::*;
@@ -106,7 +106,7 @@ impl NexusTool for HttpStatus {
 
 #### `NexusTool::fqn`
 
-Defines the Tool's fully qualified name. This is used to uniquely identify the Tool in the Nexus ecosystem. Read more about FQNs in the [Nexus Tool documentation](../nexus-next/Tool.md).
+Defines the Tool's fully qualified name. This is used to uniquely identify the Tool in the Nexus ecosystem. Read more about FQNs in the [Nexus Tool documentation](../nexus-next/tool.md).
 
 ```rs
 use nexus_toolkit::*;
@@ -184,7 +184,7 @@ Notice that the `invoke` function does not return a `Result`. This is because er
 ### `nexus_toolkit::bootstrap!`
 
 The `bootstrap!` macro hides away the boilerplate code needed to create the\
-underlying HTTP server that adheres to the [Nexus Tool interface](../nexus-next/Tool.md).
+underlying HTTP server that adheres to the [Nexus Tool interface](../nexus-next/tool.md).
 
 It has a flexible interface that accepts an `Into<SocketAddr>` value and a struct that `impl NexusTool`.
 

@@ -30,7 +30,7 @@ The current version of Nexus is a combination of onchain and offchain components
 
 #### Sui - the Coordination & Value Layer
 
-The onchain components are initially deployed on the Sui Blockchain, and thus the smart contracts written in Sui Move. The reasoning behind picking Sui as the first layer to deploy Nexus, are examined in [another section](../why-sui-move.md).
+The onchain components are initially deployed on the Sui Blockchain, and thus the smart contracts written in Sui Move. The reasoning behind picking Sui as the first layer to deploy Nexus, are examined in [another section](../talus-overview/why-sui-move.md).
 
 There’s 3 different types of onchain Sui packages that are relevant for Nexus and Talus agents:
 

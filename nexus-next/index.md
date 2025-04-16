@@ -11,7 +11,7 @@ For the purposes of this documentation we make distinction between different use
 * **Agent developer.** Outside contributor that creates DAGs and subsequently deploys the Agent smart contract.
 * **Agent user.** End-user that interacts with the ecosystem through clients built by us or outside contributors.
 
-## [Glossary](Glossary.md)
+## [Glossary](glossary.md)
 
 Ubiqutously used terms. Often these terms reference specific parts of the project so it is crucial that they be clearly defined.
 
@@ -21,17 +21,17 @@ The on-chain part of Nexus. Holds the workflow DAG state and requests Tool execu
 
 Docs:
 
-* [Workflow package](../developer-docs/index/onchain-nexus/workflow.md)
-* [Primitives package](../developer-docs/index/onchain-nexus/primitives.md)
-* [Nexus interface package](../developer-docs/index/onchain-nexus/nexus-interface.md)
+* [Workflow package](./packages/workflow.md)
+* [Primitives package](./packages/primitives.md)
+* [Nexus interface package](./packages/nexus-interface.md)
 
 {% hint style="info" %}
-The Nexus core onchain packages are currently not open sourced. To find all of the function signatures and data structs, please refer to [the reference API documentation](packages/reference/)
+The Nexus core onchain packages are currently not open sourced. To find all of the function signatures and data structs, please refer to [the reference API documentation](./developer-docs/index/nexus-core-api-docs/README.md)
 {% endhint %}
 
-### [Sui Move Conventions](../developer-docs/index/onchain-nexus/sui-move.md)
+### [Sui Move Conventions](./conventions/sui-move.md)
 
-We established a [set of conventions for writing Move code](../developer-docs/index/onchain-nexus/sui-move.md), some of them unfamiliar outside of the Nexus team. Skim through them before diving into the Move codebase.
+We established a [set of conventions for writing Move code](./conventions/sui-move.md), some of them unfamiliar outside of the Nexus team. Skim through them before diving into the Move codebase.
 
 ## Offchain Nexus
 
@@ -39,11 +39,11 @@ The main off-chain service. Consumes events produced by the on-chain Workflow, i
 
 Docs:
 
-* [Leader](crates/Leader.md)
+* [Leader](crates/leader.md)
 
-## [Tools](Tool.md)
+## [Tools](tool.md)
 
-Tools are Vertices in the Nexus workflow DAG. They are services with [Nexus-defined interface](Tool.md) schema that perform specific tasks. These Tools are what Agent Developers orchestrate in a workflow DAG to create an Agent.
+Tools are Vertices in the Nexus workflow DAG. They are services with [Nexus-defined interface](tool.md) schema that perform specific tasks. These Tools are what Agent Developers orchestrate in a workflow DAG to create an Agent.
 
 There are a few standard Nexus tools, they can be found it the [Nexus SDK repository's tools](https://github.com/Talus-Network/nexus-sdk/tree/main/tools) folder.
 
@@ -55,16 +55,16 @@ Some examples of what a Tool is:
 
 Docs:
 
-* [Tool](Tool.md)
+* [Tool](tool.md)
 
-## [Agent Development](SAP/Index.md)
+## [Agent Development](TAP/agent-development.md)
 
 The components referenced above (onchain Nexus, offchain Nexus and tools) provide the infrastructure and building blocks for [agent developers](index.md#actors) to build Talus agents.
 
 Docs:
 
-* [Agent development](../developer-docs/index/index/)
-* [Default TAP template](../developer-docs/index/index/default-tap.md)
+* [Agent development](./TAP/agent-development.md)
+* [Default TAP template](./TAP/default-tap.md)
 
 ## Nexus SDK
 

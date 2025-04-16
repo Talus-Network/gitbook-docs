@@ -1,8 +1,8 @@
 # Agent Development
 
-Nexus, as the implementation of the Talus Agentic Framework (TAF), provides a useful set of abstractions and, both onchain and offchain components that orchestrate the development, registration and discovery of tools, the composition of those tools in workflows and finally the workflow execution. Find the definitions of these terms in the [glossary](../../../nexus-next/Glossary.md) in case they are unfamiliar.
+Nexus, as the implementation of the Talus Agentic Framework (TAF), provides a useful set of abstractions and, both onchain and offchain components that orchestrate the development, registration and discovery of tools, the composition of those tools in workflows and finally the workflow execution. Find the definitions of these terms in the [glossary](../glossary.md) in case they are unfamiliar.
 
-As a result, Nexus greatly facilitates building Talus Agents for [agent developers](../../../nexus-next/index.md#actors).
+As a result, Nexus greatly facilitates building Talus Agents for [agent developers](../index.md#actors).
 
 {% hint style="info" %}
 A Talus agent is an onchain identity associated with one or more onchain assets and workflow services
@@ -30,5 +30,5 @@ The choice of how to build the agent will be determined by weighing:
 
 Continue learning about agent development with the following sections:
 
-* the [Nexus interface for TAPs](../onchain-nexus/nexus-interface.md) section, outlining what interface the TAP must comply with
+* the [Nexus interface for TAPs](../packages/nexus-interface.md) section, outlining what interface the TAP must comply with
 * the reference [default TAP](default-tap.md) implemenation, that serves as an example for a bare-bones TAP
