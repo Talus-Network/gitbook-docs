@@ -1,7 +1,5 @@
 # Workflow Package
 
-> concerns [`sui/workflow` package][repo-workflow-package]
-
 This Sui package exports data structures and algorithms which orchestrate off-chain computation.
 The workflow engine is an integral part of the on-chain control plane.
 
@@ -46,7 +44,9 @@ In a nutshell, the workflow engine executes walks over a directed acyclic graph 
 10. If a walk reaches a vertex that cannot be immediately scheduled for execution then the walk halts as consumed.
 11. Input ports designated as part of an `EntryGroup` cannot have default values. Default values are only permitted for input ports that are *not* part of any entry group.
 
-> These rules are statically validated by the [Nexus CLI][nexus-sdk-cli] if using JSON definitions of DAGs.
+{% hint style="info" %}
+These rules are statically validated by the [Nexus CLI][nexus-sdk-cli] if using JSON definitions of DAGs.
+{% endhint %}
 
 ![Shows legend](../images/dag-rules/dag.legend.png)
 
@@ -169,7 +169,7 @@ Events in our Nexus packages can contain these data types:
   - `{ name: String }`
 - `VertexKind`
   - enumeration over the kind of vertices in a DAG
-  - see [the `dag` module][repo-workflow-package-dag] for this type
+  - see the `dag` module for this type
 - `InputPort`
   - a unique name of an input port in a vertex
   - `{ name: String }`
@@ -178,7 +178,7 @@ Events in our Nexus packages can contain these data types:
   - `{ from: { variant: String, port: String }, to: { vertex: String, port: String } }`
 - `NexusData`
   - represents some data within Nexus framework
-  - see [the `data` module][repo-primitives-package-data] for this type
+  - see the `data` module for this type
 - `VertexEvaluation`
   - represents what should be the inputs to a vertex
   - `{ ports_to_data: Map<InputPort, NexusData> }`
@@ -206,14 +206,11 @@ The amount of `SUI` locked and the interval after which they can be reclaimed is
 - We have considered a stricter rule `5.` where `InputPort` can have only one incoming `OutputVariantPort`.
   However, relaxing this rule into its current form meant expressive workflows and simpler runtime state management in exchange for more complex static analysis algorithm.
   This trade-off was deemed worthy.
-- When using the [`ProofOfUid` primitive][repo-primitives-package-data], it must be created with a type that matches the `UID`.
+- When using the `ProofOfUid` primitive, it must be created with a type that matches the `UID`.
   The type should be considered an authorization ticket and should be treated just as any other capability type.
 
 <!-- List of references -->
 
-[repo-workflow-package]: https://github.com/Talus-Network/nexus-next/tree/main/sui/workflow
-[repo-workflow-package-dag]: https://github.com/Talus-Network/nexus-next/tree/main/sui/workflow/sources/dag.move
-[repo-primitives-package-data]: https://github.com/Talus-Network/nexus-next/tree/main/sui/primitives
 [tool-definitions]: ../Tool.md#tool-definitions
 [crates-leader]: ./crates/Leader.md
 [reference-workflow]: ./reference/nexus_workflow/dag.md 

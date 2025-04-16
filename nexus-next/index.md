@@ -1,6 +1,6 @@
 # 🫀 Nexus Core
 
-This wiki aims to document the technical side of all Nexus components. We will split the documentation into several parts that, albeit distinct projects, work together to form Nexus as a whole.
+This section aims to document the technical side of all core Nexus components. We will split the documentation into several parts that, albeit distinct projects, work together to form Nexus as a whole.
 
 ## Actors
 
@@ -17,8 +17,7 @@ Ubiqutously used terms. Often these terms reference specific parts of the projec
 
 ## Onchain Nexus
 
-The on-chain part of Nexus.\
-Holds the workflow DAG state and requests Tool execution from the Leader. The codebase resides in [this repository](https://github.com/Talus-Network/nexus-next/tree/main/sui).
+The on-chain part of Nexus. Holds the workflow DAG state and requests Tool execution from the Leader. 
 
 Docs:
 
@@ -26,15 +25,13 @@ Docs:
 * [Primitives package](packages/Primitives.md)
 * [Nexus interface package](packages/Nexus-Interface.md)
 
-Epics:
-
-* https://github.com/Talus-Network/nexus-next/issues/9
-* https://github.com/Talus-Network/nexus-next/issues/16
+{% hint style="info" %}
+The Nexus core onchain packages are currently not open sourced. To find all of the function signatures and data structs, please refer to [the reference API documentation](./packages/reference/)
+{% endhint %}
 
 ### [Sui Move Conventions](conventions/Sui-Move.md)
 
-We established a [set of conventions for writing Move code](conventions/Sui-Move.md), some of them unfamiliar outside of the Nexus team.\
-Skim through them before diving into the Move codebase.
+We established a [set of conventions for writing Move code](conventions/Sui-Move.md), some of them unfamiliar outside of the Nexus team. Skim through them before diving into the Move codebase.
 
 ## Offchain Nexus
 
@@ -43,10 +40,6 @@ The main off-chain service. Consumes events produced by the on-chain Workflow, i
 Docs:
 
 * [Leader](crates/Leader.md)
-
-Epics:
-
-* https://github.com/Talus-Network/nexus-next/issues/53
 
 ## [Tools](Tool.md)
 
@@ -63,12 +56,6 @@ Some examples of what a Tool is:
 Docs:
 
 * [Tool](Tool.md)
-
-Epics:
-
-* https://github.com/Talus-Network/nexus-next/issues/69
-* https://github.com/Talus-Network/nexus-next/issues/30
-* https://github.com/Talus-Network/nexus-next/issues/31
 
 ## [Agent Development](SAP/Index.md)
 
