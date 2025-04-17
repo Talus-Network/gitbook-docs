@@ -66,3 +66,9 @@
 * [⚓ Nexus Standard Tools](tools/nexus-standard-tools.md)
   * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
   * [Math](tools/math/README.md)
+
+## Looking for a home
+
+* [nexus-sdk/CLI.md](nexus-sdk/CLI.md)
+* [nexus-sdk/guides/math_branching-dag-entry.md](nexus-sdk/guides/math_branching-dag-entry.md)
+* [nexus-sdk/guides/math_branching_with_chat.md](nexus-sdk/guides/math_branching_with_chat.md)
