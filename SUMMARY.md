@@ -66,3 +66,16 @@
 * [⚓ Nexus Standard Tools](tools/nexus-standard-tools.md)
   * [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
   * [Math](tools/math/README.md)
+
+## Looking for a home
+
+* [nexus-next/Gas-Service.md](nexus-next/Gas-Service.md)
+* [nexus-next/Glossary.md](nexus-next/Glossary.md)
+* [nexus-next/TAP/Default-TAP.md](nexus-next/TAP/Default-TAP.md)
+* [nexus-next/TAP/Index.md](nexus-next/TAP/Index.md)
+* [nexus-next/conventions/Sui-Move.md](nexus-next/conventions/Sui-Move.md)
+* [nexus-next/crates/Leader.md](nexus-next/crates/Leader.md)
+* [nexus-next/crates/Sui-Tx.md](nexus-next/crates/Sui-Tx.md)
+* [nexus-next/packages/Nexus-Interface.md](nexus-next/packages/Nexus-Interface.md)
+* [nexus-next/packages/Primitives.md](nexus-next/packages/Primitives.md)
+* [nexus-next/packages/Workflow.md](nexus-next/packages/Workflow.md)
