@@ -54,7 +54,7 @@ This topic has not yet been discussed in depth and needs addressing.
 
 ## Tool registration
 
-Tools should be register in the Tool Registry using our [CLI](../nexus-sdk/cli.md#nexus-tool)
+Tools should be register in the Tool Registry using our [CLI](../nexus-sdk/CLI.md#nexus-tool)
 
 ### Off-chain tools
 
