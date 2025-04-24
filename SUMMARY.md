@@ -33,7 +33,7 @@
     * [Primitives](nexus-next/packages/Primitives.md)
     * [Nexus Interface](nexus-next/packages/Nexus-Interface.md)
     * [Sui Move Conventions](nexus-next/conventions/Sui-Move.md)
-  * [Offchain Nexus](developer-docs/index/offchain-nexus.md/README.md)
+  * [Offchain Nexus](developer-docs/index/offchain-nexus/README.md)
     * [Leader](nexus-next/crates/Leader.md)
     * [Leader Sui TXs](nexus-next/crates/Sui-Tx.md)
   * [Agent Development](nexus-next/TAP/Index.md)
@@ -60,7 +60,7 @@
   * [Tool Development](nexus-sdk/tool-development.md)
   * [Toolkit Rust](nexus-sdk/toolkit-rust.md)
   * [How to Build a DAG](nexus-sdk/guides/dag-construction.md)
-* [Technical Glossary](nexus-next/glossary.md)
+* [Technical Glossary](developer-docs/technical-glossary.md)
 
 ## 🛠️ Tools
 
