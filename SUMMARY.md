@@ -13,9 +13,9 @@
 * [💨 Dev Quickstart](nexus-sdk/guides/math-branching-quickstart.md)
 * [📓 Dev Guides](getting-started/dev-guides/README.md)
   * [Build the Quickstart](nexus-sdk/guides/math-branching-dag-builder.md)
-  * [Add Flexibility with Entry Groups](nexus-sdk/guides/math_branching-dag-entry.md)
+  * [Add Flexibility with Entry Groups](nexus-sdk/guides/math-branching-dag-entry.md)
   * [Build the Missing Tool](nexus-sdk/guides/llm-openai-chat-prep-tool.md)
-  * [Add an LLM to your DAG](nexus-sdk/guides/math_branching_with_chat.md)
+  * [Add an LLM to your DAG](nexus-sdk/guides/math-branching-with-chat.md)
   * [Protect your Tool](nexus-sdk/guides/tool-firewall.md)
 
 ## 🌟 Product Docs
@@ -28,11 +28,13 @@
 ## 💻 Developer Docs
 
 * [🫀 Nexus Core](nexus-next/index.md)
-  * [Packages: Workflow](nexus-next/packages/Workflow.md)
-  * [Packages: Primitives](nexus-next/packages/Primitives.md)
-  * [Packages: Nexus Interface](nexus-next/packages/Nexus-Interface.md)
-  * [Sui Move Conventions](nexus-next/conventions/Sui-Move.md)
-  * [Crate: Leader](nexus-next/crates/Leader.md)
+  * [Onchain Nexus](developer-docs/index/onchain-nexus/README.md)
+    * [Workflow](nexus-next/packages/Workflow.md)
+    * [Primitives](nexus-next/packages/Primitives.md)
+    * [Nexus Interface](nexus-next/packages/Nexus-Interface.md)
+    * [Sui Move Conventions](nexus-next/conventions/Sui-Move.md)
+  * [Offchain Nexus](developer-docs/index/offchain-nexus.md/README.md)
+    * [Crate: Leader](nexus-next/crates/Leader.md)
     * [Leader Sui Transactions](nexus-next/crates/Sui-Tx.md)
   * [Agent Development](nexus-next/TAP/Index.md)
   * [Default TAP](nexus-next/TAP/Default-TAP.md)
@@ -54,14 +56,15 @@
     * [nexus\_workflow/main](nexus-next/packages/reference/nexus_workflow/main.md)
     * [nexus\_workflow/tool\_registry](nexus-next/packages/reference/nexus_workflow/tool_registry.md)
 * [🧰 Nexus SDK](nexus-sdk/index.md)
-  * [CLI](nexus-sdk/CLI.md)
+  * [CLI](nexus-sdk/cli.md)
   * [Tool Development](nexus-sdk/tool-development.md)
   * [Toolkit Rust](nexus-sdk/toolkit-rust.md)
   * [How to Build a DAG](nexus-sdk/guides/dag-construction.md)
-* [Technical Glossary](nexus-next/Glossary.md)
+* [Technical Glossary](nexus-next/glossary.md)
 
 ## 🛠️ Tools
 
 * [⚓ Nexus Standard Tools](tools/nexus-standard-tools.md)
-* [OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
-* [Math](tools/math/README.md)
+  * [Math](tools/math/README.md)
+  * [LLM: OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
+  * [Social : X](tools/social-twitter/README.md)
