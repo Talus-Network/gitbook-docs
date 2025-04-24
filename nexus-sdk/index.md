@@ -13,7 +13,7 @@ For the purposes of this documentation we make distinction between different use
 
 ## [Glossary](../nexus-next/Glossary.md)
 
-Ubiqutously used terms. Often these terms reference specific parts of the project so it is crucial that they be clearly defined. Find them [here](../nexus-next/Glossary.md).
+Ubiquitously used terms. Often these terms reference specific parts of the project so it is crucial that they be clearly defined. Find them [here](../nexus-next/glossary.md).
 
 ## [CLI](CLI.md)
 
