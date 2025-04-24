@@ -60,7 +60,7 @@
   * [Tool Development](nexus-sdk/tool-development.md)
   * [Toolkit Rust](nexus-sdk/toolkit-rust.md)
   * [How to Build a DAG](nexus-sdk/guides/dag-construction.md)
-* [Technical Glossary](developer-docs/technical-glossary.md)
+* [Technical Glossary](nexus-next/glossary.md)
 
 ## 🛠️ Tools
 
