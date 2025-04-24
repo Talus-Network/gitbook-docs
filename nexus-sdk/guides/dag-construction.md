@@ -9,7 +9,9 @@ Note that for all DAG related terms in the configuration JSON file, snake casing
 {% endhint %}
 
 ## 1. Basic Structure
+
 A DAG JSON file consists of sections defining the graph's components:
+
 ```json
 {
   "vertices": [ ... ],       // All vertices in the DAG
@@ -50,7 +52,9 @@ When beginning an execution of an [_entry group_](#5-entry-groups-optional), all
 {% endhint %}
 
 ## 3. Edges
+
 Edges define the flow of data between vertices, connecting an output port of a source vertex to an input port of a target vertex:
+
 ```json
 {
   "from": {
@@ -69,7 +73,9 @@ Edges define the flow of data between vertices, connecting an output port of a s
 - The `target_input_port_name` must be a valid input port for the tool used by the `target_vertex_name`.
 
 ## 4. Default Values
+
 Default values provide static inputs to vertices:
+
 ```json
 {
   "vertex": "vertex_name",  // References a name from the "vertices" list
@@ -80,13 +86,13 @@ Default values provide static inputs to vertices:
   }
 }
 ```
+
 **Important Constraints:**
 
 - An _input port_ can receive data either from an _incoming edge_ or a _default value_, but **never both**. ([workflow rules][nexus-next-workflow] Rule 4)
 - Entry ports **cannot** have default values (by definition). Default values are only permitted for input ports that are _not_ entry ports. ([workflow rules][nexus-next-workflow] Rule 11)
 
 ## 5. Entry Groups (Optional)
-Entry groups define named starting configurations for the DAG, specifying which vertices act as entry points and which of their input ports require external data (*entry input ports*) for a given execution.
 
 Entry groups define named starting configurations for the DAG, specifying which vertices act as entry points for a given execution (possibly multiple concurrent walks).
 

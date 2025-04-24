@@ -58,7 +58,7 @@ git clone https://github.com/Talus-Network/nexus-sdk.git
 ```
 
 {% hint style="info" %}
-In this example we will publish a DAG consisting of Nexus Tools that are running somewhere and registered (the URL can be found as metadata in the tool registry). If you were running your own tools and needed to register them, check out [Nexus CLI tool commands](../CLI.md#nexus-tool) to find out how to do this.
+In this example we will publish a DAG consisting of Nexus Tools that are running somewhere and registered (the URL can be found as metadata in the tool registry). If you were running your own tools and needed to register them, check out [Nexus CLI tool commands](../cli.md#nexus-tool) to find out how to do this.
 {% endhint %}
 
 To check the tools that are registered in the tool registry, run:
