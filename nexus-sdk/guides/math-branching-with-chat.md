@@ -7,11 +7,15 @@ This guide builds on the [Math Branching DAG with Entry Groups][math-branching-e
 3. Connect the math results to the chat completion tool
 4. Configure the chat completion tool for optimal results
 
+{% hint style="info" %} Prerequisites
+Follow the [setup guide](setup.md) to get properly setup in case you haven't.
+{% endhint %}
+
 ## The Challenge: Type Safety Between Tools
 
-Before we can connect our math operations to the chat completion tool, we need to understand a key challenge: type safety. The chat completion tool expects a `Message` struct as input, but our math operations output numbers. We can't directly connect these without proper type conversion.
+Before you can connect our math operations to the chat completion tool, you need to understand a key challenge: type safety. The [LLM chat completion tool](../../tools/llm-openai-chat-completion/README.md)expects a `Message` struct as input, but the [math tool](../../tools/math/README.md) outputs numbers. You can't directly connect these without proper type conversion.
 
-This is where we need a custom tool to bridge this gap. We'll use the `xyz.taluslabs.llm.openai.chat-prep@1` tool that we developed in the [Build the Missing Tool guide][llm-openai-chat-prep-tool]. This tool converts numbers into the proper message format that the chat completion tool expects.
+This is where you need a custom tool to bridge this gap. You'll use the `xyz.taluslabs.llm.openai.chat-prep@1` tool that you developed in the [Build the Missing Tool guide][llm-openai-chat-prep-tool]. This tool converts numbers into the proper message format that the chat completion tool expects.
 
 ## Step 1: Adding the Required Tools
 
@@ -27,7 +31,7 @@ First, let's add both the number-to-message tool and the chat completion tool to
         "tool_fqn": "xyz.taluslabs.llm.openai.chat-completion@1"
       },
       "name": "chat_completion",
-      "input_ports": ["api_key"]
+      "entry_ports": ["api_key"]
     },
     {
       "kind": {
@@ -42,7 +46,7 @@ First, let's add both the number-to-message tool and the chat completion tool to
 
 ## Step 2: Connecting the Math Results
 
-We need to connect each of our final math operation results to the LLM chat prep tool:
+You need to connect each of our final math operation results to the LLM chat prep tool:
 
 ```json
 {
@@ -89,7 +93,7 @@ Remember that this works because only one of the output variants will be trigger
 
 ## Step 3: Connecting to Chat Completion
 
-Now we connect the formatted message to the chat completion tool:
+Now you connect the formatted message to the chat completion tool:
 
 ```json
 {
@@ -112,7 +116,7 @@ Now we connect the formatted message to the chat completion tool:
 
 ## Step 4: Configuring Default Values
 
-We need to set up default values for both tools:
+You need to set up default values for both tools:
 
 ```json
 {
@@ -167,40 +171,18 @@ We need to set up default values for both tools:
 
 ## Step 5: Updating Entry Groups
 
-We need to add the chat completion API key to our entry groups:
+You need to add the `chat_completion` to our entry groups:
 
 ```json
 {
   "entry_groups": [
     {
       "name": "add_entry",
-      "members": [
-        {
-          "vertex": "add_input_and_default", 
-          "input_port": "a"
-        },
-        {
-          "vertex": "chat_completion",
-          "input_port": "api_key"
-        }
-      ]
+      "vertices": ["add_input_and_default", "chat_completion"]
     },
     {
       "name": "mul_entry",
-      "members": [
-        {
-          "vertex": "mul_inputs", 
-          "input_port": "a"
-        },
-        {
-          "vertex": "mul_inputs", 
-          "input_port": "b"
-        },
-        {
-          "vertex": "chat_completion",
-          "input_port": "api_key"
-        }
-      ]
+      "vertices": ["mul_inputs", "chat_completion"]
     }
   ]
 }
@@ -219,37 +201,37 @@ graph TD
         InputM1[User Input: a] --> M["mul_inputs<br>(math.i64.mul@1)"];
         InputM2[User Input: b] --> M;
         APIKey[User Input: API Key] --> C["chat_completion<br>(llm.openai.chat-completion@1)"];
-        
+
         %% Entry group indicators
         EG1["Entry Group: add_entry"] -.-> A;
         EG2["Entry Group: mul_entry"] -.-> M;
-        
+
         %% Main flow from entry paths to comparison
         A -- "result" --> B{"is_negative<br>(math.i64.cmp@1)"};
         M -- "result" --> B;
         Def2([b = 0]) --> B;
-        
+
         %% Branching paths based on comparison
         B -- "lt (a < 0)" --> C1["mul_by_neg_3<br>(math.i64.mul@1)"];
         Def3([b = -3]) --> C1;
-        
+
         B -- "gt (a > 0)" --> D1["mul_by_7<br>(math.i64.mul@1)"];
         Def4([b = 7]) --> D1;
-        
+
         B -- "eq (a == 0)" --> E1["add_1<br>(math.i64.add@1)"];
         Def5([b = 1]) --> E1;
-        
+
         %% Connect to number formatter
         C1 -- "result" --> F["format_number<br>(llm.openai.chat-prep@1)"];
         D1 -- "result" --> F;
         E1 -- "result" --> F;
         Def6([role = user]) --> F;
-        
+
         %% Connect to chat completion
         F -- "message" --> C;
         Def7([context = system]) --> C;
         Def8([model = gpt-4o-mini]) --> C;
-        
+
         %% Final result
         C -- "response" --> Result((Final Result));
 
@@ -259,13 +241,14 @@ graph TD
     classDef output fill:#76EFB6,stroke:#000000,stroke-width:2px,color:#000000;
     classDef default fill:#FFFFCB,stroke:#000000,stroke-width:1px,color:#000000;
     classDef entrygroup fill:#BEBAB4,stroke:#000000,stroke-width:1px,color:#000000;
-    
+
     class A,C1,D1,E1,M,F,C,B tool;
     class InputA1,InputM1,InputM2,APIKey input;
     class Result output;
     class Def1,Def2,Def3,Def4,Def5,Def6,Def7,Def8 default;
     class EG1,EG2 entrygroup;
 ```
+
 </details>
 
 ## Putting it all together
@@ -285,7 +268,7 @@ Here's the complete DAG definition that combines all the components we've discus
         "tool_fqn": "xyz.taluslabs.math.i64.add@1"
       },
       "name": "add_input_and_default",
-      "input_ports": ["a"]
+      "entry_ports": ["a"]
     },
     {
       "kind": {
@@ -293,7 +276,7 @@ Here's the complete DAG definition that combines all the components we've discus
         "tool_fqn": "xyz.taluslabs.math.i64.mul@1"
       },
       "name": "mul_inputs",
-      "input_ports": ["a", "b"]
+      "entry_ports": ["a", "b"]
     },
     {
       "kind": {
@@ -329,7 +312,7 @@ Here's the complete DAG definition that combines all the components we've discus
         "tool_fqn": "xyz.taluslabs.llm.openai.chat-completion@1"
       },
       "name": "chat_completion",
-      "input_ports": ["api_key"]
+      "entry_ports": ["api_key"]
     },
     {
       "kind": {
@@ -528,37 +511,16 @@ Here's the complete DAG definition that combines all the components we've discus
   "entry_groups": [
     {
       "name": "add_entry",
-      "members": [
-        {
-          "vertex": "add_input_and_default", 
-          "input_port": "a"
-        },
-        {
-          "vertex": "chat_completion",
-          "input_port": "api_key"
-        }
-      ]
+      "vertices": ["add_input_and_default", "chat_completion"]
     },
     {
       "name": "mul_entry",
-      "members": [
-        {
-          "vertex": "mul_inputs", 
-          "input_port": "a"
-        },
-        {
-          "vertex": "mul_inputs", 
-          "input_port": "b"
-        },
-        {
-          "vertex": "chat_completion",
-          "input_port": "api_key"
-        }
-      ]
+      "vertices": ["mul_inputs", "chat_completion"]
     }
   ]
 }
 ```
+
 </details>
 
 ## Publishing and Executing the DAG
@@ -594,6 +556,7 @@ nexus dag execute --dag-id <dag_object_id> --entry-group mul_entry --input-json 
 ```
 
 The `--inspect` flag will show you detailed information about the execution, including:
+
 - The path taken through the DAG
 - Inputs and outputs at each step
 - Any errors that occurred
@@ -603,11 +566,12 @@ The `--inspect` flag will show you detailed information about the execution, inc
 
 To integrate this DAG into your application:
 
-1. **Store the DAG**: First, store the DAG definition in your application's configuration or database.
+1. **Store the DAG**: First, store the DAG JSON definition in your application's workspace.
 
 2. **Handle API Keys**: Securely manage the OpenAI API key. Consider using environment variables or a secrets management service.
 
 3. **Create Entry Points**: Implement the two entry points in your application:
+
    - Addition path: Takes a single number and adds -3
    - Multiplication path: Takes two numbers and multiplies them
 
@@ -656,5 +620,6 @@ This extended DAG demonstrates how to combine mathematical computation with natu
 This extended DAG demonstrates how to combine mathematical computation with natural language processing, creating a more interactive and engaging experience for users.
 
 <!-- List of references -->
-[math-branching-entry-guide]: ./math_branching-dag-entry.md
-[llm-openai-chat-prep-tool]: ./llm-openai-chat-prep-tool.md 
+
+[math-branching-entry-guide]: ./math-branching-dag-entry.md
+[llm-openai-chat-prep-tool]: ./llm-openai-chat-prep-tool.md

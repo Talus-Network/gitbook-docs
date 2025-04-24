@@ -2,6 +2,10 @@
 
 This guide builds on the [Build the Quickstart guide][math-branching-dag-builder-guide] by extending the example to support multiple entry points using entry groups. You'll take the original [`math_branching.json`](https://github.com/Talus-Network/nexus-sdk/blob/v0.1.0/cli/src/dag/_dags/math_branching.json) DAG and add an alternative entry path that allows users to directly provide two numbers for multiplication instead of adding a constant to the input.
 
+{% hint style="info" %} Prerequisites
+Follow the [setup guide](setup.md) to get properly setup in case you haven't.
+{% endhint %}
+
 ## What You'll Learn
 
 - How to add multiple entry points to a DAG
@@ -12,18 +16,23 @@ This guide builds on the [Build the Quickstart guide][math-branching-dag-builder
 ## Understanding Entry Groups
 
 Entry groups define named sets of entry points for a DAG. They allow you to:
+
 - Provide multiple ways to start a DAG execution
 - Group related entry vertices
 - Explicitly specify which vertices should be considered entry points
-- Select a specific starting configuration at runtime by providing entry input ports as configuration.
 
-{% hint sytle="success" %}
+{% hint style="success" %}
 Without entry groups, a DAG uses the default entry mechanism (vertices with unsatisfied input ports become entry points). With entry groups, you gain explicit control over how the DAG can be started.
 {% endhint %}
+
+### Why Use Entry Groups?
+
+The explanation above should allow you to understand why, given a certain DAG definition, you might want to have explicit control over how the DAG execution can start. However, you might be thinking: _Why design the DAG like this in the first place? Could you not simply split this up into independent DAGs?_ The answer is yes, yes you could. Whether you choose to split up different entry configurations into separate DAGs or define a composite DAG with flexibility through entry groups, will be a design choice depending on your specific preferences and use case. Nexus is agnostic to these design choices and provides you the ability to do both!
 
 ## The Extended DAG
 
 We'll extend our original branching math DAG by:
+
 1. Adding a new vertex `mul_inputs` that takes two user-provided inputs and multiplies them
 2. Connecting this multiplication result to the same comparison step as the original addition result
 3. Creating two explicit entry groups to select between the addition path and the multiplication path
@@ -38,26 +47,26 @@ graph TD
         Def1([b = -3]) --> A;
         InputM1[User Input: a] --> M["mul_inputs<br>(math.i64.mul@1)"];
         InputM2[User Input: b] --> M;
-        
+
         %% Entry group indicators
         EG1["Entry Group: add_entry"] -.-> A;
         EG2["Entry Group: mul_entry"] -.-> M;
-        
+
         %% Main flow from entry paths to comparison
         A -- "result" --> B{"is_negative<br>(math.i64.cmp@1)"};
         M -- "result" --> B;
         Def2([b = 0]) --> B;
-        
+
         %% Branching paths based on comparison
         B -- "lt (a < 0)" --> C["mul_by_neg_3<br>(math.i64.mul@1)"];
         Def3([b = -3]) --> C;
-        
+
         B -- "gt (a > 0)" --> D["mul_by_7<br>(math.i64.mul@1)"];
         Def4([b = 7]) --> D;
-        
+
         B -- "eq (a == 0)" --> E["add_1<br>(math.i64.add@1)"];
         Def5([b = 1]) --> E;
-        
+
         %% Final results
         C -- "result" --> Result1((Final Result));
         D -- "result" --> Result2((Final Result));
@@ -69,7 +78,7 @@ graph TD
     classDef output fill:#76EFB6,stroke:#000000,stroke-width:2px,color:#000000;
     classDef default fill:#FFFFCB,stroke:#000000,stroke-width:1px,color:#000000;
     classDef entrygroup fill:#BEBAB4,stroke:#000000,stroke-width:1px,color:#000000;
-    
+
     class A,C,D,E,M,B tool;
     class Result1,Result2,Result3 output;
     class InputA1,InputM1,InputM2 input;
@@ -78,6 +87,7 @@ graph TD
 ```
 
 This diagram shows the extended workflow with two entry paths:
+
 1. The original addition path that takes one input and adds `-3` to it
 2. A new multiplication path that takes two inputs and multiplies them
 
@@ -100,7 +110,7 @@ We'll start with the vertices from our original DAG and add the new `mul_inputs`
         "tool_fqn": "xyz.taluslabs.math.i64.add@1"
       },
       "name": "add_input_and_default",
-      "input_ports": ["a"]
+      "entry_ports": ["a"]
     },
     {
       "kind": {
@@ -108,7 +118,7 @@ We'll start with the vertices from our original DAG and add the new `mul_inputs`
         "tool_fqn": "xyz.taluslabs.math.i64.mul@1"
       },
       "name": "mul_inputs",
-      "input_ports": ["a", "b"]
+      "entry_ports": ["a", "b"]
     },
     {
       "kind": {
@@ -142,7 +152,7 @@ We'll start with the vertices from our original DAG and add the new `mul_inputs`
 }
 ```
 
-Note that we explicitly list both `a` and `b` as `input_ports` for the `mul_inputs` vertex because both will be provided by the user, not by default values or edges.
+Note that we explicitly list both `a` and `b` as `entry_ports` for the `mul_inputs` vertex because both will be provided by the user, not by default values or edges.
 
 ### 2. Define Edges (`edges` list)
 
@@ -274,35 +284,21 @@ This is where the major addition happens. We'll define two entry groups:
   "entry_groups": [
     {
       "name": "add_entry",
-      "members": [
-        {
-          "vertex": "add_input_and_default", 
-          "input_port": "a"
-        }
-      ]
+      "vertices": ["add_input_and_default"]
     },
     {
       "name": "mul_entry",
-      "members": [
-        {
-          "vertex": "mul_inputs", 
-          "input_port": "a"
-        },
-        {
-          "vertex": "mul_inputs", 
-          "input_port": "b"
-        }
-      ]
+      "vertices": ["mul_inputs"]
     }
   ]
 }
 ```
 
-Each entry group has a name and a list of members, which are vertex-input port pairs. When executing the DAG, you'll specify which entry group to use, and the DAG will expect inputs for all the listed vertex-input port pairs.
+Each entry group has a name and a list of vertices When executing the DAG, you'll specify which entry group to use, and the DAG will expect inputs for _entry ports_ defined on the specified vertices.
 
 ### 5. Why Entry Groups Are Required
 
-Without entry groups, the DAG would have an issue: both `add_input_and_default` and `mul_inputs` would be considered entry vertices, but both connect to the same input port of `is_negative`. This creates a potential race condition (violating Rule 5 of the DAG Construction Guide). With entry groups, we explicitly specify which entry paths are valid and ensure they won't be active simultaneously.
+Without entry groups, the DAG would have an issue: both `add_input_and_default` and `mul_inputs` would be considered entry vertices, but both connect to the same input port of `is_negative`. This creates a potential race condition (violating Rule 5 of the [Workflow](../../nexus-next/packages/workflow.md)). With entry groups, we explicitly specify which entry paths are valid and ensure they won't be active simultaneously.
 
 ## Putting It All Together
 
@@ -321,7 +317,7 @@ Combining these sections gives us the complete `math_branching_entry_group.json`
         "tool_fqn": "xyz.taluslabs.math.i64.add@1"
       },
       "name": "add_input_and_default",
-      "input_ports": ["a"]
+      "entry_ports": ["a"]
     },
     {
       "kind": {
@@ -329,7 +325,7 @@ Combining these sections gives us the complete `math_branching_entry_group.json`
         "tool_fqn": "xyz.taluslabs.math.i64.mul@1"
       },
       "name": "mul_inputs",
-      "input_ports": ["a", "b"]
+      "entry_ports": ["a", "b"]
     },
     {
       "kind": {
@@ -462,29 +458,16 @@ Combining these sections gives us the complete `math_branching_entry_group.json`
   "entry_groups": [
     {
       "name": "add_entry",
-      "members": [
-        {
-          "vertex": "add_input_and_default", 
-          "input_port": "a"
-        }
-      ]
+      "vertices": ["add_input_and_default"]
     },
     {
       "name": "mul_entry",
-      "members": [
-        {
-          "vertex": "mul_inputs", 
-          "input_port": "a"
-        },
-        {
-          "vertex": "mul_inputs", 
-          "input_port": "b"
-        }
-      ]
+      "vertices": ["mul_inputs"]
     }
   ]
 }
 ```
+
 </details>
 
 ## Validation and Execution
@@ -553,8 +536,9 @@ In this guide, we extended our original branching math DAG to support multiple e
 
 Entry groups are a powerful feature of Nexus DAGs that enable more flexible and modular workflows while maintaining the safety guarantees of the DAG execution model. They allow a single DAG to support multiple different starting states and input combinations while preventing potential race conditions.
 
-For more advanced usage of entry groups and other DAG features, refer to the [DAG Construction Guide][dag-construction]. 
+For more advanced usage of entry groups and other DAG features, refer to the [DAG Construction Guide][dag-construction].
 
 <!-- List of references -->
+
 [dag-construction]: ./dag-construction.md
 [math-branching-dag-builder-guide]: ./math-branching-dag-builder.md
