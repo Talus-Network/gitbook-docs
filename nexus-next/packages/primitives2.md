@@ -187,7 +187,6 @@ These primitives are designed to work synergistically, enabling the construction
 
 <!-- List of References -->
 
-[repo-primitives-package]: https://github.com/Talus-Network/nexus-next/tree/main/sui/primitives
 [move-hot-potato]: https://move-book.com/programmability/hot-potato-pattern.html
 [ob-request-module]: https://github.com/Origin-Byte/nft-protocol/tree/main/contracts/request/sources/request
 [sui-transfer-policy]: https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/kiosk/transfer_policy.move

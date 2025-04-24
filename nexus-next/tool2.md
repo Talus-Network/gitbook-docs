@@ -1,10 +1,10 @@
 # Tool
 
-A Tool is an off-chain HTTP service or an on-chain smart contract. These are invoked by the Leader based on instructions provided by the on-chain Workflow.
+A Tool is an offchain HTTP service or an onchain smart contract. These are invoked by the [Leader](crates/leader.md) based on instructions provided by the onchain [Workflow](packages/workflow.md).
 
 ## Tool definitions
 
-Each Tool must provide a standardized definition, telling us where and how to interact with it. This definition is stored in the Tool Registry on-chain and should be retrievable publicly. Definition should be a JSON file in the following format:
+Each Tool must provide a standardized definition, telling us where and how to interact with it. This definition is stored in the Tool Registry onchain and should be retrievable publicly. Definition should be a JSON file in the following format:
 
 ```json
 {
@@ -30,9 +30,9 @@ Straighforward, and enum with `offchain` and `onchain` values.
 
 3. `url`
 
-This will determine _how_ the Leader contacts the Tool. For off-chain Tools, this field will be an actual URL. This can point to the server directly or to a load balancer.
+This will determine _how_ the Leader contacts the Tool. For offchain Tools, this field will be an actual URL. This can point to the server directly or to a load balancer.
 
-On-chain Tools will require a similar `url` but it would likely be a move call definition in the format `pkg_id::module::fn` or similar. This topic is, however, unexplored and needs to be researched in depth.
+Onchain Tools will require a similar `url` but it would likely be a move call definition in the format `pkg_id::module::fn` or similar. Confirmation will follow soon.
 
 4. `input_schema` and `output_schema`
 
@@ -48,26 +48,23 @@ Off-chain Tools will expose 3 HTTP endpoints:
 2. `GET /meta` - retfqns the Tool definition JSON
 3. `POST /invoke` - this endpoints invokes the Tool logic, it accepts data in its `input_schema` format and outputs data in its `output_schema` format
 
-## On-chain Tool interface
+## Onchain Tool interface
 
-This topic has not yet been discussed in depth and needs addressing.
+Coming soon.
 
 ## Tool registration
 
-Tools should be register in the Tool Registry using our [CLI](../nexus-sdk/CLI.md#nexus-tool)
+Tools should be register in the Tool Registry using our [CLI](../nexus-sdk/cli.md#nexus-tool)
 
-### Off-chain tools
+### Offchain tools
 
 The CLI leverages functions in module `tool_registry` in the `nexus_workflow` Sui package.
 
-The registration locks `SUI` tokens as collateral to combat spam.
-The creator can at any point unregister the tool again, which starts a timer defined by the `tool_registry` module.
-After the timer expires, the collateral can be reclaimed.
+The registration locks `SUI` tokens as collateral to combat spam. The creator can at any point unregister the tool again, which starts a timer defined by the `tool_registry` module. After the timer expires, the collateral can be reclaimed.
 
-### On-chain tools
+### Onchain tools
 
-This is still in process of design.
-Our initial focus are off-chain tools.
+Coming soon.
 
 ## Tool authorization
 

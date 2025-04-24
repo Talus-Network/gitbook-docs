@@ -1,13 +1,13 @@
 # Nexus Interface
 
-Nexus components are designed to be composed into "Smart Agent Packages" (SAPs) that are published on Sui.
-SAPs are typically template Sui packages that are customized for a specific product.
+Nexus components are designed to be composed into "Talus Agent Packages" (TAPs) that are published on Sui.
+TAPs are typically template Sui packages that are customized for a specific product.
 They would include business logic relevant to the product and configurations for the Nexus components.
 
 The configurations typically take the form of `SuiObjectID`s which represent shared objects.
-These shared objects, such as [`DAG`][packages-workflow], are unforced to be invoked in situations described by the business logic.
+These shared objects, such as [`DAG`](workflow.md), are unforced to be invoked in situations described by the business logic.
 
-Some examples of what the business logic in a SAP could do:
+Some examples of what the business logic in a TAP could do:
 
 - check token supply to feature-gate a workflow
 - require a payment component
@@ -17,9 +17,9 @@ Some examples of what the business logic in a SAP could do:
 ## `V1`
 
 Nexus first iteration is focused on the workflow component.
-To comply with the Nexus V1 Interface the SAP must:
+To comply with the Nexus V1 Interface the TAP must:
 
-1. Register itself with the [Nexus leader][crates-leader] by emitting `nexus_interface::v1::AnnounceInterfacePackageEvent` that
+1. Register itself with the [Nexus leader](../crates/leader.md) by emitting `nexus_interface::v1::AnnounceInterfacePackageEvent` that
    - has a generic parameter `W` which is a type located in the package and module that implements the interface.
    - contains property `shared_objects: vector<ID>` is a list of `SuiObjectID`s that the leader will inject as args into each following public function call.
      The list is ordered, that is the shared objects will be injected in the order they are listed.
@@ -35,7 +35,7 @@ To comply with the Nexus V1 Interface the SAP must:
    - Can verify that required confirmations have been collected.
    - Invoked by the Nexus Leader.
 
-![Diagram showing Nexus V1 Interface flow](images/nexus-interface-v1.png)
+![Diagram showing Nexus V1 Interface flow](../images/nexus-interface-v1.png)
 
 ### Events
 
@@ -51,8 +51,3 @@ Unfortunately, Sui does not give us a way to get current package ID.
 When upgrading a package you must create a new type that serves as a witness.
 This new type needs to be used when emitting `AnnounceInterfacePackageEvent` as its generic.
 This event _also_ needs to be emitted with every package upgrade.
-
-<!-- List of References -->
-
-[packages-workflow]: ./packages/Workflow.md
-[crates-leader]: ./crates/Leader.md
