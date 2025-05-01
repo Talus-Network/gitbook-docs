@@ -31,4 +31,4 @@ The choice of how to build the agent will be determined by weighing:
 Continue learning about agent development with the following sections:
 
 * the [Nexus interface for TAPs](../packages/nexus-interface.md) section, outlining what interface the TAP must comply with
-* the reference [default TAP](default-tap.md) implemenation, that serves as an example for a bare-bones TAP
+* the reference [default TAP](default-tap.md) implementation, that serves as an example for a bare-bones TAP
