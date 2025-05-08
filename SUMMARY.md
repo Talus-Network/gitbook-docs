@@ -69,3 +69,4 @@
   * [Math](tools/math/README.md)
   * [LLM: OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
   * [Social : X](tools/social-twitter/README.md)
+  * [Storage: Walrus](tools/storage-walrus/README.md)
