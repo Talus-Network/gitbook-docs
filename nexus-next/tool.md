@@ -11,6 +11,7 @@ Each Tool must provide a standardized definition, telling us where and how to in
   "fqn": "{domain}.{name}@{version}",
   "type": "onchain/offchain",
   "url": "{url/move_ident}",
+  "description": "A UTF-8 string",
   "input_schema": "draft-2020-12 JSON schema",
   "output_schema": "draft-2020-12 JSON schema"
 }
@@ -34,7 +35,12 @@ This will determine _how_ the Leader contacts the Tool. For offchain Tools, this
 
 Onchain Tools will require a similar `url` but it would likely be a move call definition in the format `pkg_id::module::fn` or similar. Confirmation will follow soon.
 
-4. `input_schema` and `output_schema`
+4. `description`
+
+A description of what the tool does. Currently we do not enforce a maximum length but this is
+subject to change. In addition we assume a UTF-8 representation.
+
+5. `input_schema` and `output_schema`
 
 These will be `draft-2020-12` JSON schema definitions of the Tool inputs and outputs. This lets the Leader parse and verify data going in and coming out of the Tool.
 
