@@ -55,6 +55,56 @@ The blob upload failed.
 
 ---
 
+# `xyz.taluslabs.storage.walrus.upload-file@1`
+
+Standard Nexus Tool that uploads a file to Walrus and returns the blob ID.
+
+## Input
+
+**`file_path`: [`String`]**
+
+The path to the file to upload.
+
+_opt_ **`publisher_url`: [`Option<String>`]** _default_: [`None`]
+
+The walrus publisher URL.
+
+_opt_ **`epochs`: [`u64`]** _default_: [`1`]
+
+Number of epochs to store the file.
+
+_opt_ **`send_to`: [`Option<String>`]** _default_: [`None`]
+
+Optional address to which the created Blob object should be sent.
+
+## Output Variants & Ports
+
+**`newly_created`**
+
+A new blob was created and uploaded successfully.
+
+- **`newly_created.blob_id`: [`String`]** - The unique identifier for the uploaded blob
+- **`newly_created.end_epoch`: [`u64`]** - The epoch at which the blob will expire
+- **`newly_created.sui_object_id`: [`String`]** - Sui object ID of the newly created blob
+
+**`already_certified`**
+
+The blob was already certified in the blockchain.
+
+- **`already_certified.blob_id`: [`String`]** - The unique identifier for the blob
+- **`already_certified.end_epoch`: [`u64`]** - The epoch at which the blob will expire
+- **`already_certified.tx_digest`: [`String`]** - Transaction digest of the certified blob
+
+**`err`**
+
+The file upload failed.
+
+- **`err.reason`: [`String`]** - A detailed error message describing what went wrong
+- **`err.kind`: [`UploadErrorKind`]** - Type of error that occurred
+  - Possible kinds:
+    - `network` - Error during HTTP requests or network connectivity issues
+    - `validation` - Invalid file data or file validation failures
+
 # `xyz.taluslabs.storage.walrus.read-json@1`
 
 Standard Nexus Tool that reads a JSON file from Walrus and returns the JSON data. The tool can also validate the JSON data against a provided schema.
