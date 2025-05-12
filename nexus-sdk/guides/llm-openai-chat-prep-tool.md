@@ -63,6 +63,7 @@ enum Output {
 ```
 
 where:
+
 ```rust
 /// Represents the type of a message in a chat completion request or response.
 #[derive(Debug, Default, PartialEq, Eq, Deserialize, Serialize, JsonSchema, EnumString)]
