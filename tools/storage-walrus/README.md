@@ -151,3 +151,43 @@ The JSON read operation failed.
 - **`err.status_code`: [`Option<u16>`]** - HTTP status code if available (for network errors)
 
 ---
+
+# `xyz.taluslabs.storage.walrus.verify-blob@1`
+
+Standard Nexus Tool that verifies a blob in Walrus.
+
+## Input
+
+**`blob_id`: [`String`]**
+
+The ID of the blob to verify.
+
+_opt_ **`aggregator_url`: [`Option<String>`]** _default_: [`None`]
+
+The URL of the Walrus aggregator to verify the blob against.
+
+## Output Variants & Ports
+
+**`verified`**
+
+The blob exists and is verified.
+
+- **`verified.blob_id`: [`String`]** - The ID of the verified blob
+
+**`unverified`**
+
+The blob does not exist or could not be verified.
+
+- **`unverified.blob_id`: [`String`]** - The ID of the unverified blob
+
+**`err`**
+
+An error occurred during verification.
+
+- **`err.reason`: [`String`]** - A detailed error message describing what went wrong
+- **`err.kind`: [`UploadErrorKind`]** - Type of error that occurred
+  - Possible kinds:
+    - `server` - Server-side errors during verification
+- **`err.status_code`: [`Option<u16>`]** - HTTP status code if available (for API errors)
+
+---
