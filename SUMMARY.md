@@ -71,3 +71,8 @@
   * [Social : X](tools/social-twitter/README.md)
   * [Storage: Walrus](tools/storage-walrus/README.md)
 
+
+## Looking for a home
+
+* [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+* [CONTRIBUTING.md](CONTRIBUTING.md)
