@@ -60,22 +60,26 @@ def convert_markdown_links(file_path):
     else:
         print(f"No changes in {file_path}")
 
-def process_directory(directory):
-    for root, _, files in os.walk(directory):
-        for name in files:
-            if name.endswith('.md'):
-                convert_markdown_links(os.path.join(root, name))
+def process_path(path):
+    path = Path(path)
+    if path.is_file():
+        if path.suffix == '.md':
+            convert_markdown_links(path)
+        else:
+            print(f"Skipping non-markdown file: {path}")
+    elif path.is_dir():
+        print(f"Processing directory: {path}")
+        for md_file in path.rglob('*.md'):
+            convert_markdown_links(md_file)
+    else:
+        print(f"Warning: Path '{path}' does not exist, skipping...")
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python convert-markdown-links.py <directory1> [directory2] ...")
+        print("Usage: python convert-markdown-links.py <path1> [path2] ...")
         sys.exit(1)
-    for directory in sys.argv[1:]:
-        if os.path.isdir(directory):
-            print(f"Processing directory: {directory}")
-            process_directory(directory)
-        else:
-            print(f"Warning: Directory '{directory}' does not exist, skipping...")
+    for path in sys.argv[1:]:
+        process_path(path)
 
 if __name__ == "__main__":
     main() 
