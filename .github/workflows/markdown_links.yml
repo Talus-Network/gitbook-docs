@@ -1,4 +1,4 @@
-name: Format Markdown
+name: Format Markdown Links
 
 on:
   push:

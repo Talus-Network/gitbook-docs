@@ -1,0 +1,35 @@
+name: Lint and Format Markdown
+
+on:
+  push:
+    branches: [staging, production]
+  pull_request:
+    branches: [staging, production]
+
+permissions:
+  contents: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - uses: DavidAnson/markdownlint-cli2-action@v20
+      with:
+        globs: |
+          *.md
+          !nexus-next/*.md
+          !nexus-sdk/*.md
+        config: .markdownlint.json
+        fix: true
+    - name: Configure Git
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'github-actions@github.com'
+    - name: Commit and push if changes
+      run: |
+        git add -A
+        git diff --quiet && git diff --staged --quiet || (git commit -m "style: format markdown files" && git push)
+        
