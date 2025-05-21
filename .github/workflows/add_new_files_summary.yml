@@ -4,8 +4,8 @@ on:
   pull_request:
     branches:
       - staging
-    types: [opened, synchronize, reopened]
-    
+    types: [opened, reopened]
+
 permissions:
   contents: write
   pull-requests: write
