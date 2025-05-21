@@ -27,7 +27,7 @@ jobs:
 
       - name: Format links in markdown files
         run: |
-          python .github/scripts/convert_markdown_links.py nexus-next nexus-sdk
+          python3 .github/scripts/convert_markdown_links.py nexus-next nexus-sdk
 
       - uses: crazy-max/ghaction-import-gpg@v6
         with:

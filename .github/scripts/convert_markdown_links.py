@@ -9,23 +9,27 @@ REF_DEF_RE = re.compile(r"^\[([^\]]+)\]:\s*(\S.*)$")
 EXPLICIT_LINK_RE = re.compile(r"\[([^\]]+)\]\[([^\]]+)\]")
 IMPLICIT_LINK_RE = re.compile(r"\[([^\]]+)\]\[\]")
 BARE_LINK_RE = re.compile(r"\[([^\]]+)\](?!\()")
+COMMENT_LINE_RE = re.compile(r"^\s*<!--.*-->\s*$")
 
 def convert_markdown_links(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
-    # First pass: collect reference definitions
+    # First pass: collect reference definitions and their line numbers
     refs = {}
+    ref_lines = set()
     content_lines = []
-    for line in lines:
+    for i, line in enumerate(lines):
         m = REF_DEF_RE.match(line.strip())
         if m:
             ref_id, url = m.groups()
             refs[ref_id] = url.strip()
+            ref_lines.add(i)
         else:
-            content_lines.append(line)
+            content_lines.append((i, line))
 
-    content = ''.join(content_lines)
+    # Convert content lines to string
+    content = ''.join(line for _, line in content_lines)
 
     # Replace [text][ref]
     def repl_explicit(match):
@@ -48,14 +52,34 @@ def convert_markdown_links(file_path):
         return f'[{text}]({url})' if url else match.group(0)
     content = BARE_LINK_RE.sub(repl_bare, content)
 
-    # Remove trailing blank lines
-    content = re.sub(r'\n{3,}', '\n\n', content)
+    # Split content back into lines
+    new_lines = content.splitlines(True)
+
+    # Remove reference lines and clean up trailing empty/comment lines
+    final_lines = []
+    in_reference_section = False
+    for i, line in enumerate(new_lines):
+        if i in ref_lines:
+            in_reference_section = True
+            continue
+        if in_reference_section:
+            if line.strip() and not COMMENT_LINE_RE.match(line):
+                in_reference_section = False
+                final_lines.append(line)
+        else:
+            final_lines.append(line)
+
+    # Remove trailing empty lines and comments
+    while final_lines and (not final_lines[-1].strip() or COMMENT_LINE_RE.match(final_lines[-1])):
+        final_lines.pop()
+
+    # Add a single newline at the end
+    final_content = ''.join(final_lines).rstrip() + '\n'
 
     # Write back if changed
-    new_content = content.rstrip() + '\n'
-    if new_content != ''.join(lines):
+    if final_content != ''.join(lines):
         with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(new_content)
+            f.write(final_content)
         print(f"Updated {file_path}")
     else:
         print(f"No changes in {file_path}")
