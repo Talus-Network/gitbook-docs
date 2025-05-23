@@ -16,6 +16,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
+
     - uses: tj-actions/changed-files@v46
       id: changed-files
       with:
@@ -23,6 +24,7 @@ jobs:
           **/*.md
           !nexus-next/**/*.md
           !nexus-sdk/**/*.md
+
     - uses: DavidAnson/markdownlint-cli2-action@v20
       if: steps.changed-files.outputs.any_changed == 'true'
       with:
@@ -30,7 +32,9 @@ jobs:
         config: .markdownlint.json
         fix: true
 
-    - uses: crazy-max/ghaction-import-gpg@v6
+    - name: "Import GPG key"
+      id: import-gpg
+      uses: crazy-max/ghaction-import-gpg@v6
       if: steps.changed-files.outputs.any_changed == 'true'
       with:
         gpg_private_key: ${{ secrets.DEVOPS_GPG_PRIVATE_KEY }}
@@ -38,11 +42,10 @@ jobs:
         git_user_signingkey: true
         git_commit_gpgsign: true
         git_config_global: true
-        
-    - name: Commit changes
-      if: steps.changed-files.outputs.any_changed == 'true'
-      run: |
-        git config user.name "devops-talus"
-        git config user.email "devops@taluslabs.xyz"
-        git add -A
-        git diff --quiet && git diff --staged --quiet || (git commit -S -m "style: format markdown files" && git push)
+
+    - name: "Commit and push changes"
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_user_name: "Talus DevOps"
+        commit_user_email: ${{ steps.import-gpg.outputs.email }}
+        commit_message: "style: format markdown files"
