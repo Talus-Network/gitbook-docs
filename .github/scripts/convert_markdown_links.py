@@ -73,8 +73,8 @@ def convert_markdown_links(file_path):
     while final_lines and (not final_lines[-1].strip() or COMMENT_LINE_RE.match(final_lines[-1])):
         final_lines.pop()
 
-    # Add a single newline at the end
-    final_content = ''.join(final_lines).rstrip() + '\n'
+    # Add exactly one newline at the end
+    final_content = ''.join(final_lines).rstrip() + '\n\n'
 
     # Write back if changed
     if final_content != ''.join(lines):
@@ -106,4 +106,4 @@ def main():
         process_path(path)
 
 if __name__ == "__main__":
-    main() 
+    main()  
