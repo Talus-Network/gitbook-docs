@@ -1,8 +1,6 @@
 name: Lint and Format Markdown
 
 on:
-  push:
-    branches: [staging, production]
   pull_request:
     branches: [staging, production]
 

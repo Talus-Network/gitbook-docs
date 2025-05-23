@@ -1,8 +1,8 @@
 name: Format Markdown Links
 
 on:
-  push:
-    branches: [staging, production]
+  pull_request:
+    branches: [staging]
     paths:
         - 'nexus-next/**'
         - 'nexus-sdk/**'
@@ -23,7 +23,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.13'
 
       - name: Format links in markdown files
         run: |
@@ -44,4 +44,4 @@ jobs:
         with:
           commit_user_name: "Talus DevOps"
           commit_user_email: ${{ steps.import-gpg.outputs.email }}
-          commit_message: "chore: format markdown links"
+          commit_message: "chore(docs): format markdown links"
