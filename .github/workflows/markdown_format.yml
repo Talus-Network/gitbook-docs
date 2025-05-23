@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  lint:
+  lint-format:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -43,7 +43,30 @@ jobs:
 
     - name: "Commit and push changes"
       uses: stefanzweifel/git-auto-commit-action@v5
+      if: steps.changed-files.outputs.any_changed == 'true'
       with:
         commit_user_name: "Talus DevOps"
         commit_user_email: ${{ steps.import-gpg.outputs.email }}
         commit_message: "style: format markdown files"
+
+  typos-check:
+    needs: lint-format
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - uses: tj-actions/changed-files@v46
+      id: changed-files
+      with:
+        files: |
+          **/*.md
+          !nexus-next/**/*.md
+          !nexus-sdk/**/*.md
+
+    - name: Check for typos
+      if: steps.changed-files.outputs.any_changed == 'true'
+      uses: crate-ci/typos@v1.32.0
+      with:
+        files: ${{ steps.changed-files.outputs.all_changed_files }}
