@@ -75,3 +75,4 @@ Coming soon.
 ## Tool authorization
 
 Once there are community Tools, we will need a way to authorize communication between the Leader and a Tool. This has been discussed superficially and it needs to be researched in depth in the future.
+
