@@ -153,3 +153,6 @@ Disables this extension.
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/default_gas_extension.md#(nexus_workflow=0x0)_default_gas_extension_disable_expiry">disable_expiry</a>(gas_service: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/gas.md#(nexus_workflow=0x0)_gas_GasService">gas::GasService</a>, <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry">tool_registry</a>: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/gas.md#(nexus_workflow=0x0)_gas_OverGas">gas::OverGas</a>&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>)
 </code></pre>
 
+
+
+

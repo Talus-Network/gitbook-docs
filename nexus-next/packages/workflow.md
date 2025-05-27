@@ -13,12 +13,12 @@ The terms used in the context of the DAG can be found in the [glossary](../gloss
 
 {% hint style="success" %} Mental model for Nexus Tools as the workflow vertices
 
-* A tool is represented by a vertex in the DAG.
-* A tool has at least one input represented by input ports.
-* These input ports are akin to arguments to a function.
-* A tool returns a first degree enumeration variant.
-* These are mutually exclusive descriptions of the tool's output.
-* An output variant has at least one output represented by output ports.
+- A tool is represented by a vertex in the DAG.
+- A tool has at least one input represented by input ports.
+- These input ports are akin to arguments to a function.
+- A tool returns a first degree enumeration variant.
+- These are mutually exclusive descriptions of the tool's output.
+- An output variant has at least one output represented by output ports.
 
 {% endhint %}
 
@@ -221,6 +221,12 @@ The tool registry is an onchain shared object that holds [tool definitions](../t
 To register a tool the creator must deposit a time-locked collateral to prevent spamming the registry.
 The amount of `SUI` locked and the interval after which they can be reclaimed is configured in the `nexus-next` repo.
 
+## Prekey vault
+
+The prekey vault is an onchain shared object that holds prekeys for initiating encrypted communication with the workflow.
+
+To claim a prekey, the user must first deposit some gas budget in `SUI` to the gas service. Claiming a prekey is also rate limited per wallet.
+
 ## Notes
 
 - We have considered a stricter rule `5.` where `InputPort` can have only one incoming `OutputVariantPort`.
@@ -228,4 +234,3 @@ The amount of `SUI` locked and the interval after which they can be reclaimed is
   This trade-off was deemed worthy.
 - When using the `ProofOfUid` primitive, it must be created with a type that matches the `UID`.
   The type should be considered an authorization ticket and should be treated just as any other capability type.
-
