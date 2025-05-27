@@ -1,0 +1,47 @@
+name: Format Markdown Links
+
+on:
+  pull_request:
+    branches: [staging]
+    paths:
+        - 'nexus-next/**'
+        - 'nexus-sdk/**'
+
+permissions:
+  contents: write
+
+jobs:
+  markdown-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Format links in markdown files
+        run: |
+          python3 .github/scripts/convert_markdown_links.py nexus-next nexus-sdk
+
+      - name: "Import GPG key"
+        id: import-gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.DEVOPS_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.DEVOPS_GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          git_config_global: true
+    
+      - name: "Commit and push changes"
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_user_name: "Talus DevOps"
+          commit_user_email: ${{ steps.import-gpg.outputs.email }}
+          commit_message: "chore(docs): format markdown links"
