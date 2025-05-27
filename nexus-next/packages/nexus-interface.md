@@ -51,3 +51,4 @@ Unfortunately, Sui does not give us a way to get current package ID.
 When upgrading a package you must create a new type that serves as a witness.
 This new type needs to be used when emitting `AnnounceInterfacePackageEvent` as its generic.
 This event _also_ needs to be emitted with every package upgrade.
+
