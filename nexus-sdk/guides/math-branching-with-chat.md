@@ -1,6 +1,6 @@
 # Extending the Math Branching DAG with Chat Completion
 
-This guide builds on the [Math Branching DAG with Entry Groups](./math_branching-dag-entry.md) by adding a chat completion tool that explains the mathematical results. You'll learn how to:
+This guide builds on the [Math Branching DAG with Entry Groups](./math-branching-dag-entry.md) by adding a chat completion tool that explains the mathematical results. You'll learn how to:
 
 1. Understand the need for a custom tool to bridge between math operations and chat completion
 2. Add the chat completion tool to the DAG
@@ -164,6 +164,22 @@ You need to set up default values for both tools:
         "storage": "inline",
         "data": 1.0
       }
+    }
+  ]
+}
+```
+
+## Step 5: Updating DAG outputs
+
+We can no longer assign outputs to be on the math tools because they now have outgoing edges. Instead our new output will be the chat completion tool:
+
+```json
+{
+  "outputs": [
+    {
+      "vertex": "chat_completion",
+      "output_variant": "ok",
+      "output_port": "completion"
     }
   ]
 }
@@ -517,6 +533,13 @@ Here's the complete DAG definition that combines all the components we've discus
       "name": "mul_entry",
       "vertices": ["mul_inputs", "chat_completion"]
     }
+  ],
+  "outputs": [
+    {
+      "vertex": "chat_completion",
+      "output_variant": "ok",
+      "output_port": "completion"
+    }
   ]
 }
 ```
@@ -546,13 +569,13 @@ For testing, you can use the Nexus CLI to execute the DAG:
 nexus dag execute --dag-id <dag_object_id> --entry-group add_entry --input-json '{
   "add_input_and_default": {"a": 10},
   "chat_completion": {"api_key": "your-api-key"}
-}' --inspect
+}' --inspect --encrypt chat_completion.api_key
 
 # Using the multiplication entry group
 nexus dag execute --dag-id <dag_object_id> --entry-group mul_entry --input-json '{
   "mul_inputs": {"a": 5, "b": 2},
   "chat_completion": {"api_key": "your-api-key"}
-}' --inspect
+}' --inspect --encrypt chat_completion.api_key
 ```
 
 The `--inspect` flag will show you detailed information about the execution, including:
@@ -561,6 +584,8 @@ The `--inspect` flag will show you detailed information about the execution, inc
 - Inputs and outputs at each step
 - Any errors that occurred
 - The final chat completion response
+
+The `--encrypt` flag is used to encrypt sensitive information, such as the API key, before sending it to the Nexus network.
 
 ### 2. Integration with Applications
 
