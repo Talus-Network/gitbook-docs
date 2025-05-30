@@ -26,3 +26,4 @@
 - **`Output Variant`** - A mutually exclusive variant of the tool's output.
 - **`Output Port`** - A single output (field) of a Tool within an Output Variant.
 - **`Entry Group`** - A named set of vertices that define an entry configuration for DAG execution.
+

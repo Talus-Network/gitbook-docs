@@ -234,3 +234,4 @@ To claim a prekey, the user must first deposit some gas budget in `SUI` to the g
   This trade-off was deemed worthy.
 - When using the `ProofOfUid` primitive, it must be created with a type that matches the `UID`.
   The type should be considered an authorization ticket and should be treated just as any other capability type.
+
