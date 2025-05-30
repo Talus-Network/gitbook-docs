@@ -70,3 +70,9 @@
   * [LLM: OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
   * [Social : X](tools/social-twitter/README.md)
   * [Storage: Walrus](tools/storage-walrus/README.md)
+
+## Looking for a home
+
+* [nexus-next/tokenomics/default-gas-extension.md](nexus-next/tokenomics/default-gas-extension.md)
+* [nexus-next/tokenomics/gas-service.md](nexus-next/tokenomics/gas-service.md)
+* [nexus-next/tokenomics/tokenomics.md](nexus-next/tokenomics/tokenomics.md)
