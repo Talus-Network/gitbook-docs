@@ -6,28 +6,31 @@ The Default TAP is a useful helper component for Nexus agent developers. It serv
 
 ## Interface Compliance
 
-The Default TAP implements the [Nexus Interface V1](../packages/nexus-interface.md#v1)  specification, which defines the required functionality for any Talus Agent Package to integrate with the Nexus workflow engine. Key interface requirements include:
+The Default TAP implements the [Nexus Interface V1][nexus-interface-v1] specification, which defines the required functionality for any Talus Agent Package to integrate with the Nexus workflow engine. Key interface requirements include:
 
 1. **Version Management**
    - Must declare and maintain interface version compatibility.
    - Must support version checking for backward compatibility.
 
-2. **Workflow Management**
+1. **Workflow Management**
    - Must handle worksheet management and state tracking.
    - Must support tool evaluation confirmation.
 
-3. **Authorization**
+1. **Authorization**
    - Must implement witness-based authorization.
    - Must support package upgrade mechanisms.
 
-For detailed interface requirements, see the [Nexus Interface Documentation](../packages/nexus-interface.md).
+For detailed interface requirements, see the [Nexus Interface Documentation][nexus-interface].
 
 <!-- Gitbook syntax -->
-{% hint style="info" %} In the code snippets below, we reference some Sui Move patterns (e.g. hot potato), please refer to the [primitives package doc](../packages/primitives.md) for more information on the approach taken here. {% endhint %}
+{% hint style="info" %}
+In the code snippets below, we reference some Sui Move patterns (e.g. hot potato), please refer to the [primitives package doc][primitives] for more information on the approach taken here. 
+{% endhint %}
 
 ### DefaultTAP Structure
 
 The agent will be represented by the `DefaultTAP` struct, which is a shared object that contains:
+
 - `id`: A unique identifier for the TAP instance.
 - `witness`: A Bag containing authorization tokens for package identification and upgrade management.
 - `iv`: The interface version (currently v1) that clients can use to determine compatibility.
@@ -56,10 +59,11 @@ public struct DefaultTAP has key {
 ### Constructor and Leader Registration
 
 The DefaultTAP is created using the `new()` constructor function, which:
+
 1. Creates a new DefaultTAP instance with a unique ID.
-2. Initializes a witness token for package identification.
-3. Sets the Nexus interface version to v1.
-4. Registers the TAP with the Nexus leader.
+1. Initializes a witness token for package identification.
+1. Sets the Nexus interface version to v1.
+1. Registers the TAP with the Nexus leader.
 
 ```rust
 use nexus_interface::version::{Self, InterfaceVersion};
@@ -97,8 +101,8 @@ public struct DefaultSAPV1Witness has key, store {
 The worksheet function is a core requirement of the Nexus Interface V1 specification. It creates a proof of UID (Unique Identifier) that serves as a "stamp collector" for tracking workflow execution state. This proof:
 
 1. Acts as a hot-potato object that collects execution confirmations from Nexus components like the DAG.
-2. Must be constructed with a type defined in the same package and module that implements the interface.
-3. Is used to verify that required operations have been performed in the correct sequence.
+1. Must be constructed with a type defined in the same package and module that implements the interface.
+1. Is used to verify that required operations have been performed in the correct sequence.
 
 ```rust
 use nexus_interface::version::InterfaceVersion;
@@ -115,8 +119,8 @@ public fun worksheet(self: &DefaultSAP): ProofOfUID {
 The `confirm_tool_eval_for_walk` function is another core requirement of the Nexus Interface V1 specification. It is invoked by the Nexus Leader after a workflow contract has advanced the DAG to:
 
 1. Consume the worksheet hot-potato.
-2. Verify that all required confirmations have been collected.
-3. Complete the tool evaluation cycle for a specific walk in the workflow.
+1. Verify that all required confirmations have been collected.
+1. Complete the tool evaluation cycle for a specific walk in the workflow.
 
 ```rust
 use nexus_interface::version::InterfaceVersion
@@ -144,10 +148,10 @@ The Default TAP works in conjunction with the Nexus workflow engine, which provi
    - Support for vertices, edges, and input/output ports.
    - Entry group management for workflow initiation.
 
-2. **Tool Registry**
+1. **Tool Registry**
    - Registration and management of available tools.
 
-3. **Tool Invocation**
+1. **Tool Invocation**
    - Support for tool execution invocation, onchain or offchain.
    - Leader capability management.
 
@@ -160,10 +164,10 @@ The DAG execution is initiated through the `begin_dag_execution` function.
 This function:
 
 1. Takes a DAG and entry vertices with their input data.
-2. Creates a worksheet to track execution state.
-3. Begins execution of the entry group through the DAG.
-4. Requests the network to execute walks through the DAG.
-5. Shares the execution object for tracking progress.
+1. Creates a worksheet to track execution state.
+1. Begins execution of the entry group through the DAG.
+1. Requests the network to execute walks through the DAG.
+1. Shares the execution object for tracking progress.
 
 ```rust
 use nexus_primitives::data::NexusData;
@@ -211,11 +215,12 @@ public fun begin_dag_execution(
 
 ## Security Considerations
 
-- The TAP uses witness tokens for authorization as required by the [Nexus Interface](../packages/nexus-interface.md).
+- The TAP uses witness tokens for authorization as required by the [Nexus Interface][nexus-interface].
 - Interface version checking ensures compatibility.
 - Worksheet proofs ensure state integrity.
 - Tool execution is properly isolated.
-<!-- TODO: refer to Security analysis after integrating Stephen's whitepaper section on it -->
+
+For a broader security analysis of Nexus, refer to the [whitepaper section 4.4][whitepaper].
 
 ## Full Module Code
 
@@ -350,3 +355,9 @@ fun get_witness(self: &DefaultSAP): &DefaultSAPV1Witness {
 
 </details>
 
+<!-- List of references -->
+
+[whitepaper]: https://talus.network/nexus/whitepaper.pdf
+[nexus-interface-v1]: ../packages/nexus-interface.md#v1
+[nexus-interface]: ../packages/nexus-interface.md
+[primitives]: ../packages/primitives.md

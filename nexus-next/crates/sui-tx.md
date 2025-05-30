@@ -7,4 +7,3 @@ The Leader will be assigned a wallet via the `SUI_SECRET_MNEMONIC` environment v
 Initially, there will only be one transaction type from Leader back to Workflow. This transaction notifies the Workflow of the Tool invocation result. More details are available in the [Leader](leader.md) documentation.
 
 Once onchain Tools are defined, the Leader will also have to send transactions to invoke these Tools. These are currently still in the design phase however.
-
