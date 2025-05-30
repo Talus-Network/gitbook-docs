@@ -40,7 +40,9 @@
   * [Agent Development](nexus-next/TAP/agent-development.md)
   * [Default TAP](nexus-next/TAP/default-tap.md)
   * [Tool](nexus-next/tool.md)
-  * [Gas Service](nexus-next/gas-service.md)
+  * [Tokenomics](nexus-next/tokenomics/tokenomics.md)
+    * [Gas Service](nexus-next/tokenomics/gas-service.md)
+    * [Default Gas Extension](nexus-next/tokenomics/default-gas-extension.md)
   * [Nexus Core API docs](developer-docs/index/nexus-core-api-docs/README.md)
     * [nexus\_interface/v1](nexus-next/packages/reference/nexus_interface/v1.md)
     * [nexus\_interface/version](nexus-next/packages/reference/nexus_interface/version.md)
@@ -70,9 +72,3 @@
   * [LLM: OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
   * [Social : X](tools/social-twitter/README.md)
   * [Storage: Walrus](tools/storage-walrus/README.md)
-
-## Looking for a home
-
-* [nexus-next/tokenomics/default-gas-extension.md](nexus-next/tokenomics/default-gas-extension.md)
-* [nexus-next/tokenomics/gas-service.md](nexus-next/tokenomics/gas-service.md)
-* [nexus-next/tokenomics/tokenomics.md](nexus-next/tokenomics/tokenomics.md)
