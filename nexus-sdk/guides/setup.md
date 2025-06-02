@@ -84,6 +84,13 @@ export NEXUS_USERNAME="my-username"
 export NEXUS_PASSWORD="my-password"
 ```
 
+Clone the nexus-sdk repository
+
+```code
+git clone --depth 1 --branch v0.1.0 https://github.com/Talus-Network/nexus-sdk.git
+cd nexus-sdk
+```
+
 Then, configure your Nexus CLI to connect to the\
 Talus `devnet` by running:
 
