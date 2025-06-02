@@ -162,7 +162,8 @@ sui client balance tally
 
 ## Access Devnet Sui Explorer
 
-Open the [Talus Sui Explorer](https://explorer.devnet.taluslabs.dev/) and request an access code.
+Open the [Talus Sui Explorer](https://explorer.devnet.taluslabs.dev/)\
+and log in using the credentials provided earlier.
 
 ---
 
