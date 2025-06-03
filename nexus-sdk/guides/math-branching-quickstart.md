@@ -70,9 +70,18 @@ This should show the following tools running:
 - xyz.taluslabs.math.i64.mul@1
 - ...
 
-## 1. Validate the DAG
+## 1. Clone the repository
 
-First, validate the DAG structure using the Nexus CLI:
+Clone the nexus-sdk repository and navigate to it
+
+```code
+git clone --depth 1 --branch v0.1.0 https://github.com/Talus-Network/nexus-sdk.git
+cd nexus-sdk
+```
+
+## 2. Validate the DAG
+
+Validate the DAG structure using the Nexus CLI:
 
 ```bash
 nexus dag validate --path cli/src/dag/_dags/math_branching.json
@@ -80,7 +89,7 @@ nexus dag validate --path cli/src/dag/_dags/math_branching.json
 
 This step ensures the DAG structure meets all Nexus workflow rules before attempting to publish it.
 
-## 2. Publish the DAG
+## 3. Publish the DAG
 
 Once validated, publish the DAG to make it executable:
 
@@ -92,7 +101,7 @@ nexus dag publish --path cli/src/dag/_dags/math_branching.json
 
 Take note of the DAG ID returned by this command - you'll need it in the next step.
 
-## 3. Execute the DAG with Different Inputs
+## 4. Execute the DAG with Different Inputs
 
 To execute the published DAG, use its ID and provide input for the entry vertex:
 
