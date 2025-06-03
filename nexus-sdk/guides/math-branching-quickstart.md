@@ -51,6 +51,7 @@ graph TD
 ## Prerequisites
 
 - [Nexus CLI](setup.md#install-the-nexus-cli) installed.
+- A clone of the [`nexus-sdk` repository](https://github.com/talus-network/nexus-sdk) to run the examples.
 - A configured Sui wallet for the publish step (can skip this step if just validating). Follow the [Getting Started section in the Sui Docs](https://docs.sui.io/guides/developer/getting-started) to get you set up.
 
 {% hint style="info" %}
@@ -72,10 +73,10 @@ This should show the following tools running:
 
 ## 1. Clone the repository
 
-Clone the nexus-sdk repository and navigate to it
+Clone the `nexus-sdk` repository and navigate to it:
 
-```code
-git clone --depth 1 --branch v0.1.0 https://github.com/Talus-Network/nexus-sdk.git
+```bash
+git clone --branch v0.1.0 https://github.com/talus-network/nexus-sdk
 cd nexus-sdk
 ```
 

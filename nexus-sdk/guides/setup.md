@@ -84,8 +84,7 @@ export NEXUS_USERNAME="my-username"
 export NEXUS_PASSWORD="my-password"
 ```
 
-Then, configure your Nexus CLI to connect to the\
-Talus `devnet` by running:
+Then, configure your Nexus CLI to connect to the Talus `devnet` by running:
 
 ```bash
 nexus conf --sui.net devnet \
