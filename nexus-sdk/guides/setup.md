@@ -10,9 +10,9 @@ Follow these steps to install the Nexus CLI and set up your environment:
 
 Make sure you have installed:
 
-* [Rust](https://rustup.rs/) (latest stable)
-* [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
-* [Sui](https://docs.sui.io/guides/developer/getting-started)
+- [Rust](https://rustup.rs/) (latest stable)
+- [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+- [Sui](https://docs.sui.io/guides/developer/getting-started)
 
 ### Install the Nexus CLI
 
@@ -24,6 +24,7 @@ brew install nexus-cli
 ```
 
 or in one step:
+
 ```bash
 brew install talus-network/tap/nexus-cli
 ```
@@ -61,7 +62,8 @@ cargo install nexus-cli \
 nexus --version
 ```
 
-it should print:
+It should print:
+
 ```bash
 nexus-cli 0.1.0
 ```
@@ -74,13 +76,20 @@ credentials. To request access, please submit your details using the form\
 provided in the navigation bar.
 {% endhint %}
 
-Once you receive your credentials, configure your Nexus CLI to connect to the\
-Talus `devnet` by running:
+Once you receive your credentials, first set them as environment variables in your terminal.\
+Replace `my-username` and `my-password` with your actual credentials:
+
+```bash
+export NEXUS_USERNAME="my-username"
+export NEXUS_PASSWORD="my-password"
+```
+
+Then, configure your Nexus CLI to connect to the Talus `devnet` by running:
 
 ```bash
 nexus conf --sui.net devnet \
-  --sui.basic-auth-user YOUR_USERNAME \
-  --sui.basic-auth-password YOUR_PASSWORD \
+  --sui.basic-auth-user "$NEXUS_USERNAME" \
+  --sui.basic-auth-password "$NEXUS_PASSWORD" \
   --nexus.primitives-pkg-id "0x0783a33d62f22820d78d343492ae261015f83757e5de3302bf189c04b38086d5" \
   --nexus.workflow-pkg-id "0xc338f469d744408e9efaafc9ede711fb11e29eb65536009b443479fb6e8ee502" \
   --nexus.default-sap-object-id "0x6b7c6c579d35c214ee63c3c3f3e8534abe391a4b7f86c5aeb992d80ee1466ce6" \
@@ -91,11 +100,9 @@ nexus conf --sui.net devnet \
 Next, create a `.envrc` file to conveniently store your RPC and faucet URLs:
 
 ```bash
-export SUI_RPC_URL=https://YOUR_USERNAME:YOUR_PASSWORD@rpc.ssfn.devnet.production.taluslabs.dev
-export SUI_FAUCET_URL=https://YOUR_USERNAME:YOUR_PASSWORD@faucet.devnet.production.taluslabs.dev/gas
+echo "export SUI_RPC_URL=https://rpc.ssfn.devnet.production.taluslabs.dev" > .envrc
+echo "export SUI_FAUCET_URL=https://$NEXUS_USERNAME:$NEXUS_PASSWORD@faucet.devnet.production.taluslabs.dev/gas" >> .envrc
 ```
-
-where you need to substitute the previously given credentials for `YOUR_USERNAME` and `YOUR_PASSWORD` accordingly.
 
 Activate these environment variables using:
 
@@ -116,7 +123,7 @@ environment:
 
 ```bash
 sui client new-env --alias devnet --rpc $SUI_RPC_URL \
-  --basic-auth YOUR_USERNAME:YOUR_PASSWORD
+  --basic-auth "$NEXUS_USERNAME":"$NEXUS_PASSWORD"
 sui client switch --env devnet
 ```
 
@@ -147,9 +154,8 @@ sui client balance tally
 
 ## Access Devnet Sui Explorer
 
-Open the [Talus Sui Explorer](https://explorer.devnet.taluslabs.dev/) and request an access code.
+Open the [Talus Sui Explorer](https://explorer.devnet.taluslabs.dev/) and log in using the credentials provided earlier.
 
-***
+---
 
-After completing these steps, you are ready to build and execute workflows using\
-the Nexus SDK. To build your first workflow, check the [Dev Quickstart guide](math-branching-quickstart.md).
+After completing these steps, you are ready to build and execute workflows using the Nexus SDK. To build your first workflow, check the [Dev Quickstart guide](math-branching-quickstart.md).

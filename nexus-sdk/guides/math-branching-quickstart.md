@@ -10,9 +10,9 @@ In the quickstart example we'll use a simple conceptual workflow consisting of s
 
 The [`math_branching.json` DAG](https://github.com/Talus-Network/nexus-sdk/blob/v0.1.0/cli/src/dag/_dags/math_branching.json) takes a number input, adds `-3` to it, checks if the result is negative, zero, or positive, and then performs one of three operations:
 
-* If negative: Multiply by `-3`
-* If positive: Multiply by `7`
-* If zero: Add `1`
+- If negative: Multiply by `-3`
+- If positive: Multiply by `7`
+- If zero: Add `1`
 
 Here's a visual representation of the workflow:
 
@@ -23,16 +23,16 @@ graph TD
         Def1([b = -3]) --> A;
         A -- "result" --> B{"is_negative<br>(math.i64.cmp@1)"};
         Def2([b = 0]) --> B;
-        
+
         B -- "lt (a < 0)" --> C["mul_by_neg_3<br>(math.i64.mul@1)"];
         Def3([b = -3]) --> C;
-        
+
         B -- "gt (a > 0)" --> D["mul_by_7<br>(math.i64.mul@1)"];
         Def4([b = 7]) --> D;
-        
+
         B -- "eq (a == 0)" --> E["add_1<br>(math.i64.add@1)"];
         Def5([b = 1]) --> E;
-        
+
         C -- "result" --> Result1((Final Result));
         D -- "result" --> Result2((Final Result));
         E -- "result" --> Result3((Final Result));
@@ -41,7 +41,7 @@ graph TD
     classDef input fill:#23D3F8,stroke:#000000,stroke-width:2px,color:#000000;
     classDef output fill:#76EFB6,stroke:#000000,stroke-width:2px,color:#000000;
     classDef default fill:#FFFFCB,stroke:#000000,stroke-width:1px,color:#000000;
-    
+
     class A,C,D,E,B tool;
     class Result1,Result2,Result3 output;
     class Input input;
@@ -50,8 +50,9 @@ graph TD
 
 ## Prerequisites
 
-* [Nexus CLI](setup.md#install-the-nexus-cli) installed.
-* A configured Sui wallet for the publish step (can skip this step if just validating). Follow the [Getting Started section in the Sui Docs](https://docs.sui.io/guides/developer/getting-started) to get you set up.
+- [Nexus CLI](setup.md#install-the-nexus-cli) installed.
+- A clone of the [`nexus-sdk` repository](https://github.com/talus-network/nexus-sdk) to run the examples.
+- A configured Sui wallet for the publish step (can skip this step if just validating). Follow the [Getting Started section in the Sui Docs](https://docs.sui.io/guides/developer/getting-started) to get you set up.
 
 {% hint style="info" %}
 In this example we will publish a DAG consisting of Nexus Tools that are running somewhere and registered (the URL can be found as metadata in the tool registry). If you were running your own tools and needed to register them, check out [Nexus CLI tool commands](../cli.md#nexus-tool) to find out how to do this.
@@ -65,14 +66,23 @@ nexus tool list
 
 This should show the following tools running:
 
-* xyz.taluslabs.math.i64.add@1
-* xyz.taluslabs.math.i64.cmp@1
-* xyz.taluslabs.math.i64.mul@1
-* ...
+- xyz.taluslabs.math.i64.add@1
+- xyz.taluslabs.math.i64.cmp@1
+- xyz.taluslabs.math.i64.mul@1
+- ...
 
-## 1. Validate the DAG
+## 1. Clone the repository
 
-First, validate the DAG structure using the Nexus CLI:
+Clone the `nexus-sdk` repository and navigate to it:
+
+```bash
+git clone --branch v0.1.0 https://github.com/talus-network/nexus-sdk
+cd nexus-sdk
+```
+
+## 2. Validate the DAG
+
+Validate the DAG structure using the Nexus CLI:
 
 ```bash
 nexus dag validate --path cli/src/dag/_dags/math_branching.json
@@ -80,7 +90,7 @@ nexus dag validate --path cli/src/dag/_dags/math_branching.json
 
 This step ensures the DAG structure meets all Nexus workflow rules before attempting to publish it.
 
-## 2. Publish the DAG
+## 3. Publish the DAG
 
 Once validated, publish the DAG to make it executable:
 
@@ -92,14 +102,15 @@ nexus dag publish --path cli/src/dag/_dags/math_branching.json
 
 Take note of the DAG ID returned by this command - you'll need it in the next step.
 
-## 3. Execute the DAG with Different Inputs
+## 4. Execute the DAG with Different Inputs
 
 To execute the published DAG, use its ID and provide input for the entry vertex:
 
 **Input JSON Structure:**
+
 ```json
 // Example Input: provide value 10 to port 'a' of 'add_input_and_default'
-'{"add_input_and_default": {"a": 10}}'
+"{\"add_input_and_default\": {\"a\": 10}}"
 ```
 
 **Test Different Execution Paths:**
@@ -124,18 +135,18 @@ The `--inspect` flag automatically retrieves and displays the execution details 
 
 By trying different inputs, you can see how the DAG's branching logic directs execution flow:
 
-* `a=10` triggers the "greater than" path
-* `a=-5` triggers the "less than" path
-* `a=3` triggers the "equal to" path
+- `a=10` triggers the "greater than" path
+- `a=-5` triggers the "less than" path
+- `a=3` triggers the "equal to" path
 
 This demonstrates how Nexus DAGs can implement conditional logic and branching based on data values.
 
 ## Find the Results
 
-When you execute the DAG via the `nexus dag execute` command, a successful output will return you a transaction digest and DAG execution object ID. You can use both to further examine the execution, using either the Sui CLI or an explorer.
+When you execute the DAG via the `nexus dag execute` command, a successful output will return you a transaction digest and DAG execution object ID. You can use both to further examine the execution, using either the Sui CLI or an [explorer](https://explorer.devnet.taluslabs.dev/).
 
 ## Next Steps
 
-* Read the full [Agent Builder Guide](math-branching-dag-builder.md) to understand how this DAG is constructed
-* Study the [DAG Construction Guide](dag-construction.md) for more advanced DAG features
-* Try building your own DAG with different tools and logic flows
+- Read the full [Agent Builder Guide](math-branching-dag-builder.md) to understand how this DAG is constructed
+- Study the [DAG Construction Guide](dag-construction.md) for more advanced DAG features
+- Try building your own DAG with different tools and logic flows
