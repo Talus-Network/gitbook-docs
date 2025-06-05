@@ -1,6 +1,6 @@
 # Extending the Math Branching DAG with Chat Completion
 
-This guide builds on the [Math Branching DAG with Entry Groups](./math-branching-dag-entry.md) by adding a chat completion tool that explains the mathematical results. You'll learn how to:
+This guide builds on the [Math Branching DAG with Entry Groups][math-branching-entry-guide] by adding a chat completion tool that explains the mathematical results. You'll learn how to:
 
 1. Understand the need for a custom tool to bridge between math operations and chat completion
 2. Add the chat completion tool to the DAG
@@ -15,7 +15,7 @@ Follow the [setup guide](setup.md) to get properly setup in case you haven't.
 
 Before you can connect our math operations to the chat completion tool, you need to understand a key challenge: type safety. The [LLM chat completion tool](../../tools/llm-openai-chat-completion/README.md)expects a `Message` struct as input, but the [math tool](../../tools/math/README.md) outputs numbers. You can't directly connect these without proper type conversion.
 
-This is where you need a custom tool to bridge this gap. You'll use the `xyz.taluslabs.llm.openai.chat-prep@1` tool that you developed in the [Build the Missing Tool guide](./llm-openai-chat-prep-tool.md). This tool converts numbers into the proper message format that the chat completion tool expects.
+This is where you need a custom tool to bridge this gap. You'll use the `xyz.taluslabs.llm.openai.chat-prep@1` tool that you developed in the [Build the Missing Tool guide][llm-openai-chat-prep-tool]. This tool converts numbers into the proper message format that the chat completion tool expects.
 
 ## Step 1: Adding the Required Tools
 
@@ -644,3 +644,7 @@ This extended DAG demonstrates how to combine mathematical computation with natu
 
 This extended DAG demonstrates how to combine mathematical computation with natural language processing, creating a more interactive and engaging experience for users.
 
+<!-- List of references -->
+
+[math-branching-entry-guide]: ./math-branching-dag-entry.md
+[llm-openai-chat-prep-tool]: ./llm-openai-chat-prep-tool.md
