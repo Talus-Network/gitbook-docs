@@ -740,3 +740,6 @@ Has the tool been unregistered for longer than the lock duration?
 <pre><code><b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass_">did_unregister_period_pass_</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OffChainTool">tool_registry::OffChainTool</a>, clock: &<a href="../dependencies/sui/clock.md#sui_clock_Clock">sui::clock::Clock</a>): bool
 </code></pre>
 
+
+
+

@@ -6,4 +6,3 @@ In Nexus and related packages we (to the best of our ability) follow these conve
 
 Each enumeration variant contains a property `_variant_name: AsciiString`, which will always be a static string representing the variant name.
 This helps clients to identify the variant because at the moment RPCs do not include the variant name in the response.
-
