@@ -221,11 +221,11 @@ The tool registry is an onchain shared object that holds [tool definitions](../t
 To register a tool the creator must deposit a time-locked collateral to prevent spamming the registry.
 The amount of `SUI` locked and the interval after which they can be reclaimed is configured in the `nexus-next` repo.
 
-## Prekey vault
+## PreKey vault
 
-The prekey vault is an onchain shared object that holds prekeys for initiating encrypted communication with the workflow.
+The pre_key vault is an onchain shared object that holds pre_keys for initiating encrypted communication with the workflow.
 
-To claim a prekey, the user must first deposit some gas budget in `SUI` to the gas service. Claiming a prekey is also rate limited per wallet.
+To claim a pre_key, the user must first deposit some gas budget in `SUI` to the gas service. Claiming a pre_key is also rate limited per wallet.
 
 ## Notes
 
