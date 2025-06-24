@@ -1,6 +1,6 @@
 # Gas Service
 
-The concepts related to tokenomics as explained in [the tokenomics section](tokenomics.md) are implemented in the `GasService` shared object in Nexus.
+The concepts related to tokenomics as explained in [the tokenomics section][tokenomics] are implemented in the `GasService` shared object in Nexus.
 
 ## Overview
 
@@ -70,7 +70,7 @@ Tools can set a default cost per invocation. When no gas tickets are available, 
 
 ### 2. Gas Extensions
 
-Gas extensions provide alternative payment strategies. The [default extension](default-gas-extension.md) implements an expiry-based system where users can:
+Gas extensions provide alternative payment strategies. The [default extension][default-gas-extension] implements an expiry-based system where users can:
 
 - Buy access for a specific duration (e.g., 10 minutes).
 - Pay a fixed rate per minute.
@@ -353,3 +353,7 @@ public fun donate_to_tool(
 
 </details>
 
+<!-- List of references -->
+
+[tokenomics]: tokenomics.md
+[default-gas-extension]: default-gas-extension.md

@@ -6,7 +6,7 @@ The Default TAP is a useful helper component for Nexus agent developers. It serv
 
 ## Interface Compliance
 
-The Default TAP implements the [Nexus Interface V1](../packages/nexus-interface.md#v1) specification, which defines the required functionality for any Talus Agent Package to integrate with the Nexus workflow engine. Key interface requirements include:
+The Default TAP implements the [Nexus Interface V1][nexus-interface-v1] specification, which defines the required functionality for any Talus Agent Package to integrate with the Nexus workflow engine. Key interface requirements include:
 
 1. **Version Management**
    - Must declare and maintain interface version compatibility.
@@ -20,11 +20,11 @@ The Default TAP implements the [Nexus Interface V1](../packages/nexus-interface.
    - Must implement witness-based authorization.
    - Must support package upgrade mechanisms.
 
-For detailed interface requirements, see the [Nexus Interface Documentation](../packages/nexus-interface.md).
+For detailed interface requirements, see the [Nexus Interface Documentation][nexus-interface].
 
 <!-- Gitbook syntax -->
 {% hint style="info" %}
-In the code snippets below, we reference some Sui Move patterns (e.g. hot potato), please refer to the [primitives package doc](../packages/primitives.md) for more information on the approach taken here. 
+In the code snippets below, we reference some Sui Move patterns (e.g. hot potato), please refer to the [primitives package doc][primitives] for more information on the approach taken here. 
 {% endhint %}
 
 ### DefaultTAP Structure
@@ -215,12 +215,12 @@ public fun begin_dag_execution(
 
 ## Security Considerations
 
-- The TAP uses witness tokens for authorization as required by the [Nexus Interface](../packages/nexus-interface.md).
+- The TAP uses witness tokens for authorization as required by the [Nexus Interface][nexus-interface].
 - Interface version checking ensures compatibility.
 - Worksheet proofs ensure state integrity.
 - Tool execution is properly isolated.
 
-For a broader security analysis of Nexus, refer to the [whitepaper section 4.4](https://talus.network/nexus/whitepaper.pdf).
+For a broader security analysis of Nexus, refer to the [whitepaper section 4.4][whitepaper].
 
 ## Full Module Code
 
@@ -355,3 +355,9 @@ fun get_witness(self: &DefaultSAP): &DefaultSAPV1Witness {
 
 </details>
 
+<!-- List of references -->
+
+[whitepaper]: https://talus.network/nexus/whitepaper.pdf
+[nexus-interface-v1]: ../packages/nexus-interface.md#v1
+[nexus-interface]: ../packages/nexus-interface.md
+[primitives]: ../packages/primitives.md

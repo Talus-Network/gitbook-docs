@@ -544,7 +544,7 @@ See the docs to understand how scopes work.
 We ignore enum variant convention out of convenience as in this specific
 example the variant is unambiguous.
 
-<https://github.com/Talus-Network/nexus-next/wiki/Conventions:-Sui-Move#enums-_variant_name>
+<https://docs.talus.network/developer-docs/index/onchain-nexus/sui-move#enums-_variant_name>
 
 
 <pre><code><b>public</b> <b>enum</b> <a href="../nexus_workflow/gas.md#(nexus_workflow=0x0)_gas_Scope">Scope</a> <b>has</b> <b>copy</b>, drop, store
@@ -1091,4 +1091,7 @@ amount requested.
 
 <pre><code><b>fun</b> <a href="../nexus_workflow/gas.md#(nexus_workflow=0x0)_gas_get_or_insert_tool_gas_mut">get_or_insert_tool_gas_mut</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/gas.md#(nexus_workflow=0x0)_gas_GasService">gas::GasService</a>, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>): &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/gas.md#(nexus_workflow=0x0)_gas_ToolGas">gas::ToolGas</a>
 </code></pre>
+
+
+
 

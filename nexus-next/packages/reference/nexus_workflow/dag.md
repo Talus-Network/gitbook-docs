@@ -2079,3 +2079,6 @@ Will emit an event if the execution is done.
 <pre><code><b>fun</b> <a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_if_finished_emit_final_event">if_finished_emit_final_event</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_DAGExecution">dag::DAGExecution</a>)
 </code></pre>
 
+
+
+
