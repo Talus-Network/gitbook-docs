@@ -548,7 +548,7 @@ To prevent spamming, we lock [ToolRegistry.mist_collateral_to_lock]
 If the tool is unregistered, the collateral is available after
 [ToolRegistry.lock_duration_ms] milliseconds.
 
-See <https://github.com/Talus-Network/nexus-next/wiki/Tool#tool-definitions>
+See <https://docs.talus.network/developer-docs/index/tool#tool-definitions>
 to learn about the expected format of the input and output schemas and the
 expected format of the FQN and URL.
 

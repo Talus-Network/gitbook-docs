@@ -544,7 +544,7 @@ See the docs to understand how scopes work.
 We ignore enum variant convention out of convenience as in this specific
 example the variant is unambiguous.
 
-<https://github.com/Talus-Network/nexus-next/wiki/Conventions:-Sui-Move#enums-_variant_name>
+<https://docs.talus.network/developer-docs/index/onchain-nexus/sui-move#enums-_variant_name>
 
 
 <pre><code><b>public</b> <b>enum</b> <a href="../nexus_workflow/gas.md#(nexus_workflow=0x0)_gas_Scope">Scope</a> <b>has</b> <b>copy</b>, drop, store
