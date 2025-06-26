@@ -105,3 +105,6 @@ Creates a founding [CloneableOwnerCap] with a random network ID.
 <pre><code><b>public</b> <b>entry</b> <b>fun</b> <a href="../nexus_workflow/leader_cap.md#(nexus_workflow=0x0)_leader_cap_create_for_self_and_addresses">create_for_self_and_addresses</a>(n_per_address: u64, addresses: vector&lt;<b>address</b>&gt;, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>)
 </code></pre>
 
+
+
+
