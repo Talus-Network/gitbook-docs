@@ -4,7 +4,7 @@ In blockchain systems, typically users pay a gas fee to submit transactions to a
 
 In Nexus an agentic workflow is usually triggered by a user action, but the additional work on behalf of the user (or Talus Agent, TAP) during workflow execution is delegated to other parties. This includes:
 
-- the gas fees the [Leader][leader] incurs when submitting the results of the tool invocations back onchain
+- the gas fees the [Leader](../crates/leader.md) incurs when submitting the results of the tool invocations back onchain
 - the fees for the service the tool provides
 
 To manage payment for those fees, Nexus introduces a tokenomics model to manage payments for the agentic (AI) workflow services it provides.
@@ -26,7 +26,7 @@ From a tokenomics perspective, consider the following actors:
 
 ## Gas Service Concepts
 
-The implementation of the `GasService`, a shared object that manages all gas-related operations, can be found in the [dedicated section][gas-service].
+The implementation of the `GasService`, a shared object that manages all gas-related operations, can be found in the [dedicated section](gas-service.md).
 
 ### Where to draw gas from?
 
@@ -53,14 +53,9 @@ The Talus Labs team will provide some gas exentsion Move packages that can will 
 
 However, the tool developers are free to write custom gas extensions Move packages that correspond to custom mode of operation for their gas tickets.
 
-For more information and details on the gas service, refer to the [dedicated section][gas-service].
+For more information and details on the gas service, refer to the [dedicated section](gas-service.md).
 
 ## Nexus CLI
 
-You'll be able to manage interaction with the gas service through the [Nexus CLI][nexus-cli]. Please refer to the commands and inspect the gas-related arguments.
+You'll be able to manage interaction with the gas service through the [Nexus CLI](../../nexus-sdk/cli.md). Please refer to the commands and inspect the gas-related arguments.
 
-<!-- List of references -->
-
-[leader]: ../crates/leader.md
-[gas-service]: gas-service.md
-[nexus-cli]: ../../nexus-sdk/cli.md
