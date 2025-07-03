@@ -90,11 +90,11 @@ Then, configure your Nexus CLI to connect to the Talus `devnet` by running:
 nexus conf --sui.net devnet \
   --sui.basic-auth-user "$NEXUS_USERNAME" \
   --sui.basic-auth-password "$NEXUS_PASSWORD" \
-  --nexus.primitives-pkg-id "0x0783a33d62f22820d78d343492ae261015f83757e5de3302bf189c04b38086d5" \
-  --nexus.workflow-pkg-id "0xc338f469d744408e9efaafc9ede711fb11e29eb65536009b443479fb6e8ee502" \
-  --nexus.default-sap-object-id "0x6b7c6c579d35c214ee63c3c3f3e8534abe391a4b7f86c5aeb992d80ee1466ce6" \
-  --nexus.tool-registry-object-id "0x163a07482e8464bb901d0d1010b971e6f622ecd3d65cdf959f8745278145fd38" \
-  --nexus.network_id "0xaed8f0f6eab0dafd5fc296ec1598f850798c57a94f7196495cd8f04aa071c0ac"
+  --nexus.primitives-pkg-id "0xaa132473ac02f2782b549596f6c4f3b39d2d6427dab6654b92666950722a80b0" \
+  --nexus.workflow-pkg-id "0x4177e80a8da5d45e55e16b8075bf02ec8695e6f6a78b2694bfe7762afc2f500e" \
+  --nexus.default-sap-object-id "0x779a768a7b34d9737ae654c3064ba040efc90996d595c891d1862d81e4141d33" \
+  --nexus.tool-registry-object-id "0xa3be0bae7afe2628b2a35e23b1b2ec82a6f10bb973c3f73cf9c17ec394be83ae" \
+  --nexus.network_id "0xcee192504b48a1306aa00217fa2714908e417ac07d1056e224fd2a4e0aac6e89"
 ```
 
 Next, create a `.envrc` file to conveniently store your RPC and faucet URLs:
