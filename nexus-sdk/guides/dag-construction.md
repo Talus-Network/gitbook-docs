@@ -2,7 +2,7 @@
 
 This guide explains how to construct DAG (Directed Acyclic Graph) JSON files for the Nexus platform. DAGs define the workflow that an Agent will execute.
 
-For an explanation of the terms and rules used below, refer to [the Nexus workflow documentation][nexus-next-workflow].
+For an explanation of the terms and rules used below, refer to [the Nexus workflow documentation](../../nexus-next/packages/workflow.md).
 
 {% hint style="info"%}
 Note that for all DAG related terms in the configuration JSON file, snake casing is applied.
@@ -100,8 +100,8 @@ Default values provide static inputs to vertices:
 
 **Important Constraints:**
 
-- An _input port_ can receive data either from an _incoming edge_ or a _default value_, but **never both**. ([workflow rules][nexus-next-workflow] Rule 4)
-- Entry ports **cannot** have default values (by definition). Default values are only permitted for input ports that are _not_ entry ports. ([workflow rules][nexus-next-workflow] Rule 11)
+- An _input port_ can receive data either from an _incoming edge_ or a _default value_, but **never both**. ([workflow rules](../../nexus-next/packages/workflow.md) Rule 4)
+- Entry ports **cannot** have default values (by definition). Default values are only permitted for input ports that are _not_ entry ports. ([workflow rules](../../nexus-next/packages/workflow.md) Rule 11)
 
 ## 5. Entry Groups (Optional)
 
@@ -158,7 +158,7 @@ Outputs can be defined on vertices that have no outgoing edges. These can be tho
 
 ## 7. Validation Rules
 
-The [Nexus CLI][nexus-cli] (`nexus dag validate`) performs static analysis to enforce the critical rules defined in [workflow rules][nexus-next-workflow].
+The [Nexus CLI](../cli.md) (`nexus dag validate`) performs static analysis to enforce the critical rules defined in [workflow rules](../../nexus-next/packages/workflow.md).
 
 ## 8. Best Practices
 
@@ -230,10 +230,5 @@ For working examples, see the following files in the `cli/src/dag/_dags` directo
 - `ig_story_planner_valid.json`: Example of a complex workflow
 - `entry_groups_valid.json`: Example of using entry groups.
 
-For examples of invalid DAGs and common mistakes to avoid (especially regarding Rule 5 - Race Conditions), see the diagrams in [workflow documentation][nexus-next-workflow] and the `*_invalid.json` files in the [testing DAG directory][example-dags].
+For examples of invalid DAGs and common mistakes to avoid (especially regarding Rule 5 - Race Conditions), see the diagrams in [workflow documentation](../../nexus-next/packages/workflow.md) and the `*_invalid.json` files in the [testing DAG directory](https://github.com/Talus-Network/nexus-sdk/tree/v0.1.0/cli/src/dag/_dags).
 
-<!-- List of references -->
-
-[nexus-next-workflow]: ../../nexus-next/packages/workflow.md
-[example-dags]: https://github.com/Talus-Network/nexus-sdk/tree/v0.1.0/cli/src/dag/_dags
-[nexus-cli]: ../cli.md
