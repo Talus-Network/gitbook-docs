@@ -366,6 +366,10 @@ Note that you'll have to add the chat completion api key still. It is recommende
     nexus tool register --off-chain http://localhost:8080
     ```
 
+{% hint style="info" %}
+Tool registration is currently restricted during the beta phase. To register your tool, please contact the team to be added to the allow list.
+{% endhint %}
+
 ## Did you catch it?
 
 The example provided here, while functional does not provide the optimal design according to the guidelines in [the Tool development guide](../tool-development.md). If you did not already think of this while going through the above setup, go through the best practices and see what you could improve about the Tool's design.
@@ -377,4 +381,3 @@ Consider for what use cases you could use this tool to prepare it to add as an L
 ## Next Steps
 
 This tool provides a simple but essential bridge between mathematical operations and chat completion, enabling the creation of more sophisticated DAGs that combine numerical computation with natural language processing. Follow along with the developer guides to expand the [Math Branching Example DAG with LLM chat completion](math-branching-with-chat.md).
-
