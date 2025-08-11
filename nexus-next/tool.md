@@ -60,6 +60,10 @@ Coming soon.
 
 ## Tool registration
 
+{% hint style="warning" %}
+Tool registration is currently restricted during the beta phase. To register your tool, please contact the team to be added to the allow list.
+{% endhint %}
+
 Tools should be register in the Tool Registry using our [CLI](../nexus-sdk/cli.md#nexus-tool)
 
 ### Offchain tools

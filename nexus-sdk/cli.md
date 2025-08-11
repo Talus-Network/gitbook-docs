@@ -50,6 +50,10 @@ The specific design for onchain tools is still in progress and as a result the i
 
 ---
 
+{% hint style="warning" %}
+Tool registration is currently restricted during the beta phase. To register your tool, please contact the team to be added to the allow list.
+{% endhint %}
+
 **`nexus tool register --off-chain <url> --invocation-cost [mist] --collateral-coin [object_id] [--batch] [--no-save]`**
 
 Command that makes a request to `GET <url>/meta` to fetch the Tool definition and then submits a TX to our Tool Registry. It also locks the collateral and sets the single invocation cost of the Tool which defaults to 0 MIST.

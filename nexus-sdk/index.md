@@ -1,5 +1,9 @@
 # 🧰 Nexus SDK
 
+{% hint style="warning" %}
+Tool registration is currently restricted during the beta phase. To register your tool, please contact the team to be added to the allow list.
+{% endhint %}
+
 This documentation aims to document the Nexus SDK, a combination of a CLI tool and Toolkit to facilitate developers building with Nexus. For more information about Nexus itself, please refer to [the Nexus Core documentation](../nexus-next/index.md).
 
 ## Actors

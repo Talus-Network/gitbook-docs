@@ -1,5 +1,9 @@
 # Tool Development Guidelines
 
+{% hint style="warning" %}
+Tool registration is currently restricted during the beta phase. To register your tool, please contact the team to be added to the allow list.
+{% endhint %}
+
 This document will highlight some high-level guidelines for developing Nexus Tools.
 
 These guidelines are not meant to be technical specifications but rather a set of best practices that will help you create a Tool that is easy to use and maintain.

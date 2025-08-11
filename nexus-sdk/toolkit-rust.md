@@ -6,6 +6,10 @@ This library exports useful functionality to streamline the development of Nexus
 
 This documentation will go over the main features of the library and how to use them.
 
+{% hint style="warning" %}
+Tool registration is currently restricted during the beta phase. To register your tool, please contact the team to be added to the allow list.
+{% endhint %}
+
 ## Installation
 
 Using the [CLI](./cli.md) run the `$ nexus tool new --help` command to see the available options. This command creates a fresh Rust project with the necessary dependencies to get started.
