@@ -1,6 +1,6 @@
 # Nexus Toolkit for Rust
 
-> concerns [`nexus-toolkit-rust` repo][nexus-toolkit-rust-repo]
+> concerns [`nexus-toolkit-rust` repo](https://github.com/Talus-Network/nexus-sdk/tree/main/toolkit-rust)
 
 This library exports useful functionality to streamline the development of Nexus Tools in Rust. It is mainly used by **Tool developers** to bootstrap their efforts to extend the Nexus ecosystem.
 
@@ -8,7 +8,7 @@ This documentation will go over the main features of the library and how to use 
 
 ## Installation
 
-Using the [CLI][nexus-cli-docs] run the `$ nexus tool new --help` command to see the available options. This command creates a fresh Rust project with the necessary dependencies to get started.
+Using the [CLI](./cli.md) run the `$ nexus tool new --help` command to see the available options. This command creates a fresh Rust project with the necessary dependencies to get started.
 
 Alternatively, you can add the following to your `Cargo.toml` file:
 
@@ -83,7 +83,7 @@ This associated type defines the output that the Tool produces. This type must d
 
 The Tool's output schema is then derived from this type via the `schemars::schema_for!` macro.
 
-To comply with [Nexus Workflow output variants][nexus-next-workflow-docs], the output schema **must include a top-level `oneOf`**. This is also enforced by the Tool's runtime and achievable in Rust simply by using an `enum`.
+To comply with [Nexus Workflow output variants](../nexus-next/packages/workflow.md), the output schema **must include a top-level `oneOf`**. This is also enforced by the Tool's runtime and achievable in Rust simply by using an `enum`.
 
 ```rs
 use nexus_toolkit::*;
@@ -106,7 +106,7 @@ impl NexusTool for HttpStatus {
 
 #### `NexusTool::fqn`
 
-Defines the Tool's fully qualified name. This is used to uniquely identify the Tool in the Nexus ecosystem. Read more about FQNs in the [Nexus Tool documentation][nexus-next-tool-docs].
+Defines the Tool's fully qualified name. This is used to uniquely identify the Tool in the Nexus ecosystem. Read more about FQNs in the [Nexus Tool documentation](../nexus-next/tool.md).
 
 ```rs
 use nexus_toolkit::*;
@@ -132,7 +132,7 @@ This defaults to the root route.
 
 Defines the Tool's health check. This is a simple function that returns a `anyhow::Result<warp::http::StatusCode>`. The Tool is considered healthy if this function returns `Ok(StatusCode::OK)`.
 
-The health check **should check for the health of dependant** services and return an error if they are not healthy.
+The health check **should check for the health of dependent** services and return an error if they are not healthy.
 
 ```rs
 use nexus_toolkit::*;
@@ -174,6 +174,7 @@ impl NexusTool for HttpStatus {
     // ...
 }
 ```
+
 {% hint style="info" %}
 Notice that the `invoke` function does not return a `Result`. This is because errors are valid output variants of a Nexus Tool. The `invoke` function should handle any errors and return them as part of the output.
 {% endhint %}
@@ -183,7 +184,7 @@ Notice that the `invoke` function does not return a `Result`. This is because er
 ### `nexus_toolkit::bootstrap!`
 
 The `bootstrap!` macro hides away the boilerplate code needed to create the
-underlying HTTP server that adheres to the [Nexus Tool interface][nexus-next-tool-docs].
+underlying HTTP server that adheres to the [Nexus Tool interface](../nexus-next/tool.md).
 
 It has a flexible interface that accepts an `Into<SocketAddr>` value and a struct that `impl NexusTool`.
 
@@ -223,9 +224,3 @@ async fn main() {
 }
 ```
 
-<!-- List of References -->
-
-[nexus-toolkit-rust-repo]: https://github.com/Talus-Network/nexus-sdk/tree/main/toolkit-rust
-[nexus-next-tool-docs]: ../nexus-next/tool.md
-[nexus-next-workflow-docs]: ../nexus-next/packages/workflow.md
-[nexus-cli-docs]: ./cli.md

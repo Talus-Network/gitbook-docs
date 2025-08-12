@@ -18,11 +18,11 @@ Therefore, upgrading components is less likely to require changes to other compo
 
 `UID` (Unique Identifier) proves that an object exist on-chain and its unique. By requiring passing a UID reference as the input and keeping a record of the ID of the UID that was passed as argument we can prove that only the module that defined that object did that operation. As only that module can access the UID.
 
-This is achieved with the [hot potato pattern][move-hot-potato].
+This is achieved with the [hot potato pattern](https://move-book.com/programmability/hot-potato-pattern.html).
 
 {% hint style="info" %}
 This is a step away from explicitness and towards conventions.
-Prior similar work includes [Originbyte's `request` module][ob-request-module] and [Mysten's `transfer_policy` module][sui-transfer-policy].
+Prior similar work includes [Originbyte's `request` module](https://github.com/Origin-Byte/nft-protocol/tree/main/contracts/request/sources/request) and [Mysten's `transfer_policy` module](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/kiosk/transfer_policy.move).
 {% endhint %}
 
 A hot potato struct that enables authenticated communication between different packages without explicit dependencies. The `ProofOfUID` is created by one package and subsequently utilized across (potentially) multiple calls inside a PTB, allowing different participating packages to add their unique stamps.
@@ -185,8 +185,3 @@ These primitives are designed to work synergistically, enabling the construction
    - Optional recipient restriction adds targeted security
    - Clear verification of data provenance
 
-<!-- List of References -->
-
-[move-hot-potato]: https://move-book.com/programmability/hot-potato-pattern.html
-[ob-request-module]: https://github.com/Origin-Byte/nft-protocol/tree/main/contracts/request/sources/request
-[sui-transfer-policy]: https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/kiosk/transfer_policy.move

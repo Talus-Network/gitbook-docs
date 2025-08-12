@@ -6,10 +6,10 @@ This section aims to document the technical side of all core Nexus components. W
 
 For the purposes of this documentation we make distinction between different user roles within the ecosystem:
 
-* **Nexus maintainer.** Core team member that maintains the Nexus codebase.
-* **Tool developer.** Outside contributor that develops Tools to be used by Agents.
-* **Agent developer.** Outside contributor that creates DAGs and subsequently deploys the Agent smart contract.
-* **Agent user.** End-user that interacts with the ecosystem through clients built by us or outside contributors.
+- **Nexus maintainer.** Core team member that maintains the Nexus codebase.
+- **Tool developer.** Outside contributor that develops Tools to be used by Agents.
+- **Agent developer.** Outside contributor that creates DAGs and subsequently deploys the Agent smart contract.
+- **Agent user.** End-user that interacts with the ecosystem through clients built by us or outside contributors.
 
 ## [Glossary](glossary.md)
 
@@ -17,13 +17,13 @@ Ubiqutously used terms. Often these terms reference specific parts of the projec
 
 ## Onchain Nexus
 
-The onchain part of Nexus. Holds the workflow state and requests [Tool](#tools) execution from the [Leader](#offchain-nexus). 
+The onchain part of Nexus. Holds the workflow state and requests [Tool](tool.md) execution from the [Leader](crates/leader.md).
 
 Docs:
 
-* [Workflow package](packages/workflow.md)
-* [Primitives package](packages/wrimitives.md)
-* [Nexus interface package](packages/nexus-interface.md)
+- [Workflow package](packages/workflow.md)
+- [Primitives package](packages/primitives.md)
+- [Nexus interface package](packages/nexus-interface.md)
 
 {% hint style="info" %}
 The Nexus core onchain packages are currently not open sourced. To find all of the function signatures and data structs, please refer to [the reference API documentation](../developer-docs/index/nexus-core-api-docs/README.md)
@@ -39,37 +39,38 @@ The main offchain service. Consumes events produced by the onchain Workflow, inv
 
 Docs:
 
-* [Leader](crates/leader.md)
+- [Leader](crates/leader.md)
 
 ## [Tools](tool.md)
 
 Tools are Vertices in the Nexus workflow DAG. They are services with [Nexus-defined interface](tool.md) schema that perform specific tasks. These Tools are what Agent Developers orchestrate in a workflow DAG to create an Agent.
 
-There are a few standard Nexus tools, they can be found it the [Nexus SDK repository's tools](https://github.com/Talus-Network/nexus-sdk/tree/main/tools) folder.
+There are a few standard Nexus tools, they can be found in the [Nexus SDK repository's tools](https://github.com/Talus-Network/nexus-sdk/tree/main/tools) folder.
 
 Some examples of what a Tool is:
 
-* getting a chat completion from OpenAI
-* posting a Tweet
-* storing data on an external storage
+- getting a chat completion from OpenAI
+- posting a Tweet
+- storing data on an external storage
 
 Docs:
 
-* [Tool](tool.md)
+- [Tool](tool.md)
 
 ## [Agent Development](./TAP/agent-development.md)
 
-The components referenced above (onchain Nexus, offchain Nexus and tools) provide the infrastructure and building blocks for [agent developers](index.md#actors) to build Talus agents.
+The components referenced above (onchain Nexus, offchain Nexus and tools) provide the infrastructure and building blocks for [agent developers](#actors) to build Talus agents.
 
 Docs:
 
-* [Agent development](./TAP/agent-development.md)
-* [Default TAP template](./TAP/default-tap.md)
+- [Agent development](./TAP/agent-development.md)
+- [Default TAP template](./TAP/default-tap.md)
 
 ## Nexus SDK
 
-Nexus offers [tool and agent developers](index.md#actors) an easy-to-use SDK consisting of a CLI and Toolkit to streamline their development. The codebase resides in [this repository](https://github.com/Talus-Network/nexus-sdk) and is the main entry point for developers to interact with Nexus. It has a separate section in the developer docs dedicated to it.
+Nexus offers [tool and agent developers](#actors) an easy-to-use SDK consisting of a CLI and Toolkit to streamline their development. The codebase resides in [this repository](https://github.com/Talus-Network/nexus-sdk) and is the main entry point for developers to interact with Nexus. It has a separate section in the developer docs dedicated to it.
 
 Docs:
 
-* [Nexus SDK documentation](../nexus-sdk/index.md)
+- [Nexus SDK documentation](../nexus-sdk/index.md)
+

@@ -518,7 +518,7 @@ vertices and following the edges.
 <code>worksheet_from_type: <a href="../dependencies/std/type_name.md#std_type_name_TypeName">std::type_name::TypeName</a></code>
 </dt>
 <dd>
- The off-chain realm can determine the Smart Agent Package to invoke
+ The off-chain realm can determine the Talus Agent Package to invoke
  thanks to the package address and module name from this field.
 </dd>
 <dt>
@@ -910,7 +910,7 @@ for more information.
 <code>worksheet_from_type: <a href="../dependencies/std/type_name.md#std_type_name_TypeName">std::type_name::TypeName</a></code>
 </dt>
 <dd>
- The off-chain realm can determine the Smart Agent Package to invoke
+ The off-chain realm can determine the Talus Agent Package to invoke
  thanks to the package address and module name from this field.
 </dd>
 </dl>
@@ -2078,7 +2078,4 @@ Will emit an event if the execution is done.
 
 <pre><code><b>fun</b> <a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_if_finished_emit_final_event">if_finished_emit_final_event</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_DAGExecution">dag::DAGExecution</a>)
 </code></pre>
-
-
-
 
