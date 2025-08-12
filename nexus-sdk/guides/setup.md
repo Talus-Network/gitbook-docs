@@ -23,14 +23,6 @@ brew tap talus-network/tap
 brew install nexus-cli
 ```
 
-#### Arch Linux
-
-The [nexus-cli](https://aur.archlinux.org/packages/nexus-cli) is also available in the AUR (Arch User Repository). You can install it using your preferred [AUR helper](https://wiki.archlinux.org/title/AUR_helpers):
-
-```bash
-yay -S nexus-cli
-```
-
 #### Using cargo-binstall (recommended for faster binaries)
 
 If you prefer quicker binary installation, use [cargo-binstall](https://github.com/cargo-bins/cargo-binstall):
@@ -138,4 +130,3 @@ Open the [Talus Sui Explorer](https://explorer.devnet.taluslabs.dev/).
 ---
 
 After completing these steps, you are ready to build and execute workflows using the Nexus SDK. To build your first workflow, check the [Dev Quickstart guide](math-branching-quickstart.md).
-
