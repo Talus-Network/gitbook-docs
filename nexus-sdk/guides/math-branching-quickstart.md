@@ -62,6 +62,10 @@ git clone https://github.com/Talus-Network/nexus-sdk.git
 In this example we will publish a DAG consisting of Nexus Tools that are running somewhere and registered (the URL can be found as metadata in the tool registry). If you were running your own tools and needed to register them, check out [Nexus CLI tool commands](../cli.md#nexus-tool) to find out how to do this.
 {% endhint %}
 
+{% hint style="info" %}
+Tool registration is currently restricted during the beta phase. To register your tool, please contact the team to be added to the allow list.
+{% endhint %}
+
 To check the tools that are registered in the tool registry, run:
 
 ```bash
@@ -145,4 +149,3 @@ When you execute the DAG via the `nexus dag execute` command, a successful outpu
 - Read the full [Agent Builder Guide](math-branching-dag-builder.md) to understand how this DAG is constructed
 - Study the [DAG Construction Guide](dag-construction.md) for more advanced DAG features
 - Try building your own DAG with different tools and logic flows
-
