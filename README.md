@@ -1,5 +1,5 @@
 ---
-description: 'Talus: Powering the Autonomous AI Economy'
+description: 'The Missing Infrastructure for the Autonomous Digital Economy'
 cover: .gitbook/assets/Screenshot 2025-04-15 at 17.48.08.png
 coverY: 0
 layout:
