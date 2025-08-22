@@ -8,8 +8,6 @@ Talus envisions a future where global economic activity—spanning capital marke
 
 Our mission is to build a more democratic and efficient digital economy where increasing amounts of economic activity—from capital flows to AI services—are powered by autonomous agents, coordinated trustlessly at a global scale. This is a fundamental reimagining of how intelligence and value move through the digital landscape.
 
-**Note**: the definition of AI agents is the topic of a more rigorous discussion below, but for now one may simply think of an AI agent as _an AI system that is able to autonomously perform (complex) tasks for users_.
-
 ## **The Missing Pieces in Decentralization**
 
 Despite advancements in blockchain technology—high-throughput execution, composability, and Turing-complete environments—current decentralized systems still lack the flexibility to handle **dynamic, complex, real-world activity**. Two critical components are missing:
