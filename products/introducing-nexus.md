@@ -92,7 +92,9 @@ Value creation happens across three layers:
 - **Agent Marketplace (AM)** → Agent Developers create and monetize agents that operate as decentralized services (e.g., automated trading strategies). Users can instantiate or customize agents, driving demand for more sophisticated Tools.
 - **Agent-as-a-Service (AaaS)** → Application Developers compose Talus Agents into autonomous services for existing apps and dApps (e.g., audit bots for DEX users). This makes agent capabilities widely accessible while extending automation to mainstream protocols.
 
+
 ![Talus ecosystem with scenarios.](../.gitbook/assets/talus_ecosystem_scenario.png)
+
 
 Talus ecosystem with scenarios.
 
