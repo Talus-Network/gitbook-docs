@@ -8,14 +8,14 @@ In the section above, we outlined the motivation for building Talus and Nexus, a
 
 We can summarize the decision to partner with Sui for our initial deployment based on three broad categories:
 
-### Vision Alignment
+## Vision Alignment
 
 - Talus is building independent, chain-agnostic infrastructure for **verifiable agent execution, permissionless tool hosting, and monetization**. Our vision is a future in which AI agents power a more democratic and efficient digital economy. To achieve this, Talus provides a decentralized platform to deploy, coordinate, and monetize autonomous systems—leveraging blockchain(s) as the coordination and value layer, decentralized storage solutions as the data layer, and off-chain AI models and other computational resources as the execution layer.
 - Sui, developed by Mysten Labs, aims to create the next generation of the decentralized internet, with Sui as the coordination and value layer and Walrus as the decentralized storage layer—both critical components for AI-enhanced applications. Additionally, Sui positions itself as a home for the next wave of decentralized AI builders.
 
 This strong alignment of vision makes Sui an ideal **stepping stone** for Talus to bring our mission to market quickly, without compromising on our long-term goal.
 
-### **Best-in-Class Tech**
+## **Best-in-Class Tech**
 
 The strategic decision to utilize Move as the initial smart contract language is underpinned by its high-performance characteristics, in addition to its security and program design properties. We elaborate on the performance advantages of Move and the MoveVM, and why they are an optimal choice for Talus:
 
@@ -23,13 +23,13 @@ The strategic decision to utilize Move as the initial smart contract language is
 - **Flexible Object Model** – Move’s object model is highly effective for abstracting and managing resources, enabling Talus to securely track, value, and transfer intelligence outputs in a composable way.
 - **High Performance** – MoveVM’s parallel execution architecture supports efficient concurrency, allowing Talus to process large-scale agentic workflows and on-chain events without sacrificing integrity.
 
-### **The Ecosystem**
+## **The Ecosystem**
 
 Since its launch, Sui has rapidly grown its ecosystem with a strong base of technical teams and innovative projects. The release of Walrus—and future additions like Seal—has further strengthened its appeal for data-heavy, high-performance decentralized applications.
 
 Sui also leads in several important growth metrics, including TVL, on-chain transaction volume, and liquidity inflows, with notable adoption from stablecoins, Ethereum-native assets, and BTC liquidity. This creates strong opportunities for Talus agents to integrate into complementary DeFi, gaming, and infrastructure applications within the Sui ecosystem.
 
-### **Talus’ Role Within Sui**
+## **Talus’ Role Within Sui**
 
 While Talus will take AI agents everywhere, Sui is our first deployment environment. We see it as the most advanced general-purpose L1 for launching verifiable, agent-driven applications today. We are proud to work closely with Mysten Labs and the Sui Foundation as early partners.
 
