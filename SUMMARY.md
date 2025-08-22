@@ -6,7 +6,7 @@
 
 - [🐸 Introduction to Talus](talus-overview/readme.md)
 - [🤖 AI Agent: What's in a Name?](talus-overview/ai-agent-whats-in-a-name.md)
-- [🔬 Nexus Whitepaper](talus-overview/nexus-whitepaper.md)
+- [🔬 Papers](talus-overview/papers.md)
 
 ## 🚀 Getting Started
 
