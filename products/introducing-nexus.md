@@ -14,7 +14,7 @@ In the previous sections**,** we defined Talus Agents as leveraging multiple lay
 > At first sight, this layered approach introduces more coordination complexity. This, in a way, is the case. This is exactly why we offer **Nexus**, the developer framework for building Talus Agents.
 > 
 
-![image.png](attachment:47f5256b-704d-4f09-81b0-42f7d7994f2a:image.png)
+![image.png](../.gitbook/assets/card7.png)
 
 **Nexus** is a decentralized agentic automation protocol purpose-built to support verifiable agent execution, permissionless tool hosting, and monetization—streamlining the developer experience. It bridges the gap between the different layers that make up a Talus Agent workflow, connecting the onchain and offchain world. It does the heavy lifting in the background and provides developers with an easy-to-use SDK.
 
@@ -92,7 +92,7 @@ Value creation happens across three layers:
 - **Agent Marketplace (AM)** → Agent Developers create and monetize agents that operate as decentralized services (e.g., automated trading strategies). Users can instantiate or customize agents, driving demand for more sophisticated Tools.
 - **Agent-as-a-Service (AaaS)** → Application Developers compose Talus Agents into autonomous services for existing apps and dApps (e.g., audit bots for DEX users). This makes agent capabilities widely accessible while extending automation to mainstream protocols.
 
-![Talus ecosystem with scenarios.](attachment:3b80aa02-a82a-4865-ba4c-3356d6fb2d79:image.png)
+![Talus ecosystem with scenarios.](../.gitbook/assets/talus_ecosystem_scenario.png)
 
 Talus ecosystem with scenarios.
 
