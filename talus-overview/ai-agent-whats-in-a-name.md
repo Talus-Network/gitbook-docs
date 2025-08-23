@@ -62,8 +62,6 @@ We believe agentic frameworks (and thus the agents they allow to build) exist on
 
 ![Agentic Frameworks as a Spectrum](../.gitbook/assets/agentic-framework-spectrum-v2.png)
 
-Agentic Frameworks as a Spectrum
-
 At Talus, we believe that agentic frameworks should strive towards decentralization but within the bounds of the pragmatic. The emphasis should be on **verifiability onchain** (along with the agent’s workflow definition), rather than putting all agentic execution onchain at great cost/performance penalties.
 
 **We are building Nexus** (decentralized automation protocol and developer framework to build Talus Agents) **to occupy the Type 2 domain of the spectrum** where we leverage the open, censorship resistant and verifiable nature of the blockchain while keeping the overall workflow performant through outsourcing computation to offchain service providers. This is the first step to identify how Talus Agents are different, but there’s more that we can specify to rigorously define them.
