@@ -5,7 +5,7 @@ description: Nexus at the heart of the Talus Technical Ecosystem
 # 👋 Introducing Nexus
 The Talus platform, powered by Nexus, allows for an open ecosystem consisting of many actors, our community, building towards a more democratic and efficient digital economy. 
 
-In the previous sections**,** we defined Talus Agents as leveraging multiple layers:
+In the previous sections, we defined Talus Agents as leveraging multiple layers:
 
 - **Blockchain** as the coordination and value layer.
 - **Decentralized data storage platform** as the data layer.
@@ -14,13 +14,13 @@ In the previous sections**,** we defined Talus Agents as leveraging multiple lay
 > At first sight, this layered approach introduces more coordination complexity. This, in a way, is the case. This is exactly why we offer **Nexus**, the developer framework for building Talus Agents.
 > 
 
-![image.png](../.gitbook/assets/card7.png)
-
 **Nexus** is a decentralized agentic automation protocol purpose-built to support verifiable agent execution, permissionless tool hosting, and monetization—streamlining the developer experience. It bridges the gap between the different layers that make up a Talus Agent workflow, connecting the onchain and offchain world. It does the heavy lifting in the background and provides developers with an easy-to-use SDK.
 
 Nexus lays the groundwork for an efficient, decentralized digital economy by turning AI logic into autonomous, value-generating actions. It enables agents to securely execute complex workflows with dynamic on-chain permissions, using trustless coordinators for routing, delegation, and verification. Developers can build high-performance, AI-powered dApps that ingest real-time data and interact across services. With Nexus, Talus establishes a foundation for decentralized AI automation at scale, where logic, data, and value move seamlessly to their highest use, maximizing transparency and efficiency across the ecosystem.
 
 To get a holistic overview of all actors and technical components of the Talus platform, let’s consider the following diagram.
+
+![Nexus Architecture](../.gitbook/assets/card7.png)
 
 ## Technical Component Overview
 
@@ -92,11 +92,7 @@ Value creation happens across three layers:
 - **Agent Marketplace (AM)** → Agent Developers create and monetize agents that operate as decentralized services (e.g., automated trading strategies). Users can instantiate or customize agents, driving demand for more sophisticated Tools.
 - **Agent-as-a-Service (AaaS)** → Application Developers compose Talus Agents into autonomous services for existing apps and dApps (e.g., audit bots for DEX users). This makes agent capabilities widely accessible while extending automation to mainstream protocols.
 
-
 ![Talus ecosystem with scenarios.](../.gitbook/assets/talus_ecosystem_scenario.png)
-
-
-Talus ecosystem with scenarios.
 
 ### **Flagship Applications**
 
