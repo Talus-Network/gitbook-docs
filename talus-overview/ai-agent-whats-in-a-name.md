@@ -60,6 +60,7 @@ We believe agentic frameworks (and thus the agents they allow to build) exist on
 - **Type 2**: agents that are defined onchain with execution workflows that are verifiable onchain, but, for the sake of performance and cost-effectiveness, outsource (a part of) their execution offchain to service providers.
 - **Type 3**: agents that are defined and operate completely onchain.
 
+
 ![Agentic Frameworks as a Spectrum](../.gitbook/assets/agentic-framework-spectrum-v2.png)
 
 At Talus, we believe that agentic frameworks should strive towards decentralization but within the bounds of the pragmatic. The emphasis should be on **verifiability onchain** (along with the agent’s workflow definition), rather than putting all agentic execution onchain at great cost/performance penalties.
