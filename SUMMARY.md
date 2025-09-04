@@ -72,3 +72,7 @@
   - [LLM: OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
   - [Social : X](tools/social-twitter/README.md)
   - [Storage: Walrus](tools/storage-walrus/README.md)
+
+## Looking for a home
+
+* [tools/market-coinbase/README.md](tools/market-coinbase/README.md)
