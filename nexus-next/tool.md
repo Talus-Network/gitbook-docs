@@ -27,7 +27,7 @@ xyz.taluslabs.llm.openai-chat-completion@1
 
 2. `type`
 
-Straighforward, and enum with `offchain` and `onchain` values.
+Straightforward, and enum with `offchain` and `onchain` values.
 
 3. `url`
 
