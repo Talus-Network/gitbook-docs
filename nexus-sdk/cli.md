@@ -1,6 +1,6 @@
 # Nexus CLI
 
-> concerns [`nexus-cli` repo](https://github.com/Talus-Network/nexus-sdk/tree/main/cli)
+> concerns [`nexus-cli` repo][nexus-cli-repo]
 
 The Nexus CLI is a set of tools that is used by almost all Actors in the Nexus ecosystem.
 
@@ -162,7 +162,7 @@ This command requires that a wallet is connected to the CLI...
 
 ---
 
-**`nexus dag execute --dag-id <id> --input-json <data> --entry-group [group] [--inspect]`**
+**`nexus dag execute --dag-id <id> --input-json <data> --entry-group [group] --remote [field1,field2,...] [--inspect]`**
 
 Execute a DAG with the provided `<id>`. This command also accepts an entry `<group>` of vertices to be invoked. Find out more about entry groups in [[Package: Workflow]]. Entry `<group>` defaults to a starndardized `_default_group` string.
 
@@ -175,6 +175,12 @@ The input `<data>` is a JSON string with the following structure:
 Data for encrypted ports are automatically encrypted before being sent on-chain.
 
 The `--inspect` argument automatically triggers `nexus dag inspect-execution` upon submitting the execution transaction.
+
+The `--remote` argument accepts a list of `{vertex}.{port}` strings that refer to entry ports and their vertices. The data associated with these ports is stored remotely based on the configured preferred remote storage provider. Note that it is required that the user configure these remote storage providers via the `$ nexus conf set --help` command.
+
+Supported remote storage providers are:
+
+- Walrus
 
 {% hint style="info" %}
 This command requires that a wallet is connected to the CLI...
@@ -306,3 +312,6 @@ This command requires that a wallet is connected to the CLI...
 
 Provides completion for some well-known shells.
 
+<!-- List of References -->
+
+[nexus-cli-repo]: https://github.com/Talus-Network/nexus-sdk/tree/main/cli
