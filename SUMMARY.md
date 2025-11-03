@@ -77,3 +77,7 @@
   - [Storage: Walrus](tools/storage-walrus/README.md)
   - [Echanges: Coinbase](tools/exchanges-coinbase/README.md)
   - [HTTP](tools/http/README.md)
+
+## Looking for a home
+
+* [tools/templating-jinja/README.md](tools/templating-jinja/README.md)
