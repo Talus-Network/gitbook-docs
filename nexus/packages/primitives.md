@@ -47,6 +47,7 @@ module module_a {
     }
 }
 ```
+
 ```rust
 module module_b {
     use nexus_primitives::proof_of_uid::{ProofOfUID};
@@ -57,17 +58,20 @@ module module_b {
     }
 }
 ```
+
 Explanation of the Code
+
 1. Module A:
-    - Creates a `ProofOfUID` tied to its OwnerObject.
-    - Passes the `ProofOfUID` to module B for stamping.
-    - Consumes the `ProofOfUID` after it has been stamped, ensuring it is used only once.
 
-2. Module B:
-    - Accepts the `ProofOfUID` as input.
-    - Performs an operation (e.g., stamping the proof) to authenticate its involvement.
+   - Creates a `ProofOfUID` tied to its OwnerObject.
+   - Passes the `ProofOfUID` to module B for stamping.
+   - Consumes the `ProofOfUID` after it has been stamped, ensuring it is used only once.
 
-**Key Features of the Pattern**
+1. Module B:
+   - Accepts the `ProofOfUID` as input.
+   - Performs an operation (e.g., stamping the proof) to authenticate its involvement.
+
+#### Key Features of the Pattern
 
 - **Authentication**: The `ProofOfUID` ensures that only the module owning the UID (module A) can create and consume the proof.
 - **Cross-Module Communication**: Module B can interact with the proof (by stamping) within the same PTB without requiring explicit dependencies on module A.
@@ -80,10 +84,12 @@ This pattern allows modules to communicate securely and verifiably while maintai
 Implements ownership capabilities with both cloneable and non-cloneable variants. Used to manage control and access rights over resources.
 
 **Key Structs:**
+
 - `OwnerCap<T>`: Simple ownership capability (non-cloneable)
 - `CloneableOwnerCap<T>`: Ownership capability that can be cloned for multiple addresses or concurrent transactions
 
 **Real-World Usage Example (from agent):**
+
 ```rust
 // During initialization
 let owner_cap_over_agent = owner_cap::new_cloneable_drop(
@@ -97,6 +103,7 @@ public_transfer(owner_cap_over_agent, AGENT_ADMIN);
 ```
 
 **Common Use Cases:**
+
 - Admin controls: Managing administrative rights over resources
 - Access delegation: Allowing multiple entities to have controlled access
 - Resource management: Controlling who can modify or interact with resources
@@ -106,12 +113,14 @@ public_transfer(owner_cap_over_agent, AGENT_ADMIN);
 A container that proves a value was created by a specific UID, optionally restricting who can unwrap it.
 
 **Key Features:**
+
 - `wrap<T>`: Proves a value was created by a UID (anyone can unwrap)
 - `wrap_for_recipient<T>`: Creates a value that only a specific recipient can unwrap
 - `unwrap<T>`: Extracts the value (for unrestricted proven values)
 - `unwrap_as_recipient<T>`: Extracts the value if the caller is the intended recipient
 
 **Common Use Cases:**
+
 - Secure data transfer between modules
 - Implementing restricted access to values
 - Creating trusted communication channels
@@ -121,10 +130,12 @@ A container that proves a value was created by a specific UID, optionally restri
 A flexible data representation format supporting both inline and remote storage.
 
 **Key Constructors:**
+
 - `inline_one/inline_many`: Store small data directly on-chain
-- `remote_one/remote_many`: Reference data stored off-chain via keys
+- `walrus_one/walrus_many`: Reference data stored remotely on Walrus
 
 **Real-World Usage Example (from agent):**
+
 ```rust
 // Storing input data in a DAG
 .with_default_value(
@@ -135,19 +146,26 @@ A flexible data representation format supporting both inline and remote storage.
 ```
 
 **Common Use Cases:**
+
 - Flexible configuration storage
 - Bridging on-chain and off-chain data
 - Storage optimization for different data sizes
+
+**Available remote storage providers:**
+
+- Walrus (default)
 
 ### 5. Event
 
 A simple wrapper for standardizing and emitting events.
 
 **Key Features:**
+
 - `emit<T>`: Wraps and emits any type of event in a standardized format
 - `EventWrapper<T>`: Makes events searchable by type in client applications
 
 **Common Use Cases:**
+
 - Standardized event emission
 - Improved indexing and filtering of events
 - Consistent event handling across packages
@@ -156,31 +174,35 @@ A simple wrapper for standardizing and emitting events.
 
 These primitives are designed to work synergistically, enabling the construction of robust, verifiable on-chain systems. Here are common patterns:
 
-1.  **Agent / Workflow Systems (e.g., `agent`):** This pattern combines agent logic with workflow execution.
-    *   `OwnerCap` (often `CloneableOwnerCap`) grants administrative control over the agent.
-    *   `ProofOfUID` serves as a verifiable "worksheet" to track and authenticate actions across transaction boundaries or different package interactions within a workflow.
-    *   `NexusData` provides flexible storage for agent configuration, workflow inputs, and state, supporting both inline and remote data references.
-    *   `Event` standardizes the emission of agent actions and workflow progress updates.
+1. **Agent / Workflow Systems (e.g., `agent`):** This pattern combines agent logic with workflow execution.
 
-2.  **Access Control Systems:** Focuses on managing permissions and verifying actions.
-    *   `OwnerCap` defines and delegates control privileges.
-    *   `ProofOfUID` can authenticate specific actions performed under those privileges.
-    *   `ProvenValue` securely transfers capability-related data or attests to permissions.
-    *   `Event` logs access changes or granted permissions.
+   - `OwnerCap` (often `CloneableOwnerCap`) grants administrative control over the agent.
+   - `ProofOfUID` serves as a verifiable "worksheet" to track and authenticate actions across transaction boundaries or different package interactions within a workflow.
+   - `NexusData` provides flexible storage for agent configuration, workflow inputs, and state, supporting both inline and remote data references.
+   - `Event` standardizes the emission of agent actions and workflow progress updates.
+
+1. **Access Control Systems:** Focuses on managing permissions and verifying actions.
+
+   - `OwnerCap` defines and delegates control privileges.
+   - `ProofOfUID` can authenticate specific actions performed under those privileges.
+   - `ProvenValue` securely transfers capability-related data or attests to permissions.
+   - `Event` logs access changes or granted permissions.
 
 ## Security Considerations
 
 1. **Hot Potato Pattern Security**
+
    - `ProofOfUID` cannot be duplicated or transferred
    - Only the original creator can consume a `ProofOfUID`
    - Stamping is tracked to prevent double-counting
 
-2. **Ownership Capabilities**
+1. **Ownership Capabilities**
+
    - The phantom type parameter ensures type safety
    - Cloneable capabilities must be explicitly created
    - Object identity verification prevents spoofing
 
-3. **Proven Values**
+1. **Proven Values**
    - Source authentication guarantees origin
    - Optional recipient restriction adds targeted security
    - Clear verification of data provenance
