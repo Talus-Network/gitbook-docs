@@ -38,6 +38,9 @@
     - [Leader](nexus-next/crates/leader.md)
     - [Leader Sui TXs](nexus-next/crates/sui-tx.md)
   - [Agent Development](nexus-next/TAP/agent-development.md)
+  - [Flow Controls]
+    - [Branching & Conditionals](nexus/flow-controls/branching_and_conditionals.md)
+    - [Looping](nexus/flow-controls/looping.md)
   - [Default TAP](nexus-next/TAP/default-tap.md)
   - [Tool](nexus-next/tool.md)
   - [Tokenomics](nexus-next/tokenomics/tokenomics.md)
@@ -70,5 +73,7 @@
 - [⚓ Nexus Standard Tools](tools/nexus-standard-tools.md)
   - [Math](tools/math/README.md)
   - [LLM: OpenAI Chat Completion](tools/llm-openai-chat-completion/README.md)
-  - [Social : X](tools/social-twitter/README.md)
+  - [Social: X](tools/social-twitter/README.md)
   - [Storage: Walrus](tools/storage-walrus/README.md)
+  - [Echanges: Coinbase](tools/exchanges-coinbase/README.md)
+  - [HTTP](tools/http/README.md)
