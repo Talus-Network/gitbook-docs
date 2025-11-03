@@ -64,6 +64,10 @@ Upon successful registration, both OwnerCap object IDs are saved to the CLI conf
 This command requires that a wallet is connected to the CLI...
 {% endhint %}
 
+{% hint style="info" %}
+Tool registration is currently restricted during the beta phase. To register your tool, please contact the team to be added to the allow list.
+{% endhint %}
+
 ---
 
 **`nexus tool register --on-chain <ident>`**
@@ -231,6 +235,48 @@ This command requires that a wallet is connected to the CLI...
 Buy an expiry gas ticket for the tool specified by the FQN. This ticket can then be used to pay for the tool usage for the specified amount of `minutes` if a DAG is executed from the same address that was used to buy this ticket. The ticket is paid for with the provided `coin` object.
 
 This transaction fails if the tool does not have the expiry gas extension enabled.
+
+{% hint style="info" %}
+This command requires that a wallet is connected to the CLI...
+{% endhint %}
+
+---
+
+**`nexus gas limited-invocations enable --tool-fqn <fqn> --owner-cap [object_id] --cost-per-invocation <mist> --min-invocations <count> --max-invocations <count>`**
+
+The tool owners can enable the limited invocations gas extension for their tools specified by the FQN. This allows users to buy limited invocations gas tickets that can be used to pay for a specific number of tool invocations.
+
+The `cost-per-invocation` parameter sets the price in MIST for each invocation. The `min-invocations` and `max-invocations` parameters define the allowed range for ticket purchases.
+
+If the OwnerCap object ID is not passed, the CLI will attempt to use the one saved in the configuration file.
+
+Calling this command again with different parameters will update the cost and limits for new tickets.
+
+{% hint style="info" %}
+This command requires that a wallet is connected to the CLI...
+{% endhint %}
+
+---
+
+**`nexus gas limited-invocations disable --tool-fqn <fqn> --owner-cap [object_id]`**
+
+Disables the limited invocations gas extension for the tool specified by the FQN.
+
+If the OwnerCap object ID is not passed, the CLI will attempt to use the one saved in the configuration file.
+
+{% hint style="info" %}
+This command requires that a wallet is connected to the CLI...
+{% endhint %}
+
+---
+
+**`nexus gas limited-invocations buy-ticket --tool-fqn <fqn> --invocations <count> --coin <object_id>`**
+
+Buy a limited invocations gas ticket for the tool specified by the FQN. This ticket can then be used to pay for the specified number of tool `invocations` if a DAG is executed from the same address that was used to buy this ticket. The ticket is paid for with the provided `coin` object.
+
+The number of invocations must be within the min/max range configured by the tool owner when enabling the extension.
+
+This transaction fails if the tool does not have the limited invocations gas extension enabled.
 
 {% hint style="info" %}
 This command requires that a wallet is connected to the CLI...
