@@ -92,7 +92,7 @@ Edges define the flow of data between vertices, connecting an output port of a s
 - **`do_while`** → Repeats execution by looping back as long as a condition is satisfied.
 - **`break`** → Exits a `do_while` loop when the condition is no longer met.
 
-Read more about looping and flow controls in the [looping documentation][looping].
+Read more about looping and flow controls in the [looping documentation](../../nexus-next/flow-controls/looping.md).
 
 ## 4. Default Values
 
