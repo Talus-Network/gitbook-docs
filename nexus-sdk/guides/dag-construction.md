@@ -75,13 +75,24 @@ Edges define the flow of data between vertices, connecting an output port of a s
   "to": {
     "vertex": "target_vertex_name", // Name from the "vertices" list
     "input_port": "target_input_port_name"
-  }
+  },
+  "kind": "normal" // Optional, default is "normal"
 }
 ```
 
 - The `source_vertex_name` and `target_vertex_name` refer to the `name` field of vertices defined in the `vertices` list.
 - The `target_input_port_name` must be a valid input port for the tool used by the `target_vertex_name`.
 - If the `encrypted` field is set to `true`, the data will be encrypted before being sent on-chain. This is useful for sensitive data that should not be exposed in plaintext.
+
+## 3.1 Special edge types
+
+- **`normal`** → The default edge type. Data flows from the source vertex to the target vertex as soon as the source vertex produces output on the specified port.
+- **`for_each`** → Spawns parallel executions of the downstream vertex, once per element of an array. This must be followed by a `collect` (with any number of intermediate `normal` edges) to gather the results back into a single array.
+- **`collect`** → Gathers the results of a `for_each` branch back into a single ordered array.
+- **`do_while`** → Repeats execution by looping back as long as a condition is satisfied.
+- **`break`** → Exits a `do_while` loop when the condition is no longer met.
+
+Read more about looping and flow controls in the [looping documentation](../../nexus-next/flow-controls/looping.md).
 
 ## 4. Default Values
 
