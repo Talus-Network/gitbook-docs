@@ -10,7 +10,7 @@ description: >-
 
 [Json Editor Tab](json-editor-tab.md)
 
-[Worfklow Discovery Tab](json-editor-tab.md)
+[Workflow Discovery Tab](workflow-discovery-tab.md)
 
 [Deploy Workflows Tab](deploy-workflows-tab.md)
 

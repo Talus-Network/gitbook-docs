@@ -15,7 +15,7 @@ layout:
     visible: true
 ---
 
-# Execute My first Worklow
+# Execute My first Workflow
 
 So far, we have successfully built a workflow according to our desired logic. After passing all **validation steps**, we deployed this workflow, turning it into an **on-chain object**. The next step is to **execute it and observe the results**.
 

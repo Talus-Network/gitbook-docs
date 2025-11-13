@@ -79,7 +79,7 @@
     - [Node Component](vision/talus-vision/draw-first-workflow/node-component.md)
     - [Step by Step: My First Workflow](vision/talus-vision/draw-first-workflow/step-by-step-my-first-workflow.md)
     - [Deploy My First Workflow](vision/talus-vision/draw-first-workflow/deploy-my-first-workflow.md)
-    - [Execute My First Workflow](vision/talus-vision/draw-first-workflow/execute-my-first-worklow.md)
+    - [Execute My First Workflow](vision/talus-vision/draw-first-workflow/execute-my-first-workflow.md)
     - [Summary](vision/talus-vision/draw-first-workflow/summary.md)
   - [About Sidebar](vision/talus-vision/about-sidebar/README.md)
     - [Workflow Discovery Tab](vision/talus-vision/about-sidebar/workflow-discovery-tab.md)

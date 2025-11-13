@@ -16,7 +16,7 @@
     * [Node Component](talus-vision/draw-first-workflow/node-component.md)
     * [Step-by-step My first Workflow](talus-vision/draw-first-workflow/step-by-step-my-first-workflow.md)
     * [Deploy My first workflow](talus-vision/draw-first-workflow/deploy-my-first-workflow.md)
-    * [Execute My first Worklow](talus-vision/draw-first-workflow/execute-my-first-worklow.md)
+    * [Execute My first Workflow](talus-vision/draw-first-workflow/execute-my-first-workflow.md)
     * [Summary](talus-vision/draw-first-workflow/summary.md)
   * [User Workflows & Profile](talus-vision/user-workflows-and-profile.md)
   * [About previously deployed workflows](talus-vision/about-previously-deployed-workflows.md)
