@@ -67,7 +67,6 @@
   - [Tool Development](nexus-sdk/tool-development.md)
   - [Toolkit Rust](nexus-sdk/toolkit-rust.md)
   - [How to Build a DAG](nexus-sdk/guides/dag-construction.md)
-- [Technical Glossary](nexus-next/glossary.md)
 - [🔮 Vision](vision/README.md)
   - [Welcome to Talus Vision](vision/talus-vision/welcome-to-talus-vision.md)
   - [Crypto Auth](vision/talus-vision/crypto-auth.md)
@@ -88,6 +87,7 @@
     - [Tools Tab](vision/talus-vision/about-sidebar/tools-tab.md)
     - [JSON Editor Tab](vision/talus-vision/about-sidebar/json-editor-tab.md)
     - [Gas Management Tab](vision/talus-vision/about-sidebar/gas-management-tab.md)
+- [Technical Glossary](nexus-next/glossary.md)
 
 ## 🛠️ Tools
 
