@@ -63,7 +63,7 @@ sequenceDiagram
 
 There are multiple processes running in parallel in the leader node. These are as follows:
 
-1. **`RequestWalkExectuionEvent` listener**
+1. **`RequestWalkExecutionEvent` listener**
 
 - This process repeatedly queries Sui RPC for new events coming from the Workflow. It then saves these events on the Indexer.
 - It persists the last visited cursor, a pointer to the event it has written to our Indexer last. This way we ensure no events are lost in case the Leader goes down.
