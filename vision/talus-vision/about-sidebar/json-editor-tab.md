@@ -30,4 +30,3 @@ The **JSON Editor tab** offers the following features:
 <figure><img src="../assets/5.png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../assets/6.png" alt=""><figcaption></figcaption></figure>
-
