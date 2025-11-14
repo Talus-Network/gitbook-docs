@@ -69,7 +69,7 @@
   - [How to Build a DAG](nexus-sdk/guides/dag-construction.md)
 - [🔮 Vision](vision/README.md)
   - [Welcome to Talus Vision](vision/talus-vision/welcome-to-talus-vision.md)
-  - [Crypto Auth](vision/talus-vision/crypto-auth.md)
+  - [Cryptographic Features](vision/talus-vision/crypto-features.md)
   - [Connect with Sui Wallet](vision/talus-vision/connect-with-sui-wallet.md)
   - [User Workflows and Profile](vision/talus-vision/user-workflows-and-profile.md)
   - [About Previously Deployed Workflows](vision/talus-vision/about-previously-deployed-workflows.md)
@@ -99,7 +99,3 @@
   - [Echanges: Coinbase](tools/exchanges-coinbase/README.md)
   - [HTTP](tools/http/README.md)
   - [Templating: Jinja](tools/templating-jinja/README.md)
-
-## Looking for a home
-
-* [vision/talus-vision/crypto-features.md](vision/talus-vision/crypto-features.md)
