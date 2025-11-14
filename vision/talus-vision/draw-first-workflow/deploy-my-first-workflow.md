@@ -21,9 +21,8 @@ On the previous page, we created a **valid workflow**. The next step is to **dep
 
 Before proceeding, ensure that the following **two steps** have been completed:
 
-1. **Gas Management:** Navigate to the **Gas Management tab** and add a **SUI gas budget** of sufficient amount.
-2. **Crypto Auth:** If a **key icon** appears in the application header, it indicates that **Crypto Auth** has not yet been performed. Complete this process and wait for the generated transactions to finalize.\
-
+1. **Gas Management:** Navigate to the **Gas Management tab** and add a **SUI gas budget** of a sufficient amount.
+2. **Crypto Auth:** If a **key icon** appears in the application header, it indicates that **Crypto Auth** has not yet been performed. Complete this process and wait for the generated transactions to finalize.
 
 After completing the necessary preparations, navigate to the **DEPLOY WORKFLOWS tab** to deploy your workflow.
 
