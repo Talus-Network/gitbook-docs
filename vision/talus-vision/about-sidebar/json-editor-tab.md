@@ -27,7 +27,7 @@ The **JSON Editor tab** offers the following features:
 * **Export JSON:** Download workflows as a **JSON file**
 * **Import JSON:** Load previously created **JSON files** into **Talus Vision** for use
 
-<figure><img src="../../.gitbook/assets/5.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/5.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/6.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/6.png" alt=""><figcaption></figcaption></figure>
 

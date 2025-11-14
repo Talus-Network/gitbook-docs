@@ -50,7 +50,7 @@ Under the **Math** category, the **Add** tool is designed precisely for this pur
 For naming, set the node name to **`add_input_and_default`**.\
 Then, assign **port B** as the **default value**, and set this value to **3**.
 
-<figure><img src="../../.gitbook/assets/Screenshot 2025-11-11 at 13.10.47.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Screenshot 2025-11-11 at 13.10.47.png" alt=""><figcaption></figcaption></figure>
 
 JSON editor current state is :&#x20;
 
@@ -96,7 +96,7 @@ Next, set the **second input** as a **default value of 0** to establish the desi
 
 Finally, connect the **result output** from the **`add_input_and_default`** node to the **first input** of the **`is_negative`** node.
 
-<figure><img src="../../.gitbook/assets/Screenshot 2025-11-11 at 13.20.04.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Screenshot 2025-11-11 at 13.20.04.png" alt=""><figcaption></figcaption></figure>
 
 JSON editor current state is :&#x20;
 
@@ -191,7 +191,7 @@ Based on this logic, the required tools are:
 
 
 
-    <figure><img src="../../.gitbook/assets/Screenshot 2025-11-11 at 13.31.13.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../assets/Screenshot 2025-11-11 at 13.31.13.png" alt=""><figcaption></figcaption></figure>
 
 
 

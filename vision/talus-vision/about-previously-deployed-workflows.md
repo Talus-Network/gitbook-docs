@@ -30,9 +30,9 @@ Nexus users can create workflows in different designs, and all users are free to
 
 The **playground editor** helps users distinguish between **templates** and **deployed workflows**. Deployed workflow objects are **shared objects**, meaning they can be reused by multiple users.
 
-<figure><img src="../.gitbook/assets/Screenshot 2025-11-11 at 15.38.31.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="assets/Screenshot 2025-11-11 at 15.38.31.png" alt=""><figcaption></figcaption></figure>
 
 \
 On the **Deployments page**, if the **“+ New Workflow”** button is clicked, the **“Use Workflow as Template”** option allows users to draw a workflow as a template, provided they already have a deployment **object ID**.
 
-<figure><img src="../.gitbook/assets/Screenshot 2025-11-11 at 15.34.00.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="assets/Screenshot 2025-11-11 at 15.34.00.png" alt=""><figcaption></figcaption></figure>

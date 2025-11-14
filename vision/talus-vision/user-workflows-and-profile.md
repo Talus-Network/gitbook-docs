@@ -29,10 +29,10 @@ User activity within the application is continuously tracked, and there are **tw
 
 
 
-<figure><img src="../.gitbook/assets/Screenshot 2025-11-11 at 15.05.22.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="assets/Screenshot 2025-11-11 at 15.05.22.png" alt=""><figcaption></figcaption></figure>
 
 
 
 **Deployments:** Displays workflows that have been **deployed on-chain**. Clicking a workflow opens it in **View Mode** within the playground, allowing users to interact with the deployed workflow.
 
-<figure><img src="../.gitbook/assets/Screenshot 2025-11-11 at 15.09.19.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="assets/Screenshot 2025-11-11 at 15.09.19.png" alt=""><figcaption></figcaption></figure>

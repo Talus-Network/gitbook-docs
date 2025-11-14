@@ -29,4 +29,4 @@ Within the **Workflows Discovery tab**, users have access to the following featu
     \
 
 
-    <figure><img src="../../.gitbook/assets/8.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../assets/8.png" alt=""><figcaption></figcaption></figure>

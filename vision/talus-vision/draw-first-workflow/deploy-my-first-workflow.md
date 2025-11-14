@@ -29,6 +29,6 @@ After completing the necessary preparations, navigate to the **DEPLOY WORKFLOWS 
 
 Since the deployment occurs **on-chain**, you will need to use your **Sui wallet**, and a **transaction approval** will be requested. Once the transaction is successfully completed, the current drawing in the editor will automatically switch from **Edit Mode** to **View Mode**.
 
-<figure><img src="../../.gitbook/assets/Screenshot 2025-11-11 at 13.44.29.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Screenshot 2025-11-11 at 13.44.29.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/Screenshot 2025-11-11 at 13.44.41.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Screenshot 2025-11-11 at 13.44.41.png" alt=""><figcaption></figcaption></figure>

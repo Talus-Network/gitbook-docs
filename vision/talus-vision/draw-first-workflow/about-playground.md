@@ -32,5 +32,5 @@ Some key features of the **Playground** include:
 
 As shown in the figure, multiple workflows can be developed simultaneously across different tabs. All changes made in the playground are **instantly reflected in the JSON Editor**.
 
-<figure><img src="../../.gitbook/assets/Screenshot 2025-11-11 at 12.31.28.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Screenshot 2025-11-11 at 12.31.28.png" alt=""><figcaption></figcaption></figure>
 

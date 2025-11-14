@@ -23,7 +23,7 @@ During the demo, the platform operates with a **default gas budget of 0.1**. Use
 \
 If the deployment is successful, the playground automatically switches from **Edit Mode** to **View Mode**, and the user is provided with the **on-chain object ID**.
 
-<figure><img src="../../.gitbook/assets/7.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/7.png" alt=""><figcaption></figcaption></figure>
 
 \
 \

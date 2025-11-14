@@ -10,7 +10,7 @@
     * [Deploy Workflows Tab](talus-vision/about-sidebar/deploy-workflows-tab.md)
     * [Gas Management Tab](talus-vision/about-sidebar/gas-management-tab.md)
     * [Execute Workflow Tab](talus-vision/about-sidebar/execute-workflow-tab.md)
-  * [Crypto Auth](talus-vision/crypto-auth.md)
+  * [Crypto Features](talus-vision/crypto-features.md)
   * [Draw First Workflow](talus-vision/draw-first-workflow/README.md)
     * [About Playground](talus-vision/draw-first-workflow/about-playground.md)
     * [Node Component](talus-vision/draw-first-workflow/node-component.md)
