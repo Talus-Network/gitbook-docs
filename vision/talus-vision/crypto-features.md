@@ -28,7 +28,6 @@ The session data is stored locally in your browser and is used to **encrypt and 
 
 After logging in with your wallet, if the **Nexus Crypto Auth** process has not been completed previously, you will need to perform it. A dedicated button for this action is available in the **application header**.
 
-All you need to do is **sign the generated transactions**. Completing this step is required before you can perform any **Nexus operations**.\
-\
+All you need to do is **sign the generated transactions**. Completing this step is required before you can perform any **Nexus operations**.
 
 <figure><img src="assets/Screenshot 2025-11-11 at 12.20.26.png" alt=""><figcaption></figcaption></figure>

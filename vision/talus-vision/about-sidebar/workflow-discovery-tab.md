@@ -25,8 +25,7 @@ Within the **Workflows Discovery tab**, users have access to the following featu
 * **All User-Created Workflows:** Access to workflows created by other **Nexus** users
 * **Workflow Details:** Information on tools used, deployment date, and workflow owner
 * **Template Reuse:** Ability to use workflows again as templates
-*   **Easy Execution:** Simplified execution of workflows\
-    \
-
+* **Easy Execution:** Simplified execution of workflows
+    
 
     <figure><img src="../assets/8.png" alt=""><figcaption></figcaption></figure>

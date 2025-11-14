@@ -32,7 +32,7 @@ The **playground editor** helps users distinguish between **templates** and **de
 
 <figure><img src="assets/Screenshot 2025-11-11 at 15.38.31.png" alt=""><figcaption></figcaption></figure>
 
-\
+
 On the **Deployments page**, if the **“+ New Workflow”** button is clicked, the **“Use Workflow as Template”** option allows users to draw a workflow as a template, provided they already have a deployment **object ID**.
 
 <figure><img src="assets/Screenshot 2025-11-11 at 15.34.00.png" alt=""><figcaption></figcaption></figure>
