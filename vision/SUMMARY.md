@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Talus Vision](README.md)
-  * [Welcome to Talus Vision ](talus-vision/welcome-to-talus-vision.md)
+  * [Welcome to Talus Vision](talus-vision/welcome-to-talus-vision.md)
   * [Connect with Sui Wallet](talus-vision/connect-with-sui-wallet.md)
   * [About Sidebar](talus-vision/about-sidebar/README.md)
     * [Tools Tab](talus-vision/about-sidebar/tools-tab.md)
