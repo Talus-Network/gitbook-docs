@@ -17,14 +17,14 @@ layout:
 
 # User Workflows & Profile
 
-User activity within the application is continuously tracked, and there are **two user-specific sections**:
+User activity within the application is continuously tracked, and there are two user-specific sections:
 
 1. **Profile Section (top-right corner):**
-   - Displays the **number of draft workflows** currently in progress.
-   - Shows how many workflows have been **deployed** with the connected wallet.
-   - Additional features will be supported in future versions after **Devnet**.
+   - Displays the number of draft workflows currently in progress.
+   - Shows how many workflows have been deployed with the connected wallet.
+   - Additional features will be supported in future versions after Devnet.
 2. **Deployments Navigation Button (left of the profile button):**
-   - Redirects users to the **Deployments page**, which provides access to workflows across **two tabs**:
+   - Redirects users to the Deployments page, which provides access to workflows across two tabs:
      - **My Workflows:** Displays workflows that are still being edited in the playground. Users can click any workflow to return to the playground with that workflow loaded.
 
 <figure><img src="assets/Screenshot 2025-11-11 at 15.05.22.png" alt=""><figcaption></figcaption></figure>

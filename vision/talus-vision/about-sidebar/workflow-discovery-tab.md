@@ -17,14 +17,14 @@ layout:
 
 # Workflow Discovery Tab
 
-All deployed workflows are **accessible on-chain**. Under this tab, users can explore workflows previously deployed by other users.
+All deployed workflows are accessible on-chain. Under this tab, users can explore workflows previously deployed by other users.
 
-Within the **Workflow Discovery tab**, users have access to the following features:
+Within the Workflow Discovery tab, users have access to the following features:
 
 - **Featured Workflows:** Workflows frequently executed by other users
-- **All User-Created Workflows:** Access to workflows created by other **Nexus** users
-- **Workflow Details:** Information on tools used, deployment date, and workflow owner
-- **Template Reuse:** Ability to use workflows again as templates
-- **Easy Execution:** Simplified execution of workflows
+- **All User-Created Workflows:** Access to workflows created by other Nexus users
+- Workflow Details: Information on tools used, deployment date, and workflow owner
+- Template Reuse: Ability to use workflows again as templates
+- Easy Execution: Simplified execution of workflows
 
     <figure><img src="../assets/8.png" alt=""><figcaption></figcaption></figure>

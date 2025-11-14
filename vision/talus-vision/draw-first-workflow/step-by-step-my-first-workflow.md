@@ -21,11 +21,11 @@ Let's build our first workflow together. We'll reconstruct this example from the
 
 This example accepts a numeric input from the user and performs the following sequence of operations:
 
-1. Add **3** to the input value.
+1. Add 3 to the input value.
 2. Evaluate the sign of the resulting number and apply one of three branches:
-   - **If the number is positive:** multiply it by **7**.
-   - **If the number equals 0:** add **1** to it.
-   - **If the number is negative:** multiply it by **-3**.
+   - **If the number is positive:** multiply it by 7.
+   - **If the number equals 0:** add 1 to it.
+   - **If the number is negative:** multiply it by -3.
 
 We will now construct the complete workflow step by step.
 
@@ -40,12 +40,12 @@ Initial state for the JSON editor:
 ```
 
 Step - 1\
-The first node we need in our workflow will perform the operation of **adding the number 3** to the user's input.
+The first node we need in our workflow will perform the operation of adding the number 3 to the user's input.
 
-Under the **Math** category, the **Add** tool is designed precisely for this purpose. From the **Tools tab**, navigate to the **Math** category, locate the **Add** tool, and **drag and drop** it into the playground.
+Under the Math category, the Add tool is designed precisely for this purpose. From the Tools tab, navigate to the Math category, locate the Add tool, and drag and drop it into the playground.
 
 For naming, set the node name to **`add_input_and_default`**.\
-Then, assign **port B** as the **default value**, and set this value to **3**.
+Then, assign port B as the default value, and set this value to 3.
 
 <figure><img src="../assets/Screenshot 2025-11-11 at 13.10.47.png" alt=""><figcaption></figcaption></figure>
 
@@ -86,12 +86,12 @@ Step - 2
 
 In this step, we need to check whether the result from the first node is negative.
 
-The most suitable node for this task is the **Compare (cmp)** tool, located under the **Math** category. This tool takes **two inputs** and compares them, producing **three distinct outputs**: **greater than**, **equal to**, and **less than** — perfectly fitting our example’s logic.
+The most suitable node for this task is the Compare (cmp) tool, located under the Math category. This tool takes two inputs and compares them, producing three distinct outputs: **greater than**, **equal to**, and **less than** — perfectly fitting our example’s logic.
 
-Drag and drop the **Compare (cmp)** tool into the playground and rename it to **`is_negative`**.\
-Next, set the **second input** as a **default value of 0** to establish the desired comparison logic.
+Drag and drop the Compare (cmp) tool into the playground and rename it to **`is_negative`**.\
+Next, set the second input as a **default value of 0** to establish the desired comparison logic.
 
-Finally, connect the **result output** from the **`add_input_and_default`** node to the **first input** of the **`is_negative`** node.
+Finally, connect the result output from the **`add_input_and_default`** node to the first input of the **`is_negative`** node.
 
 <figure><img src="../assets/Screenshot 2025-11-11 at 13.20.04.png" alt=""><figcaption></figcaption></figure>
 
@@ -157,34 +157,34 @@ The JSON editor's current state is:
 
 Step - 3&#x20;
 
-In this step, we will generate new outputs based on the results from the **Compare (cmp)** node, following the target logic:
+In this step, we will generate new outputs based on the results from the Compare (cmp) node, following the target logic:
 
-- **If the number is greater than 0:** multiply it by **7**
-- **If the number equals 0:** add **1**
-- **If the number is less than 0:** multiply it by **-3**
+- **If the number is greater than 0:** multiply it by 7
+- **If the number equals 0:** add 1
+- **If the number is less than 0:** multiply it by -3
 
 Based on this logic, the required tools are:
 
-- **Multiply (Mul) tool** from the **Math** category for multiplying by 7 and -3
-- **Add tool** from the **Math** category for adding 1
+- Multiply (Mul) tool from the Math category for multiplying by 7 and -3
+- Add tool from the Math category for adding 1
 
 ## Steps to implement
 
-1. **Locate the tools** in the **Tools tab → Math category** and **drag and drop** them into the playground.
+1. Locate the tools in the **Tools tab → Math category** and drag and drop them into the playground.
 2. **Rename and configure the nodes** as follows:
 
    - **Multiply by 7 node:**
      - Name: **`mul_by_7`**
-     - **B input:** 7
-     - Connect to the **gt output** of the **`is_negative`** node
+     - B input: 7
+     - Connect to the gt output of the **`is_negative`** node
    - **Add 1 node:**
      - Name: **`add_1`**
-     - **B input:** 1
-     - Connect to the **eq output** of the **`is_negative`** node
+     - B input: 1
+     - Connect to the eq output of the **`is_negative`** node
    - **Multiply by -3 node:**
      - Name: **`mul_by_neg_3`**
-     - **B input:** -3
-     - Connect to the **lt output** of the **`is_negative`** node
+     - B input: -3
+     - Connect to the lt output of the **`is_negative`** node
 
    <figure><img src="../assets/Screenshot 2025-11-11 at 13.31.13.png" alt=""><figcaption></figcaption></figure>
 
