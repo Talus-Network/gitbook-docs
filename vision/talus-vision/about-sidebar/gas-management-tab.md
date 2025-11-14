@@ -23,5 +23,4 @@ The **Gas Management tab** allows users to **create a budget** for their **Nexus
 * Users can **view their gas budget** in real-time.
 * In the **demo version**, it provides **Sui faucet support** on the **Talus Devnet**.\
 
-
 <figure><img src="../assets/9.png" alt=""><figcaption></figcaption></figure>

@@ -23,7 +23,6 @@ Navigate to the **Execute Workflow tab**, fill in the required inputs, and execu
 
 In this example, the workflow expects **one numeric input** at the **`add_input_and_default`** node. At this point, the playground is in **View Mode**, and only the necessary input fields are visible. Once the input is provided, we can monitor the **output in the console**.\
 
-
 I chose **12** as the input, and the expected step-by-step results are as follows:
 
 * **`add_input_and_default` output:** 12 + 3 = **15**
@@ -31,4 +30,3 @@ I chose **12** as the input, and the expected step-by-step results are as follow
 * **Final result:** The workflow ends at the **`mul_by_7`** node
 
 <figure><img src="../assets/Screenshot 2025-11-11 at 13.50.22.png" alt=""><figcaption></figcaption></figure>
-
