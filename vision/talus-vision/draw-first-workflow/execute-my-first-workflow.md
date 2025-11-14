@@ -30,5 +30,5 @@ I chose **12** as the input, and the expected step-by-step results are as follow
 * **`is_negative` output:** 15 compared to 0 → **greater than**, so the **gt output** is triggered
 * **Final result:** The workflow ends at the **`mul_by_7`** node
 
-<figure><img src="../../.gitbook/assets/Screenshot 2025-11-11 at 13.50.22.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/Screenshot 2025-11-11 at 13.50.22.png" alt=""><figcaption></figcaption></figure>
 

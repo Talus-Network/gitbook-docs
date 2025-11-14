@@ -14,6 +14,6 @@ This **devnet demo** provides users with the following capabilities:
 - **Crypto Auth** feature for encryption operations
 - **One-click deployment**, allowing users to deploy their workflows on-chain using their **Sui wallet**
 - **Workflow execution**, enabling on-chain transaction processing from deployed workflows
-- **Multiple entry group management**, allowing users to organize and control their entry groups
+- **Easily manage multiple** [**entry groups**](https://docs.talus.network/getting-started/dev-guides/math-branching-dag-entry#understanding-entry-groups), allowing users to group related entry points and define how each DAG execution begins.
 
-<figure><img src=".gitbook/assets/3.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="talus-vision/assets/3.png" alt=""><figcaption></figcaption></figure>
