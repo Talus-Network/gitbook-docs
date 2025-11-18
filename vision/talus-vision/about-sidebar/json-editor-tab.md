@@ -21,11 +21,11 @@ The JSON Editor tab provides real-time Nexus validation while users build their 
 
 The JSON Editor tab offers the following features:
 
-* **Preview Mode:** Provides real-time workflow validation
-* **Editor Mode:** Supports a VS Code–style editor
-* Easy Copying: Quickly copy JSON content
-* **Export JSON:** Download workflows as a JSON file
-* Import JSON: Load previously created JSON files into Talus Vision for use
+- **Preview Mode:** Provides real-time workflow validation
+- **Editor Mode:** Supports a VS Code–style editor
+- Easy Copying: Quickly copy JSON content
+- **Export JSON:** Download workflows as a JSON file
+- Import JSON: Load previously created JSON files into Talus Vision for use
 
 <figure><img src="../assets/5.png" alt=""><figcaption></figcaption></figure>
 

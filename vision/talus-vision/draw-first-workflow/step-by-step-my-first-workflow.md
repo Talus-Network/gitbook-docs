@@ -22,7 +22,7 @@ Let's build our first workflow together. We'll reconstruct this example from the
 This example accepts a numeric input from the user and performs the following sequence of operations:
 
 1. Add 3 to the input value.
-2. Evaluate the sign of the resulting number and apply one of three branches:
+1. Evaluate the sign of the resulting number and apply one of three branches:
    - **If the number is positive:** multiply it by 7.
    - **If the number equals 0:** add 1 to it.
    - **If the number is negative:** multiply it by -3.
@@ -171,7 +171,7 @@ Based on this logic, the required tools are:
 ## Steps to implement
 
 1. Locate the tools in the **Tools tab → Math category** and drag and drop them into the playground.
-2. **Rename and configure the nodes** as follows:
+1. **Rename and configure the nodes** as follows:
 
    - **Multiply by 7 node:**
      - Name: **`mul_by_7`**
