@@ -17,3 +17,5 @@ description: >-
 [Gas Management Tab](gas-management-tab.md)
 
 [Execute Workflow Tab](execute-workflow-tab.md)
+
+<figure><img src="../assets/Screenshot 2025-11-13 at 14.43.30.png" alt=""><figcaption></figcaption></figure>
