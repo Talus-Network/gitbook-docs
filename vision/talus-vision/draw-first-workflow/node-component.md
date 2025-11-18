@@ -21,9 +21,9 @@ Each tool is added to the playground via drag-and-drop and is then transformed i
 
 When examining a node closely, the following features can be observed:
 
-* Node names can be easily edited (click the pencil icon to rename).
-* Nodes can be quickly deleted from the playground.
-* Node positions can be locked during design (using the anchor icon).
+- Node names can be easily edited (click the pencil icon to rename).
+- Nodes can be quickly deleted from the playground.
+- Node positions can be locked during design (using the anchor icon).
 
 <figure><img src="../assets/Screenshot 2025-11-11 at 12.35.00.png" alt=""><figcaption></figcaption></figure>
 
