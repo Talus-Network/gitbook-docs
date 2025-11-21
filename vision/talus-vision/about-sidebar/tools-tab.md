@@ -17,10 +17,11 @@ layout:
 
 # Tools Tab
 
-The Tools tab lists all previously developed Nexus tools, providing users with easy access. All available tools can also be found in the [nexus-sdk repository](https://github.com/Talus-Network/nexus-sdk/tree/main/tools).
+The Tools tab provides access to all Nexus tools available within the platform. You can also browse the full collection in the [nexus-sdk repository](https://github.com/Talus-Network/nexus-sdk/tree/main/tools).
 
-- All tools are categorized based on their functionality.
-- The Tools tab displays all available tools in one place, including a special section for quick access to your favorite and most frequently used tools.
-- Tools listed under each category can be easily added to the playground using the drag-and-drop feature. Each tool includes a description, along with detailed input and output properties. Users can review these details thoroughly and access the tools they wish to use with ease. Tools that are **registered** are clearly marked, and their usage is recommended.
+- Tools are organized by category for quick navigation.
+- A dedicated section highlights your favorite and most frequently used tools.
+- Any tool can be added to the playground via simple drag-and-drop.
+- Each tool includes a description, input/output definitions, and additional metadata. Registered tools are clearly marked and recommended for use.
 
-    <figure><img src="../assets/4.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/4.png" alt=""><figcaption></figcaption></figure>

@@ -17,20 +17,22 @@ layout:
 
 # Connect with Sui Wallet
 
-Talus Devnet Rpc : <https://rpc.ssfn.devnet.production.taluslabs.dev>\
-Talus Devnet Explorer : <https://explorer.devnet.taluslabs.dev/>
+Talus Devnet RPC: <https://rpc.ssfn.devnet.production.taluslabs.dev>  
+Talus Devnet Explorer: <https://explorer.devnet.taluslabs.dev/>
 
-For Sui wallets that support custom RPC, you can log in after configuring the network using the RPC information provided above.\
-The recommended wallet for this process is [**Surf Wallet**](https://www.surf.tech/).
+If your Sui wallet supports custom RPC networks, you can connect by configuring it with the RPC information above.  
+The recommended wallet for this process is [Surf Wallet](https://www.surf.tech/).
 
 <figure><img src="assets/2.png" alt=""><figcaption></figcaption></figure>
 
 ## Adding a Custom RPC for Slush Wallet
 
-After opening the Slush Wallet browser extension, go to the settings page located at the bottom right and click the "Change Network" option.
+Open the Slush Wallet browser extension, navigate to the settings menu at the bottom right, and click **Change Network**.
 
-<div data-full-width="true"><figure><img src="assets/Screenshot 2025-11-13 at 14.12.05.png" alt="" width="560"><figcaption></figcaption></figure></div>
+<div data-full-width="true">
+<figure><img src="assets/Screenshot 2025-11-13 at 14.12.05.png" alt="" width="560"><figcaption></figcaption></figure>
+</div>
 
-Select the "Custom RPC" option and add the Talus Devnet RPC here.
+Select **Custom RPC**, then enter the Talus Devnet RPC endpoint.
 
 <figure><img src="assets/Screenshot 2025-11-13 at 14.17.15.png" alt="" width="563"><figcaption></figcaption></figure>
