@@ -77,7 +77,7 @@ Explanation of the Code
 - **Cross-Module Communication**: Module B can interact with the proof (by stamping) within the same PTB without requiring explicit dependencies on module A.
 - **Single Use**: The `ProofOfUID` is consumed after use, so that it's used exactly once, preventing duplication or misuse.
 
-This pattern allows modules to communicate securely and verifiably while maintaining modularity and avoiding tight coupling.1
+This pattern allows modules to communicate securely and verifiably while maintaining modularity and avoiding tight coupling.
 
 ### 2. OwnerCap
 
