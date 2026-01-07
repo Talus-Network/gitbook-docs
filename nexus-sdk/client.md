@@ -246,3 +246,4 @@ The `NexusError` enum categorizes issues from configuration errors to RPC and tr
 ## 🪶 Summary
 
 The [`NexusClient`] aims to make building, publishing, and executing Nexus workflows _simple, safe, and async-ready_. It abstracts away Sui transaction signing and gas management while providing a clean modular interface.
+
