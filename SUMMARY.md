@@ -99,3 +99,10 @@
   - [Echanges: Coinbase](tools/exchanges-coinbase/README.md)
   - [HTTP](tools/http/README.md)
   - [Templating: Jinja](tools/templating-jinja/README.md)
+
+## Looking for a home
+
+* [nexus/crates/leader-checkpoint-clock.md](nexus/crates/leader-checkpoint-clock.md)
+* [nexus/policy/dfa.md](nexus/policy/dfa.md)
+* [nexus/policy/index.md](nexus/policy/index.md)
+* [nexus/scheduler/index.md](nexus/scheduler/index.md)
