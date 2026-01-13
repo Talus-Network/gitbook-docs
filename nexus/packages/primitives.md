@@ -77,7 +77,7 @@ Explanation of the Code
 - **Cross-Module Communication**: Module B can interact with the proof (by stamping) within the same PTB without requiring explicit dependencies on module A.
 - **Single Use**: The `ProofOfUID` is consumed after use, so that it's used exactly once, preventing duplication or misuse.
 
-This pattern allows modules to communicate securely and verifiably while maintaining modularity and avoiding tight coupling.1
+This pattern allows modules to communicate securely and verifiably while maintaining modularity and avoiding tight coupling.
 
 ### 2. OwnerCap
 
@@ -169,6 +169,10 @@ A simple wrapper for standardizing and emitting events.
 - Standardized event emission
 - Improved indexing and filtering of events
 - Consistent event handling across packages
+
+### 6. Policy
+
+A reusable DFA-based policy module (`nexus_primitives::policy`) that defines allowed paths (regular languages) over typed symbols (`Witness(TypeName)` or `Uid(object::ID)`), advances state only on allowed inputs, and asserts off-path attempts. Acts as a dynamic dispatcher/filter across Sui state space. See the full write-up at [Policy DFA](../policy/index.md).
 
 ## Integration Patterns
 

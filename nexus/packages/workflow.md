@@ -5,6 +5,10 @@ The workflow engine is an integral part of the onchain control plane.
 
 In a nutshell, the workflow engine executes walks over a directed acyclic graph (DAG) of `Vertex`s that represent Nexus Tools.
 
+## Scheduler
+
+The workflow package also includes an on-chain scheduler module for time-based orchestration (queue + periodic scheduling) that can gate DAG execution. See [On-chain scheduler architecture](../scheduler/index.md).
+
 {% hint style="info" %}
 The terms used in the context of the DAG can be found in the [glossary](../glossary.md#dag-related-terms). Familiarize yourself with them before moving on.
 {% endhint %}
