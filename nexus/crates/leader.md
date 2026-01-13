@@ -90,6 +90,12 @@ There are multiple processes running in parallel in the leader node. These are a
 - Events that are still `Active` after a configured time has passed should be disposed of and marked as `Dead`.
 - This should also notify Workflow via a TX.
 
+## Checkpoint clock (time sync)
+
+A checkpoint-driven clock provides the leader with a conservative, monotonic view of on-chain time to gate time-sensitive work. It derives bounds from Sui checkpoints, caps drift by observed cadence/headroom, surfaces staleness, and refreshes via gRPC when stale.
+
+- [Checkpoint clock details](./leader-checkpoint-clock.md)
+
 ## High integrity channel
 
 Some parts of the Leader service use a custom channel implementation that handles indexing of messages sent over this channel, as well as retries and sweeps of stale messages.

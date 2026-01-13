@@ -24,6 +24,7 @@ Docs:
 - [Workflow package][workflow]
 - [Primitives package][primitives]
 - [Nexus interface package][nexus-interface]
+- [Policy DFA][policy]
 
 {% hint style="info" %}
 The Nexus core onchain packages are currently not open sourced. To find all of the function signatures and data structs, please refer to [the reference API documentation][ref-api]
@@ -40,6 +41,7 @@ The main offchain service. Consumes events produced by the onchain Workflow, inv
 Docs:
 
 - [Leader][leader]
+- [Checkpoint clock][leader-clock]
 
 ## [Tools][tool]
 
@@ -89,10 +91,12 @@ Docs:
 [workflow]: packages/workflow.md
 [primitives]: packages/primitives.md
 [nexus-interface]: packages/nexus-interface.md
+[policy]: policy/index.md
 [ref-api]: ../developer-docs/index/nexus-core-api-docs/README.md
 [sui-move-conventions]: conventions/sui-move.md
 [tool]: tool.md
 [leader]: crates/leader.md
+[leader-clock]: crates/leader-checkpoint-clock.md
 [actors]: #actors
 [branching_and_conditionals]: ./flow-controls/branching_and_conditionals.md
 [looping]: ./flow-controls/looping.md
