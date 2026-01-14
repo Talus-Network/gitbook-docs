@@ -220,11 +220,9 @@ For a list of all event types, refer to [the reference docs for the Workflow pac
 
 ## Leader cap
 
-The leader cap(_ability_) is an owned object given to the [leader](../crates/leader.md) wallet.
-With this object the leader authorizes itself to submit tool outputs to the workflow.
+The leader cap(_ability_) is a party object given to the [leader](../crates/leader.md) wallet. With this object the leader authorizes itself to submit tool outputs to the workflow.
 
-The leader cap can be cloned and given to other wallets, or multiple times to the same wallet.
-This is desirable if parallel txs are submitted to the workflow to prevent equivocation related errors.
+The leader cap can be cloned and given to other wallets.
 
 ## Tool registry
 

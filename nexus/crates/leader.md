@@ -14,7 +14,7 @@ sequenceDiagram
 
     critical initialize service
         LD-->>LD: load env, global objects, secret mnemonics
-        LD->>WF: request leader caps and gas coins
+        LD->>WF: request gas coins
         LD->>DB: establish a connection to indexer
     end
 
@@ -79,7 +79,7 @@ There are multiple processes running in parallel in the leader node. These are a
 
 1. **Workflow communication channel**
 
-- N channels can run in parallel where N is the number of `leader_cap`s the Leader has available.
+- N channels can run in parallel where N is the number of `Coin<SUI>` objects the Leader has available.
 - Receives messages from the execution engine and evaluates the result. Depending on this, multiple outcomes can happen:
   - (a) `Successful` - TX to Workflow is sent and status is updated in Indexer to `Successful`. If TX fails, we have to block the channel for 24h.
   - (b.i) `Failed.Retriable` - Status is updated back to `Queued` and retires are incremented in Indexer.
@@ -101,7 +101,6 @@ A checkpoint-driven clock provides the leader with a conservative, monotonic vie
 Some parts of the Leader service use a custom channel implementation that handles indexing of messages sent over this channel, as well as retries and sweeps of stale messages. Notably, the event listener<>event executor and the event executor<>merchant processes communicate via this channel.
 
 ### Why queue discipline and resource gating
-
 - Avoid head-of-line blocking when a queued item cannot run (shared-object locks, external rate limits, or missing resources).
 - Let domains swap in their own ordering policy without touching channel internals.
 - Prevent wasted retries by dispatching only when capacity for the payload exists.
@@ -136,7 +135,6 @@ flowchart LR
 ```
 
 **QueueDiscipline** is the abstraction that decides what queued item is delivered next. Policies can derive hints from the payload, keep bookkeeping in Redis, and observe lifecycle hooks:
-
 - Hooks: `on_enqueue` (new, nack, sweep), `select_for_delivery`, `on_deliver`, optional `on_nack`, and `on_remove`.
 - The default policy selects a random queued ID; swapping policies does not change the channel core.
 
@@ -151,7 +149,6 @@ Note that this channel "assumes" it has a stable Redis connection. There are edg
 {% endhint %}
 
 ### Retry and sweep
-
 - `nack` (consumer) or resource denial moves the ID back to the queued set, increments retries, and fires `on_enqueue` with the appropriate event.
 - The sweeper periodically scans active messages; stale entries are nacked, `on_enqueue` is invoked with a sweep event, and the dispatcher is woken up.
 
