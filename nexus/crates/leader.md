@@ -101,6 +101,7 @@ A checkpoint-driven clock provides the leader with a conservative, monotonic vie
 Some parts of the Leader service use a custom channel implementation that handles indexing of messages sent over this channel, as well as retries and sweeps of stale messages. Notably, the event listener<>event executor and the event executor<>merchant processes communicate via this channel.
 
 ### Why queue discipline and resource gating
+
 - Avoid head-of-line blocking when a queued item cannot run (shared-object locks, external rate limits, or missing resources).
 - Let domains swap in their own ordering policy without touching channel internals.
 - Prevent wasted retries by dispatching only when capacity for the payload exists.
@@ -135,6 +136,7 @@ flowchart LR
 ```
 
 **QueueDiscipline** is the abstraction that decides what queued item is delivered next. Policies can derive hints from the payload, keep bookkeeping in Redis, and observe lifecycle hooks:
+
 - Hooks: `on_enqueue` (new, nack, sweep), `select_for_delivery`, `on_deliver`, optional `on_nack`, and `on_remove`.
 - The default policy selects a random queued ID; swapping policies does not change the channel core.
 
@@ -149,6 +151,7 @@ Note that this channel "assumes" it has a stable Redis connection. There are edg
 {% endhint %}
 
 ### Retry and sweep
+
 - `nack` (consumer) or resource denial moves the ID back to the queued set, increments retries, and fires `on_enqueue` with the appropriate event.
 - The sweeper periodically scans active messages; stale entries are nacked, `on_enqueue` is invoked with a sweep event, and the dispatcher is woken up.
 
