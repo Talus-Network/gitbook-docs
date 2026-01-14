@@ -31,11 +31,15 @@
 - [🫀 Nexus Core](nexus/index.md)
   - [Onchain Nexus](developer-docs/index/onchain-nexus/README.md)
     - [Workflow](nexus/packages/workflow.md)
+      - [On-chain Scheduler](nexus/scheduler/index.md)
     - [Primitives](nexus/packages/primitives.md)
+      - [Policy](nexus/policy/index.md)
+        - [DFA module](nexus/policy/dfa.md)
     - [Nexus Interface](nexus/packages/nexus-interface.md)
     - [Sui Move Conventions](nexus/conventions/sui-move.md)
   - [Offchain Nexus](developer-docs/index/offchain-nexus/README.md)
     - [Leader](nexus/crates/leader.md)
+      - [Checkpoint clock](nexus/crates/leader-checkpoint-clock.md)
     - [Leader Sui TXs](nexus/crates/sui-tx.md)
   - [Agent Development](nexus/TAP/agent-development.md)
   - [Flow Controls]
@@ -56,7 +60,7 @@
     - [nexus_primitives/proven_value](nexus/packages/reference/nexus_primitives/proven_value.md)
     - [nexus_workflow/dag](nexus/packages/reference/nexus_workflow/dag.md)
     - [nexus_workflow/default_gas_extension](nexus/packages/reference/nexus_workflow/default_gas_extension.md)
-    - [nexus_workflow/default_sap](nexus/packages/reference/nexus_workflow/default_sap.md)
+    - [nexus_workflow/default_tap](nexus/packages/reference/nexus_workflow/default_tap.md)
     - [nexus_workflow/gas](nexus/packages/reference/nexus_workflow/gas.md)
     - [nexus_workflow/leader_cap](nexus/packages/reference/nexus_workflow/leader_cap.md)
     - [nexus_workflow/main](nexus/packages/reference/nexus_workflow/main.md)
@@ -87,7 +91,7 @@
     - [Tools Tab](vision/talus-vision/about-sidebar/tools-tab.md)
     - [JSON Editor Tab](vision/talus-vision/about-sidebar/json-editor-tab.md)
     - [Gas Management Tab](vision/talus-vision/about-sidebar/gas-management-tab.md)
-- [Technical Glossary](nexus-next/glossary.md)
+  - [Technical Glossary](nexus/glossary.md)
 
 ## 🛠️ Tools
 
@@ -99,10 +103,3 @@
   - [Echanges: Coinbase](tools/exchanges-coinbase/README.md)
   - [HTTP](tools/http/README.md)
   - [Templating: Jinja](tools/templating-jinja/README.md)
-
-## Looking for a home
-
-- [nexus/crates/leader-checkpoint-clock.md](nexus/crates/leader-checkpoint-clock.md)
-- [nexus/policy/dfa.md](nexus/policy/dfa.md)
-- [nexus/policy/index.md](nexus/policy/index.md)
-- [nexus/scheduler/index.md](nexus/scheduler/index.md)
