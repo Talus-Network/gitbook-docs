@@ -65,4 +65,3 @@ sequenceDiagram
 - **Config:** Non-zero poll jitter; refresh timeout; headroom/slack tuned to checkpoint cadence; stale fallback (`Headroom` vs `Hold`) per risk tolerance.
 - **Observability:** Metrics for refresh attempts/success/failure and cadence gauge; tracing on refresh outcomes labeled (`manual` vs `subscription`).
 - **Testing:** Time/RNG injectable for deterministic tests; coverage for monotonicity, drift cap, staleness, backoff, cadence rounding, seeded/unseeded behavior.
-
