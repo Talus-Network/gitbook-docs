@@ -102,7 +102,7 @@
 
 ## Looking for a home
 
-* [nexus/crates/leader-checkpoint-clock.md](nexus/crates/leader-checkpoint-clock.md)
-* [nexus/policy/dfa.md](nexus/policy/dfa.md)
-* [nexus/policy/index.md](nexus/policy/index.md)
-* [nexus/scheduler/index.md](nexus/scheduler/index.md)
+- [nexus/crates/leader-checkpoint-clock.md](nexus/crates/leader-checkpoint-clock.md)
+- [nexus/policy/dfa.md](nexus/policy/dfa.md)
+- [nexus/policy/index.md](nexus/policy/index.md)
+- [nexus/scheduler/index.md](nexus/scheduler/index.md)
