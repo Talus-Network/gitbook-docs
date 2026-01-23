@@ -3,38 +3,53 @@
 
 # Module `(nexus_workflow=0x0)::tool_registry`
 
+## Tool Verification Status
 
+Tools are registered as **Unverified** by default. The holder of
+`OverSlashing` (admin/governance) may update a tool to **Verified** or back to
+**Unverified** via `set_tool_status`.
 
--  [Struct `ToolRegistry`](#(nexus_workflow=0x0)_tool_registry_ToolRegistry)
--  [Struct `OffChainTool`](#(nexus_workflow=0x0)_tool_registry_OffChainTool)
--  [Struct `OverSlashing`](#(nexus_workflow=0x0)_tool_registry_OverSlashing)
--  [Struct `OverTool`](#(nexus_workflow=0x0)_tool_registry_OverTool)
--  [Struct `ToolRegistryCreatedEvent`](#(nexus_workflow=0x0)_tool_registry_ToolRegistryCreatedEvent)
--  [Struct `OffChainToolRegisteredEvent`](#(nexus_workflow=0x0)_tool_registry_OffChainToolRegisteredEvent)
--  [Struct `ToolUnregisteredEvent`](#(nexus_workflow=0x0)_tool_registry_ToolUnregisteredEvent)
--  [Struct `ToolSlashedEvent`](#(nexus_workflow=0x0)_tool_registry_ToolSlashedEvent)
--  [Constants](#@Constants_0)
--  [Function `new`](#(nexus_workflow=0x0)_tool_registry_new)
--  [Function `share`](#(nexus_workflow=0x0)_tool_registry_share)
--  [Function `slash_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_slash_off_chain_tool)
--  [Function `set_mist_collateral_to_lock`](#(nexus_workflow=0x0)_tool_registry_set_mist_collateral_to_lock)
--  [Function `set_lock_duration_ms`](#(nexus_workflow=0x0)_tool_registry_set_lock_duration_ms)
--  [Function `register_off_chain_tool_for_self`](#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool_for_self)
-    -  [Slashing](#@Slashing_1)
-    -  [Owner Cap](#@Owner_Cap_2)
-    -  [Gas Tickets](#@Gas_Tickets_3)
--  [Function `register_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool)
--  [Function `unregister_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_unregister_off_chain_tool)
--  [Function `claim_collateral_for_self`](#(nexus_workflow=0x0)_tool_registry_claim_collateral_for_self)
--  [Function `claim_collateral_for_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_claim_collateral_for_off_chain_tool)
--  [Function `deescalate`](#(nexus_workflow=0x0)_tool_registry_deescalate)
--  [Function `did_unregister_period_pass`](#(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass)
--  [Function `assert_tool_registered`](#(nexus_workflow=0x0)_tool_registry_assert_tool_registered)
--  [Function `assert_tool_owner`](#(nexus_workflow=0x0)_tool_registry_assert_tool_owner)
--  [Function `assert_tool_owner_unchecked_generic`](#(nexus_workflow=0x0)_tool_registry_assert_tool_owner_unchecked_generic)
--  [Function `register_off_chain_tool_`](#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool_)
--  [Function `did_unregister_period_pass_`](#(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass_)
+Verified means the slashing authority has explicitly endorsed the tool entry.
+It does **not** imply correctness, safety, availability, or that inputs/outputs
+are benign. Signed HTTP provides authenticity of responses; slashing is an
+after-the-fact enforcement mechanism.
 
+- [Struct `ToolRegistry`](#(nexus_workflow=0x0)_tool_registry_ToolRegistry)
+- [Struct `ToolStatus`](#(nexus_workflow=0x0)_tool_registry_ToolStatus)
+- [Struct `OffChainTool`](#(nexus_workflow=0x0)_tool_registry_OffChainTool)
+- [Struct `OverSlashing`](#(nexus_workflow=0x0)_tool_registry_OverSlashing)
+- [Struct `OverTool`](#(nexus_workflow=0x0)_tool_registry_OverTool)
+- [Struct `ToolRegistryCreatedEvent`](#(nexus_workflow=0x0)_tool_registry_ToolRegistryCreatedEvent)
+- [Struct `OffChainToolRegisteredEvent`](#(nexus_workflow=0x0)_tool_registry_OffChainToolRegisteredEvent)
+- [Struct `ToolUnregisteredEvent`](#(nexus_workflow=0x0)_tool_registry_ToolUnregisteredEvent)
+- [Struct `ToolSlashedEvent`](#(nexus_workflow=0x0)_tool_registry_ToolSlashedEvent)
+- [Struct `ToolStatusUpdatedEvent`](#(nexus_workflow=0x0)_tool_registry_ToolStatusUpdatedEvent)
+- [Constants](#@Constants_0)
+- [Function `new`](#(nexus_workflow=0x0)_tool_registry_new)
+- [Function `share`](#(nexus_workflow=0x0)_tool_registry_share)
+- [Function `slash_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_slash_off_chain_tool)
+- [Function `set_mist_collateral_to_lock`](#(nexus_workflow=0x0)_tool_registry_set_mist_collateral_to_lock)
+- [Function `set_lock_duration_ms`](#(nexus_workflow=0x0)_tool_registry_set_lock_duration_ms)
+- [Function `set_tool_status`](#(nexus_workflow=0x0)_tool_registry_set_tool_status)
+- [Function `register_off_chain_tool_for_self`](#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool_for_self)
+  - [Slashing](#@Slashing_1)
+  - [Owner Cap](#@Owner_Cap_2)
+  - [Gas Tickets](#@Gas_Tickets_3)
+- [Function `register_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool)
+- [Function `unregister_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_unregister_off_chain_tool)
+- [Function `claim_collateral_for_self`](#(nexus_workflow=0x0)_tool_registry_claim_collateral_for_self)
+- [Function `claim_collateral_for_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_claim_collateral_for_off_chain_tool)
+- [Function `deescalate`](#(nexus_workflow=0x0)_tool_registry_deescalate)
+- [Function `did_unregister_period_pass`](#(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass)
+- [Function `assert_tool_registered`](#(nexus_workflow=0x0)_tool_registry_assert_tool_registered)
+- [Function `assert_tool_owner`](#(nexus_workflow=0x0)_tool_registry_assert_tool_owner)
+- [Function `assert_tool_owner_unchecked_generic`](#(nexus_workflow=0x0)_tool_registry_assert_tool_owner_unchecked_generic)
+- [Function `tool_status_unverified`](#(nexus_workflow=0x0)_tool_registry_tool_status_unverified)
+- [Function `tool_status_verified`](#(nexus_workflow=0x0)_tool_registry_tool_status_verified)
+- [Function `tool_status`](#(nexus_workflow=0x0)_tool_registry_tool_status)
+- [Function `tool_is_verified`](#(nexus_workflow=0x0)_tool_registry_tool_is_verified)
+- [Function `register_off_chain_tool_`](#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool_)
+- [Function `did_unregister_period_pass_`](#(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass_)
 
 <pre><code><b>use</b> (nexus_primitives=0x0)::event;
 <b>use</b> (nexus_primitives=0x0)::owner_cap;
@@ -67,22 +82,15 @@
 <b>use</b> <a href="../dependencies/sui/vec_set.md#sui_vec_set">sui::vec_set</a>;
 </code></pre>
 
-
-
 <a name="(nexus_workflow=0x0)_tool_registry_ToolRegistry"></a>
 
 ## Struct `ToolRegistry`
 
-
-
 <pre><code><b>public</b> <b>struct</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">ToolRegistry</a> <b>has</b> key
 </code></pre>
 
-
-
 <details>
 <summary>Fields</summary>
-
 
 <dl>
 <dt>
@@ -111,6 +119,34 @@
 </dd>
 </dl>
 
+</details>
+
+<a name="(nexus_workflow=0x0)_tool_registry_ToolStatus"></a>
+
+## Enum `ToolStatus`
+
+Verification status for a tool entry.
+
+<pre><code><b>public</b> <b>enum</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolStatus">ToolStatus</a> <b>has</b> <b>copy</b>, drop, store
+</code></pre>
+
+<details>
+<summary>Variants</summary>
+
+<dl>
+<dt>
+Variant <code>Unverified</code>
+</dt>
+<dd>
+ Default status for newly registered tools.
+</dd>
+<dt>
+Variant <code>Verified</code>
+</dt>
+<dd>
+ Explicitly endorsed by the slashing authority.
+</dd>
+</dl>
 
 </details>
 
@@ -120,15 +156,11 @@
 
 Dynamic object.
 
-
 <pre><code><b>public</b> <b>struct</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OffChainTool">OffChainTool</a> <b>has</b> key, store
 </code></pre>
 
-
-
 <details>
 <summary>Fields</summary>
-
 
 <dl>
 <dt>
@@ -155,6 +187,12 @@ Dynamic object.
  Must follow our meta schema for output schemas.
 </dd>
 <dt>
+<code>tool_status: <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolStatus">tool_registry::ToolStatus</a></code>
+</dt>
+<dd>
+ Verification status set by the slashing authority. Tools are registered as unverified by default.
+</dd>
+<dt>
 <code>vault: <a href="../dependencies/sui/balance.md#sui_balance_Balance">sui::balance::Balance</a>&lt;<a href="../dependencies/sui/sui.md#sui_sui_SUI">sui::sui::SUI</a>&gt;</code>
 </dt>
 <dd>
@@ -178,7 +216,6 @@ Dynamic object.
 </dd>
 </dl>
 
-
 </details>
 
 <a name="(nexus_workflow=0x0)_tool_registry_OverSlashing"></a>
@@ -187,19 +224,14 @@ Dynamic object.
 
 Will identify admin cap for slashing permissions.
 
-
 <pre><code><b>public</b> <b>struct</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverSlashing">OverSlashing</a> <b>has</b> drop
 </code></pre>
-
-
 
 <details>
 <summary>Fields</summary>
 
-
 <dl>
 </dl>
-
 
 </details>
 
@@ -209,19 +241,14 @@ Will identify admin cap for slashing permissions.
 
 Will identify admin cap over a tool in this registry.
 
-
 <pre><code><b>public</b> <b>struct</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverTool">OverTool</a> <b>has</b> drop
 </code></pre>
-
-
 
 <details>
 <summary>Fields</summary>
 
-
 <dl>
 </dl>
-
 
 </details>
 
@@ -229,16 +256,11 @@ Will identify admin cap over a tool in this registry.
 
 ## Struct `ToolRegistryCreatedEvent`
 
-
-
 <pre><code><b>public</b> <b>struct</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistryCreatedEvent">ToolRegistryCreatedEvent</a> <b>has</b> <b>copy</b>, drop
 </code></pre>
 
-
-
 <details>
 <summary>Fields</summary>
-
 
 <dl>
 <dt>
@@ -253,23 +275,17 @@ Will identify admin cap over a tool in this registry.
 </dd>
 </dl>
 
-
 </details>
 
 <a name="(nexus_workflow=0x0)_tool_registry_OffChainToolRegisteredEvent"></a>
 
 ## Struct `OffChainToolRegisteredEvent`
 
-
-
 <pre><code><b>public</b> <b>struct</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OffChainToolRegisteredEvent">OffChainToolRegisteredEvent</a> <b>has</b> <b>copy</b>, drop
 </code></pre>
 
-
-
 <details>
 <summary>Fields</summary>
-
 
 <dl>
 <dt>
@@ -310,23 +326,17 @@ Will identify admin cap over a tool in this registry.
 </dd>
 </dl>
 
-
 </details>
 
 <a name="(nexus_workflow=0x0)_tool_registry_ToolUnregisteredEvent"></a>
 
 ## Struct `ToolUnregisteredEvent`
 
-
-
 <pre><code><b>public</b> <b>struct</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolUnregisteredEvent">ToolUnregisteredEvent</a> <b>has</b> <b>copy</b>, drop
 </code></pre>
 
-
-
 <details>
 <summary>Fields</summary>
-
 
 <dl>
 <dt>
@@ -341,7 +351,6 @@ Will identify admin cap over a tool in this registry.
 </dd>
 </dl>
 
-
 </details>
 
 <a name="(nexus_workflow=0x0)_tool_registry_ToolSlashedEvent"></a>
@@ -350,15 +359,11 @@ Will identify admin cap over a tool in this registry.
 
 The admin has slashed some collateral from a tool.
 
-
 <pre><code><b>public</b> <b>struct</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolSlashedEvent">ToolSlashedEvent</a> <b>has</b> <b>copy</b>, drop
 </code></pre>
 
-
-
 <details>
 <summary>Fields</summary>
-
 
 <dl>
 <dt>
@@ -379,6 +384,42 @@ The admin has slashed some collateral from a tool.
 </dd>
 </dl>
 
+</details>
+
+<a name="(nexus_workflow=0x0)_tool_registry_ToolStatusUpdatedEvent"></a>
+
+## Struct `ToolStatusUpdatedEvent`
+
+Emitted when a tool's verification status is updated.
+
+<pre><code><b>public</b> <b>struct</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolStatusUpdatedEvent">ToolStatusUpdatedEvent</a> <b>has</b> <b>copy</b>, drop
+</code></pre>
+
+<details>
+<summary>Fields</summary>
+
+<dl>
+<dt>
+<code>registry: <a href="../dependencies/sui/object.md#sui_object_ID">sui::object::ID</a></code>
+</dt>
+<dd>
+</dd>
+<dt>
+<code>tool: <a href="../dependencies/sui/object.md#sui_object_ID">sui::object::ID</a></code>
+</dt>
+<dd>
+</dd>
+<dt>
+<code>fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a></code>
+</dt>
+<dd>
+</dd>
+<dt>
+<code>status: <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolStatus">tool_registry::ToolStatus</a></code>
+</dt>
+<dd>
+</dd>
+</dl>
 
 </details>
 
@@ -386,66 +427,41 @@ The admin has slashed some collateral from a tool.
 
 ## Constants
 
-
 <a name="(nexus_workflow=0x0)_tool_registry_ENotEnoughSuiToLock"></a>
-
-
 
 <pre><code>#[error]
 <b>const</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ENotEnoughSuiToLock">ENotEnoughSuiToLock</a>: vector&lt;u8&gt; = b"Not enough SUI to lock collateral";
 </code></pre>
 
-
-
 <a name="(nexus_workflow=0x0)_tool_registry_ECollateralNotReadyToClaim"></a>
-
-
 
 <pre><code>#[error]
 <b>const</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ECollateralNotReadyToClaim">ECollateralNotReadyToClaim</a>: vector&lt;u8&gt; = b"Collateral not ready to reclaim";
 </code></pre>
 
-
-
 <a name="(nexus_workflow=0x0)_tool_registry_EFqnNotFound"></a>
-
-
 
 <pre><code>#[error]
 <b>const</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_EFqnNotFound">EFqnNotFound</a>: vector&lt;u8&gt; = b"FQN not found";
 </code></pre>
 
-
-
 <a name="(nexus_workflow=0x0)_tool_registry_EUnauthorized"></a>
-
-
 
 <pre><code>#[error]
 <b>const</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_EUnauthorized">EUnauthorized</a>: vector&lt;u8&gt; = b"Only the creator can unregister a tool";
 </code></pre>
 
-
-
 <a name="(nexus_workflow=0x0)_tool_registry_EToolUnregistered"></a>
-
-
 
 <pre><code>#[error]
 <b>const</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_EToolUnregistered">EToolUnregistered</a>: vector&lt;u8&gt; = b"Tool <b>has</b> been unregistered";
 </code></pre>
 
-
-
 <a name="(nexus_workflow=0x0)_tool_registry_EFqnAlreadyExists"></a>
-
-
 
 <pre><code>#[error]
 <b>const</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_EFqnAlreadyExists">EFqnAlreadyExists</a>: vector&lt;u8&gt; = b"FQN already exists";
 </code></pre>
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_DEFAULT_MIST_COLLATERAL_TO_LOCK"></a>
 
@@ -453,11 +469,8 @@ How much [SUI] (in MIST) to lock to register a tool.
 
 TODO: This is only a testing value.
 
-
 <pre><code><b>const</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_DEFAULT_MIST_COLLATERAL_TO_LOCK">DEFAULT_MIST_COLLATERAL_TO_LOCK</a>: u64 = 1;
 </code></pre>
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_DEFAULT_LOCK_DURATION_MS"></a>
 
@@ -465,37 +478,22 @@ How long is the collateral locked for in milliseconds after unregistering.
 
 TODO: This is only a testing value.
 
-
 <pre><code><b>const</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_DEFAULT_LOCK_DURATION_MS">DEFAULT_LOCK_DURATION_MS</a>: u64 = 1;
 </code></pre>
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_new"></a>
 
 ## Function `new`
 
-
-
 <pre><code><b>public</b>(package) <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_new">new</a>(ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>): ((nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, (nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverSlashing">tool_registry::OverSlashing</a>&gt;)
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_share"></a>
 
 ## Function `share`
 
-
-
 <pre><code><b>public</b>(package) <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_share">share</a>(self: (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>)
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_slash_off_chain_tool"></a>
 
@@ -503,39 +501,31 @@ TODO: This is only a testing value.
 
 Takes given amount of collateral from a tool.
 
-
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_slash_off_chain_tool">slash_off_chain_tool</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, _: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverSlashing">tool_registry::OverSlashing</a>&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, amount: u64, clock: &<a href="../dependencies/sui/clock.md#sui_clock_Clock">sui::clock::Clock</a>): <a href="../dependencies/sui/balance.md#sui_balance_Balance">sui::balance::Balance</a>&lt;<a href="../dependencies/sui/sui.md#sui_sui_SUI">sui::sui::SUI</a>&gt;
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_set_mist_collateral_to_lock"></a>
 
 ## Function `set_mist_collateral_to_lock`
 
-
-
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_set_mist_collateral_to_lock">set_mist_collateral_to_lock</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, _: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverSlashing">tool_registry::OverSlashing</a>&gt;, new_mist_collateral_to_lock: u64)
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_set_lock_duration_ms"></a>
 
 ## Function `set_lock_duration_ms`
 
-
-
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_set_lock_duration_ms">set_lock_duration_ms</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, _: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverSlashing">tool_registry::OverSlashing</a>&gt;, new_duration_ms: u64)
 </code></pre>
 
+<a name="(nexus_workflow=0x0)_tool_registry_set_tool_status"></a>
 
+## Function `set_tool_status`
 
+Set a tool's verification status (verified or unverified).
 
+<pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_set_tool_status">set_tool_status</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, _: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverSlashing">tool_registry::OverSlashing</a>&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, status: (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolStatus">tool_registry::ToolStatus</a>)
+</code></pre>
 
 <a name="(nexus_workflow=0x0)_tool_registry_register_off_chain_tool_for_self"></a>
 
@@ -552,52 +542,35 @@ See <https://docs.talus.network/developer-docs/index/tool#tool-definitions>
 to learn about the expected format of the input and output schemas and the
 expected format of the FQN and URL.
 
-
 <a name="@Slashing_1"></a>
 
 ### Slashing
 
-
 If the tool does not uphold its contract defined by off-chain process the
 admin has access to [slash_off_chain_tool] to slash collateral.
-
 
 <a name="@Owner_Cap_2"></a>
 
 ### Owner Cap
 
-
 Is transferred to the sender of this tx.
-
 
 <a name="@Gas_Tickets_3"></a>
 
 ### Gas Tickets
 
-
 By default the tool does not require gas for its invocations.
 Gas needs to be configured, see the <code><a href="../nexus_workflow/gas.md#(nexus_workflow=0x0)_gas">nexus_workflow::gas</a></code> module.
 
-
 <pre><code><b>public</b> <b>entry</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool_for_self">register_off_chain_tool_for_self</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, url: vector&lt;u8&gt;, input_schema: vector&lt;u8&gt;, output_schema: vector&lt;u8&gt;, pay_with: &<b>mut</b> <a href="../dependencies/sui/coin.md#sui_coin_Coin">sui::coin::Coin</a>&lt;<a href="../dependencies/sui/sui.md#sui_sui_SUI">sui::sui::SUI</a>&gt;, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>)
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_register_off_chain_tool"></a>
 
 ## Function `register_off_chain_tool`
 
-
-
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool">register_off_chain_tool</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, url: vector&lt;u8&gt;, input_schema: vector&lt;u8&gt;, output_schema: vector&lt;u8&gt;, pay_with: &<b>mut</b> <a href="../dependencies/sui/coin.md#sui_coin_Coin">sui::coin::Coin</a>&lt;<a href="../dependencies/sui/sui.md#sui_sui_SUI">sui::sui::SUI</a>&gt;, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>): (nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverTool">tool_registry::OverTool</a>&gt;
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_unregister_off_chain_tool"></a>
 
@@ -607,13 +580,8 @@ Permissioned way to unregister a tool.
 
 Soon after this point all DAGs that use this tool will stop working.
 
-
 <pre><code><b>public</b> <b>entry</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_unregister_off_chain_tool">unregister_off_chain_tool</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverTool">tool_registry::OverTool</a>&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, clock: &<a href="../dependencies/sui/clock.md#sui_clock_Clock">sui::clock::Clock</a>)
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_claim_collateral_for_self"></a>
 
@@ -622,13 +590,8 @@ Soon after this point all DAGs that use this tool will stop working.
 Same as [claim_collateral_for_off_chain_tool] but transfers the collateral
 to the sender of this tx.
 
-
 <pre><code><b>public</b> <b>entry</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_claim_collateral_for_self">claim_collateral_for_self</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverTool">tool_registry::OverTool</a>&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, clock: &<a href="../dependencies/sui/clock.md#sui_clock_Clock">sui::clock::Clock</a>, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>)
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_claim_collateral_for_off_chain_tool"></a>
 
@@ -636,13 +599,8 @@ to the sender of this tx.
 
 Return collateral to a tool owner.
 
-
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_claim_collateral_for_off_chain_tool">claim_collateral_for_off_chain_tool</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverTool">tool_registry::OverTool</a>&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, clock: &<a href="../dependencies/sui/clock.md#sui_clock_Clock">sui::clock::Clock</a>): <a href="../dependencies/sui/balance.md#sui_balance_Balance">sui::balance::Balance</a>&lt;<a href="../dependencies/sui/sui.md#sui_sui_SUI">sui::sui::SUI</a>&gt;
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_deescalate"></a>
 
@@ -653,52 +611,29 @@ generic type that doesn't have any permissions within this module.
 
 See also [assert_tool_owner_unchecked_generic].
 
-
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_deescalate">deescalate</a>&lt;T: drop&gt;(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverTool">tool_registry::OverTool</a>&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, witness: T, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>): (nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;T&gt;
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass"></a>
 
 ## Function `did_unregister_period_pass`
 
-
-
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass">did_unregister_period_pass</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, clock: &<a href="../dependencies/sui/clock.md#sui_clock_Clock">sui::clock::Clock</a>): bool
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_assert_tool_registered"></a>
 
 ## Function `assert_tool_registered`
 
-
-
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_assert_tool_registered">assert_tool_registered</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>)
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_assert_tool_owner"></a>
 
 ## Function `assert_tool_owner`
 
-
-
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_assert_tool_owner">assert_tool_owner</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverTool">tool_registry::OverTool</a>&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>)
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_assert_tool_owner_unchecked_generic"></a>
 
@@ -709,26 +644,51 @@ type to be used.
 
 See also [deescalate].
 
-
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_assert_tool_owner_unchecked_generic">assert_tool_owner_unchecked_generic</a>&lt;T&gt;(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;T&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>)
 </code></pre>
 
+<a name="(nexus_workflow=0x0)_tool_registry_tool_status_unverified"></a>
 
+## Function `tool_status_unverified`
 
+Construct [ToolStatus::Unverified].
 
+<pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_tool_status_unverified">tool_status_unverified</a>(): (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolStatus">tool_registry::ToolStatus</a>
+</code></pre>
+
+<a name="(nexus_workflow=0x0)_tool_registry_tool_status_verified"></a>
+
+## Function `tool_status_verified`
+
+Construct [ToolStatus::Verified].
+
+<pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_tool_status_verified">tool_status_verified</a>(): (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolStatus">tool_registry::ToolStatus</a>
+</code></pre>
+
+<a name="(nexus_workflow=0x0)_tool_registry_tool_status"></a>
+
+## Function `tool_status`
+
+Return the tool verification status (verified or unverified).
+
+<pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_tool_status">tool_status</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>): (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolStatus">tool_registry::ToolStatus</a>
+</code></pre>
+
+<a name="(nexus_workflow=0x0)_tool_registry_tool_is_verified"></a>
+
+## Function `tool_is_verified`
+
+Return true iff the tool is verified.
+
+<pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_tool_is_verified">tool_is_verified</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>): bool
+</code></pre>
 
 <a name="(nexus_workflow=0x0)_tool_registry_register_off_chain_tool_"></a>
 
 ## Function `register_off_chain_tool_`
 
-
-
 <pre><code><b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool_">register_off_chain_tool_</a>(self: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, url: vector&lt;u8&gt;, input_schema: vector&lt;u8&gt;, output_schema: vector&lt;u8&gt;, vault: <a href="../dependencies/sui/balance.md#sui_balance_Balance">sui::balance::Balance</a>&lt;<a href="../dependencies/sui/sui.md#sui_sui_SUI">sui::sui::SUI</a>&gt;, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>): (nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverTool">tool_registry::OverTool</a>&gt;
 </code></pre>
-
-
-
-
 
 <a name="(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass_"></a>
 
@@ -736,10 +696,5 @@ See also [deescalate].
 
 Has the tool been unregistered for longer than the lock duration?
 
-
 <pre><code><b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass_">did_unregister_period_pass_</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OffChainTool">tool_registry::OffChainTool</a>, clock: &<a href="../dependencies/sui/clock.md#sui_clock_Clock">sui::clock::Clock</a>): bool
 </code></pre>
-
-
-
-

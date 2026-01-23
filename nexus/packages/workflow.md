@@ -9,6 +9,16 @@ In a nutshell, the workflow engine executes walks over a directed acyclic graph 
 
 The workflow package also includes an on-chain scheduler module for time-based orchestration (queue + periodic scheduling) that can gate DAG execution. See [On-chain scheduler architecture](../scheduler/index.md).
 
+## Network Auth (identity key bindings)
+
+The workflow package includes the `network_auth` module: a shared on-chain registry that binds off-chain identities (Tools and Leader nodes) to Ed25519 public keys used for message signing and verification.
+
+This enables any verifier to discover the currently active public key for an identity and validate signed messages offline, while supporting key rotation and revocation (via proof-of-identity + proof-of-possession).
+
+Reference:
+
+- [`nexus_workflow::network_auth`](./reference/nexus_workflow/network_auth.md)
+
 {% hint style="info" %}
 The terms used in the context of the DAG can be found in the [glossary](../glossary.md#dag-related-terms). Familiarize yourself with them before moving on.
 {% endhint %}

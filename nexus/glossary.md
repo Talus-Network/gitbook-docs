@@ -1,6 +1,12 @@
 # Glossary
 
 - **`Tool Registry`** - Onchain object that holds Tool definitions so that the Leader knows where and how to invoke them.
+- **`Network Auth`** - Onchain trusted binding registry that maps offchain identities (Tools and Leader nodes) to Ed25519 public keys for message signing and verification (supports rotation/revocation and active key discovery).
+- **`Key Binding`** - Per-identity record in Network Auth that stores registered keys, the active key id, and rotation/revocation state.
+- **`Key id (kid)`** - Monotonic identifier for a key within a Key Binding, used to support key rotation.
+- **`Active key`** - The currently selected key id in a Key Binding; verifiers should accept signatures from this key only.
+- **`Proof of identity`** - Onchain capability-based proof that a transaction is authorized to act for an identity (used to create/modify a Key Binding).
+- **`Proof of possession (PoP)`** - Signature-based proof that the registrant controls the private key corresponding to a public key being registered (prevents registering keys you don’t control).
 - **`Tool`** - HTTP service or a smart contract with a predefined interface, executing a specific task. It is a Vertex in the Nexus DAG.
 - **`DAG`** - Directed acyclic graph describes how outputs from Tools flow into inputs of other Tools. This is a static definition.
 - **`JSON DAG`** - JSON representation of a DAG with a Nexus provided schema.

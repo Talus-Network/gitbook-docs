@@ -172,6 +172,14 @@ The CLI automatically:
 - Allows for optional customization of input and output schemas
 - Registers the tool in the Tool Registry with the appropriate data
 
-## Tool authorization
+## Tool authentication and key discovery (Network Auth)
 
-Once there are community Tools, we will need a way to authorize communication between the Leader and a Tool. This has been discussed superficially and it needs to be researched in depth in the future.
+Off-chain Tools are invoked by Nexus Leader nodes. Tools and Leader nodes need a way to authenticate signed messages and discover which public key is currently valid for an identity (with support for rotation and revocation).
+
+Nexus uses the on-chain `nexus_workflow::network_auth` module as a trusted binding registry from identity → Ed25519 public keys. Any verifier can read the binding state on-chain to obtain the active public key for an identity and verify signed messages offline.
+
+Network Auth is protocol-agnostic: it does not define a transport or wire format. It only defines identities, proofs, and key lifecycle.
+
+Reference:
+
+- [`nexus_workflow::network_auth`](packages/reference/nexus_workflow/network_auth.md)
