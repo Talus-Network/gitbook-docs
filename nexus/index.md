@@ -9,7 +9,7 @@ For the purposes of this documentation we make distinction between different use
 - **Nexus maintainer.** Core team member that maintains the Nexus codebase.
 - **Tool developer.** Outside contributor that develops Tools to be used by Agents.
 - **Agent developer.** Outside contributor that creates DAGs and subsequently deploys the Agent smart contract.
-- **Agent user.** End-user that interacts with the ecosystem through clients built by us or outside contributors.
+- **Agent user.** End user that interacts with the ecosystem through clients built by us or outside contributors.
 
 ## [Glossary][glossary]
 
@@ -45,7 +45,7 @@ Docs:
 
 ## [Tools][tool]
 
-Tools are Vertices in the Nexus workflow DAG. They are services with [Nexus-defined interface][tool] schema that perform specific tasks. These Tools are what Agent Developers orchestrate in a workflow DAG to create an Agent.
+Tools are Vertices in the Nexus workflow DAG. They are services with [Nexus defined interface][tool] schema that perform specific tasks. These Tools are what Agent Developers orchestrate in a workflow DAG to create an Agent.
 
 There are a few standard Nexus tools, they can be found in the [Nexus SDK repository's tools][nexus-sdk-tools] folder.
 
@@ -58,6 +58,7 @@ Some examples of what a Tool is:
 Docs:
 
 - [Tool][tool]
+- [Tool communication (HTTPS + signed HTTP)][tool-communication]
 
 ## Flow Controls
 
@@ -79,7 +80,7 @@ Docs:
 
 ## Nexus SDK
 
-Nexus offers [tool and agent developers][actors] an easy-to-use SDK consisting of a CLI and Toolkit to streamline their development. The codebase resides in [this repository][nexus-sdk-repo] and is the main entry point for developers to interact with Nexus. It has a separate section in the developer docs dedicated to it.
+Nexus offers [tool and agent developers][actors] an easy to use SDK consisting of a CLI and Toolkit to streamline their development. The codebase resides in [this repository][nexus-sdk-repo] and is the main entry point for developers to interact with Nexus. It has a separate section in the developer docs dedicated to it.
 
 Docs:
 
@@ -95,6 +96,7 @@ Docs:
 [ref-api]: ../developer-docs/index/nexus-core-api-docs/README.md
 [sui-move-conventions]: conventions/sui-move.md
 [tool]: tool.md
+[tool-communication]: guides/tool-communication.md
 [leader]: crates/leader.md
 [leader-clock]: crates/leader-checkpoint-clock.md
 [actors]: #actors

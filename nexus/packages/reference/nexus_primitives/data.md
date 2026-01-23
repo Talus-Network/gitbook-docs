@@ -40,7 +40,7 @@ Serialization conventions are agreed on by the off-chain realm.
 <code>storage: vector&lt;u8&gt;</code>
 </dt>
 <dd>
- Will be b"inline" if stored on chain, or an identifier of the storage.
+ Will be b"inline" if stored on-chain, or an identifier of the storage.
  Inline data are useful for short data that can be stored on-chain such
  as configurations.
 </dd>
