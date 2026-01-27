@@ -91,7 +91,7 @@
     - [Tools Tab](vision/talus-vision/about-sidebar/tools-tab.md)
     - [JSON Editor Tab](vision/talus-vision/about-sidebar/json-editor-tab.md)
     - [Gas Management Tab](vision/talus-vision/about-sidebar/gas-management-tab.md)
-  - [Technical Glossary](nexus/glossary.md)
+- [Technical Glossary](nexus/glossary.md)
 
 ## 🛠️ Tools
 

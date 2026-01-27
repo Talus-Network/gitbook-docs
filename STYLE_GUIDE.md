@@ -31,7 +31,7 @@ Avoid using reference-style links like:
 [reference]: https://example.com
 ```
 
-> Note that there is a Github workflow to transform reference style links for content that is synced from source repositories (like `nexus-sdk` and `nexus-next`). This ensures that all links in this repo are inline style links for Gitbook compatibility.
+> Note that there is a Github workflow to transform reference style links for content that is synced from source repositories (like `nexus-sdk` and `nexus`). This ensures that all links in this repo are inline style links for Gitbook compatibility.
 
 ## Lists
 
