@@ -12,6 +12,7 @@ The [`NexusClient`] provides access to:
 - [`CryptoActions`]: perform cryptographic handshakes with Nexus
 - [`WorkflowActions`]: publish and execute workflows (DAGs)
 - [`SchedulerActions`]: create and manage scheduler tasks, occurrences, and periodic schedules
+- [`NetworkAuthActions`]: manage message-signing key bindings for Tools/Leader nodes
 
 You can initialize a `NexusClient` via [`NexusClient::builder()`] with:
 
@@ -43,6 +44,17 @@ async fn main() -> anyhow::Result<()> {
     Ok(())
 }
 ```
+
+---
+
+## 🔏 Network Auth (signed HTTP)
+
+`NexusClient` exposes `network_auth()` for Tool/Leader node message-signing key operations:
+
+- register/rotate a Tool message-signing key on-chain, and
+- export a local allowlist file of permitted Leader nodes for Tool-side verification (no RPC at runtime).
+
+This is the same functionality exposed via the CLI under `nexus tool auth ...`.
 
 ---
 
@@ -85,6 +97,8 @@ println!("Gas budget added in tx: {:?}", result.tx_digest);
 
 **Returns:**
 
+[`AddBudgetResult`]: includes the transaction digest.
+
 ---
 
 ## 🔐 Cryptographic Actions
@@ -116,6 +130,9 @@ assert!(handshake.session);
 
 **Returns:**
 
+[`HandshakeResult`]: includes session data and transaction digests for claim and association steps.
+
+---
 
 ## ⚡ Workflow Actions
 
@@ -140,8 +157,10 @@ println!("Published DAG ID: {:?}", publish_result.dag_object_id);
 
 **Returns:**
 
+[`PublishResult`]: includes the transaction digest and DAG object ID.
 
 ---
+
 ### 2. Execute a Workflow
 
 ```rust
@@ -179,8 +198,11 @@ println!("Execution object ID: {:?}", execute_result.execution_object_id);
 
 **Returns:**
 
+[`ExecuteResult`]: includes the transaction digest and execution object ID.
 
 ---
+
+### 3. Inspect Workflow Execution
 
 ```rust
 use tokio::time::Duration;
@@ -214,10 +236,12 @@ println!("✅ Execution finished successfully!");
 
 **Returns:**
 
+[`InspectExecutionResult`]: includes an event stream and a poller handle.
 
 ---
 
 ## ⏱️ Scheduler Actions
+
 The [`SchedulerActions`] API allows you to create and manage **on-chain scheduler tasks**.
 
 A scheduler task is split into:
@@ -393,4 +417,3 @@ The `NexusError` enum categorizes issues from configuration errors to RPC and tr
 ## 🪶 Summary
 
 The [`NexusClient`] aims to make building, publishing, and executing Nexus workflows _simple, safe, and async-ready_. It abstracts away Sui transaction signing and gas management while providing a clean modular interface.
-
