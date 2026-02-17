@@ -2,7 +2,7 @@
 
 This guide explains how to construct DAG (Directed Acyclic Graph) JSON files for the Nexus platform. DAGs define the workflow that an Agent will execute.
 
-For an explanation of the terms and rules used below, refer to [the Nexus workflow documentation](../../nexus-next/packages/workflow.md).
+For an explanation of the terms and rules used below, refer to [the Nexus workflow documentation][nexus-next-workflow].
 
 {% hint style="info"%}
 Note that for all DAG related terms in the configuration JSON file, snake casing is applied.
@@ -35,8 +35,7 @@ A DAG JSON file consists of sections defining the graph's components:
   "name": "unique_vertex_name",
   "entry_ports": [
     {
-      "name": "input_port_name", // Must match the tool's input schema
-      "encrypted": false // Optional, default is false
+      "name": "input_port_name" // Must match the tool's input schema
     }
     // ... potentially more entry ports
   ]
@@ -69,8 +68,7 @@ Edges define the flow of data between vertices, connecting an output port of a s
   "from": {
     "vertex": "source_vertex_name", // Name from the "vertices" list
     "output_variant": "ok", // e.g., ok, err, gt, lt, eq
-    "output_port": "output_port_name",
-    "encrypted": true // Optional, default is false
+    "output_port": "output_port_name"
   },
   "to": {
     "vertex": "target_vertex_name", // Name from the "vertices" list
@@ -82,7 +80,6 @@ Edges define the flow of data between vertices, connecting an output port of a s
 
 - The `source_vertex_name` and `target_vertex_name` refer to the `name` field of vertices defined in the `vertices` list.
 - The `target_input_port_name` must be a valid input port for the tool used by the `target_vertex_name`.
-- If the `encrypted` field is set to `true`, the data will be encrypted before being sent on-chain. This is useful for sensitive data that should not be exposed in plaintext.
 
 ## 3.1 Special edge types
 
@@ -92,7 +89,7 @@ Edges define the flow of data between vertices, connecting an output port of a s
 - **`do_while`** → Repeats execution by looping back as long as a condition is satisfied.
 - **`break`** → Exits a `do_while` loop when the condition is no longer met.
 
-Read more about looping and flow controls in the [looping documentation](../../nexus-next/flow-controls/looping.md).
+Read more about looping and flow controls in the [looping documentation][looping].
 
 ## 4. Default Values
 
@@ -111,8 +108,8 @@ Default values provide static inputs to vertices:
 
 **Important Constraints:**
 
-- An _input port_ can receive data either from an _incoming edge_ or a _default value_, but **never both**. ([workflow rules](../../nexus-next/packages/workflow.md) Rule 4)
-- Entry ports **cannot** have default values (by definition). Default values are only permitted for input ports that are _not_ entry ports. ([workflow rules](../../nexus-next/packages/workflow.md) Rule 11)
+- An _input port_ can receive data either from an _incoming edge_ or a _default value_, but **never both**. ([workflow rules][nexus-next-workflow] Rule 4)
+- Entry ports **cannot** have default values (by definition). Default values are only permitted for input ports that are _not_ entry ports. ([workflow rules][nexus-next-workflow] Rule 11)
 
 ## 5. Entry Groups (Optional)
 
@@ -148,8 +145,7 @@ Outputs can be defined on vertices that have no outgoing edges. These can be tho
 {
   "vertex": "vertex_name", // Name must exist in the `vertices` list
   "output_variant": "ok", // e.g., ok, err, gt, lt, eq
-  "output_port": "output_port_name", // e.g., result
-  "encrypted": true // Optional, default is false
+  "output_port": "output_port_name" // e.g., result
 }
 ```
 
@@ -169,21 +165,18 @@ Outputs can be defined on vertices that have no outgoing edges. These can be tho
 
 ## 7. Validation Rules
 
-The [Nexus CLI](../cli.md) (`nexus dag validate`) performs static analysis to enforce the critical rules defined in [workflow rules](../../nexus-next/packages/workflow.md).
+The [Nexus CLI][nexus-cli] (`nexus dag validate`) performs static analysis to enforce the critical rules defined in [workflow rules][nexus-next-workflow].
 
 ## 8. Best Practices
 
 1. **Naming Conventions**:
-
    - Use descriptive names for vertices.
 
 1. **Organization**:
-
    - Keep the DAG as simple as possible. (But no simpler! For example, branching and entry groups can make powerful composite DAG structures. )
    - Use entry groups to provide different ways of starting DAG execution.
 
 1. **Error Handling**:
-
    - Consider all possible `output_variant`s (e.g., `ok`, `err`) from tools.
    - Explicitly handle error paths or ensure they lead to acceptable end states.
    - Use appropriate comparison/logic tools for branching.
@@ -198,29 +191,24 @@ The [Nexus CLI](../cli.md) (`nexus dag validate`) performs static analysis to en
 Here's a step-by-step process to create a DAG:
 
 1. **Define Requirements**:
-
    - What inputs are needed?
    - What outputs are expected?
    - What processing steps are required?
 
 1. **Design the Flow**:
-
    - Map out the vertices (tools) needed
    - Determine the connections
    - Identify branching points
 
 1. **Create Entry Points**:
-
    - Specify entry ports and default values
    - Set up entry groups if needed
 
 1. **Add Processing Vertices**:
-
    - Define intermediate vertices (tools)
    - Set up default values
 
 1. **Connect the Dots**:
-
    - Create edges between vertices
    - Handle all output variants
    - Ensure proper data flow
@@ -241,5 +229,11 @@ For working examples, see the following files in the `cli/src/dag/_dags` directo
 - `ig_story_planner_valid.json`: Example of a complex workflow
 - `entry_groups_valid.json`: Example of using entry groups.
 
-For examples of invalid DAGs and common mistakes to avoid (especially regarding Rule 5 - Race Conditions), see the diagrams in [workflow documentation](../../nexus-next/packages/workflow.md) and the `*_invalid.json` files in the [testing DAG directory](https://github.com/Talus-Network/nexus-sdk/tree/v0.5.0/sdk/src/dag/_dags).
+For examples of invalid DAGs and common mistakes to avoid (especially regarding Rule 5 - Race Conditions), see the diagrams in [workflow documentation][nexus-next-workflow] and the `*_invalid.json` files in the [testing DAG directory][example-dags].
 
+<!-- List of references -->
+
+[nexus-next-workflow]: ../../nexus-next/packages/workflow.md
+[example-dags]: https://github.com/Talus-Network/nexus-sdk/tree/v0.5.0/sdk/src/dag/_dags
+[nexus-cli]: ../cli.md
+[looping]: ../../nexus-next/flow-controls/looping.md
