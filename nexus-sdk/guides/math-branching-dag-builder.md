@@ -101,8 +101,7 @@ First, we define all the nodes (steps) in our graph. Each vertex needs a unique 
       // 'b' will be provided by a default value.
       "entry_ports": [
         {
-          "name": "a",
-          "encrypted": false
+          "name": "a"
         }
       ]
     },
@@ -359,8 +358,7 @@ Combining these sections gives us the complete `math_branching.json`:
       "name": "add_input_and_default",
       "entry_ports": [
         {
-          "name": "a",
-          "encrypted": false
+          "name": "a"
         }
       ]
     },
@@ -487,4 +485,3 @@ This example showcases how to combine simple tools and DAG structure definitions
 ## Up Next
 
 Want to extend this example? Follow the next part of the guide to see how we can add another entry point to the DAG and manage this through entry groups.
-
