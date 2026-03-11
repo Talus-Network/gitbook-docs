@@ -79,7 +79,7 @@ sui client --yes
 {% endhint %}
 
 ```bash
-sui client new-env --alias devnet --rpc https://rpc.ssfn.devnet.production.taluslabs.dev
+sui client new-env --alias devnet --rpc https://grpc.ssfn.devnet.production.taluslabs.dev
 sui client switch --env devnet
 ```
 
