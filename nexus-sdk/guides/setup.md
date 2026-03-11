@@ -79,7 +79,7 @@ sui client --yes
 {% endhint %}
 
 ```bash
-sui client new-env --alias devnet --rpc https://rpc.ssfn.devnet.production.taluslabs.dev
+sui client new-env --alias devnet --rpc https://grpc.ssfn.devnet.production.taluslabs.dev
 sui client switch --env devnet
 ```
 
@@ -228,4 +228,3 @@ Open the [Talus Sui Explorer](https://explorer.devnet.taluslabs.dev/).
 ---
 
 After completing these steps, you are ready to build and execute workflows using the Nexus SDK. To build your first workflow, check the [Dev Quickstart guide](math-branching-quickstart.md).
-
