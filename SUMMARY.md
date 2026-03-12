@@ -103,3 +103,7 @@
   - [Echanges: Coinbase](tools/exchanges-coinbase/README.md)
   - [HTTP](tools/http/README.md)
   - [Templating: Jinja](tools/templating-jinja/README.md)
+
+## Looking for a home
+
+* [nexus-sdk/guides/tool-communication.md](nexus-sdk/guides/tool-communication.md)
