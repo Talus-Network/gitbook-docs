@@ -1,6 +1,6 @@
 # Extending Your DAG with Entry Groups
 
-This guide builds on the [Build the Quickstart guide](./math-branching-dag-builder.md) by extending the example to support multiple entry points using entry groups. You'll take the original [`math_branching.json`](https://github.com/Talus-Network/nexus-sdk/blob/main/sdk/src/dag/_dags/math_branching.json) DAG and add an alternative entry path that allows users to directly provide two numbers for multiplication instead of adding a constant to the input.
+This guide builds on the [Build the Quickstart guide][math-branching-dag-builder-guide] by extending the example to support multiple entry points using entry groups. You'll take the original [`math_branching.json`](https://github.com/Talus-Network/nexus-sdk/blob/main/sdk/src/dag/_dags/math_branching.json) DAG and add an alternative entry path that allows users to directly provide two numbers for multiplication instead of adding a constant to the input.
 
 {% hint style="info" %} Prerequisites
 Follow the [setup guide](setup.md) to get properly setup in case you haven't.
@@ -112,8 +112,7 @@ We'll start with the vertices from our original DAG and add the new `mul_inputs`
       "name": "add_input_and_default",
       "entry_ports": [
         {
-          "name": "a",
-          "encrypted": false
+          "name": "a"
         }
       ]
     },
@@ -125,12 +124,10 @@ We'll start with the vertices from our original DAG and add the new `mul_inputs`
       "name": "mul_inputs",
       "entry_ports": [
         {
-          "name": "a",
-          "encrypted": false
+          "name": "a"
         },
         {
-          "name": "b",
-          "encrypted": false
+          "name": "b"
         }
       ]
     },
@@ -360,8 +357,7 @@ Combining these sections gives us the complete `math_branching_entry_group.json`
       "name": "add_input_and_default",
       "entry_ports": [
         {
-          "name": "a",
-          "encrypted": false
+          "name": "a"
         }
       ]
     },
@@ -373,12 +369,10 @@ Combining these sections gives us the complete `math_branching_entry_group.json`
       "name": "mul_inputs",
       "entry_ports": [
         {
-          "name": "a",
-          "encrypted": false
+          "name": "a"
         },
         {
-          "name": "b",
-          "encrypted": false
+          "name": "b"
         }
       ]
     },
@@ -608,5 +602,9 @@ In this guide, we extended our original branching math DAG to support multiple e
 
 Entry groups are a powerful feature of Nexus DAGs that enable more flexible and modular workflows while maintaining the safety guarantees of the DAG execution model. They allow a single DAG to support multiple different starting states and input combinations while preventing potential race conditions.
 
-For more advanced usage of entry groups and other DAG features, refer to the [DAG Construction Guide](./dag-construction.md).
+For more advanced usage of entry groups and other DAG features, refer to the [DAG Construction Guide][dag-construction].
 
+<!-- List of references -->
+
+[dag-construction]: ./dag-construction.md
+[math-branching-dag-builder-guide]: ./math-branching-dag-builder.md
