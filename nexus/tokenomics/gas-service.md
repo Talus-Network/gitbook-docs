@@ -4,354 +4,534 @@ The concepts related to tokenomics as explained in [the tokenomics section][toke
 
 ## Overview
 
-The gas payment and settlement system in Nexus provides a flexible way to handle gas payments for tool invocations. It supports multiple modes of operation and allows for different payment strategies through gas extensions.
+The gas payment and settlement system in Nexus provides a flexible and **two-phase gas locking model** for tool invocations.
 
-## Core Concepts
+Gas is:
 
-### Gas Service
+1. **Locked before invocation**
+1. **Finalized (paid) only after successful execution**
+1. **Refunded if execution aborts**
 
-The `GasService` is a shared object that manages all gas-related operations. It maintains:
+This ensures:
 
-- Gas tickets for tools.
-- Gas budgets for different scopes.
-- Execution gas settlement state.
-- Tool-specific gas settings.
+- Tools only get paid for successful invocations.
+- Users never permanently lose funds for aborted executions.
+- Gas settlement is deterministic and idempotent.
+- Offchain actors can verify settlement state.
 
-### Gas Tickets
+---
 
-Gas tickets represent prepaid access to tool invocations. They can be configured with different modes of operation:
+# Core Concepts
 
-1. **Expiry Mode**: Allows unlimited invocations within a specific time period.
-1. **Limited Invocations Mode**: Allows a fixed number of invocations.
-1. **Upon Discretion of Tool Mode**: Tool owner has complete control over ticket validity.
+## GasService
 
-### Scopes
+`GasService` is a shared object that:
 
-Gas tickets and budgets can be associated with different scopes:
+- Tracks tool default invocation costs
+- Derives `ToolGas`, `ExecutionGas`, and `InvokerGas`
+- Coordinates gas locking and settlement
 
-1. **Execution Scope**: Specific to a single DAG execution.
-1. **Worksheet Type Scope**: Applies to all executions of a specific worksheet type, i.e. the TAP.
-1. **Invoker Address Scope**: Applies to all executions initiated by a specific address.
+It does **not** hold funds directly — funds live in:
 
-{% hint style="warning" %}
-Gas is secured before the tool is invoked to ensure that the tool always gets paid for its usage according to the selected mode.
+- `ToolGas.vault`
+- `InvokerGas.vault`
 
-This does expose the tool owner to slashing risk, if they do not deliver the service according to the Nexus defined protocol.
-{% endhint %}
+---
 
-### Other Data Structures
+## ExecutionGas
 
-#### ExecutionGas
+`ExecutionGas` is derived per `DAGExecution`.
 
-Tracks gas settlement state for a specific DAG execution. This struct maintains a record of which vertices in the execution have had their gas settled. Once a vertex is marked as settled, it can be invoked once.
+It maintains:
 
-#### GasBudgets
+- `locked_vertices` → vertices whose gas has been locked
+- `tool_cost_snapshot` → price snapshot at execution start
+- `claimed_leader_gas` → audit trail for leader claims
 
-Manages gas budgets for different scopes in the system. The inner Bag stores balances of SUI coins, with the key being a Scope. These budgets are used as a fallback payment method when no gas tickets are available. See [Default Gas Budget](#1-default-gas-budget).
+### Important Semantics
 
-#### ToolGas
+A vertex being “locked” means:
 
-Manages all gas-related state for a specific tool. This includes:
+> Gas has been reserved and the vertex can be invoked once.
 
-- Collected gas payments in the vault
-- Default cost per invocation
-- Tool-specific gas settings
-- Available gas tickets for different scopes
+It does **not** mean the tool has been paid yet.
 
-## Gas Payment Modes
+Payment happens later via:
 
-### 1. Default Gas Budget
+```move
+finalize_gas_state_for_vertex(...)
+```
 
-Tools can set a default cost per invocation. When no gas tickets are available, the system will attempt to charge from the gas budget in the following order:
+If execution aborts, locked entries are refunded via:
 
-1. Execution-specific budget
-1. Worksheet type budget
-1. Invoker address budget
+```move
+refund_aborted_execution_gas_for_tool(...)
+```
 
-### 2. Gas Extensions
+---
 
-Gas extensions provide alternative payment strategies. The [default extension][default-gas-extension] implements an expiry-based system where users can:
+## ToolGas
 
-- Buy access for a specific duration (e.g., 10 minutes).
-- Pay a fixed rate per minute.
-- Get unlimited invocations during the purchased period.
+Derived per tool (`tool.fqn()`).
 
-## Gas Settlement Process
+Holds:
 
-1. When a vertex (tool) is invoked, the system checks if gas has been settled.
-1. If not settled, it attempts to find a valid gas ticket for the different scopes in order.
-1. Gas tickets are validated against the execution's creation timestamp, not the current time.
-1. If no valid ticket is found, it attempts to charge from the gas budget.
-1. Once settled, the vertex can be invoked.
-1. Gas settlement is idempotent - subsequent checks won't charge again.
+- `vault` → collected payments
+- `tickets` → prepaid access
+- `settings` → extension config
 
-### Events
+The vault only increases when:
 
-The system emits several types of events for gas-related operations:
+```move
+finalize_gas_state_for_vertex(...)
+```
 
-1. `GasSettlementUpdateEvent` for each gas settlement attempt:
+is called successfully.
+
+---
+
+## InvokerGas
+
+Derived per invoker address.
+
+Holds gas budgets scoped by:
+
+- Execution
+- Worksheet type
+- Invoker address
+
+Each budget tracks:
+
+```move
+GasFunds {
+  bal: Balance<SUI>,
+  locked: u64
+}
+```
+
+`locked` ensures:
+
+- Funds are reserved before invocation
+- Funds are reduced only on finalization
+- Locked funds can be unlocked on abort
+
+---
+
+# Gas Tickets
+
+Gas tickets represent prepaid access to tool invocations. They are implemented in [the default gas extension][default-gas-extension].
+
+They are stored in `ToolGas.tickets` and can operate in three modes:
+
+## 1. Expiry
+
+Unlimited invocations until:
+
+```move
+created_at_ms + valid_for_ms
+```
+
+Validation is performed against:
+
+```move
+execution.execution_created_at()
+```
+
+(not current time).
+
+No funds are locked per invocation.
+
+---
+
+## 2. Limited Invocations
+
+Allows a fixed number of invocations.
+
+Tracks:
+
+```move
+total
+used
+locked
+```
+
+Lock phase:
+
+- `locked += 1`
+
+Finalize phase:
+
+- `used += 1`
+- `locked -= 1`
+- ticket removed if fully consumed
+
+Abort phase:
+
+- `locked -= 1`
+- `used` unchanged
+
+This ensures correct accounting across retries and aborts.
+
+---
+
+## 3. Upon Discretion of Tool
+
+Tool owner can revoke at any time.
+
+No internal locking counters.
+No automatic accounting.
+Used for custom gas strategies.
+
+---
+
+# Scopes
+
+Gas tickets and budgets can be associated with:
+
+1. **Execution Scope**
+1. **Worksheet Type Scope**
+1. **Invoker Address Scope**
+
+When locking gas, the system searches in this order (specific -> general):
+
+```move
+Execution → WorksheetType → InvokerAddress
+```
+
+---
+
+# Gas Locking Model
+
+The system follows a strict two-phase model.
+
+---
+
+## Phase 1 — Lock
+
+Triggered via:
+
+```move
+lock_gas_state_for_vertex(...)
+```
+
+or
+
+```move
+lock_gas_state_for_tool(...)
+```
+
+Internally calls:
+
+```move
+try_lock_gas_state_for_vertex(...)
+```
+
+Locking:
+
+1. Attempts to stamp a valid gas ticket.
+1. Otherwise attempts to reserve budget.
+1. Otherwise marks vertex as Free (if cost is zero).
+
+If successful:
+
+- Entry added to `ExecutionGas.locked_vertices`
+- Budget `locked` value increased (if budget used)
+- `GasLockUpdateEvent` emitted
+
+Locking is:
+
+- Permissionless
+- Idempotent
+- Safe to call multiple times
+
+---
+
+## Phase 2 — Finalize (Success Path)
+
+Called after successful tool invocation:
+
+```move
+finalize_gas_state_for_vertex(...)
+```
+
+Behavior depends on how the vertex was settled:
+
+### Ticket (Expiry / UponDiscretion)
+
+No fund transfer.
+
+### Ticket (LimitedInvocations)
+
+- Decrement `locked`
+- Increment `used`
+- Remove ticket if exhausted
+
+### Budget
+
+- Reduce `locked`
+- Split funds from `bal`
+- Transfer to `ToolGas.vault`
+
+Emits:
+
+```move
+GasUnlockUpdateEvent { was_refunded: false }
+```
+
+---
+
+## Phase 3 — Abort (Failure Path)
+
+Called for aborted executions:
+
+```move
+refund_aborted_execution_gas_for_tool(...)
+```
+
+For each locked vertex:
+
+### Budget
+
+- Reduce `locked`
+- Funds remain in user balance
+
+### Ticket (LimitedInvocations)
+
+- Decrement `locked`
+- `used` unchanged
+
+### Ticket (Expiry / UponDiscretion)
+
+No state mutation needed
+
+Emits:
+
+```move
+GasUnlockUpdateEvent { was_refunded: true }
+```
+
+After all tools are processed:
+
+```move
+assert_aborted_execution_fully_refunded(...)
+```
+
+can be called as a sanity check.
+
+---
+
+# Gas Payment Modes
+
+## 1. Default Gas Budget
+
+If no ticket applies:
+
+System attempts to reserve from budgets in order:
+
+1. Execution scope
+1. Worksheet type scope
+1. Invoker address scope
+
+Reservation occurs during lock.
+Transfer occurs during finalize.
+
+---
+
+## 2. Gas Extensions
+
+Gas extensions rely on:
+
+- ToolGas settings
+- Custom tickets
+- Ticket logic
+
+Extensions can:
+
+- Implement time-based access
+- Implement subscription models
+- Implement metered invocations
+
+---
+
+# Leader Gas
+
+Leaders claim gas for:
+
+- Execution
+- Priority
+- Pre-key handshake
+
+Functions:
+
+```move
+claim_leader_gas(...)
+claim_leader_gas_for_self(...)
+claim_leader_gas_for_pre_key(...)
+```
+
+Leader gas is charged immediately from `InvokerGas`.
+
+Each claim emits:
+
+```move
+LeaderClaimedGasEvent {
+    network,
+    amount,
+    purpose
+}
+```
+
+Claims are recorded in:
+
+```move
+ExecutionGas.claimed_leader_gas
+```
+
+⚠ Current limitation:
+Leader can claim arbitrary amounts.
+External observers must validate via events.
+
+---
+
+# Events
+
+## GasLockUpdateEvent
+
+Emitted on lock attempt.
 
 ```rust
-public struct GasSettlementUpdateEvent has copy, drop {
+public struct GasLockUpdateEvent {
     execution: ID,
-    vertex: dag::Vertex,
+    vertex: dag::RuntimeVertex,
     tool_fqn: AsciiString,
-    /// Whether the gas ticket was stamped ok.
-    ///
-    /// Multiple of these events can be emitted for the same execution/vertex/tool_fqn
-    /// combination, but only one of them will have this field set to true.
-    was_settled: bool,
+    was_locked: bool,
 }
 ```
 
-1. `LeaderClaimedGasEvent` for tracking gas claims by leaders:
+- Multiple events may be emitted
+- Only one will have `was_locked = true`
+
+---
+
+## GasUnlockUpdateEvent
+
+Emitted on finalize or refund.
 
 ```rust
-public struct LeaderClaimedGasEvent has copy, drop {
-    /// Who is the leader.
+public struct GasUnlockUpdateEvent {
+    execution: ID,
+    vertex: dag::RuntimeVertex,
+    tool_fqn: AsciiString,
+    was_refunded: bool,
+}
+```
+
+- `was_refunded = false` → successful payment
+- `was_refunded = true` → refund after abort
+
+---
+
+## LeaderClaimedGasEvent
+
+```rust
+public struct LeaderClaimedGasEvent {
     network: ID,
-    /// How much was claimed.
     amount: u64,
+    purpose: AsciiString,
 }
 ```
 
-### Checking Gas Payment Status
+Used for auditing leader behavior.
 
-There are several ways to check if gas has been paid for a tool invocation:
+---
 
-1. **Using GasService State**
-   - Anyone can check if gas has been settled for a specific vertex in an execution using [`is_execution_vertex_settled`](#view-operations).
-   - This is useful both for onchain and offchain actors.
-   - This is the most direct way to verify gas payment status.
-   - Returns a boolean indicating whether the vertex can be invoked.
-1. **Listening to Events**
-   - The system emits `GasSettlementUpdateEvent` for each gas settlement attempt.
-   - Anyone can listen to these events to track gas settlement status.
-1. **Checking Gas Tickets**
-   - Tool owners can check their tool's gas tickets and settings.
-   - Users can check their own gas budgets and tickets.
-   - This is useful _before_ the invocation is requested to know whether it's possible to execute with given gas tickets.
-1. **Viewing Gas Budgets**
-   - Users can check their remaining gas budgets for different scopes.
-   - This is useful _before_ the invocation is requested to know whether it's possible to execute with given gas budgets.
+# Checking Gas Payment Status
 
-## Owner Capabilities
+## 1. Onchain
 
-Tool owners have two levels of capabilities for managing their tool's gas operations:
+Use:
 
-1. `OverTool` - The main owner cap that provides full control over the tool, including gas operations
-1. `OverGas` - A de-escalated version of `OverTool` that provides limited permissions focused only on gas-related operations
-
-The `OverGas` cap is designed to make tool owners more comfortable using gas extensions by providing a more restricted set of permissions. It allows them to:
-
-- Add and remove gas tickets.
-- Change gas settings.
-- Manage gas-related operations.
-
-without giving them access to other important tool state. This separation of concerns helps maintain security while enabling tool owners to manage their gas operations effectively.
-
-## Security Considerations
-
-1. Gas tickets with expiry or limited invocations cannot be revoked.
-1. Only tickets in "Upon Discretion of Tool" mode can be revoked.
-1. Tool owners can claim gas at any time.
-1. Gas budgets can be refunded if the execution is finished.
-1. Workflows that want to pay gas on behalf of the user must assert that they execute in a network with a trusted leader. See [current limitation below](#current-limitation)
-
-### Current limitation
-
-In the current implementation the Nexus leader can claim any amount of gas it wants from anybody who uploads gas budgets.\
-To hold the leader accountable we emit `LeaderClaimedGasEvent` event which can be read by 3rd parties that check that the amount claimed is not over the top.
-
-However, this implies that as of right now, the leader is has to be trusted.
-
-## Key Operations
-
-<details>
-
-<summary>Tool Owner Operations</summary>
-
-### Gas Cost Management
-
-1. **Setting Default Cost**\
-    Sets the default cost in MIST for a single tool invocation. Calling this function enables gas collection by the tool so it's imperative the tool owners calls it to collect fees for tool execution.
-
-    ```rust
-    public fun set_single_invocation_cost_mist(
-        gas_service: &mut GasService,
-        tool_registry: &ToolRegistry,
-        owner_cap: &CloneableOwnerCap<OverGas>,
-        fqn: AsciiString,
-        single_invocation_cost_mist: u64,
-        ctx: &mut TxContext,
-    )
-    ```
-
-    > Set `single_invocation_cost_mist` to 2^64-1 to enable gas collection but require a gas extension to do it.
-1. **Claiming Gas**\
-    Allows the tool owner to withdraw all collected gas payments for their tool.
-
-    ```rust
-    public fun claim_gas(
-        gas_service: &mut GasService,
-        tool_registry: &ToolRegistry,
-        owner_cap: &CloneableOwnerCap<OverTool>,
-        fqn: AsciiString,
-        ctx: &mut TxContext,
-    ): Balance<SUI>
-    ```
-
-### Gas Ticket Management
-
-1. **Adding Gas Tickets**\
-    Creates a new gas ticket with specified scope and mode of operation.
-
-    ```rust
-    public fun add_gas_ticket(
-        gas_service: &mut GasService,
-        tool_registry: &ToolRegistry,
-        owner_cap: &CloneableOwnerCap<OverGas>,
-        fqn: AsciiString,
-        scope: Scope,
-        modus_operandi: ModusOperandi,
-        clock: &Clock,
-        ctx: &mut TxContext,
-    )
-    ```
-
-The tool owner can use "upon discretion of the tool" mode to be able to `revoke_gas_ticket` _at will_.
-
-1. **Revoking Gas Tickets**\
-    Revokes a gas ticket that was created with the "Upon Discretion of Tool" mode.
-
-    ```rust
-    public fun revoke_gas_ticket(
-        gas_service: &mut GasService,
-        tool_registry: &ToolRegistry,
-        owner_cap: &CloneableOwnerCap<OverGas>,
-        fqn: AsciiString,
-        scope: Scope,
-        ctx: &mut TxContext,
-    )
-    ```
-
-1. **Managing Gas Settings**\
-    The tool owner can set the gas settings for the tool.
-
-    ```rust
-    public fun get_tool_gas_setting_mut(
-        gas_service: &mut GasService,
-        tool_registry: &ToolRegistry,
-        owner_cap: &CloneableOwnerCap<OverGas>,
-        fqn: AsciiString,
-        ctx: &mut TxContext,
-    ): &mut Bag
-    ```
-
-1. **De-escalating Permissions**\
-    Converts a tool owner cap into a gas owner cap with reduced permissions.
-
-    ```rust
-    public fun deescalate(
-        tool_registry: &ToolRegistry,
-        owner_cap: &CloneableOwnerCap<OverTool>,
-        fqn: AsciiString,
-        ctx: &mut TxContext,
-    ): CloneableOwnerCap<OverGas>
-    ```
-
-</details>
-
-<details>
-
-<summary>User Operations</summary>
-
-#### Gas Budget Management
-
-1. **Donating to Tool**\
-   Donate given balance to the tool's gas total. This is used to charge the user from gas extensions and make it available to the tool.
-
-```rust
-public fun donate_to_tool(
-    self: &mut GasService, fqn: AsciiString, amount: Balance<SUI>,
-) {
-    let tool_gas = self.tools_gas.borrow_mut(fqn);
-    tool_gas.vault.join(amount);
-}
+```move
+is_execution_vertex_locked(...)
 ```
 
-1. **Adding Gas Budget**\
-    Adds a gas budget for a specific scope (execution, worksheet type, or invoker address).
+If `true`, the vertex can be invoked once.
 
-    ```rust
-    public fun add_gas_budget(
-        gas_service: &mut GasService,
-        scope: Scope,
-        budget: Balance<SUI>,
-    )
-    ```
+After finalization, it will no longer appear locked.
 
-1. **Refunding Execution Gas Budget**\
-    Refunds any remaining gas budget for a completed execution to the invoker. This operation also cleans up storage by removing the execution gas state, helping to reduce storage costs.
+---
 
-    ```rust
-    public fun refund_execution_gas_budget(
-        gas_service: &mut GasService,
-        execution: &dag::DAGExecution,
-        ctx: &mut TxContext,
-    )
-    ```
+## 2. Events
 
-1. **Refunding Invoker Gas Budget**\
-    Refunds any remaining gas budget associated with the invoker's address.
+Monitor:
 
-    ```rust
-    public fun refund_invoker_gas_budget(
-        gas_service: &mut GasService,
-        ctx: &mut TxContext,
-    ): Balance<SUI>
-    ```
+- `GasLockUpdateEvent`
+- `GasUnlockUpdateEvent`
+- `LeaderClaimedGasEvent`
 
-1. **Refunding Worksheet Gas Budget**\
-    Refunds any remaining gas budget associated with a specific worksheet type.
+---
 
-    ```rust
-    public fun refund_worksheet_gas_budget<T>(
-        gas_service: &mut GasService,
-        _witness: &T,
-    ): Balance<SUI>
-    ```
+# Refunds
 
-</details>
+Users can reclaim unused funds:
 
-<details>
+- `refund_execution_gas_budget`
+- `refund_invoker_gas_budget`
+- `refund_worksheet_gas_budget`
 
-<summary>View Operations</summary>
+Execution refund transfers remaining unlocked funds to invoker.
 
-#### View Operations
+Aborted executions require:
 
-1. **Checking Vertex Settlement**\
-    Verifies if gas has been settled for a specific vertex in an execution.
+```move
+refund_aborted_execution_gas_for_tool(...)
+```
 
-    ```rust
-    public fun is_execution_vertex_settled(
-        gas_service: &GasService,
-        execution: &dag::DAGExecution,
-        vertex: dag::Vertex,
-    ): bool
-    ```
+for each tool involved.
 
-1. **Reading Tool Gas Settings**\
-    Gets read-only access to a tool's gas settings.
+---
 
-    ```rust
-    public fun get_tool_gas_setting(
-        gas_service: &GasService,
-        fqn: AsciiString,
-    ): &Bag
-    ```
+# Owner Capabilities
 
-</details>
+Two caps exist:
+
+## `OverTool`
+
+Full tool control (including vault withdrawal)
+
+## `OverGas`
+
+Restricted to gas management only:
+
+- Add tickets
+- Revoke discretionary tickets
+- Modify settings
+
+De-escalation:
+
+```move
+deescalate(...)
+```
+
+---
+
+# Security Considerations
+
+1. Gas is locked before invocation.
+1. Tools are paid only after successful execution.
+1. Aborted executions must be explicitly refunded.
+1. Expiry and Limited tickets cannot be revoked.
+1. Leader claims must be externally audited.
+
+---
+
+# Key Semantics Summary
+
+| Stage    | Budget           | Limited Ticket         | Expiry Ticket |
+| -------- | ---------------- | ---------------------- | ------------- |
+| Lock     | locked += amount | locked += 1            | mark locked   |
+| Finalize | transfer to tool | used += 1, locked -= 1 | remove lock   |
+| Abort    | locked -= amount | locked -= 1            | remove lock   |
 
 <!-- List of references -->
 

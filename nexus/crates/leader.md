@@ -2,14 +2,14 @@
 
 ## Sequence diagram
 
-High-level sequence diagram describing the duties of the Leader.
+High level sequence diagram describing the duties of the Leader.
 
 ```mermaid
 sequenceDiagram
-    participant RG as [On-chain] Registry
-    participant WF as [On-chain] Workflow
-    participant LD as [Off-chain] Leader
-    participant DB as [Off-chain] Indexer
+    participant RG as [On chain] Registry
+    participant WF as [On chain] Workflow
+    participant LD as [Off chain] Leader
+    participant DB as [Off chain] Indexer
     participant TL as [Either] Tool
 
     critical initialize service
@@ -77,6 +77,10 @@ There are multiple processes running in parallel in the leader node. These are a
 - Verifies output data from Tools based on its output schemas.
 - Finally, it halts until a channel is open to send a TX back to Workflow (this can happen at any point during the execution if it errors).
 
+Tool invocation details (HTTPS/TLS, signed HTTP headers, key discovery/caching):
+
+- [Tool communication (HTTPS + signed HTTP)](../guides/tool-communication.md)
+
 1. **Workflow communication channel**
 
 - N channels can run in parallel where N is the number of `Coin<SUI>` objects the Leader has available.
@@ -92,7 +96,7 @@ There are multiple processes running in parallel in the leader node. These are a
 
 ## Checkpoint clock (time sync)
 
-A checkpoint-driven clock provides the leader with a conservative, monotonic view of on-chain time to gate time-sensitive work. It derives bounds from Sui checkpoints, caps drift by observed cadence/headroom, surfaces staleness, and refreshes via gRPC when stale.
+A checkpoint-driven clock provides the leader with a conservative, monotonic view of on-chain time to gate time sensitive work. It derives bounds from Sui checkpoints, caps drift by observed cadence/headroom, surfaces staleness, and refreshes via gRPC when stale.
 
 - [Checkpoint clock details](./leader-checkpoint-clock.md)
 
@@ -101,7 +105,7 @@ A checkpoint-driven clock provides the leader with a conservative, monotonic vie
 Some parts of the Leader service use a custom channel implementation that handles indexing of messages sent over this channel, as well as retries and sweeps of stale messages. Notably, the event listener<>event executor and the event executor<>merchant processes communicate via this channel.
 
 ### Why queue discipline and resource gating
-- Avoid head-of-line blocking when a queued item cannot run (shared-object locks, external rate limits, or missing resources).
+- Avoid head of line blocking when a queued item cannot run (shared object locks, external rate limits, or missing resources).
 - Let domains swap in their own ordering policy without touching channel internals.
 - Prevent wasted retries by dispatching only when capacity for the payload exists.
 
@@ -142,7 +146,7 @@ flowchart LR
 
 **Dispatcher + receiver**: a semaphore enforces the configured capacity. The dispatcher asks the queue discipline for the next ID, activates it, loads the payload, consults the resource pool, and delivers `(payload, handle, retries)` to consumers. The handle’s `ack`/`nack` remove or requeue the message (data, active, retries) and notify the queue discipline.
 
-**Persistence surface**: Redis stores queued IDs, active IDs with timestamps, payload data, and retry counters. Metrics track delivery latency and in-flight counts.
+**Persistence surface**: Redis stores queued IDs, active IDs with timestamps, payload data, and retry counters. Metrics track delivery latency and in flight counts.
 
 {% hint style="info" %}
 Note that this channel "assumes" it has a stable Redis connection. There are edge cases, where dropping events is very unlikely, but possible. One such edge case is if sending a message over this channel fails due to Redis being unavailable but the Sui event listener successfully saves the next page cursor to Redis. This can in the future be improved by handling Redis errors within the channel differently (by for example, halting).

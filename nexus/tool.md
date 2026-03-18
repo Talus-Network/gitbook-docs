@@ -1,6 +1,6 @@
 # Tool
 
-A Tool is an offchain HTTP service or an onchain smart contract. These are invoked by the [Leader](crates/leader.md) based on instructions provided by the onchain [Workflow](packages/workflow.md).
+A Tool is an off-chain HTTP service or an on-chain smart contract. These are invoked by [Leader nodes](crates/leader.md) based on instructions provided by the on-chain [Workflow](packages/workflow.md).
 
 ## Tool definitions
 
@@ -44,7 +44,7 @@ subject to change. In addition we assume a UTF-8 representation.
 
 These will be `draft-2020-12` JSON schema definitions of the Tool inputs and outputs. This lets the Leader parse and verify data going in and coming out of the Tool.
 
-Note that for `output_schema`, top-level `oneOf` has to be enforced by the Tool deployment process to adhere to the `OutputVariant` DAG definition.
+Note that for `output_schema`, top level `oneOf` has to be enforced by the Tool deployment process to adhere to the `OutputVariant` DAG definition.
 
 For onchain tools, both of these schemas will be generated automatically during tool registration.
 
@@ -52,9 +52,13 @@ For onchain tools, both of these schemas will be generated automatically during 
 
 Off-chain Tools will expose 3 HTTP endpoints:
 
-1. `GET /health` - operational health, should retfqn 200 if and only if the Tool is ready to be invoked
-2. `GET /meta` - retfqns the Tool definition JSON
-3. `POST /invoke` - this endpoints invokes the Tool logic, it accepts data in its `input_schema` format and outputs data in its `output_schema` format
+1. `GET /health` - operational health, should return `200` if and only if the Tool is ready to be invoked
+2. `GET /meta` - returns the Tool definition JSON
+3. `POST /invoke` - this endpoint invokes the Tool logic; it accepts data in its `input_schema` format and outputs data in its `output_schema` format
+
+For the full transport/security contract (HTTPS/TLS and signed HTTP), see:
+
+- [Tool communication (HTTPS + signed HTTP)](guides/tool-communication.md)
 
 ## Onchain Tool interface
 
@@ -67,7 +71,7 @@ Every onchain tool must provide an `execute` function with the following signatu
 ```move
 public fun execute(
     worksheet: &mut ProofOfUID,
-    // ... tool-specific parameters ...
+    // ... tool specific parameters ...
     ctx: &mut TxContext,
 ): ToolOutput
 ```
@@ -172,6 +176,14 @@ The CLI automatically:
 - Allows for optional customization of input and output schemas
 - Registers the tool in the Tool Registry with the appropriate data
 
-## Tool authorization
+## Tool authentication and key discovery (Network Auth)
 
-Once there are community Tools, we will need a way to authorize communication between the Leader and a Tool. This has been discussed superficially and it needs to be researched in depth in the future.
+Off-chain Tools are invoked by Nexus Leader nodes. Tools and Leader nodes need a way to authenticate signed messages and discover which public key is currently valid for an identity (with support for rotation and revocation).
+
+Nexus uses the on-chain `nexus_workflow::network_auth` module as a trusted binding registry from identity → Ed25519 public keys. Any verifier can read the binding state on-chain to obtain the active public key for an identity and verify signed messages offline.
+
+Network Auth is protocol-agnostic: it does not define a transport or wire format. It only defines identities, proofs, and key lifecycle.
+
+Reference:
+
+- [`nexus_workflow::network_auth`](packages/reference/nexus_workflow/network_auth.md)
