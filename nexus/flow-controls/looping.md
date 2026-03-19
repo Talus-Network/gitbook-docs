@@ -47,12 +47,10 @@ Think of `for_each` as a **map** operation, and `collect` as the **reduce back t
 Suppose Tool `A` outputs an array `[1, 2, 3]`.
 
 1. A `for_each` edge connects `A` → `B`.
-
    - Tool `B` runs three times with inputs `1`, `2`, and `3`.
    - Each run produces an incremented number, outputting `2`, `3`, and `4`.
 
 1. A `collect` edge connects `B` → `C`.
-
    - Tool `C` receives `[2, 3, 4]`.
 
 This creates a parallel map-like computation:
@@ -78,7 +76,6 @@ The **`do_while`** / **`break`** edge pair enables conditional loops.
 - Both `do_while` and `break` edges must originate from **two distinct output variants** of the **same vertex**.
 - Both edges **must** be present for the loop to be valid.
 - On each iteration:
-
   1. The vertex produces an output.
   1. If the **`do_while` edge** is taken, execution loops back, overwriting the input data with the new outputs.
   1. If the **`break` edge** is taken, execution exits the loop and continues forward.
@@ -87,7 +84,6 @@ The **`do_while`** / **`break`** edge pair enables conditional loops.
 
 1. Tool `A` adds `+1` to a number.
 1. Tool `B` checks whether the number is `< 3`.
-
    - If **true**, the `do_while` edge loops back to `A`.
    - If **false**, the `break` edge continues the walk.
 
@@ -104,6 +100,16 @@ flowchart TD
     B -->|do_while| A
     B -->|break| End[Continue workflow]
 ```
+
+---
+
+## Static Edges
+
+Static edges originate from outside a loop and provide data for vertices inside the loop. Normally, vertices inside a loop must wait for all their input ports to be filled with data for the _current iteration_. Static edges bypass this and the same data is re-used for each iteration of the loop.
+
+{% hint style="info" %}
+All entry port data is considered to be static.
+{% endhint %}
 
 ---
 
