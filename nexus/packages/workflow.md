@@ -7,7 +7,27 @@ In a nutshell, the workflow engine executes walks over a directed acyclic graph 
 
 ## Scheduler
 
-The workflow package also includes an on-chain scheduler module for time-based orchestration (queue + periodic scheduling) that can gate DAG execution. See [On-chain scheduler architecture](../scheduler/index.md).
+The workflow package also includes an on-chain scheduler module for time based orchestration (queue + periodic scheduling) that can gate DAG execution. See [On-chain scheduler architecture](../scheduler/index.md).
+
+## Network Auth (identity key bindings)
+
+The workflow package includes the `network_auth` module: a shared on-chain registry that binds off-chain identities (Tools and Leader nodes) to Ed25519 public keys used for message signing and verification.
+
+This enables any verifier to discover the currently active public key for an identity and validate signed messages offline, while supporting key rotation and revocation (via proof of identity + proof of possession).
+
+Reference:
+
+- [`nexus_workflow::network_auth`](./reference/nexus_workflow/network_auth.md)
+
+## Network Auth (identity key bindings)
+
+The workflow package includes the `network_auth` module: a shared on-chain registry that binds off-chain identities (Tools and Leader nodes) to Ed25519 public keys used for message signing and verification.
+
+This enables any verifier to discover the currently active public key for an identity and validate signed messages offline, while supporting key rotation and revocation (via proof-of-identity + proof-of-possession).
+
+Reference:
+
+- [`nexus_workflow::network_auth`](./reference/nexus_workflow/network_auth.md)
 
 {% hint style="info" %}
 The terms used in the context of the DAG can be found in the [glossary](../glossary.md#dag-related-terms). Familiarize yourself with them before moving on.
@@ -31,7 +51,6 @@ The terms used in the context of the DAG can be found in the [glossary](../gloss
 - An end state is a `Vertex` with no outgoing `Edge`s.
 
 - A walk can either halt as _(i)_ successful, _(ii)_ failed, or _(iii)_ consumed.
-
   - _(i)_ successful halt means that the walk has reached an end state;
   - _(ii)_ failed halt means that the walk cannot reach an end state;
   - _(iii)_ consumed halt means that the walk has been joined with another walk.
@@ -186,7 +205,7 @@ An `EntryGroup` consists of a set of vertices.
 
 To start the execution via a specific entry group, the user must provide input data for each _entry port_ of each vertex included in the entry group. If a vertex has no entry ports, the vertex name _must_ still be specified with an empty `VecMap` of entry ports.
 
-Vertices included in an entry group but with an _empty_ set of input ports will be scheduled for execution immediately at the start, provided they don't have any incoming edges. If a vertex in this case _does_ have incoming edges, this is a no-op - it has no effect on the execution and the vertex is treated as-if it was not included in the entry group.
+Vertices included in an entry group but with an _empty_ set of input ports will be scheduled for execution immediately at the start, provided they don't have any incoming edges. If a vertex in this case _does_ have incoming edges, this is a no op - it has no effect on the execution and the vertex is treated as if it was not included in the entry group.
 
 A default entry group (named `_default_group`) is available for convenience.
 
@@ -228,19 +247,13 @@ The leader cap can be cloned and given to other wallets.
 
 The tool registry is an onchain shared object that holds [tool definitions](../tool.md#tool-definitions).
 
-To register a tool the creator must deposit a time-locked collateral to prevent spamming the registry.
+To register a tool the creator must deposit a time locked collateral to prevent spamming the registry.
 The amount of `SUI` locked and the interval after which they can be reclaimed is configured in the `nexus-next` repo.
-
-## PreKey vault
-
-The pre_key vault is an onchain shared object that holds pre_keys for initiating encrypted communication with the workflow.
-
-To claim a pre_key, the user must first deposit some gas budget in `SUI` to the gas service. Claiming a pre_key is also rate limited per wallet.
 
 ## Notes
 
 - We have considered a stricter rule `5.` where `InputPort` can have only one incoming `OutputVariantPort`.
   However, relaxing this rule into its current form meant expressive workflows and simpler runtime state management in exchange for more complex static analysis algorithm.
-  This trade-off was deemed worthy.
+  This trade off was deemed worthy.
 - When using the `ProofOfUid` primitive, it must be created with a type that matches the `UID`.
   The type should be considered an authorization ticket and should be treated just as any other capability type.

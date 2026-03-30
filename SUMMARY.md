@@ -47,6 +47,7 @@
     - [Looping](nexus/flow-controls/looping.md)
   - [Default TAP](nexus/TAP/default-tap.md)
   - [Tool](nexus/tool.md)
+  - [Tool Communication](nexus/guides/tool-communication.md)
   - [Tokenomics](nexus/tokenomics/tokenomics.md)
     - [Gas Service](nexus/tokenomics/gas-service.md)
     - [Default Gas Extension](nexus/tokenomics/default-gas-extension.md)
@@ -70,6 +71,7 @@
   - [Client](nexus-sdk/client.md)
   - [Tool Development](nexus-sdk/tool-development.md)
   - [Toolkit Rust](nexus-sdk/toolkit-rust.md)
+  - [Tool Communication](nexus-sdk/guides/tool-communication.md)
   - [How to Build a DAG](nexus-sdk/guides/dag-construction.md)
 - [🔮 Vision](vision/README.md)
   - [Welcome to Talus Vision](vision/talus-vision/welcome-to-talus-vision.md)
@@ -104,6 +106,6 @@
   - [HTTP](tools/http/README.md)
   - [Templating: Jinja](tools/templating-jinja/README.md)
 
-## Looking for a home
+## ADRs
 
-* [nexus-sdk/guides/tool-communication.md](nexus-sdk/guides/tool-communication.md)
+- [Encryption Removal](nexus/adr/x3dh-removal-from-nexus.md)
