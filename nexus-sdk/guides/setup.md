@@ -38,7 +38,7 @@ To install directly from the source using `cargo`, run:
 ```bash
 cargo install nexus-cli \
   --git https://github.com/talus-network/nexus-sdk \
-  --tag v0.8.0 \
+  --tag v0.8.1 \
   --locked
 ```
 
@@ -51,7 +51,7 @@ nexus --version
 ## Download the Nexus objects
 
 ```bash
-wget -O ~/.nexus/objects.devnet.toml https://storage.googleapis.com/production-talus-sui-objects/v0.8.0/objects.devnet.toml
+wget -O ~/.nexus/objects.devnet.toml https://storage.googleapis.com/production-talus-sui-objects/v0.8.1/objects.devnet.toml
 ```
 
 ## Configure the Talus devnet
@@ -147,4 +147,3 @@ Open the [Talus Sui Explorer](https://explorer.devnet.taluslabs.dev/).
 ---
 
 After completing these steps, you are ready to build and execute workflows using the Nexus SDK. To build your first workflow, check the [Dev Quickstart guide](math-branching-quickstart.md).
-
