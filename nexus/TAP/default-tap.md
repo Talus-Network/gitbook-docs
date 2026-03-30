@@ -9,12 +9,10 @@ The Default TAP is a useful helper component for Nexus agent developers. It serv
 The Default TAP implements the [Nexus Interface V1][nexus-interface-v1] specification, which defines the required functionality for any Talus Agent Package to integrate with the Nexus workflow engine. Key interface requirements include:
 
 1. **Version Management**
-
    - Must declare and maintain interface version compatibility.
    - Must support version checking for backward compatibility.
 
 1. **Workflow Management**
-
    - Must handle worksheet management and state tracking.
    - Must support tool evaluation confirmation.
 
@@ -147,13 +145,11 @@ fun get_witness(self: &DefaultTAP): &DefaultTAPV1Witness {
 The Default TAP works in conjunction with the Nexus workflow engine, which provides:
 
 1. **DAG Implementation**
-
    - Directed Acyclic Graph data structure for modeling complex workflows.
    - Support for vertices, edges, and input/output ports.
    - Entry group management for workflow initiation.
 
 1. **Tool Registry**
-
    - Registration and management of available tools.
 
 1. **Tool Invocation**
@@ -297,7 +293,6 @@ public(package) fun new(ctx: &mut TxContext) {
 
 /// Invokes the provided entry vertex on a DAG with the provided input data for
 /// each input port.
-#[allow(lint(share_owned))]
 public fun begin_dag_execution(
     self: &mut DefaultTAP,
     dag: &DAG,
