@@ -1,6 +1,6 @@
 # Nexus CLI
 
-> concerns [`nexus-cli` repo](https://github.com/Talus-Network/nexus-sdk/tree/main/cli)
+> concerns [`nexus-cli` repo][nexus-cli-repo]
 
 The Nexus CLI is a set of tools that is used by almost all Actors in the Nexus ecosystem.
 
@@ -478,3 +478,6 @@ This command requires that a wallet is connected to the CLI...
 
 Provides completion for some well-known shells.
 
+<!-- List of References -->
+
+[nexus-cli-repo]: https://github.com/Talus-Network/nexus-sdk/tree/main/cli
