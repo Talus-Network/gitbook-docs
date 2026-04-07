@@ -91,4 +91,3 @@ Tool developers should design with these constraints in mind:
 For a detailed guide (TLS termination options, key registration, runtime config, and troubleshooting), see:
 
 - [Tool Communication (HTTPS + Signed HTTP)](guides/tool-communication.md)
-

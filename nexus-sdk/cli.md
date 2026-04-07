@@ -1,6 +1,6 @@
 # Nexus CLI
 
-> concerns [`nexus-cli` repo](https://github.com/Talus-Network/nexus-sdk/tree/main/cli)
+> concerns [`nexus-cli` repo][nexus-cli-repo]
 
 The Nexus CLI is a set of tools that is used by almost all Actors in the Nexus ecosystem.
 
@@ -266,6 +266,12 @@ Inspects a DAG execution process based on the provided `DAGExecution` object ID 
 
 ---
 
+**`nexus dag execution-cost --dag-execution-id <id>`**
+
+Checks the cost of a DAG execution based on the provided `DAGExecution` object ID. This cost is broken down per transaction digest and includes the execution cost and the priority fee.
+
+---
+
 ### `nexus scheduler`
 
 Manage scheduler tasks, occurrences, and periodic schedules.
@@ -376,6 +382,16 @@ This command requires that a wallet is connected to the CLI...
 
 ---
 
+**`nexus gas balance`**
+
+Check the balance of the invoker's gas funds. This command reads all the funds that the invoker has uploaded as gas budget and prints them per usage scope.
+
+{% hint style="info" %}
+This command requires that a wallet is connected to the CLI...
+{% endhint %}
+
+---
+
 **`nexus gas expiry enable --tool-fqn <fqn> --owner-cap [object_id] --cost-per-minute <mist>`**
 
 The tool owners can enable the expiry gas extension for their tools specified by the FQN. This allows users to buy expiry gas tickets that can be used to pay for the tool usage for a limited amount of time.
@@ -478,3 +494,6 @@ This command requires that a wallet is connected to the CLI...
 
 Provides completion for some well-known shells.
 
+<!-- List of References -->
+
+[nexus-cli-repo]: https://github.com/Talus-Network/nexus-sdk/tree/main/cli
