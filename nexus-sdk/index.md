@@ -42,4 +42,3 @@ Docs:
 - [Tool Development Guidelines](tool-development.md)
 - [Nexus Toolkit Rust](toolkit-rust.md)
 - [Tool Communication (HTTPS + Signed HTTP)](guides/tool-communication.md)
-
