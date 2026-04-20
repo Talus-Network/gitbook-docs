@@ -360,4 +360,3 @@ Common causes:
 - Certificate is self-signed or missing intermediate chain.
 - Certificate hostname does not match the Tool URL.
 - Leader node environment does not include the required root CA (custom CA deployments).
-
