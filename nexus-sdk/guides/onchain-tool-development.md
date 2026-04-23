@@ -379,4 +379,3 @@ This workflow only executes the onchain tool twice if the output variant is Succ
 - **Examples**: Study the [onchain tool example modules](../../nexus-next/sui/examples/) and [corresponding json dag workflows](../../sdk/src/dag/_dags/)
 
 Remember that onchain tools are powerful building blocks in the Nexus ecosystem. Well-designed tools can be composed with others to create sophisticated autonomous agents and workflows.
-
