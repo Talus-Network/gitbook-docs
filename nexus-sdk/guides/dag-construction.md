@@ -229,5 +229,5 @@ For working examples, see the following files in the `cli/src/dag/_dags` directo
 - `ig_story_planner_valid.json`: Example of a complex workflow
 - `entry_groups_valid.json`: Example of using entry groups.
 
-For examples of invalid DAGs and common mistakes to avoid (especially regarding Rule 5 - Race Conditions), see the diagrams in [workflow documentation](../../nexus-next/packages/workflow.md) and the `*_invalid.json` files in the [testing DAG directory](https://github.com/Talus-Network/nexus-sdk/tree/v1.0.0-testnet.1/sdk/src/dag/_dags).
+For examples of invalid DAGs and common mistakes to avoid (especially regarding Rule 5 - Race Conditions), see the diagrams in [workflow documentation](../../nexus-next/packages/workflow.md) and the `*_invalid.json` files in the [testing DAG directory](https://github.com/Talus-Network/nexus-sdk/tree/v1.0.0/sdk/src/dag/_dags).
 
