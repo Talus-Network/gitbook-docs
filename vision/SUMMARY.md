@@ -20,3 +20,4 @@
     - [Summary](talus-vision/draw-first-workflow/summary.md)
   - [User Workflows & Profile](talus-vision/user-workflows-and-profile.md)
   - [About previously deployed workflows](talus-vision/about-previously-deployed-workflows.md)
+  - [Explorer](talus-vision/explorer.md)

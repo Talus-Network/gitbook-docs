@@ -15,17 +15,17 @@ layout:
     visible: true
 ---
 
-# Step-by-step My first Workflow
+# Step-by-step: My First Workflow
 
-Let's build our first workflow together. We'll reconstruct this example from the Nexus documentation step-by-step and monitor the changes in the JSON files in real time. [https://docs.talus.network/getting-started/math-branching-quickstart](https://docs.talus.network/getting-started/math-branching-quickstart)
+In this section, we’ll build a simple workflow together. We’ll recreate the example from the Nexus documentation (see the **Math Branching Quickstart** [guide](https://docs.talus.network/getting-started/math-branching-quickstart)) and observe how the JSON updates in real time.
 
-This example accepts a numeric input from the user and performs the following sequence of operations:
+This example takes a numeric input and performs the following sequence of operations:
 
-1. Add 3 to the input value.
-1. Evaluate the sign of the resulting number and apply one of three branches:
-   - **If the number is positive:** multiply it by 7.
-   - **If the number equals 0:** add 1 to it.
-   - **If the number is negative:** multiply it by -3.
+1. Add **3** to the input value.
+1. Evaluate the sign of the result and follow one of three branches:
+   - **If the number is positive:** multiply it by **7**.
+   - **If the number equals 0:** add **1**.
+   - **If the number is negative:** multiply it by **–3**.
 
 We will now construct the complete workflow step by step.
 
@@ -39,17 +39,23 @@ Initial state for the JSON editor:
 }
 ```
 
-Step - 1\
-The first node we need in our workflow will perform the operation of adding the number 3 to the user's input.
+## Step 1
 
-Under the Math category, the Add tool is designed precisely for this purpose. From the Tools tab, navigate to the Math category, locate the Add tool, and drag and drop it into the playground.
+The first node in this workflow performs the operation of adding **3** to the user’s input.
 
-For naming, set the node name to **`add_input_and_default`**.\
-Then, assign port B as the default value, and set this value to 3.
+Under the **Math** category, the **Add** tool is designed for this purpose.  
+From the **Tools** tab, navigate to **Math → Add**, then drag and drop the tool into the playground.
 
-<figure><img src="../assets/Screenshot 2025-11-11 at 13.10.47.png" alt=""><figcaption></figcaption></figure>
+Rename the node to `add_input_and_default`.
 
-The JSON editor's current state is:
+Next, set **port B** as the default value and assign it the value **3**.
+
+<figure>
+  <img src="../assets/Screenshot 2025-11-11 at 13.10.47.png" alt="">
+  <figcaption></figcaption>
+</figure>
+
+The JSON editor’s current state is:
 
 ```json
 {
@@ -82,20 +88,23 @@ The JSON editor's current state is:
 }
 ```
 
-Step - 2
+### Step 2
 
-In this step, we need to check whether the result from the first node is negative.
+In this step, we need to check whether the result from the first node is **negative**.
 
-The most suitable node for this task is the Compare (cmp) tool, located under the Math category. This tool takes two inputs and compares them, producing three distinct outputs: **greater than**, **equal to**, and **less than** — perfectly fitting our example’s logic.
+To do this, use the **Compare (cmp)** tool found under the **Math** category. This tool accepts two inputs and compares them, producing three outputs: **greater than**, **equal to**, and **less than** — exactly what is needed for branching logic.
 
-Drag and drop the Compare (cmp) tool into the playground and rename it to **`is_negative`**.\
-Next, set the second input as a **default value of 0** to establish the desired comparison logic.
+1. Drag and drop the **Compare (cmp)** tool into the playground.
+1. Rename the node to `is_negative`.
+1. Set the second input (**port B**) to a **default value of 0**, which establishes the comparison target.
+1. Connect the output of the `add_input_and_default` node to the **first input (port A)** of the `is_negative` node.
 
-Finally, connect the result output from the **`add_input_and_default`** node to the first input of the **`is_negative`** node.
+<figure>
+<img src="../assets/Screenshot 2025-11-11 at 13.20.04.png" alt="">
+<figcaption></figcaption>
+</figure>
 
-<figure><img src="../assets/Screenshot 2025-11-11 at 13.20.04.png" alt=""><figcaption></figcaption></figure>
-
-The JSON editor's current state is:
+The JSON editor’s current state is:
 
 ```json
 {
@@ -155,38 +164,46 @@ The JSON editor's current state is:
 }
 ```
 
-Step - 3&#x20;
+### Step 3
 
-In this step, we will generate new outputs based on the results from the Compare (cmp) node, following the target logic:
+In this step, we will generate new outputs based on the results from the **Compare (cmp)** node, following this logic:
 
 - **If the number is greater than 0:** multiply it by 7
 - **If the number equals 0:** add 1
 - **If the number is less than 0:** multiply it by -3
 
-Based on this logic, the required tools are:
+To implement this logic, we will use:
 
-- Multiply (Mul) tool from the Math category for multiplying by 7 and -3
-- Add tool from the Math category for adding 1
+- **Multiply (Mul)** tool (Math category) — for multiplying by 7 and -3
+- **Add** tool (Math category) — for adding 1
 
 ## Steps to implement
 
-1. Locate the tools in the **Tools tab → Math category** and drag and drop them into the playground.
-1. **Rename and configure the nodes** as follows:
+1. Locate the tools in **Tools tab → Math category** and drag and drop them into the playground.
 
-   - **Multiply by 7 node:**
-     - Name: **`mul_by_7`**
-     - B input: 7
-     - Connect to the gt output of the **`is_negative`** node
-   - **Add 1 node:**
-     - Name: **`add_1`**
-     - B input: 1
-     - Connect to the eq output of the **`is_negative`** node
-   - **Multiply by -3 node:**
-     - Name: **`mul_by_neg_3`**
-     - B input: -3
-     - Connect to the lt output of the **`is_negative`** node
+1. **Rename and configure each node** as follows:
 
-   <figure><img src="../assets/Screenshot 2025-11-11 at 13.31.13.png" alt=""><figcaption></figcaption></figure>
+   - **Multiply by 7 node**
+
+     - Name: `mul_by_7`
+     - Set input **B = 7**
+     - Connect to the **gt** (greater than) output of the `is_negative` node
+
+   - **Add 1 node**
+
+     - Name: `add_1`
+     - Set input **B = 1**
+     - Connect to the **eq** (equal) output of the `is_negative` node
+
+   - **Multiply by -3 node**
+     - Name: `mul_by_neg_3`
+     - Set input **B = -3**
+     - Connect to the **lt** (less than) output of the `is_negative` node
+
+<figure>
+  <img src="../assets/Screenshot 2025-11-11 at 13.31.13.png" alt="">
+  <figcaption></figcaption>
+</figure>
 
 The JSON editor's final state is:
 
