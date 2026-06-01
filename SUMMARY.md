@@ -109,3 +109,7 @@
 ## ADRs
 
 - [Encryption Removal](nexus/adr/x3dh-removal-from-nexus.md)
+
+## Looking for a home
+
+* [vision/talus-vision/explorer.md](vision/talus-vision/explorer.md)

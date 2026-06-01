@@ -17,20 +17,19 @@ layout:
 
 # Connect with Sui Wallet
 
-Talus Devnet Rpc : <https://rpc.ssfn.devnet.production.taluslabs.dev>\
-Talus Devnet Explorer : <https://explorer.devnet.taluslabs.dev/>
+Talus Vision runs on the public **Sui** networks, so there is no need to configure a custom RPC. Connect any Sui-compatible wallet (for example, [Slush](https://slush.app/)) and approve the connection request.
 
-For Sui wallets that support custom RPC, you can log in after configuring the network using the RPC information provided above.\
-The recommended wallet for this process is [**Surf Wallet**](https://www.surf.tech/).
+## Choosing a Network
+
+Talus Vision supports two networks:
+
+- **Mainnet** — the default network.
+- **Testnet** — for experimenting without spending real funds.
+
+Use the **network switcher** in the top-right of the header to move between them. Your selection is remembered across sessions and is reflected in the page URL through a `network` query parameter, so a link can be shared on a specific network.
 
 <figure><img src="assets/2.png" alt=""><figcaption></figcaption></figure>
 
-## Adding a Custom RPC for Slush Wallet
+## Connecting Your Wallet
 
-After opening the Slush Wallet browser extension, go to the settings page located at the bottom right and click the "Change Network" option.
-
-<div data-full-width="true"><figure><img src="assets/Screenshot 2025-11-13 at 14.12.05.png" alt="" width="560"><figcaption></figcaption></figure></div>
-
-Select the "Custom RPC" option and add the Talus Devnet RPC here.
-
-<figure><img src="assets/Screenshot 2025-11-13 at 14.17.15.png" alt="" width="563"><figcaption></figcaption></figure>
+Click **Launch App** (or **Login**) and choose **Wallet**, then approve the connection request in your Sui wallet extension. Once connected, your address appears in the header and you can start building, deploying, and executing workflows.

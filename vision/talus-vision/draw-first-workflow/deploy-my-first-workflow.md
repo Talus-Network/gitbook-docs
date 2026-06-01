@@ -15,19 +15,28 @@ layout:
     visible: true
 ---
 
-# Deploy My first workflow
+# Deploy My First Workflow
 
-On the previous page, we created a valid workflow. The next step is to deploy this workflow on-chain. Up to this point, all actions were focused on generating a valid workflow, continuously checked by built-in validation mechanisms. Now, we need to deploy the workflow on the **Talus Devnet**.
+On the previous page, we created a valid workflow. The next step is to deploy this workflow **on-chain**. Up to this point, all actions focused on creating a valid workflow, continuously validated by built-in checks. Now it’s time to deploy the workflow on **Sui** (the deployment targets whichever network—Testnet or Mainnet—is selected in the header).
 
-Before proceeding, ensure that the following two steps have been completed:
+Before deploying, make sure the following steps are completed:
 
-1. **Gas Management:** Navigate to the **Gas Management tab** and add a **SUI gas budget** of a sufficient amount.
-1. **Crypto Auth:** If a key icon appears in the application header, it indicates that **Crypto Auth** has not yet been performed. Complete this process and wait for the generated transactions to finalize.
+1. **Gas Management:**  
+   Go to the **Gas Management** tab and add a **SUI gas budget** large enough to cover deployment costs.
 
-After completing the necessary preparations, navigate to the **DEPLOY WORKFLOWS tab** to deploy your workflow.
+1. **Key Setup:**  
+   If a key icon appears in the application header, click it and complete the one-time **Key Setup** (tool signing key generation). No wallet transaction is required for this step.
 
-Since the deployment occurs **on-chain**, you will need to use your **Sui wallet**, and a transaction approval will be requested. Once the transaction is successfully completed, the current drawing in the editor will automatically switch from **Edit Mode** to **View Mode**.
+Once preparation is complete, navigate to the **Deployment** tab in the sidebar to deploy your workflow.
 
-<figure><img src="../assets/Screenshot 2025-11-11 at 13.44.29.png" alt=""><figcaption></figcaption></figure>
+Since deployment happens **on-chain**, a transaction will be initiated through your **Sui wallet**, and you will be asked to approve it. After the transaction succeeds, the current diagram in the editor will automatically switch from **Edit Mode** to **View Mode**.
 
-<figure><img src="../assets/Screenshot 2025-11-11 at 13.44.41.png" alt=""><figcaption></figcaption></figure>
+<figure>
+  <img src="../assets/Screenshot 2025-11-11 at 13.44.29.png" alt="">
+  <figcaption></figcaption>
+</figure>
+
+<figure>
+  <img src="../assets/Screenshot 2025-11-11 at 13.44.41.png" alt="">
+  <figcaption></figcaption>
+</figure>
