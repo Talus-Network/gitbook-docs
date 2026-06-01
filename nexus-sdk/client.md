@@ -77,6 +77,8 @@ The `Signer` struct accepts a [`sui::crypto::Ed25519PrivateKey`] and is responsi
 
 Nexus gas budget is managed through the [`GasActions`] struct.
 
+Standard Talus agent-funded execution uses agent payment vaults in the TAP interface. Every Talus agent has a vault object, and SDK callers can fetch that object, deposit or withdraw funds through standard TAP builders, and create typed `AgentVault` payment sources for skill execution. Agent-scoped workflow gas budget helpers are also available when execution settlement should resolve `Execution -> Agent -> Invoker`.
+
 ### Add Budget
 
 ```rust
@@ -96,6 +98,8 @@ println!("Gas budget added in tx: {:?}", result.tx_digest);
 - Returns the transaction digest.
 
 **Returns:**
+
+[`AddBudgetResult`]: includes the transaction digest.
 
 ---
 
@@ -122,6 +126,9 @@ println!("Published DAG ID: {:?}", publish_result.dag_object_id);
 
 **Returns:**
 
+[`PublishResult`]: includes the transaction digest and DAG object ID.
+
+---
 
 ### 2. Execute a Workflow
 
@@ -157,8 +164,10 @@ println!("Execution object ID: {:?}", execute_result.execution_object_id);
 
 **Returns:**
 
+[`ExecuteResult`]: includes the transaction digest and execution object ID.
 
 ---
+
 ### 3. Inspect Workflow Execution
 
 ```rust
@@ -193,8 +202,11 @@ println!("✅ Execution finished successfully!");
 
 **Returns:**
 
+[`InspectExecutionResult`]: includes an event stream and a poller handle.
 
 ---
+
+## ⏱️ Scheduler Actions
 
 The [`SchedulerActions`] API allows you to create and manage **on-chain scheduler tasks**.
 
@@ -362,12 +374,10 @@ nexus_client
 
 ## 🧭 Error Handling
 
-All methods return a `Result<T, NexusError>`.
-The `NexusError` enum categorizes issues from configuration errors to RPC and transaction issues.
+All methods return a `Result<T, NexusError>`. The `NexusError` enum categorizes issues from configuration errors to RPC and transaction issues.
 
 ---
 
 ## 🪶 Summary
 
 The [`NexusClient`] aims to make building, publishing, and executing Nexus workflows _simple, safe, and async-ready_. It abstracts away Sui transaction signing and gas management while providing a clean modular interface.
-

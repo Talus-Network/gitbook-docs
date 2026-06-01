@@ -1,6 +1,6 @@
 # Nexus CLI
 
-> concerns [`nexus-cli` repo](https://github.com/Talus-Network/nexus-sdk/tree/main/cli)
+> concerns [`nexus-cli` repo][nexus-cli-repo]
 
 The Nexus CLI is a set of tools that is used by almost all Actors in the Nexus ecosystem.
 
@@ -62,6 +62,10 @@ Upon successful registration, both OwnerCap object IDs are saved to the CLI conf
 
 {% hint style="info" %}
 This command requires that a wallet is connected to the CLI...
+{% endhint %}
+
+{% hint style="info" %}
+Tool registration is currently restricted during the beta phase. To register your tool, please contact the team to be added to the allow list.
 {% endhint %}
 
 ---
@@ -490,3 +494,6 @@ This command requires that a wallet is connected to the CLI...
 
 Provides completion for some well-known shells.
 
+<!-- List of References -->
+
+[nexus-cli-repo]: https://github.com/Talus-Network/nexus-sdk/tree/main/cli
