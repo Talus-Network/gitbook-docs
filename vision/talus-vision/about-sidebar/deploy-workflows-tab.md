@@ -17,10 +17,18 @@ layout:
 
 # Deploy Workflows Tab
 
-It provides a feature that allows users to **deploy workflows developed on the playground with a single click**. It works in conjunction with the JSON Editor, tracking the validation status of user-created workflows and enabling on-chain deployment using the Sui wallet.
+In the sidebar this panel is labeled **Deployment**. It allows users to **deploy any workflow created in the playground with a single click**. It works alongside the JSON Editor, which continuously monitors validation status to ensure the workflow is ready for on-chain deployment via the Sui wallet.
 
-During the demo, the platform operates with a default gas budget of 0.1. Users can increase the gas budget if desired.
+Before deploying, the tab lets you configure a few fields:
 
-If the deployment is successful, the playground automatically switches from Edit Mode to View Mode, and the user is provided with the **on-chain object ID**.
+- **Choose workflow** — select which open draft to deploy.
+- **Gas budget** — a **default of 0.1 SUI**, which users may increase if needed.
+- **Name (optional)** and **Description (optional, up to 300 characters)** — metadata stored with the deployment.
+- **Validation output** — a live panel that reflects the current validation status; the **Deploy** button stays disabled until the workflow is valid and a wallet is connected.
+
+Key points:
+
+- After a successful deployment, the playground automatically switches from **Edit Mode** to **View Mode**.
+- The system displays the resulting **on-chain object ID**, confirming that the workflow is now deployed.
 
 <figure><img src="../assets/7.png" alt=""><figcaption></figcaption></figure>
