@@ -15,7 +15,7 @@ Alternatively, you can add the following to your `Cargo.toml` file:
 ```toml
 [dependencies.nexus-toolkit]
 git = "https://github.com/Talus-Network/nexus-sdk"
-tag = "v1.0.0"
+tag = "v1.0.1"
 package = "nexus-toolkit"
 ```
 
@@ -279,4 +279,3 @@ In a future update, Nexus will support self-signed certificates and TLS client a
 For a full end-to-end setup guide (TLS termination options + key registration + runtime config), see:
 
 - [Tool Communication (HTTPS + Signed HTTP)](guides/tool-communication.md)
-
