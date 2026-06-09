@@ -2062,8 +2062,10 @@ Won't add the walk if it's already there.
 Advances the walk by evaluating the vertex and following the edges if possible.
 
 
-<pre><code><b>fun</b> <a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_advance_walk">advance_walk</a>(<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag">dag</a>: &(nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_DAG">dag::DAG</a>, execution: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_DAGExecution">dag::DAGExecution</a>, <a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_request_walk_execution">request_walk_execution</a>: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_RequestWalkExecution">dag::RequestWalkExecution</a>, walk_index: u64, expected_vertex: (nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_Vertex">dag::Vertex</a>, variant: (nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_OutputVariant">dag::OutputVariant</a>, variant_ports_to_data: <a href="../dependencies/sui/vec_map.md#sui_vec_map_VecMap">sui::vec_map::VecMap</a>&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_OutputPort">dag::OutputPort</a>, (nexus_primitives=0x0)::data::NexusData&gt;, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>)
+<pre><code><b>fun</b> <a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_advance_walk">advance_walk</a>(<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag">dag</a>: &(nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_DAG">dag::DAG</a>, execution: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_DAGExecution">dag::DAGExecution</a>, <a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_request_walk_execution">request_walk_execution</a>: &<b>mut</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_RequestWalkExecution">dag::RequestWalkExecution</a>, walk_index: u64, expected_vertex: (nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_RuntimeVertex">dag::RuntimeVertex</a>, variant: (nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_OutputVariant">dag::OutputVariant</a>, variant_ports_to_data: <a href="../dependencies/sui/vec_map.md#sui_vec_map_VecMap">sui::vec_map::VecMap</a>&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_OutputPort">dag::OutputPort</a>, (nexus_primitives=0x0)::data::NexusData&gt;, failure_evidence_kind: (nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_FailureEvidenceKind">dag::FailureEvidenceKind</a>, clock: &<a href="../dependencies/sui/clock.md#sui_clock_Clock">sui::clock::Clock</a>, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>)
 </code></pre>
+
+If <code>variant</code> is <code>_err_eval</code>, tool evidence follows outgoing <code>_err_eval</code> edges first. When no such edge is available, the runtime resolves the effective post-failure action using vertex override, then DAG default, then terminate. Leader-evidence paths such as expired execution aborts are terminal-only and record <code>TerminalErrEvalRecordedEvent</code> instead of continuing through <code>_err_eval</code> edges.
 
 
 
@@ -2078,7 +2080,4 @@ Will emit an event if the execution is done.
 
 <pre><code><b>fun</b> <a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_if_finished_emit_final_event">if_finished_emit_final_event</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag_DAGExecution">dag::DAGExecution</a>)
 </code></pre>
-
-
-
 
