@@ -168,3 +168,4 @@ If the Move package fails to compile, the error surfaces here — fix the source
 - A `skill.tap.json` and `dag.json` still in their scaffold-default shapes — we'll edit those two pages from now.
 
 Next: [Write the on-chain transfer tool](3-tap-transfer-tool.md).
+

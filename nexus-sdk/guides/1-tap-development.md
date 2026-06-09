@@ -77,3 +77,4 @@ The TAP CLI surface is broader than what one tutorial can show. After you finish
 - Address-funded scheduling and the default-executor variant (`nexus tap schedule-address-funded`, `nexus tap schedule-default-address-funded`).
 - Endpoint revision announcements for already-bound skills (`nexus tap announce`).
 - Inspecting payment receipts and execution costs (`nexus tap payments list`, `nexus dag execution-cost`).
+

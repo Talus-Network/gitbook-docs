@@ -111,3 +111,4 @@ You now have:
 Everything is still local — nothing has touched the chain yet. The next page goes on chain three times: publish the Move package + DAG, register the on-chain tool, and bind the agent.
 
 Next: [Publish, register, bind](5-tap-publish-and-register.md).
+
