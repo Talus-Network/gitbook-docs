@@ -154,3 +154,4 @@ You should see exactly one agent entry with your `agent_id` + `operator`, and on
 The agent is empty so far — the treasury inside `TutorialState` is still `option::none()`. The next page funds it and runs the first execution.
 
 Next: [Execute and verify the transfer](6-tap-execute-and-settle.md).
+

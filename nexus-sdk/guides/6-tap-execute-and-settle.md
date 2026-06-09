@@ -186,3 +186,4 @@ The CLI surface for the rest of standard TAP is the natural follow-up reading â€
 - **`nexus tap schedule-from-vault`**, **`nexus tap schedule-address-funded`**, and **`nexus tap schedule-default-address-funded`** to drive scheduled executions tied to a scheduler task.
 - **`nexus tap announce`** for shipping a new endpoint revision of an existing skill.
 - **`nexus dag execution-cost`** and **`nexus tap payments list`** for observability on what executions cost the operator across an agent's lifetime.
+
