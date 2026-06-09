@@ -113,3 +113,9 @@
 ## Looking for a home
 
 * [vision/talus-vision/explorer.md](vision/talus-vision/explorer.md)
+* [nexus-sdk/guides/1-tap-development.md](nexus-sdk/guides/1-tap-development.md)
+* [nexus-sdk/guides/2-tap-scaffold-and-package.md](nexus-sdk/guides/2-tap-scaffold-and-package.md)
+* [nexus-sdk/guides/3-tap-transfer-tool.md](nexus-sdk/guides/3-tap-transfer-tool.md)
+* [nexus-sdk/guides/4-tap-dag-and-skill-config.md](nexus-sdk/guides/4-tap-dag-and-skill-config.md)
+* [nexus-sdk/guides/5-tap-publish-and-register.md](nexus-sdk/guides/5-tap-publish-and-register.md)
+* [nexus-sdk/guides/6-tap-execute-and-settle.md](nexus-sdk/guides/6-tap-execute-and-settle.md)
