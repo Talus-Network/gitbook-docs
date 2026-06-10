@@ -189,14 +189,25 @@ Used for custom gas strategies.
 Gas tickets and budgets can be associated with:
 
 1. **Execution Scope**
+1. **Agent Scope**
 1. **Worksheet Type Scope**
 1. **Invoker Address Scope**
 
-When locking gas, the system searches in this order (specific -> general):
+The historical generic workflow path searches in this order:
 
 ```move
 Execution → WorksheetType → InvokerAddress
 ```
+
+The standard TAP path searches in this order:
+
+```move
+Execution → Agent → InvokerAddress
+```
+
+Agent scope is keyed by the standard TAP `Agent`. It lets a TAP package or
+operator fund repeated execution for an agent without relying on worksheet-type
+lookup or the current invoker's budget.
 
 ---
 
