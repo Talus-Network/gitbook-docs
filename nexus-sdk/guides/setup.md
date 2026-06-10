@@ -38,7 +38,7 @@ To install directly from the source using `cargo`, run:
 ```bash
 cargo install nexus-cli \
   --git https://github.com/talus-network/nexus-sdk \
-  --tag v1.0.0 \
+  --tag v1.0.1 \
   --locked
 ```
 
@@ -185,4 +185,3 @@ Note that this coin can only be used to pay for Nexus and tool invocation fees o
 ---
 
 After completing these steps, you are ready to build and execute workflows using the Nexus SDK. To build your first workflow, check the [Dev Quickstart guide](math-branching-quickstart.md).
-
