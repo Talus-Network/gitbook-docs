@@ -325,7 +325,6 @@ Signature errors can also be caused by clock skew. Keep leader and tool clocks s
 Tool communication is primarily configured via these environment variables:
 
 - `ENVIRONMENT`
-- `EXECUTOR_TOOL_INVOKE_TIMEOUT`
 - `EXECUTOR_TOOL_MAX_RESPONSE_BYTES`
 - `EXECUTOR_TOOL_TLS_ROOT_PEM_PATH`
 - `EXECUTOR_SIGNED_HTTP_MODE`
