@@ -113,3 +113,4 @@
 ## Looking for a home
 
 * [vision/talus-vision/explorer.md](vision/talus-vision/explorer.md)
+* [nexus/adr/multi-coin-gas-payment.md](nexus/adr/multi-coin-gas-payment.md)
