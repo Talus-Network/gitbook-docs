@@ -93,3 +93,4 @@ nexus tap validate-skill --config skill.tap.json
 You should still see `[✓] Validating TAP skill config...` — but now both modules are present and the package gates withdrawal correctly.
 
 Next: [DAG and skill config](4-tap-dag-and-skill-config.md).
+
