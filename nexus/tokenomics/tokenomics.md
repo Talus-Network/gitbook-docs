@@ -49,7 +49,7 @@ The leader requires gas to submit tool invocation outputs onchain and will use g
 
 ### Library of gas extensions
 
-The Talus Labs team will provide some gas exentsion Move packages that can will be able to make up the bulk of use cases, including gas tickets with expiry and limited number of invocations.
+The Talus Labs team will provide some gas extension Move packages that can will be able to make up the bulk of use cases, including gas tickets with expiry and limited number of invocations.
 
 However, the tool developers are free to write custom gas extensions Move packages that correspond to custom mode of operation for their gas tickets.
 
