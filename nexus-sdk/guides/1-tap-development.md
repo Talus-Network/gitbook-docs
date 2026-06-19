@@ -79,3 +79,4 @@ The TAP package CLI surface is broader than what one tutorial can show. After yo
 - Address-funded scheduling (`nexus tap schedule-task --payment-source address-funded`).
 - Current skill updates for already-bound skills (`nexus tap update-skill`).
 - Inspecting payment receipts and execution costs (`nexus tap payments list`, `nexus dag execution-cost`).
+
