@@ -204,7 +204,7 @@ Add a stamp to the proof.
 
 
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_primitives/proof_of_uid.md#nexus_primitives_proof_of_uid_stamp">stamp</a>(self: &<b>mut</b> <a href="../nexus_primitives/proof_of_uid.md#nexus_primitives_proof_of_uid_ProofOfUID">ProofOfUID</a>, uid: &UID) {
-    self.<a href="../nexus_primitives/proof_of_uid.md#nexus_primitives_proof_of_uid_stamp_with_data">stamp_with_data</a>(uid, vector::empty())
+    self.<a href="../nexus_primitives/proof_of_uid.md#nexus_primitives_proof_of_uid_stamp_with_data">stamp_with_data</a>(uid, vector[])
 }
 </code></pre>
 
