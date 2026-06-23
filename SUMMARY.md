@@ -113,3 +113,7 @@
 ## Looking for a home
 
 * [vision/talus-vision/explorer.md](vision/talus-vision/explorer.md)
+* [nexus/adr/address-balance-gas-payment.md](nexus/adr/address-balance-gas-payment.md)
+* [nexus/adr/leader-status-ownership-versioning.md](nexus/adr/leader-status-ownership-versioning.md)
+* [nexus/adr/multi-coin-gas-payment.md](nexus/adr/multi-coin-gas-payment.md)
+* [nexus/packages/reference/nexus_registry/agent_registry.md](nexus/packages/reference/nexus_registry/agent_registry.md)

@@ -13,7 +13,6 @@
 <b>use</b> (nexus_primitives=0x0)::owner_cap;
 <b>use</b> (nexus_primitives=0x0)::proof_of_uid;
 <b>use</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/dag.md#(nexus_workflow=0x0)_dag">dag</a>;
-<b>use</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/default_tap.md#(nexus_workflow=0x0)_default_tap">default_tap</a>;
 <b>use</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/gas.md#(nexus_workflow=0x0)_gas">gas</a>;
 <b>use</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/leader_cap.md#(nexus_workflow=0x0)_leader_cap">leader_cap</a>;
 <b>use</b> (nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry">tool_registry</a>;
