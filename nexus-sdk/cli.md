@@ -1,6 +1,6 @@
 # Nexus CLI
 
-> concerns [`nexus-cli` repo][nexus-cli-repo]
+> concerns [`nexus-cli` repo](https://github.com/Talus-Network/nexus-sdk/tree/main/cli)
 
 The Nexus CLI is a set of tools that is used by almost all Actors in the Nexus ecosystem.
 
@@ -753,6 +753,3 @@ Update the Nexus CLI configuration. Each flag updates the corresponding setting 
 
 Prints shell completion scripts to stdout. Supported shells: `bash`, `elvish`, `fish`, `powershell`, `zsh`. Source the output into your shell's completion directory or `eval` it directly.
 
-<!-- List of References -->
-
-[nexus-cli-repo]: https://github.com/Talus-Network/nexus-sdk/tree/main/cli

@@ -186,3 +186,4 @@ The CLI surface for the rest of TAP package and Talus agent operation is the nat
 - **`nexus tap schedule-task --payment-source agent-vault`** and **`nexus tap schedule-task --payment-source address-funded`** to create and fund scheduled TAP executions.
 - **`nexus tap update-skill`** for moving an existing skill to a new current revision.
 - **`nexus dag execution-cost`** and **`nexus tap payments list`** for observability on what executions cost the operator across an agent's lifetime.
+
