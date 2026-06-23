@@ -33,37 +33,42 @@ Verifiers should accept signatures from the binding’s active key only (`KeyBin
 
 
 
--  [Struct `NetworkAuth`](#(nexus_workflow=0x0)_network_auth_NetworkAuth)
--  [Struct `KeyBinding`](#(nexus_workflow=0x0)_network_auth_KeyBinding)
--  [Struct `KeyRecord`](#(nexus_workflow=0x0)_network_auth_KeyRecord)
--  [Struct `ProofOfIdentity`](#(nexus_workflow=0x0)_network_auth_ProofOfIdentity)
--  [Struct `ProofOfKey`](#(nexus_workflow=0x0)_network_auth_ProofOfKey)
--  [Struct `NetworkAuthCreatedEvent`](#(nexus_workflow=0x0)_network_auth_NetworkAuthCreatedEvent)
--  [Struct `KeyBindingCreatedEvent`](#(nexus_workflow=0x0)_network_auth_KeyBindingCreatedEvent)
--  [Struct `KeyRegisteredEvent`](#(nexus_workflow=0x0)_network_auth_KeyRegisteredEvent)
--  [Struct `KeyRevokedEvent`](#(nexus_workflow=0x0)_network_auth_KeyRevokedEvent)
--  [Struct `ActiveKeyUpdatedEvent`](#(nexus_workflow=0x0)_network_auth_ActiveKeyUpdatedEvent)
--  [Enum `IdentityKey`](#(nexus_workflow=0x0)_network_auth_IdentityKey)
--  [Constants](#@Constants_0)
--  [Function `new`](#(nexus_workflow=0x0)_network_auth_new)
--  [Function `share`](#(nexus_workflow=0x0)_network_auth_share)
--  [Function `prove_leader`](#(nexus_workflow=0x0)_network_auth_prove_leader)
--  [Function `prove_offchain_tool`](#(nexus_workflow=0x0)_network_auth_prove_offchain_tool)
--  [Function `proof_identity`](#(nexus_workflow=0x0)_network_auth_proof_identity)
--  [Function `new_proof_of_key`](#(nexus_workflow=0x0)_network_auth_new_proof_of_key)
--  [Function `binding_address`](#(nexus_workflow=0x0)_network_auth_binding_address)
--  [Function `binding_exists`](#(nexus_workflow=0x0)_network_auth_binding_exists)
--  [Function `create_binding`](#(nexus_workflow=0x0)_network_auth_create_binding)
--  [Function `register_key`](#(nexus_workflow=0x0)_network_auth_register_key)
--  [Function `revoke_key`](#(nexus_workflow=0x0)_network_auth_revoke_key)
--  [Function `set_active_key`](#(nexus_workflow=0x0)_network_auth_set_active_key)
--  [Function `key_binding_identity`](#(nexus_workflow=0x0)_network_auth_key_binding_identity)
--  [Function `key_binding_active_key_id`](#(nexus_workflow=0x0)_network_auth_key_binding_active_key_id)
--  [Function `key_binding_next_key_id`](#(nexus_workflow=0x0)_network_auth_key_binding_next_key_id)
--  [Function `key_binding_key`](#(nexus_workflow=0x0)_network_auth_key_binding_key)
--  [Function `assert_identity`](#(nexus_workflow=0x0)_network_auth_assert_identity)
--  [Function `append_bytes`](#(nexus_workflow=0x0)_network_auth_append_bytes)
--  [Function `clone_bytes`](#(nexus_workflow=0x0)_network_auth_clone_bytes)
+- [Module `(nexus_workflow=0x0)::network_auth`](#module-nexus_workflow0x0network_auth)
+  - [Identity and key bindings](#identity-and-key-bindings)
+    - [Identities](#identities)
+    - [Proofs](#proofs)
+    - [Verification rule](#verification-rule)
+  - [Struct `NetworkAuth`](#struct-networkauth)
+  - [Struct `KeyBinding`](#struct-keybinding)
+  - [Struct `KeyRecord`](#struct-keyrecord)
+  - [Struct `ProofOfIdentity`](#struct-proofofidentity)
+  - [Struct `ProofOfKey`](#struct-proofofkey)
+  - [Struct `NetworkAuthCreatedEvent`](#struct-networkauthcreatedevent)
+  - [Struct `KeyBindingCreatedEvent`](#struct-keybindingcreatedevent)
+  - [Struct `KeyRegisteredEvent`](#struct-keyregisteredevent)
+  - [Struct `KeyRevokedEvent`](#struct-keyrevokedevent)
+  - [Struct `ActiveKeyUpdatedEvent`](#struct-activekeyupdatedevent)
+  - [Enum `IdentityKey`](#enum-identitykey)
+  - [Constants](#constants)
+  - [Function `new`](#function-new)
+  - [Function `share`](#function-share)
+  - [Function `prove_leader`](#function-prove_leader)
+  - [Function `prove_offchain_tool`](#function-prove_offchain_tool)
+  - [Function `proof_identity`](#function-proof_identity)
+  - [Function `new_proof_of_key`](#function-new_proof_of_key)
+  - [Function `binding_address`](#function-binding_address)
+  - [Function `binding_exists`](#function-binding_exists)
+  - [Function `create_binding`](#function-create_binding)
+  - [Function `register_key`](#function-register_key)
+  - [Function `revoke_key`](#function-revoke_key)
+  - [Function `set_active_key`](#function-set_active_key)
+  - [Function `key_binding_identity`](#function-key_binding_identity)
+  - [Function `key_binding_active_key_id`](#function-key_binding_active_key_id)
+  - [Function `key_binding_next_key_id`](#function-key_binding_next_key_id)
+  - [Function `key_binding_key`](#function-key_binding_key)
+  - [Function `assert_identity`](#function-assert_identity)
+  - [Function `append_bytes`](#function-append_bytes)
+  - [Function `clone_bytes`](#function-clone_bytes)
 
 
 <pre><code><b>use</b> (nexus_primitives=0x0)::event;
@@ -836,7 +841,7 @@ The owner cap is validated against the registry to bind the tool identity.
     owner_cap: &CloneableOwnerCap&lt;OverTool&gt;,
     fqn: AsciiString,
 ): <a href="../nexus_workflow/network_auth.md#(nexus_workflow=0x0)_network_auth_ProofOfIdentity">ProofOfIdentity</a> {
-    registry.assert_tool_owner(owner_cap, fqn);
+    registry.assert_tool_owner_generic<OverTool>(owner_cap, fqn);
     <a href="../nexus_workflow/network_auth.md#(nexus_workflow=0x0)_network_auth_ProofOfIdentity">ProofOfIdentity</a> {
         identity: IdentityKey::Tool {
             fqn,
