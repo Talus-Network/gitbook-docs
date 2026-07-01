@@ -1,53 +1,16 @@
 # Nexus Interface
 
-Nexus components are designed to be composed into "Talus Agent Packages" (TAPs) that are published on Sui.
-TAPs are typically template Sui packages that are customized for a specific product.
-They would include business logic relevant to the product and configurations for the Nexus components.
+Nexus TAP execution now uses the standard TAP registry and endpoint model in
+`nexus_interface::tap`.
 
-The configurations typically take the form of `SuiObjectID`s which represent shared objects.
-These shared objects, such as [`DAG`](workflow.md), are unforced to be invoked in situations described by the business logic.
+The standard TAP interface also creates an `AgentPaymentVault` for every new
+agent. The vault holds agent-funded execution balances, tracks locked budget,
+and is used by vault-backed `ExecutionPayment` settlement. Deposits are open;
+withdrawals are authorized by the agent owner or operator through the TAP
+registry. Payment finalization records source kind, source identity, locked
+budget, consumed amount, and final state.
 
-Some examples of what the business logic in a TAP could do:
-
-- check token supply to feature-gate a workflow
-- require a payment component
-- require a minimal time elapsed between invocations
-- reward OP for reaching some step in the workflow
-
-## `V1`
-
-Nexus first iteration is focused on the workflow component.
-To comply with the Nexus V1 Interface the TAP must:
-
-1. Register itself with the [Nexus leader](../crates/leader.md) by emitting `nexus_interface::v1::AnnounceInterfacePackageEvent` that
-   - has a generic parameter `W` which is a type located in the package and module that implements the interface.
-   - contains property `shared_objects: vector<ID>` is a list of `SuiObjectID`s that the leader will inject as args into each following public function call.
-     The list is ordered, that is the shared objects will be injected in the order they are listed.
-2. Export `public fun worksheet(...${shared_objects}): ProofOfUID`
-   - Returns a stamp collector hot-potato.
-   - Collects execution confirmations by Nexus components such as `DAG`.
-   - Hot potato must be constructed with a type.
-     That can be achieved by calling `nexus_primitives::proof_of_uid::new_with_type`.
-     This type must be defined in the package and module that implements the interface.
-     Note that types don't change their type name when doing package upgrades.
-3. Export `public fun confirm_tool_eval_for_walk(...${shared_objects}, ProofOfUID)`
-   - Consumes the hot-potato.
-   - Can verify that required confirmations have been collected.
-   - Invoked by the Nexus Leader.
-
-![Diagram showing Nexus V1 Interface flow](../images/nexus-interface-v1.png)
-
-### Events
-
-- `nexus_interface::v1::AnnounceInterfacePackageEvent`
-  - has the aforementioned generic parameter `W`;
-  - can be emitted many times by the same `W` in case the shared objects change, but delay should be tolerated between emitting this call and the BE syncing the changes;
-  - `shared_objects` is a list of `SuiObjectID`s that the leader will inject as args into each following public function call;
-  - when a package is upgraded, it must be called again with a newly published `W`
-
-### Upgrades
-
-Unfortunately, Sui does not give us a way to get current package ID.
-When upgrading a package you must create a new type that serves as a witness.
-This new type needs to be used when emitting `AnnounceInterfacePackageEvent` as its generic.
-This event _also_ needs to be emitted with every package upgrade.
+The old v1 witness announcement flow is retired for active package authoring.
+`nexus_interface::v1` remains only for non-witness shared-object reference and
+configuration helpers that are still consumed by verifier compatibility and
+historical decoding.

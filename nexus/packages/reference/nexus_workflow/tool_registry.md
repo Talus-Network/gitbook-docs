@@ -14,42 +14,44 @@ It does **not** imply correctness, safety, availability, or that inputs/outputs
 are benign. Signed HTTP provides authenticity of responses; slashing is an
 after-the-fact enforcement mechanism.
 
-- [Struct `ToolRegistry`](#(nexus_workflow=0x0)_tool_registry_ToolRegistry)
-- [Struct `ToolStatus`](#(nexus_workflow=0x0)_tool_registry_ToolStatus)
-- [Struct `OffChainTool`](#(nexus_workflow=0x0)_tool_registry_OffChainTool)
-- [Struct `OverSlashing`](#(nexus_workflow=0x0)_tool_registry_OverSlashing)
-- [Struct `OverTool`](#(nexus_workflow=0x0)_tool_registry_OverTool)
-- [Struct `ToolRegistryCreatedEvent`](#(nexus_workflow=0x0)_tool_registry_ToolRegistryCreatedEvent)
-- [Struct `OffChainToolRegisteredEvent`](#(nexus_workflow=0x0)_tool_registry_OffChainToolRegisteredEvent)
-- [Struct `ToolUnregisteredEvent`](#(nexus_workflow=0x0)_tool_registry_ToolUnregisteredEvent)
-- [Struct `ToolSlashedEvent`](#(nexus_workflow=0x0)_tool_registry_ToolSlashedEvent)
-- [Struct `ToolStatusUpdatedEvent`](#(nexus_workflow=0x0)_tool_registry_ToolStatusUpdatedEvent)
-- [Constants](#@Constants_0)
-- [Function `new`](#(nexus_workflow=0x0)_tool_registry_new)
-- [Function `share`](#(nexus_workflow=0x0)_tool_registry_share)
-- [Function `slash_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_slash_off_chain_tool)
-- [Function `set_mist_collateral_to_lock`](#(nexus_workflow=0x0)_tool_registry_set_mist_collateral_to_lock)
-- [Function `set_lock_duration_ms`](#(nexus_workflow=0x0)_tool_registry_set_lock_duration_ms)
-- [Function `set_tool_status`](#(nexus_workflow=0x0)_tool_registry_set_tool_status)
-- [Function `register_off_chain_tool_for_self`](#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool_for_self)
-  - [Slashing](#@Slashing_1)
-  - [Owner Cap](#@Owner_Cap_2)
-  - [Gas Tickets](#@Gas_Tickets_3)
-- [Function `register_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool)
-- [Function `unregister_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_unregister_off_chain_tool)
-- [Function `claim_collateral_for_self`](#(nexus_workflow=0x0)_tool_registry_claim_collateral_for_self)
-- [Function `claim_collateral_for_off_chain_tool`](#(nexus_workflow=0x0)_tool_registry_claim_collateral_for_off_chain_tool)
-- [Function `deescalate`](#(nexus_workflow=0x0)_tool_registry_deescalate)
-- [Function `did_unregister_period_pass`](#(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass)
-- [Function `assert_tool_registered`](#(nexus_workflow=0x0)_tool_registry_assert_tool_registered)
-- [Function `assert_tool_owner`](#(nexus_workflow=0x0)_tool_registry_assert_tool_owner)
-- [Function `assert_tool_owner_unchecked_generic`](#(nexus_workflow=0x0)_tool_registry_assert_tool_owner_unchecked_generic)
-- [Function `tool_status_unverified`](#(nexus_workflow=0x0)_tool_registry_tool_status_unverified)
-- [Function `tool_status_verified`](#(nexus_workflow=0x0)_tool_registry_tool_status_verified)
-- [Function `tool_status`](#(nexus_workflow=0x0)_tool_registry_tool_status)
-- [Function `tool_is_verified`](#(nexus_workflow=0x0)_tool_registry_tool_is_verified)
-- [Function `register_off_chain_tool_`](#(nexus_workflow=0x0)_tool_registry_register_off_chain_tool_)
-- [Function `did_unregister_period_pass_`](#(nexus_workflow=0x0)_tool_registry_did_unregister_period_pass_)
+- [Module `(nexus_workflow=0x0)::tool_registry`](#module-nexus_workflow0x0tool_registry)
+  - [Tool Verification Status](#tool-verification-status)
+  - [Struct `ToolRegistry`](#struct-toolregistry)
+  - [Enum `ToolStatus`](#enum-toolstatus)
+  - [Struct `OffChainTool`](#struct-offchaintool)
+  - [Struct `OverSlashing`](#struct-overslashing)
+  - [Struct `OverTool`](#struct-overtool)
+  - [Struct `ToolRegistryCreatedEvent`](#struct-toolregistrycreatedevent)
+  - [Struct `OffChainToolRegisteredEvent`](#struct-offchaintoolregisteredevent)
+  - [Struct `ToolUnregisteredEvent`](#struct-toolunregisteredevent)
+  - [Struct `ToolSlashedEvent`](#struct-toolslashedevent)
+  - [Struct `ToolStatusUpdatedEvent`](#struct-toolstatusupdatedevent)
+  - [Constants](#constants)
+  - [Function `new`](#function-new)
+  - [Function `share`](#function-share)
+  - [Function `slash_off_chain_tool`](#function-slash_off_chain_tool)
+  - [Function `set_mist_collateral_to_lock`](#function-set_mist_collateral_to_lock)
+  - [Function `set_lock_duration_ms`](#function-set_lock_duration_ms)
+  - [Function `set_tool_status`](#function-set_tool_status)
+  - [Function `register_off_chain_tool_for_self`](#function-register_off_chain_tool_for_self)
+    - [Slashing](#slashing)
+    - [Owner Cap](#owner-cap)
+    - [Gas Tickets](#gas-tickets)
+  - [Function `register_off_chain_tool`](#function-register_off_chain_tool)
+  - [Function `unregister_off_chain_tool`](#function-unregister_off_chain_tool)
+  - [Function `claim_collateral_for_self`](#function-claim_collateral_for_self)
+  - [Function `claim_collateral_for_off_chain_tool`](#function-claim_collateral_for_off_chain_tool)
+  - [Function `deescalate`](#function-deescalate)
+  - [Function `did_unregister_period_pass`](#function-did_unregister_period_pass)
+  - [Function `assert_tool_registered`](#function-assert_tool_registered)
+  - [Function `assert_tool_owner`](#function-assert_tool_owner)
+  - [Function `assert_tool_owner_generic`](#function-assert_tool_owner_generic)
+  - [Function `tool_status_unverified`](#function-tool_status_unverified)
+  - [Function `tool_status_verified`](#function-tool_status_verified)
+  - [Function `tool_status`](#function-tool_status)
+  - [Function `tool_is_verified`](#function-tool_is_verified)
+  - [Function `register_off_chain_tool_`](#function-register_off_chain_tool_)
+  - [Function `did_unregister_period_pass_`](#function-did_unregister_period_pass_)
 
 <pre><code><b>use</b> (nexus_primitives=0x0)::event;
 <b>use</b> (nexus_primitives=0x0)::owner_cap;
@@ -609,7 +611,7 @@ Return collateral to a tool owner.
 Returns a new [CloneableOwnerCap] for the given tool but with the given
 generic type that doesn't have any permissions within this module.
 
-See also [assert_tool_owner_unchecked_generic].
+See also [assert_tool_owner_generic].
 
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_deescalate">deescalate</a>&lt;T: drop&gt;(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverTool">tool_registry::OverTool</a>&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>, witness: T, ctx: &<b>mut</b> <a href="../dependencies/sui/tx_context.md#sui_tx_context_TxContext">sui::tx_context::TxContext</a>): (nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;T&gt;
 </code></pre>
@@ -635,16 +637,16 @@ See also [assert_tool_owner_unchecked_generic].
 <pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_assert_tool_owner">assert_tool_owner</a>(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_OverTool">tool_registry::OverTool</a>&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>)
 </code></pre>
 
-<a name="(nexus_workflow=0x0)_tool_registry_assert_tool_owner_unchecked_generic"></a>
+<a name="(nexus_workflow=0x0)_tool_registry_assert_tool_owner_generic"></a>
 
-## Function `assert_tool_owner_unchecked_generic`
+## Function `assert_tool_owner_generic`
 
 Assert that the owner cap is for the given tool but allows any generic
 type to be used.
 
 See also [deescalate].
 
-<pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_assert_tool_owner_unchecked_generic">assert_tool_owner_unchecked_generic</a>&lt;T&gt;(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;T&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>)
+<pre><code><b>public</b> <b>fun</b> <a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_assert_tool_owner_generic">assert_tool_owner_generic</a>&lt;T&gt;(self: &(nexus_workflow=0x0)::<a href="../nexus_workflow/tool_registry.md#(nexus_workflow=0x0)_tool_registry_ToolRegistry">tool_registry::ToolRegistry</a>, owner_cap: &(nexus_primitives=0x0)::owner_cap::CloneableOwnerCap&lt;T&gt;, fqn: <a href="../dependencies/std/ascii.md#std_ascii_String">std::ascii::String</a>)
 </code></pre>
 
 <a name="(nexus_workflow=0x0)_tool_registry_tool_status_unverified"></a>
