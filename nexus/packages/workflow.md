@@ -174,6 +174,44 @@ Currently, the workflow engine reserves the following output variants:
   1. Tool invocation failed
   1. Output data could not be parsed or does not pass the tool's validation schema
 
+### Post-failure action
+
+The workflow stores an optional `post_failure_action` on the DAG and an optional
+`post_failure_action` on each executable vertex.
+
+Resolution order is:
+
+1. The executable vertex override.
+1. The DAG default.
+1. `Terminate`.
+
+Supported actions are:
+
+- `continue`
+- `terminate`
+
+Fixture and DAG authoring use the same JSON shape. For example:
+
+```json
+{
+  "post_failure_action": "continue",
+  "vertices": [
+    {
+      "name": "failable",
+      "post_failure_action": "terminate"
+    }
+  ]
+}
+```
+
+Runtime behavior follows the simplified walk model:
+
+- Tool `_err_eval` is edge-first. If `_err_eval` edges exist, the engine follows them first.
+- If no `_err_eval` edge exists, runtime resolves `continue` versus `terminate` using the precedence above.
+- Timeout handling is terminal-only and records terminal `_err_eval` state regardless of configured `continue`.
+- `terminate` records terminal `_err_eval`, aborts the walk, and cancels peer unfinished walks.
+- When execution finishes with no active work remaining, consumed blocked walks normalize to `Cancelled`.
+
 ### Entry ports
 
 Entry ports are input ports that must receive data from the client before execution can begin. These ports are explicitly defined via `with_entry_port` or `with_entry_port_in_group`. They cannot have any default values or incoming edges.
