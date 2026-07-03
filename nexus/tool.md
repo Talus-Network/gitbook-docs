@@ -66,19 +66,20 @@ Onchain Tools are published as separate Move modules on Sui. They must adhere to
 
 ### Required Interface
 
-Every onchain tool must provide an `execute` function with the following signature:
+Every onchain tool must provide an `execute` entry function with the following signature:
 
 ```move
-public fun execute(
-    worksheet: &mut ProofOfUID,
+entry fun execute(
+    worksheet: ProofOfUID,
+    result: &mut OnchainToolResult,
     // ... tool specific parameters ...
     ctx: &mut TxContext,
-): ToolOutput
+)
 ```
 
 #### Key Requirements execute function
 
-1. **First Parameter**: The first parameter must be `worksheet: &mut ProofOfUID`. This is a worksheet object that the tool must stamp to prove execution.
+1. **Workflow Worksheet**: The tool receives `worksheet: ProofOfUID`, stamps it, and passes it into `onchain_tool_result::finalize`.
 
 2. **Witness Stamping**: The tool must stamp the worksheet with its witness ID to prove it was executed:
 
@@ -86,13 +87,13 @@ public fun execute(
    worksheet.stamp_with_data(&witness.id, b"tool_executed");
    ```
 
-3. **Return Type**: The function must return a `ToolOutput` object, which provides a standardized way to return structured outputs. This object must be populated with the exact same variant type and fields as specified in the output schema.
+3. **Result Handling**: The function must not return values. It must write the final `TaggedOutput` into `result: &mut OnchainToolResult`; the leader shares that result object after `execute`.
 
 4. **Tool Witness**: Each tool must maintain a witness object that uniquely identifies it. This is typically stored in the tool's shared state object.
 
 #### Output enum
 
-The module must also provide an `Output` enum in which the output variants and fields are specified. This is similar to the offchain tool template. This enum however, unlike the `ToolOutput` object, is not being used during execution. It is merely used as a means to have a clear overview of the output schema of the onchain tool, and to automatically generate the output schema during tool registration. All output variants and fields are up to the tool developer to specify. This `Output` enum may like this:
+The module must also provide an `Output` enum in which the output variants and fields are specified. This is similar to the offchain tool template. This enum is not used directly during execution. It provides the output schema that is automatically generated during tool registration. All output variants and fields are up to the tool developer to specify. This `Output` enum may look like this:
 
 ```move
 public enum Output {
@@ -113,36 +114,39 @@ public enum Output {
 }
 ```
 
-### ToolOutput Usage
+### TaggedOutput Usage
 
-Tools can return different output variants using the `ToolOutput` system. Fields must be typed using constructor functions to ensure proper JSON formatting:
+Tools build different output variants using `TaggedOutput`, then finalize that output into the mutable `OnchainToolResult` input. Fields must be typed using constructor functions to ensure proper JSON formatting:
 
 ```move
 // Success case with typed fields
-tool_output::ok()
-    .with_field(b"result", tool_output::string_value(value.to_string().into_bytes()))
-    .with_field(b"count", tool_output::number_value(count.to_string().into_bytes()))
-    .with_field(b"active", tool_output::bool_value(b"true"))
-    .with_field(b"owner", tool_output::address_value(owner_address.to_string().into_bytes()))
+let output = tagged_output::new(b"ok")
+    .with_named_payload(b"result", data::inline_one(value.to_string().into_bytes()).as_string())
+    .with_named_payload(b"count", data::inline_one(count.to_string().into_bytes()).as_number())
+    .with_named_payload(b"active", data::inline_one(b"true").as_bool())
+    .with_named_payload(b"owner", data::inline_one(owner_address.to_string().into_bytes()).as_address());
 
 // Error case
-tool_output::err(b"Something went wrong")
+let output = tagged_output::new(b"err")
+    .with_named_payload(b"reason", data::inline_one(b"Something went wrong").as_string());
 
 // Custom variant with mixed types
-tool_output::variant(b"timeout")
-    .with_field(b"elapsed_ms", tool_output::number_value(elapsed.to_string().into_bytes()))
-    .with_field(b"retry_after", tool_output::number_value(retry_delay.to_string().into_bytes()))
-    .with_field(b"message", tool_output::string_value(b"Operation timed out"))
+let output = tagged_output::new(b"timeout")
+    .with_named_payload(b"elapsed_ms", data::inline_one(elapsed.to_string().into_bytes()).as_number())
+    .with_named_payload(b"retry_after", data::inline_one(retry_delay.to_string().into_bytes()).as_number())
+    .with_named_payload(b"message", data::inline_one(b"Operation timed out").as_string());
+
+onchain_tool_result::finalize_and_share(result, worksheet, output, ctx);
 ```
 
 #### Field Value Types
 
-The `tool_output` module provides typed constructors for different value types:
+The `data::inline_one(bytes)` helper provides typed constructors for different value types:
 
-- `tool_output::number_value(bytes)`: For numeric values (u8, u16, u32, u64, u128, u256)
-- `tool_output::string_value(bytes)`: For string values (will be wrapped in quotes)
-- `tool_output::bool_value(bytes)`: For boolean values (true/false)
-- `tool_output::address_value(bytes)`: For address values (will be prefixed with "0x" and quoted)
+- `.as_number()`: For numeric values (u8, u16, u32, u64, u128, u256)
+- `.as_string()`: For string values
+- `.as_bool()`: For boolean values
+- `.as_address()`: For address values
 
 These constructors ensure proper JSON formatting when outputs are processed by the Nexus framework.
 
