@@ -8,15 +8,7 @@ Standard Nexus Tool that uploads a JSON file to Walrus and returns the blob ID.
 
 The JSON data to upload.
 
-_opt_ **`publisher_url`: [`Option<String>`]** _default_: [`None`]
-
-The Walrus publisher URL. Must be a valid URL with http:// or https:// scheme. If not provided, the default Walrus configuration will be used.
-
-_opt_ **`aggregator_url`: [`Option<String>`]** _default_: [`None`]
-
-The Walrus aggregator URL. Must be a valid URL with http:// or https:// scheme. If not provided, the default Walrus configuration will be used.
-
-_opt_ **`epochs`: [`u64`]** _default_: [`1`]
+_opt_ **`epochs`: [`u8`]** _default_: [`1`]
 
 Number of epochs to store the data.
 
@@ -63,13 +55,9 @@ Standard Nexus Tool that uploads a file to Walrus and returns the blob ID.
 
 **`file_path`: [`String`]**
 
-The path to the file to upload.
+The path of the file to upload, relative to `WALRUS_UPLOAD_ROOT`. Uploading from a local path is **disabled** unless that variable is set. See [Local file uploads](#local-file-uploads).
 
-_opt_ **`publisher_url`: [`Option<String>`]** _default_: [`None`]
-
-The Walrus publisher URL. Must be a valid URL with http:// or https:// scheme. If not provided, the default Walrus configuration will be used.
-
-_opt_ **`epochs`: [`u64`]** _default_: [`1`]
+_opt_ **`epochs`: [`u8`]** _default_: [`1`]
 
 Number of epochs to store the file.
 
@@ -117,7 +105,7 @@ The blob ID of the JSON file to read.
 
 _opt_ **`aggregator_url`: [`Option<String>`]** _default_: [`None`]
 
-The Walrus aggregator URL. Must be a valid URL with http:// or https:// scheme. If not provided, the default Walrus configuration will be used.
+The Walrus aggregator URL. Must be a public `https` endpoint with no query, fragment or credentials. If not provided, the default Walrus configuration will be used. See [Endpoint targets](#endpoint-targets).
 
 _opt_ **`json_schema`: [`Option<WalrusJsonSchema>`]** _default_: [`None`]
 
@@ -164,7 +152,7 @@ The unique identifier of the blob to read.
 
 _opt_ **`aggregator_url`: [`Option<String>`]** _default_: [`None`]
 
-The Walrus aggregator URL. Must be a valid URL with http:// or https:// scheme. If not provided, the default Walrus configuration will be used.
+The Walrus aggregator URL. Must be a public `https` endpoint with no query, fragment or credentials. If not provided, the default Walrus configuration will be used. See [Endpoint targets](#endpoint-targets).
 
 ## Output Variants & Ports
 
@@ -198,7 +186,7 @@ The ID of the blob to verify.
 
 _opt_ **`aggregator_url`: [`Option<String>`]** _default_: [`None`]
 
-The Walrus aggregator URL. Must be a valid URL with http:// or https:// scheme. If not provided, the default Walrus configuration will be used.
+The Walrus aggregator URL. Must be a public `https` endpoint with no query, fragment or credentials. If not provided, the default Walrus configuration will be used. See [Endpoint targets](#endpoint-targets).
 
 ## Output Variants & Ports
 
@@ -223,3 +211,62 @@ An error occurred during verification.
   - Possible kinds:
     - `server` - Server-side errors during verification
 - **`err.status_code`: [`Option<u16>`]** - HTTP status code if available (for API errors)
+
+---
+
+# Configuration
+
+## Publisher configuration
+
+Uploads use the publisher selected by the operator through
+**`WALRUS_PUBLISHER_URL`**. This setting is required: an unset or blank value
+returns an error before an upload is attempted. There is no default publisher,
+including on testnet. Operators must configure the publisher for their intended
+network.
+
+Users supply the data, retention epochs, and optional recipient. Upload inputs
+cannot select a publisher or aggregator. Uploads do not need an aggregator.
+
+## Endpoint targets
+
+Read and verification tools still accept `aggregator_url`. Its resolution order
+is the input port, then `WALRUS_AGGREGATOR_URL`, then the SDK testnet aggregator.
+Operators must configure the aggregator for other networks.
+
+An aggregator supplied through an input port must use public `https` with no
+credentials, query, or fragment. Validation rejects private addresses and internal
+hostnames, checks every resolved address, and pins the accepted addresses to the
+HTTP client. Redirects are disabled so a validated destination cannot redirect a
+request into the private network. URL paths and public ports are supported.
+
+Deployment settings are trusted operator configuration and may point to services
+inside the deployment network. The public destination policy applies to input
+ports.
+
+## Migration
+
+The upload schemas no longer contain `publisher_url`, and the JSON upload schema
+no longer contains `aggregator_url`. Supplying either removed input is rejected,
+including a value of `null`.
+
+The deployment pipeline derives tool versions from their source and shared build
+inputs, so this schema change receives a new tool version. Before moving a
+workflow to that version, configure `WALRUS_PUBLISHER_URL` on the tool service and
+remove the deleted ports from the workflow.
+
+## Local file uploads
+
+`upload-file`'s `file_path` is confined to one directory, named by
+**`WALRUS_UPLOAD_ROOT`**. The path is interpreted relative to that directory and
+cannot leave it: absolute paths and `..` are refused outright, and containment is
+re-checked after symlink resolution.
+
+With `WALRUS_UPLOAD_ROOT` unset — the default, and how the hosted tools run —
+`file_path` is refused entirely. A hosted instance has its toolkit signing key on
+a mounted volume and nothing a caller would legitimately want published, so a
+local-read port there is only useful for exfiltrating secrets into public
+storage. Turn it on deliberately, pointed at a directory that holds the files you
+mean to publish, and nothing else.
+
+Callers that want to publish content they supply themselves should use
+`upload-json`, which takes the bytes inline.
