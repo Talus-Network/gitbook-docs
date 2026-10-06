@@ -18,32 +18,7 @@ The ID of the tweet to retrieve.
 
 The tweet was retrieved successfully.
 
-- **`ok.id`: [`String`]** - The tweet's unique identifier
-- **`ok.text`: [`String`]** - The tweet's content text
-- **`ok.author_id`: [`Option<String>`]** - The ID of the tweet's author
-- **`ok.created_at`: [`Option<String>`]** - The timestamp when the tweet was created
-- **`ok.username`: [`Option<String>`]** - The username of the tweet's author
-- **`ok.attachments`: [`Option<Attachments>`]** - Media and polls attached to the tweet
-- **`ok.community_id`: [`Option<String>`]** - Community ID if the tweet belongs to a community
-- **`ok.context_annotations`: [`Option<Vec<ContextAnnotation>>`]** - Annotations about the tweet content
-- **`ok.conversation_id`: [`Option<String>`]** - ID of the conversation this tweet belongs to
-- **`ok.edit_controls`: [`Option<EditControls>`]** - Controls for editing the tweet
-- **`ok.edit_history_tweet_ids`: [`Option<Vec<String>>`]** - IDs of tweets in the edit history
-- **`ok.entities`: [`Option<Entities>`]** - Entities in the tweet (hashtags, mentions, URLs)
-- **`ok.geo`: [`Option<Geo>`]** - Geographic information
-- **`ok.in_reply_to_user_id`: [`Option<String>`]** - ID of the user being replied to
-- **`ok.lang`: [`Option<String>`]** - Language of the tweet
-- **`ok.non_public_metrics`: [`Option<NonPublicMetrics>`]** - Private metrics about the tweet
-- **`ok.note_tweet`: [`Option<NoteTweet>`]** - Extended note content
-- **`ok.organic_metrics`: [`Option<OrganicMetrics>`]** - Organic engagement metrics
-- **`ok.possibly_sensitive`: [`Option<bool>`]** - Whether the tweet might contain sensitive content
-- **`ok.promoted_metrics`: [`Option<PromotedMetrics>`]** - Metrics from promoted content
-- **`ok.public_metrics`: [`Option<PublicMetrics>`]** - Public engagement metrics (likes, retweets, etc.)
-- **`ok.referenced_tweets`: [`Option<Vec<ReferencedTweet>>`]** - Tweets referenced by this tweet
-- **`ok.reply_settings`: [`Option<String>`]** - Who can reply to this tweet
-- **`ok.scopes`: [`Option<Scopes>`]** - Visibility scopes
-- **`ok.source`: [`Option<String>`]** - Source of the tweet (client application)
-- **`ok.withheld`: [`Option<Withheld>`]** - Withholding information
+- **`ok.data`: [`Tweet`]** - The complete tweet resource, including its required `id` and `text` and any requested optional tweet fields
 - **`ok.includes`: [`Option<Includes>`]** - Additional entities related to the tweet:
   - `media`: Images and videos
   - `places`: Geographic locations
@@ -1050,31 +1025,8 @@ A comma separated list of Tweet fields to display.
 
 The user was retrieved successfully.
 
-- **`ok.id`: [`String`]** - The user's unique identifier
-- **`ok.name`: [`String`]** - The user's display name
-- **`ok.username`: [`String`]** - The user's @username
-- **`ok.protected`: [`Option<bool>`]** - Whether the user's account is protected
-- **`ok.affiliation`: [`Option<Affiliation>`]** - The user's affiliation information
-- **`ok.connection_status`: [`Option<Vec<ConnectionStatus>>`]** - The user's connection status
-- **`ok.created_at`: [`Option<String>`]** - When the user's account was created
-- **`ok.description`: [`Option<String>`]** - The user's profile description/bio
-- **`ok.entities`: [`Option<Entities>`]** - Entities found in the user's description (hashtags, mentions, URLs)
-- **`ok.location`: [`Option<String>`]** - The user's location
-- **`ok.most_recent_tweet_id`: [`Option<String>`]** - ID of the user's most recent tweet
-- **`ok.pinned_tweet_id`: [`Option<String>`]** - ID of the user's pinned tweet
-- **`ok.profile_banner_url`: [`Option<String>`]** - URL of the user's profile banner image
-- **`ok.profile_image_url`: [`Option<String>`]** - URL of the user's profile image
-- **`ok.public_metrics`: [`Option<PublicMetrics>`]** - Public metrics about the user:
-  - `followers_count`: Number of followers
-  - `following_count`: Number of accounts the user is following
-  - `tweet_count`: Number of tweets the user has posted
-  - `listed_count`: Number of lists the user appears on
-- **`ok.receives_your_dm`: [`Option<bool>`]** - Whether the user accepts direct messages
-- **`ok.subscription_type`: [`Option<SubscriptionType>`]** - The user's subscription type
-- **`ok.url`: [`Option<String>`]** - The user's website URL
-- **`ok.verified`: [`Option<bool>`]** - Whether the user is verified
-- **`ok.verified_type`: [`Option<VerifiedType>`]** - The user's verification type
-- **`ok.withheld`: [`Option<Withheld>`]** - Withholding information for the user
+- **`ok.data`: [`UserData`]** - The complete user resource, including `id`, `name`, `username`, and any requested optional user fields
+- **`ok.includes`: [`Option<Includes>`]** - Expanded users, tweets, media, places, or polls related to the user
 
 **`err`**
 
@@ -1136,31 +1088,7 @@ A list of Tweet fields to display.
 
 The user was retrieved successfully.
 
-- **`ok.id`: [`String`]** - The user's unique identifier
-- **`ok.name`: [`String`]** - The user's display name
-- **`ok.username`: [`String`]** - The user's @username
-- **`ok.protected`: [`Option<bool>`]** - Whether the user's account is protected
-- **`ok.affiliation`: [`Option<Affiliation>`]** - The user's affiliation information
-- **`ok.connection_status`: [`Option<Vec<ConnectionStatus>>`]** - The user's connection status
-- **`ok.created_at`: [`Option<String>`]** - When the user's account was created
-- **`ok.description`: [`Option<String>`]** - The user's profile description/bio
-- **`ok.entities`: [`Option<Entities>`]** - Entities found in the user's description (hashtags, mentions, URLs)
-- **`ok.location`: [`Option<String>`]** - The user's location
-- **`ok.most_recent_tweet_id`: [`Option<String>`]** - ID of the user's most recent tweet
-- **`ok.pinned_tweet_id`: [`Option<String>`]** - ID of the user's pinned tweet
-- **`ok.profile_banner_url`: [`Option<String>`]** - URL of the user's profile banner image
-- **`ok.profile_image_url`: [`Option<String>`]** - URL of the user's profile image
-- **`ok.public_metrics`: [`Option<PublicMetrics>`]** - Public metrics about the user:
-  - `followers_count`: Number of followers
-  - `following_count`: Number of accounts the user is following
-  - `tweet_count`: Number of tweets the user has posted
-  - `listed_count`: Number of lists the user appears on
-- **`ok.receives_your_dm`: [`Option<bool>`]** - Whether the user accepts direct messages
-- **`ok.subscription_type`: [`Option<SubscriptionType>`]** - The user's subscription type
-- **`ok.url`: [`Option<String>`]** - The user's website URL
-- **`ok.verified`: [`Option<bool>`]** - Whether the user is verified
-- **`ok.verified_type`: [`Option<VerifiedType>`]** - The user's verification type
-- **`ok.withheld`: [`Option<Withheld>`]** - Withholding information for the user
+- **`ok.data`: [`UserData`]** - The complete user resource, including `id`, `name`, `username`, and any requested optional user fields
 - **`ok.includes`: [`Option<Includes>`]** - Additional entities related to the user:
   - `users`: Other users referenced by this user
   - `tweets`: Tweets referenced by this user (e.g., pinned tweet)
