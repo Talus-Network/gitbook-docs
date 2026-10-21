@@ -36,7 +36,7 @@ The spot price request failed due to an error.
 
 - **`err.reason`: [`String`]** - A detailed error message describing what went wrong
 - **`err.kind`: [`String`]** - Type of error (invalid_request, not_found, parse, etc.)
-- **`err.status_code`: [`u16`] (optional)** - HTTP status code if available
+- **`err.status_code`: [`u16`] (nullable)** - HTTP status code if available
 
 ---
 
@@ -71,8 +71,8 @@ The ticker information was retrieved successfully.
 - **`ok.price`: [`String`]** - Last trade price
 - **`ok.size`: [`String`]** - Last trade size
 - **`ok.time`: [`String`]** - Time of the last trade
-- **`ok.rfq_volume`: [`String`] (optional)** - RFQ volume (only included if present)
-- **`ok.conversions_volume`: [`String`] (optional)** - Conversions volume (only included if present)
+- **`ok.rfq_volume`: [`String`] (nullable)** - RFQ volume
+- **`ok.conversions_volume`: [`String`] (nullable)** - Conversions volume
 
 **`err`**
 
@@ -80,7 +80,7 @@ The ticker request failed due to an error.
 
 - **`err.reason`: [`String`]** - A detailed error message describing what went wrong
 - **`err.kind`: [`String`]** - Type of error (invalid_request, not_found, parse, etc.)
-- **`err.status_code`: [`u16`] (optional)** - HTTP status code if available
+- **`err.status_code`: [`u16`] (nullable)** - HTTP status code if available
 
 ---
 
@@ -113,11 +113,11 @@ The product statistics were retrieved successfully.
 - **`ok.low`: [`String`]** - Lowest price (in quote currency)
 - **`ok.volume`: [`String`]** - 24h volume (in base currency)
 - **`ok.last`: [`String`]** - Last price (in quote currency)
-- **`ok.volume_30day`: [`String`] (optional)** - 30-day volume (in base currency) (only included if present)
-- **`ok.rfq_volume_24hour`: [`String`] (optional)** - 24h RFQ volume (only included if present)
-- **`ok.conversions_volume_24hour`: [`String`] (optional)** - 24h conversions volume (only included if present)
-- **`ok.rfq_volume_30day`: [`String`] (optional)** - 30-day RFQ volume (only included if present)
-- **`ok.conversions_volume_30day`: [`String`] (optional)** - 30-day conversions volume (only included if present)
+- **`ok.volume_30day`: [`String`] (nullable)** - 30-day volume (in base currency)
+- **`ok.rfq_volume_24hour`: [`String`] (nullable)** - 24h RFQ volume
+- **`ok.conversions_volume_24hour`: [`String`] (nullable)** - 24h conversions volume
+- **`ok.rfq_volume_30day`: [`String`] (nullable)** - 30-day RFQ volume
+- **`ok.conversions_volume_30day`: [`String`] (nullable)** - 30-day conversions volume
 
 They can return decimal values like
 
@@ -140,4 +140,4 @@ The stats request failed due to an error.
 
 - **`err.reason`: [`String`]** - A detailed error message describing what went wrong
 - **`err.kind`: [`String`]** - Type of error (invalid_request, not_found, parse, etc.)
-- **`err.status_code`: [`u16`] (optional)** - HTTP status code if available
+- **`err.status_code`: [`u16`] (nullable)** - HTTP status code if available
