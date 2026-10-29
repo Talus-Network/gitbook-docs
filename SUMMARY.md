@@ -113,3 +113,6 @@
 ## Looking for a home
 
 * [vision/talus-vision/explorer.md](vision/talus-vision/explorer.md)
+* [tools/exchanges-binance/README.md](tools/exchanges-binance/README.md)
+* [tools/social-elfa/README.md](tools/social-elfa/README.md)
+* [tools/trading/README.md](tools/trading/README.md)
