@@ -20,6 +20,14 @@ _opt_ **`name`: [`Option<String>`]** _default_: [`None`]
 
 Optional name for the single variable. Must be used together with the `value` parameter. This allows you to specify an additional variable beyond those provided in `args`.
 
+## Rendering limits
+
+Expressions use all supplied arguments at once. Argument values are plain data and are never interpreted again as template source. Expressions containing missing variables remain unchanged for a later tool invocation.
+
+Supported expressions are variables, scalar literals, concatenation with `~`, addition, repetition by a nonnegative integer literal, and these filters: `upper`, `lower`, `capitalize`, `title`, `trim`, `length`, `count`, `escape`, `e`, `tojson`, `default`, `d`, and `replace`. Only positional filter arguments are supported. Blocks, function calls, and other expressions or filters return an error. This restriction permits checking intermediate allocation sizes before running the expression.
+
+The combined template and argument size is limited to 64 KiB, with at most 128 arguments and 256 expressions. Output and intermediate strings are limited to 1 MiB using conservative size estimates. Expressions also have depth and instruction budgets.
+
 ## Output Variants & Ports
 
 **`ok`**
